@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consequence AI - Stock Market Cascade Predictions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .cascade-line { border-left: 2px solid #4F46E5; }
+        .effect-card { transition: all 0.2s; }
+        .effect-card:hover { transform: translateX(4px); }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-white mb-2">Consequence AI</h1>
+            <p class="text-gray-400">Causal reasoning engine for stock market cascade predictions</p>
+        </header>
+
+        <!-- Input Form -->
+        <div class="bg-gray-800 rounded-lg p-6 mb-8">
+            <h2 class="text-xl font-semibold mb-4">Simulate Earnings Event</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Ticker</label>
+                    <input type="text" id="ticker" value="AAPL"
+                           class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+                           placeholder="e.g., AAPL, NVDA, MSFT">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Surprise %</label>
+                    <input type="number" id="surprise" value="-8" step="0.1"
+                           class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+                           placeholder="e.g., -8 for 8% miss">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Horizon (days)</label>
+                    <input type="number" id="horizon" value="14" min="1" max="90"
+                           class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white">
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="block text-sm font-medium text-gray-400 mb-1">Description (optional)</label>
+                <input type="text" id="description"
+                       class="w-full bg-gray-700 border border-gray-600 rounded px-3 py-2 text-white"
+                       placeholder="e.g., Weak iPhone demand in China">
+            </div>
+            <button onclick="predict()"
+                    class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-6 rounded-lg transition">
+                Generate Cascade Prediction
+            </button>
+        </div>
+
+        <!-- Results -->
+        <div id="results" class="hidden">
+            <!-- Trigger Summary -->
+            <div id="trigger-summary" class="bg-gray-800 rounded-lg p-6 mb-6">
+                <h2 class="text-xl font-semibold mb-2">Trigger Event</h2>
+                <div id="trigger-content"></div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-gray-800 rounded-lg p-4 text-center">
+                    <div id="stat-total" class="text-2xl font-bold text-indigo-400">0</div>
+                    <div class="text-sm text-gray-400">Total Effects</div>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-4 text-center">
+                    <div id="stat-first" class="text-2xl font-bold text-green-400">0</div>
+                    <div class="text-sm text-gray-400">1st Order</div>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-4 text-center">
+                    <div id="stat-second" class="text-2xl font-bold text-yellow-400">0</div>
+                    <div class="text-sm text-gray-400">2nd Order</div>
+                </div>
+                <div class="bg-gray-800 rounded-lg p-4 text-center">
+                    <div id="stat-third" class="text-2xl font-bold text-red-400">0</div>
+                    <div class="text-sm text-gray-400">3rd+ Order</div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div id="timeline" class="space-y-6"></div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden text-center py-12">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500"></div>
+            <p class="mt-4 text-gray-400">Propagating cascade effects...</p>
+        </div>
+
+        <!-- Error -->
+        <div id="error" class="hidden bg-red-900/50 border border-red-500 rounded-lg p-4 text-red-200"></div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>Consequence AI - Causal Reasoning for the Real World</p>
+            <p class="mt-1">This is a demonstration. Not financial advice.</p>
+        </footer>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+
+        async function predict() {
+            const ticker = document.getElementById('ticker').value.toUpperCase();
+            const surprise = parseFloat(document.getElementById('surprise').value);
+            const horizon = parseInt(document.getElementById('horizon').value);
+            const description = document.getElementById('description').value;
+
+            // Show loading, hide others
+            document.getElementById('loading').classList.remove('hidden');
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('error').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_URL}/predict/earnings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ticker,
+                        surprise_percent: surprise,
+                        horizon_days: horizon,
+                        description
+                    })
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Prediction failed');
+                }
+
+                const data = await response.json();
+                displayResults(data);
+
+            } catch (err) {
+                document.getElementById('error').textContent = err.message;
+                document.getElementById('error').classList.remove('hidden');
+            } finally {
+                document.getElementById('loading').classList.add('hidden');
+            }
+        }
+
+        function displayResults(data) {
+            // Show results container
+            document.getElementById('results').classList.remove('hidden');
+
+            // Trigger summary
+            const trigger = data.trigger;
+            const direction = trigger.magnitude_percent > 0 ? 'beat' : 'miss';
+            const color = trigger.magnitude_percent > 0 ? 'text-green-400' : 'text-red-400';
+            document.getElementById('trigger-content').innerHTML = `
+                <p class="text-lg">
+                    <span class="font-bold">${trigger.entity}</span> earnings
+                    <span class="${color} font-semibold">${direction} of ${Math.abs(trigger.magnitude_percent).toFixed(1)}%</span>
+                </p>
+                ${trigger.description ? `<p class="text-gray-400 mt-1">${trigger.description}</p>` : ''}
+            `;
+
+            // Stats
+            document.getElementById('stat-total').textContent = data.total_effects;
+            document.getElementById('stat-first').textContent = data.effects_by_order.order_1 || 0;
+            document.getElementById('stat-second').textContent = data.effects_by_order.order_2 || 0;
+            document.getElementById('stat-third').textContent =
+                (data.effects_by_order.order_3 || 0) + (data.effects_by_order.order_4 || 0);
+
+            // Timeline
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            for (const [period, effects] of Object.entries(data.timeline)) {
+                const section = document.createElement('div');
+                section.className = 'bg-gray-800 rounded-lg p-6';
+                section.innerHTML = `
+                    <h3 class="text-lg font-semibold mb-4 text-indigo-400">${period}</h3>
+                    <div class="space-y-3 cascade-line pl-4">
+                        ${effects.slice(0, 10).map(effect => renderEffect(effect)).join('')}
+                        ${effects.length > 10 ? `<p class="text-gray-500 text-sm pl-4">... and ${effects.length - 10} more effects</p>` : ''}
+                    </div>
+                `;
+                timeline.appendChild(section);
+            }
+        }
+
+        function renderEffect(effect) {
+            const magnitude = effect.magnitude_percent;
+            const color = magnitude > 0 ? 'text-green-400' : 'text-red-400';
+            const sign = magnitude > 0 ? '+' : '';
+            const confidenceColor = effect.confidence > 0.7 ? 'text-green-400' :
+                                    effect.confidence > 0.4 ? 'text-yellow-400' : 'text-red-400';
+
+            return `
+                <div class="effect-card bg-gray-700/50 rounded p-3 ml-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="font-semibold text-white">${effect.entity}</span>
+                            <span class="${color} font-mono ml-2">${sign}${magnitude.toFixed(2)}%</span>
+                            <span class="text-gray-500 text-sm ml-2">[${effect.magnitude_range[0].toFixed(1)}% to ${effect.magnitude_range[1].toFixed(1)}%]</span>
+                        </div>
+                        <span class="${confidenceColor} text-sm">
+                            ${(effect.confidence * 100).toFixed(0)}% conf
+                        </span>
+                    </div>
+                    ${effect.explanation ? `<p class="text-gray-400 text-sm mt-1">${effect.explanation}</p>` : ''}
+                </div>
+            `;
+        }
+
+        // Quick examples
+        function loadExample(ticker, surprise, desc) {
+            document.getElementById('ticker').value = ticker;
+            document.getElementById('surprise').value = surprise;
+            document.getElementById('description').value = desc;
+            predict();
+        }
+    </script>
+
+    <!-- Quick Examples -->
+    <div class="container mx-auto px-4 max-w-4xl mb-8">
+        <h3 class="text-sm font-medium text-gray-400 mb-2">Quick Examples:</h3>
+        <div class="flex flex-wrap gap-2">
+            <button onclick="loadExample('AAPL', -8, 'Weak iPhone demand in China')"
+                    class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">
+                AAPL Miss
+            </button>
+            <button onclick="loadExample('NVDA', 15, 'Data center revenue exceeds expectations')"
+                    class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">
+                NVDA Beat
+            </button>
+            <button onclick="loadExample('TSM', -12, 'Capacity constraints warning')"
+                    class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">
+                TSM Miss
+            </button>
+            <button onclick="loadExample('MSFT', 8, 'Azure growth reaccelerates')"
+                    class="text-sm bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded">
+                MSFT Beat
+            </button>
+        </div>
+    </div>
+</body>
+</html>

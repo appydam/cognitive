@@ -1,0 +1,3776 @@
+{
+  "entities": [
+    {
+      "id": "WBA",
+      "type": "company",
+      "name": "WBA",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "INTC",
+      "type": "company",
+      "name": "Intel Corporation",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CL",
+      "type": "company",
+      "name": "CL",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "APTV",
+      "type": "company",
+      "name": "APTV",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "KO",
+      "type": "company",
+      "name": "Coca-Cola Company",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MAS",
+      "type": "company",
+      "name": "MAS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "COST",
+      "type": "company",
+      "name": "Costco Wholesale Corporation",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ABC",
+      "type": "company",
+      "name": "ABC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AMD",
+      "type": "company",
+      "name": "Advanced Micro Devices Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TSLA",
+      "type": "company",
+      "name": "Tesla Inc.",
+      "attributes": {},
+      "sector": "Consumer Discretionary",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TXN",
+      "type": "company",
+      "name": "Texas Instruments Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CRUS",
+      "type": "company",
+      "name": "CRUS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SHW",
+      "type": "company",
+      "name": "SHW",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TSM",
+      "type": "company",
+      "name": "Taiwan Semiconductor Manufacturing",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "WMT",
+      "type": "company",
+      "name": "Walmart Inc.",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ADI",
+      "type": "company",
+      "name": "ADI",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ASML",
+      "type": "company",
+      "name": "ASML Holding N.V.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PG",
+      "type": "company",
+      "name": "Procter & Gamble Co.",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "GIS",
+      "type": "company",
+      "name": "GIS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ALB",
+      "type": "company",
+      "name": "ALB",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AMZN",
+      "type": "company",
+      "name": "Amazon.com Inc.",
+      "attributes": {},
+      "sector": "Consumer Discretionary",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MSFT",
+      "type": "company",
+      "name": "Microsoft Corporation",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AVGO",
+      "type": "company",
+      "name": "Broadcom Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SAMSUNG",
+      "type": "company",
+      "name": "SAMSUNG",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SWKS",
+      "type": "company",
+      "name": "SWKS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AAPL",
+      "type": "company",
+      "name": "Apple Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "UNH",
+      "type": "company",
+      "name": "UnitedHealth Group Inc.",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MU",
+      "type": "company",
+      "name": "MU",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "WDC",
+      "type": "company",
+      "name": "WDC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "QCOM",
+      "type": "company",
+      "name": "Qualcomm Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PEP",
+      "type": "company",
+      "name": "PepsiCo Inc.",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MCK",
+      "type": "company",
+      "name": "MCK",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "NVDA",
+      "type": "company",
+      "name": "NVIDIA Corporation",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ABT",
+      "type": "company",
+      "name": "Abbott Laboratories",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "HD",
+      "type": "company",
+      "name": "Home Depot Inc.",
+      "attributes": {},
+      "sector": "Consumer Discretionary",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "LRCX",
+      "type": "company",
+      "name": "LRCX",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CVS",
+      "type": "company",
+      "name": "CVS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AMAT",
+      "type": "company",
+      "name": "AMAT",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "UPS",
+      "type": "company",
+      "name": "UPS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "KLAC",
+      "type": "company",
+      "name": "KLAC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "FDX",
+      "type": "company",
+      "name": "FDX",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLK",
+      "type": "etf",
+      "name": "Technology Select Sector SPDR",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLV",
+      "type": "etf",
+      "name": "Healthcare Select Sector SPDR",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLF",
+      "type": "etf",
+      "name": "Financials Select Sector SPDR",
+      "attributes": {},
+      "sector": "Financials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLY",
+      "type": "etf",
+      "name": "Consumer Discretionary Select Sector SPDR",
+      "attributes": {},
+      "sector": "Consumer Discretionary",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLP",
+      "type": "etf",
+      "name": "Consumer Staples Select Sector SPDR",
+      "attributes": {},
+      "sector": "Consumer Staples",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLE",
+      "type": "etf",
+      "name": "Energy Select Sector SPDR",
+      "attributes": {},
+      "sector": "Energy",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLI",
+      "type": "etf",
+      "name": "Industrials Select Sector SPDR",
+      "attributes": {},
+      "sector": "Industrials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLB",
+      "type": "etf",
+      "name": "Materials Select Sector SPDR",
+      "attributes": {},
+      "sector": "Materials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLU",
+      "type": "etf",
+      "name": "Utilities Select Sector SPDR",
+      "attributes": {},
+      "sector": "Utilities",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLRE",
+      "type": "etf",
+      "name": "Real Estate Select Sector SPDR",
+      "attributes": {},
+      "sector": "Real Estate",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XLC",
+      "type": "etf",
+      "name": "Communication Services Select Sector SPDR",
+      "attributes": {},
+      "sector": "Communication Services",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SMH",
+      "type": "etf",
+      "name": "Semiconductors",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SOXX",
+      "type": "etf",
+      "name": "Semiconductor Equipment",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SPY",
+      "type": "index",
+      "name": "S&P 500",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "QQQ",
+      "type": "index",
+      "name": "Nasdaq 100",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "DIA",
+      "type": "index",
+      "name": "Dow Jones",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "IWM",
+      "type": "index",
+      "name": "Russell 2000",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ACN",
+      "type": "company",
+      "name": "Accenture plc",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PSX",
+      "type": "company",
+      "name": "PSX",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MS",
+      "type": "company",
+      "name": "MS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ORCL",
+      "type": "company",
+      "name": "Oracle Corporation",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CSCO",
+      "type": "company",
+      "name": "Cisco Systems Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "BMY",
+      "type": "company",
+      "name": "BMY",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "NKE",
+      "type": "company",
+      "name": "NKE",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SCHW",
+      "type": "company",
+      "name": "SCHW",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "XOM",
+      "type": "company",
+      "name": "Exxon Mobil Corporation",
+      "attributes": {},
+      "sector": "Energy",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "AXP",
+      "type": "company",
+      "name": "AXP",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MCD",
+      "type": "company",
+      "name": "McDonald's Corporation",
+      "attributes": {},
+      "sector": "Consumer Discretionary",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "WFC",
+      "type": "company",
+      "name": "WFC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PFE",
+      "type": "company",
+      "name": "PFE",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "VLO",
+      "type": "company",
+      "name": "VLO",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "JPM",
+      "type": "company",
+      "name": "JPMorgan Chase & Co.",
+      "attributes": {},
+      "sector": "Financials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MO",
+      "type": "company",
+      "name": "MO",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TMO",
+      "type": "company",
+      "name": "Thermo Fisher Scientific Inc.",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "EOG",
+      "type": "company",
+      "name": "EOG",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MA",
+      "type": "company",
+      "name": "Mastercard Inc.",
+      "attributes": {},
+      "sector": "Financials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CVX",
+      "type": "company",
+      "name": "Chevron Corporation",
+      "attributes": {},
+      "sector": "Energy",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ADBE",
+      "type": "company",
+      "name": "Adobe Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TJX",
+      "type": "company",
+      "name": "TJX",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "DHR",
+      "type": "company",
+      "name": "DHR",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "ABBV",
+      "type": "company",
+      "name": "AbbVie Inc.",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "COP",
+      "type": "company",
+      "name": "COP",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SLB",
+      "type": "company",
+      "name": "SLB",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "JNJ",
+      "type": "company",
+      "name": "Johnson & Johnson",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "BKNG",
+      "type": "company",
+      "name": "BKNG",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "V",
+      "type": "company",
+      "name": "Visa Inc.",
+      "attributes": {},
+      "sector": "Financials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MDLZ",
+      "type": "company",
+      "name": "MDLZ",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PM",
+      "type": "company",
+      "name": "PM",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "GS",
+      "type": "company",
+      "name": "GS",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "LOW",
+      "type": "company",
+      "name": "LOW",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "CRM",
+      "type": "company",
+      "name": "Salesforce Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MPC",
+      "type": "company",
+      "name": "MPC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "SBUX",
+      "type": "company",
+      "name": "SBUX",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "BAC",
+      "type": "company",
+      "name": "BAC",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "BRK-B",
+      "type": "company",
+      "name": "Berkshire Hathaway Inc.",
+      "attributes": {},
+      "sector": "Financials",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "IBM",
+      "type": "company",
+      "name": "IBM Corporation",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "LLY",
+      "type": "company",
+      "name": "Eli Lilly and Company",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "MRK",
+      "type": "company",
+      "name": "Merck & Co. Inc.",
+      "attributes": {},
+      "sector": "Healthcare",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "META",
+      "type": "company",
+      "name": "Meta Platforms Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "GOOGL",
+      "type": "company",
+      "name": "Alphabet Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "GOOG",
+      "type": "company",
+      "name": "GOOG",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "TGT",
+      "type": "company",
+      "name": "TGT",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "PYPL",
+      "type": "company",
+      "name": "PYPL",
+      "attributes": {},
+      "sector": null,
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    },
+    {
+      "id": "NFLX",
+      "type": "company",
+      "name": "Netflix Inc.",
+      "attributes": {},
+      "sector": "Technology",
+      "industry": null,
+      "market_cap": null,
+      "country": "US"
+    }
+  ],
+  "links": [
+    {
+      "source": "AAPL",
+      "target": "TSM",
+      "relationship": "customer_of",
+      "strength": 0.3,
+      "delay_mean": 1.5,
+      "delay_std": 0.44999999999999996,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~25.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "QCOM",
+      "relationship": "customer_of",
+      "strength": 0.24,
+      "delay_mean": 1.5,
+      "delay_std": 0.44999999999999996,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~20.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "AVGO",
+      "relationship": "customer_of",
+      "strength": 0.24,
+      "delay_mean": 1.5,
+      "delay_std": 0.44999999999999996,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~20.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "TXN",
+      "relationship": "customer_of",
+      "strength": 0.144,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~12.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "ADI",
+      "relationship": "customer_of",
+      "strength": 0.12,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~10.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "SWKS",
+      "relationship": "customer_of",
+      "strength": 0.66,
+      "delay_mean": 1.0,
+      "delay_std": 0.3,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~55.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "CRUS",
+      "relationship": "customer_of",
+      "strength": 0.8,
+      "delay_mean": 1.0,
+      "delay_std": 0.3,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~80.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "MU",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "WDC",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 22.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.14,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 7.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "MSFT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "GOOGL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AAPL",
+      "target": "SAMSUNG",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "TSM",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 1.5,
+      "delay_std": 0.44999999999999996,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "AVGO",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.12,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 6.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 20.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "AMD",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NVDA",
+      "target": "INTC",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "INTC",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "AMD",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "NVDA",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 21.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.14,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 7.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "AAPL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "GOOGL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "AMZN",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "CRM",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MSFT",
+      "target": "ORCL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "UPS",
+      "relationship": "customer_of",
+      "strength": 0.12,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~10.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "FDX",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 23.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "WMT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "TGT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "COST",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "MSFT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMZN",
+      "target": "GOOGL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TSLA",
+      "target": "ALB",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSLA",
+      "target": "APTV",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSLA",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.26,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 13.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TSLA",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TSM",
+      "target": "ASML",
+      "relationship": "customer_of",
+      "strength": 0.3,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~25.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSM",
+      "target": "LRCX",
+      "relationship": "customer_of",
+      "strength": 0.24,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~20.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSM",
+      "target": "AMAT",
+      "relationship": "customer_of",
+      "strength": 0.216,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~18.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSM",
+      "target": "KLAC",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "TSM",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.24,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 12.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "ASML",
+      "relationship": "customer_of",
+      "strength": 0.24,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~20.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "LRCX",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "AMAT",
+      "relationship": "customer_of",
+      "strength": 0.144,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~12.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "AMD",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "NVDA",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "INTC",
+      "target": "TSM",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "SAMSUNG",
+      "target": "ASML",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "PG",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "KO",
+      "relationship": "customer_of",
+      "strength": 0.12,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~10.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "PEP",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "CL",
+      "relationship": "customer_of",
+      "strength": 0.144,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~12.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "GIS",
+      "relationship": "customer_of",
+      "strength": 0.12,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~10.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "COST",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "TGT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "WMT",
+      "target": "AMZN",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "COST",
+      "target": "KO",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "COST",
+      "target": "PG",
+      "relationship": "customer_of",
+      "strength": 0.096,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~8.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "COST",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.24,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 12.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "COST",
+      "target": "WMT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "COST",
+      "target": "TGT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "HD",
+      "target": "SHW",
+      "relationship": "customer_of",
+      "strength": 0.12,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~10.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "HD",
+      "target": "MAS",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "HD",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "HD",
+      "target": "LOW",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "WBA",
+      "target": "ABC",
+      "relationship": "customer_of",
+      "strength": 0.18,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~15.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "CVS",
+      "target": "MCK",
+      "relationship": "customer_of",
+      "strength": 0.24,
+      "delay_mean": 2.0,
+      "delay_std": 0.6,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~20.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "UNH",
+      "target": "ABT",
+      "relationship": "customer_of",
+      "strength": 0.06,
+      "delay_mean": 2.5,
+      "delay_std": 0.75,
+      "confidence": 0.75,
+      "direction": 1.0,
+      "evidence": [
+        "Industry estimate, ~5.0% revenue dependency"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "sec_filing",
+      "last_updated": null
+    },
+    {
+      "source": "UNH",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.2,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 10.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "UNH",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.02,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 1.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AVGO",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AVGO",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "CRM",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ADBE",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "CSCO",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ACN",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ORCL",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMD",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMD",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMD",
+      "target": "NVDA",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMD",
+      "target": "INTC",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "QCOM",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "QCOM",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TXN",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TXN",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "IBM",
+      "target": "XLK",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "JNJ",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "JNJ",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.02,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 1.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "LLY",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MRK",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.12,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 6.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ABBV",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.12,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 6.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PFE",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TMO",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ABT",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "DHR",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "BMY",
+      "target": "XLV",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "BRK-B",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.28,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 14.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "BRK-B",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "JPM",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.2,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 10.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "JPM",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.02,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 1.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "V",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.16,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 8.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "V",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.02,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 1.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "V",
+      "target": "MA",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "V",
+      "target": "PYPL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MA",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.14,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 7.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MA",
+      "target": "V",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MA",
+      "target": "PYPL",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "BAC",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "WFC",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GS",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MS",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "SCHW",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AXP",
+      "target": "XLF",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MCD",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "NKE",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "LOW",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "LOW",
+      "target": "HD",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "SBUX",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "TJX",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "BKNG",
+      "target": "XLY",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PG",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 15.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "KO",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.2,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 10.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "KO",
+      "target": "PEP",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PEP",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.2,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 10.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PEP",
+      "target": "KO",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PM",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MO",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MDLZ",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "CL",
+      "target": "XLP",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "XOM",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 23.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "XOM",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.02,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 1.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "CVX",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.3,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 17.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "SLB",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "EOG",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "COP",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.1,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 5.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MPC",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "PSX",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "VLO",
+      "target": "XLE",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "ASML",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.14,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 7.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "LRCX",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "AMAT",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "MU",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.08,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 4.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "KLAC",
+      "target": "SMH",
+      "relationship": "in_sector",
+      "strength": 0.06,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 3.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "META",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GOOGL",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GOOGL",
+      "target": "META",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GOOGL",
+      "target": "MSFT",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GOOGL",
+      "target": "AMZN",
+      "relationship": "competes_with",
+      "strength": 0.15,
+      "delay_mean": 1.0,
+      "delay_std": 0.5,
+      "confidence": 0.6,
+      "direction": -0.3,
+      "evidence": [
+        "Competitor relationship"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    },
+    {
+      "source": "GOOG",
+      "target": "SPY",
+      "relationship": "in_sector",
+      "strength": 0.04,
+      "delay_mean": 0.25,
+      "delay_std": 0.1,
+      "confidence": 0.9,
+      "direction": 1.0,
+      "evidence": [
+        "ETF weight: 2.0%"
+      ],
+      "historical_accuracy": 0.5,
+      "observation_count": 0,
+      "source_type": "manual",
+      "last_updated": null
+    }
+  ]
+}
