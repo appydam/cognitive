@@ -317,8 +317,8 @@ async def search_entities(q: str, limit: int = 10):
             matches.append({
                 "id": entity.id,
                 "name": entity.name,
-                "type": entity.type.value,
-                "sector": entity.sector,
+                "type": entity.entity_type,
+                "sector": entity.attributes.get("sector", "N/A"),
             })
             if len(matches) >= limit:
                 break
