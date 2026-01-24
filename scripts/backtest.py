@@ -220,6 +220,10 @@ def run_backtest(
                 effect.entity, event.date, horizon_days
             )
 
+            # Skip if failed to fetch data (both are 0 means fetch failed)
+            if actual_change == 0.0 and actual_day == 0:
+                continue
+
             predicted_magnitude = effect.magnitude * 100  # Convert to %
 
             # Calculate metrics
