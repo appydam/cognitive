@@ -7,6 +7,10 @@ on:
     - cron: '0 12 * * 1'  # Every Monday at 12pm UTC
   workflow_dispatch:
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   run-backtest:
     runs-on: ubuntu-latest
