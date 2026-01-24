@@ -107,11 +107,20 @@ class GraphStats(BaseModel):
 # Endpoints
 @app.get("/")
 async def root():
-    """Health check endpoint."""
+    """Root endpoint."""
     return {
         "service": "Consequence AI",
         "status": "healthy",
         "version": "0.1.0",
+    }
+
+
+@app.get("/health")
+async def health():
+    """Health check endpoint for Railway."""
+    return {
+        "status": "healthy",
+        "graph_loaded": GRAPH is not None,
     }
 
 
