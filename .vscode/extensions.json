@@ -1,0 +1,28 @@
+{
+  "recommendations": [
+    // Python
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-python.black-formatter",
+
+    // TypeScript/JavaScript
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+
+    // Tailwind CSS
+    "bradlc.vscode-tailwindcss",
+
+    // General
+    "eamodio.gitlens",
+    "github.copilot",
+    "streetsidesoftware.code-spell-checker",
+    "gruntfuggly.todo-tree",
+    "usernamehw.errorlens",
+
+    // Testing
+    "ms-python.pytest",
+
+    // Docker (for future)
+    "ms-azuretools.vscode-docker"
+  ]
+}
