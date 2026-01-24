@@ -18,7 +18,7 @@ import argparse
 import os
 import sys
 from pathlib import Path
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -61,7 +61,7 @@ def update_entity_prices(session, dry_run: bool = False):
                 if entity.metadata_json is None:
                     entity.metadata_json = {}
                 entity.metadata_json['last_price'] = float(latest_price)
-                entity.metadata_json['last_updated'] = datetime.utcnow().isoformat()
+                entity.metadata_json['last_updated'] = datetime.now(timezone.utc).isoformat()
                 updated_count += 1
             else:
                 failed_count += 1
@@ -87,7 +87,7 @@ def validate_pending_predictions(session, dry_run: bool = False):
 
     # Find predictions that need validation
     # (trigger_date + horizon_days <= today and status = 'pending')
-    cutoff_date = datetime.utcnow() - timedelta(days=7)
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=7)
 
     pending = session.query(Prediction).filter(
         Prediction.status == 'pending',
@@ -128,7 +128,7 @@ def validate_pending_predictions(session, dry_run: bool = False):
 
             # Update prediction status
             prediction.status = 'validated'
-            prediction.validated_at = datetime.utcnow()
+            prediction.validated_at = datetime.now(timezone.utc)
             validated_count += 1
 
         except Exception as e:
@@ -154,7 +154,7 @@ def update_graph_weights(session, dry_run: bool = False):
 
     # For now, just log that this would happen
     recent_outcomes = session.query(Outcome).filter(
-        Outcome.created_at >= datetime.utcnow() - timedelta(days=7)
+        Outcome.created_at >= datetime.now(timezone.utc) - timedelta(days=7)
     ).count()
 
     print(f"   Found {recent_outcomes} recent outcomes for learning")
@@ -185,6 +185,7 @@ def refresh_materialized_views(session, dry_run: bool = False):
         else:
             print("   📝 Would refresh accuracy_stats view (dry run)")
     except Exception as e:
+        session.rollback()  # Rollback failed transaction
         print(f"   ⚠️  Failed to refresh views: {e}")
         print("   (View may not exist yet - run migrations first)")
 
@@ -199,7 +200,7 @@ def cleanup_old_data(session, dry_run: bool = False, days: int = 90):
     """
     print(f"\n5. Cleaning up data older than {days} days...")
 
-    cutoff_date = datetime.utcnow() - timedelta(days=days)
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=days)
 
     old_predictions = session.query(Prediction).filter(
         Prediction.created_at < cutoff_date,
@@ -234,7 +235,7 @@ def main():
     print("=" * 60)
     print("Consequence AI - Daily Update")
     print("=" * 60)
-    print(f"Time: {datetime.utcnow().isoformat()}")
+    print(f"Time: {datetime.now(timezone.utc).isoformat()}")
 
     if args.dry_run:
         print("Mode: DRY RUN (no changes will be committed)")
