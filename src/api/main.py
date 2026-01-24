@@ -6,7 +6,8 @@ from pydantic import BaseModel, Field
 from typing import Any
 from datetime import datetime
 
-from ..graph.builders import build_initial_graph, load_or_build_graph
+from ..graph.builders import build_initial_graph
+from ..graph.loaders import load_graph_from_database
 from ..engine import propagate_with_explanation
 from ..explain import explain_cascade
 from src.adapters.securities import create_earnings_event
@@ -35,8 +36,8 @@ GRAPH = None
 async def startup_event():
     """Load the causal graph on startup."""
     global GRAPH
-    print("Loading causal graph...")
-    GRAPH = load_or_build_graph()
+    print("Loading causal graph from database...")
+    GRAPH = load_graph_from_database()
     print(f"Graph loaded: {GRAPH.num_entities} entities, {GRAPH.num_links} links")
 
 
