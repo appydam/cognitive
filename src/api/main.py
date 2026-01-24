@@ -36,7 +36,7 @@ async def startup_event():
     """Load the causal graph on startup."""
     global GRAPH
     print("Loading causal graph...")
-    GRAPH = build_initial_graph()
+    GRAPH = load_or_build_graph()
     print(f"Graph loaded: {GRAPH.num_entities} entities, {GRAPH.num_links} links")
 
 
