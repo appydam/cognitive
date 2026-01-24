@@ -89,12 +89,14 @@ def migrate_verified_relationships(data: dict, session, dry_run: bool = False):
             pass  # Already exists
         else:
             entities_created += 1
+            session.flush()  # Flush immediately to avoid duplicates
 
         customer_entity = create_entity_if_not_exists(session, customer)
         if customer_entity.id == customer and customer_entity not in session.new:
             pass  # Already exists
         else:
             entities_created += 1
+            session.flush()  # Flush immediately to avoid duplicates
 
         # Create or update causal link
         existing_link = session.query(CausalLink).filter_by(
