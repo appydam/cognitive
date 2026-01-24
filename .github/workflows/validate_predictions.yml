@@ -31,7 +31,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          python scripts/daily_update.py --skip-prices --skip-cleanup
+          PYTHONPATH=. python scripts/daily_update.py --skip-prices --skip-cleanup
 
       - name: Generate accuracy report
         if: success()

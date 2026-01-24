@@ -31,7 +31,7 @@ jobs:
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          python scripts/daily_update.py
+          PYTHONPATH=. python scripts/daily_update.py
 
       - name: Notify on failure
         if: failure()

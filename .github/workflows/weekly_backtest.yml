@@ -33,7 +33,7 @@ jobs:
 
       - name: Run backtest
         run: |
-          python scripts/backtest.py --events=10
+          PYTHONPATH=. python scripts/backtest.py --events=10
 
       - name: Check accuracy threshold
         run: |
