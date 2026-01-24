@@ -136,10 +136,10 @@ async def get_graph_stats():
     relationship_types = defaultdict(int)
 
     for entity in GRAPH.entities.values():
-        entity_types[entity.type.value] += 1
+        entity_types[entity.entity_type] += 1
 
     for link in GRAPH.iter_links():
-        relationship_types[link.relationship.value] += 1
+        relationship_types[link.relationship_type] += 1
 
     return GraphStats(
         num_entities=GRAPH.num_entities,
@@ -163,9 +163,9 @@ async def get_entity(ticker: str):
 
     return EntityInfo(
         id=entity.id,
-        type=entity.type.value,
+        type=entity.entity_type,
         name=entity.name,
-        sector=entity.sector,
+        sector=entity.attributes.get('sector'),
         connections=connections,
     )
 
@@ -184,7 +184,7 @@ async def get_entity_connections(ticker: str):
     outgoing = [
         {
             "target": link.target,
-            "relationship": link.relationship.value,
+            "relationship": link.relationship_type,
             "strength": link.strength,
             "delay_days": link.delay_mean,
             "confidence": link.confidence,
@@ -195,7 +195,7 @@ async def get_entity_connections(ticker: str):
     incoming = [
         {
             "source": link.source,
-            "relationship": link.relationship.value,
+            "relationship": link.relationship_type,
             "strength": link.strength,
             "delay_days": link.delay_mean,
             "confidence": link.confidence,
