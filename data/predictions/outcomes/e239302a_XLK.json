@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "XLK",
+  "predicted_magnitude": -2.4,
+  "actual_magnitude": 4.102640809845445,
+  "predicted_day": 0.27909169540744927,
+  "actual_day": 4.0,
+  "error": 6.502640809845445,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:57.584774"
+}

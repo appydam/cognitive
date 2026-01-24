@@ -1,0 +1,1622 @@
+[
+  {
+    "source": "AMZN",
+    "target": "META",
+    "correlation": 0.627,
+    "lag_days": 2,
+    "p_value": 1.3726887041388537e-55,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.643235"
+  },
+  {
+    "source": "META",
+    "target": "AMZN",
+    "correlation": 0.627,
+    "lag_days": 2,
+    "p_value": 1.3726887041388537e-55,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.647440"
+  },
+  {
+    "source": "MSFT",
+    "target": "AMZN",
+    "correlation": 0.624,
+    "lag_days": 3,
+    "p_value": 8.939208721336627e-55,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.819056"
+  },
+  {
+    "source": "AMZN",
+    "target": "MSFT",
+    "correlation": 0.624,
+    "lag_days": 3,
+    "p_value": 8.939208721336627e-55,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.823388"
+  },
+  {
+    "source": "MSFT",
+    "target": "META",
+    "correlation": 0.612,
+    "lag_days": 3,
+    "p_value": 3.997349813581176e-52,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.836345"
+  },
+  {
+    "source": "META",
+    "target": "MSFT",
+    "correlation": 0.612,
+    "lag_days": 3,
+    "p_value": 3.997349813581176e-52,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.840639"
+  },
+  {
+    "source": "MSFT",
+    "target": "NVDA",
+    "correlation": 0.542,
+    "lag_days": 3,
+    "p_value": 3.452356598850041e-39,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.827712"
+  },
+  {
+    "source": "NVDA",
+    "target": "MSFT",
+    "correlation": 0.542,
+    "lag_days": 3,
+    "p_value": 3.452356598850041e-39,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.832018"
+  },
+  {
+    "source": "GOOGL",
+    "target": "AMZN",
+    "correlation": 0.531,
+    "lag_days": 3,
+    "p_value": 2.5889117535299035e-37,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.224594"
+  },
+  {
+    "source": "AMZN",
+    "target": "GOOGL",
+    "correlation": 0.531,
+    "lag_days": 3,
+    "p_value": 2.5889117535299035e-37,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.228768"
+  },
+  {
+    "source": "AMZN",
+    "target": "NVDA",
+    "correlation": 0.5,
+    "lag_days": 2,
+    "p_value": 9.667744315067953e-33,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.634925"
+  },
+  {
+    "source": "NVDA",
+    "target": "AMZN",
+    "correlation": 0.5,
+    "lag_days": 2,
+    "p_value": 9.667744315067953e-33,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.639083"
+  },
+  {
+    "source": "MSFT",
+    "target": "GOOGL",
+    "correlation": 0.476,
+    "lag_days": 3,
+    "p_value": 2.723789877693369e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.810214"
+  },
+  {
+    "source": "GOOGL",
+    "target": "MSFT",
+    "correlation": 0.476,
+    "lag_days": 3,
+    "p_value": 2.723789877693369e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.814696"
+  },
+  {
+    "source": "AAPL",
+    "target": "AMZN",
+    "correlation": 0.474,
+    "lag_days": 3,
+    "p_value": 4.0064095353660267e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.401532"
+  },
+  {
+    "source": "AMZN",
+    "target": "AAPL",
+    "correlation": 0.474,
+    "lag_days": 3,
+    "p_value": 4.0064095353660267e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.405938"
+  },
+  {
+    "source": "AAPL",
+    "target": "MSFT",
+    "correlation": 0.473,
+    "lag_days": 3,
+    "p_value": 5.028881668789744e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.382798"
+  },
+  {
+    "source": "MSFT",
+    "target": "AAPL",
+    "correlation": 0.473,
+    "lag_days": 3,
+    "p_value": 5.028881668789744e-29,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.387309"
+  },
+  {
+    "source": "AAPL",
+    "target": "QCOM",
+    "correlation": 0.47,
+    "lag_days": 1,
+    "p_value": 9.060175285168887e-29,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.749483"
+  },
+  {
+    "source": "QCOM",
+    "target": "AAPL",
+    "correlation": 0.47,
+    "lag_days": 1,
+    "p_value": 9.060175285168887e-29,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.753859"
+  },
+  {
+    "source": "MSFT",
+    "target": "AVGO",
+    "correlation": 0.47,
+    "lag_days": 3,
+    "p_value": 1.3623797813717844e-28,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.996798"
+  },
+  {
+    "source": "AVGO",
+    "target": "MSFT",
+    "correlation": 0.47,
+    "lag_days": 3,
+    "p_value": 1.3623797813717844e-28,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.001032"
+  },
+  {
+    "source": "AMZN",
+    "target": "QCOM",
+    "correlation": 0.467,
+    "lag_days": 3,
+    "p_value": 3.755315446755848e-28,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.999000"
+  },
+  {
+    "source": "QCOM",
+    "target": "AMZN",
+    "correlation": 0.467,
+    "lag_days": 3,
+    "p_value": 3.755315446755848e-28,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.003273"
+  },
+  {
+    "source": "AMZN",
+    "target": "CRM",
+    "correlation": 0.46,
+    "lag_days": 1,
+    "p_value": 1.901897914568359e-27,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.946789"
+  },
+  {
+    "source": "CRM",
+    "target": "AMZN",
+    "correlation": 0.46,
+    "lag_days": 1,
+    "p_value": 1.901897914568359e-27,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.951226"
+  },
+  {
+    "source": "NVDA",
+    "target": "META",
+    "correlation": 0.46,
+    "lag_days": 2,
+    "p_value": 2.325251230966073e-27,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.059383"
+  },
+  {
+    "source": "META",
+    "target": "NVDA",
+    "correlation": 0.46,
+    "lag_days": 2,
+    "p_value": 2.325251230966073e-27,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.063673"
+  },
+  {
+    "source": "AAPL",
+    "target": "TSLA",
+    "correlation": 0.451,
+    "lag_days": 3,
+    "p_value": 3.233367928305886e-26,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.428589"
+  },
+  {
+    "source": "TSLA",
+    "target": "AAPL",
+    "correlation": 0.451,
+    "lag_days": 3,
+    "p_value": 3.233367928305886e-26,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.433085"
+  },
+  {
+    "source": "AMZN",
+    "target": "AVGO",
+    "correlation": 0.449,
+    "lag_days": 2,
+    "p_value": 4.4299326035513637e-26,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.797966"
+  },
+  {
+    "source": "AVGO",
+    "target": "AMZN",
+    "correlation": 0.449,
+    "lag_days": 2,
+    "p_value": 4.4299326035513637e-26,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.802495"
+  },
+  {
+    "source": "MSFT",
+    "target": "AMD",
+    "correlation": 0.446,
+    "lag_days": 4,
+    "p_value": 1.7403239994579403e-25,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.149194"
+  },
+  {
+    "source": "AMD",
+    "target": "MSFT",
+    "correlation": 0.446,
+    "lag_days": 4,
+    "p_value": 1.7403239994579403e-25,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.153378"
+  },
+  {
+    "source": "AAPL",
+    "target": "GOOGL",
+    "correlation": 0.442,
+    "lag_days": 3,
+    "p_value": 4.255181435263577e-25,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.392260"
+  },
+  {
+    "source": "GOOGL",
+    "target": "AAPL",
+    "correlation": 0.442,
+    "lag_days": 3,
+    "p_value": 4.255181435263577e-25,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.396801"
+  },
+  {
+    "source": "AMZN",
+    "target": "TSLA",
+    "correlation": 0.442,
+    "lag_days": 1,
+    "p_value": 2.986481613727632e-25,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.651596"
+  },
+  {
+    "source": "TSLA",
+    "target": "AMZN",
+    "correlation": 0.442,
+    "lag_days": 1,
+    "p_value": 2.986481613727632e-25,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.655760"
+  },
+  {
+    "source": "MSFT",
+    "target": "CRM",
+    "correlation": 0.441,
+    "lag_days": 1,
+    "p_value": 3.797297741483542e-25,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.115672"
+  },
+  {
+    "source": "CRM",
+    "target": "MSFT",
+    "correlation": 0.441,
+    "lag_days": 1,
+    "p_value": 3.797297741483542e-25,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.119872"
+  },
+  {
+    "source": "AMZN",
+    "target": "CAT",
+    "correlation": 0.441,
+    "lag_days": 3,
+    "p_value": 5.63964198517124e-25,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.050966"
+  },
+  {
+    "source": "CAT",
+    "target": "AMZN",
+    "correlation": 0.441,
+    "lag_days": 3,
+    "p_value": 5.63964198517124e-25,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.055212"
+  },
+  {
+    "source": "AMZN",
+    "target": "AMD",
+    "correlation": 0.432,
+    "lag_days": 4,
+    "p_value": 8.153049023935488e-24,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.981598"
+  },
+  {
+    "source": "AMD",
+    "target": "AMZN",
+    "correlation": 0.432,
+    "lag_days": 4,
+    "p_value": 8.153049023935488e-24,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.985957"
+  },
+  {
+    "source": "AAPL",
+    "target": "TXN",
+    "correlation": 0.431,
+    "lag_days": 3,
+    "p_value": 8.66064449558969e-24,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.681321"
+  },
+  {
+    "source": "TXN",
+    "target": "AAPL",
+    "correlation": 0.431,
+    "lag_days": 3,
+    "p_value": 8.66064449558969e-24,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.685544"
+  },
+  {
+    "source": "GOOGL",
+    "target": "TSLA",
+    "correlation": 0.424,
+    "lag_days": 1,
+    "p_value": 3.766957775845502e-23,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.249750"
+  },
+  {
+    "source": "TSLA",
+    "target": "GOOGL",
+    "correlation": 0.424,
+    "lag_days": 1,
+    "p_value": 3.766957775845502e-23,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.254018"
+  },
+  {
+    "source": "MSFT",
+    "target": "ORCL",
+    "correlation": 0.419,
+    "lag_days": 1,
+    "p_value": 1.1561764640972872e-22,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.140804"
+  },
+  {
+    "source": "ORCL",
+    "target": "MSFT",
+    "correlation": 0.419,
+    "lag_days": 1,
+    "p_value": 1.1561764640972872e-22,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.145000"
+  },
+  {
+    "source": "AMZN",
+    "target": "JPM",
+    "correlation": 0.414,
+    "lag_days": 3,
+    "p_value": 6.876382222788194e-22,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.684936"
+  },
+  {
+    "source": "JPM",
+    "target": "AMZN",
+    "correlation": 0.414,
+    "lag_days": 3,
+    "p_value": 6.876382222788194e-22,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.689080"
+  },
+  {
+    "source": "AMZN",
+    "target": "ADBE",
+    "correlation": 0.412,
+    "lag_days": 2,
+    "p_value": 8.037083554401166e-22,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.910909"
+  },
+  {
+    "source": "ADBE",
+    "target": "AMZN",
+    "correlation": 0.412,
+    "lag_days": 2,
+    "p_value": 8.037083554401166e-22,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.915745"
+  },
+  {
+    "source": "MSFT",
+    "target": "CSCO",
+    "correlation": 0.411,
+    "lag_days": 3,
+    "p_value": 1.3493308602067868e-21,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.022062"
+  },
+  {
+    "source": "CSCO",
+    "target": "MSFT",
+    "correlation": 0.411,
+    "lag_days": 3,
+    "p_value": 1.3493308602067868e-21,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.026246"
+  },
+  {
+    "source": "GOOGL",
+    "target": "META",
+    "correlation": 0.411,
+    "lag_days": 2,
+    "p_value": 1.1086338751047941e-21,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.241317"
+  },
+  {
+    "source": "META",
+    "target": "GOOGL",
+    "correlation": 0.411,
+    "lag_days": 2,
+    "p_value": 1.1086338751047941e-21,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.245488"
+  },
+  {
+    "source": "AAPL",
+    "target": "CSCO",
+    "correlation": 0.41,
+    "lag_days": 1,
+    "p_value": 1.0531408616613665e-21,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.604423"
+  },
+  {
+    "source": "CSCO",
+    "target": "AAPL",
+    "correlation": 0.41,
+    "lag_days": 1,
+    "p_value": 1.0531408616613665e-21,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.608763"
+  },
+  {
+    "source": "GOOGL",
+    "target": "AMD",
+    "correlation": 0.41,
+    "lag_days": 2,
+    "p_value": 1.5483613560127447e-21,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.559910"
+  },
+  {
+    "source": "AMD",
+    "target": "GOOGL",
+    "correlation": 0.41,
+    "lag_days": 2,
+    "p_value": 1.5483613560127447e-21,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.564090"
+  },
+  {
+    "source": "AMZN",
+    "target": "CSCO",
+    "correlation": 0.409,
+    "lag_days": 1,
+    "p_value": 1.4530594708856196e-21,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.826484"
+  },
+  {
+    "source": "CSCO",
+    "target": "AMZN",
+    "correlation": 0.409,
+    "lag_days": 1,
+    "p_value": 1.4530594708856196e-21,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.833449"
+  },
+  {
+    "source": "MSFT",
+    "target": "QCOM",
+    "correlation": 0.407,
+    "lag_days": 5,
+    "p_value": 4.892439999749387e-21,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.165962"
+  },
+  {
+    "source": "QCOM",
+    "target": "MSFT",
+    "correlation": 0.407,
+    "lag_days": 5,
+    "p_value": 4.892439999749387e-21,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.170139"
+  },
+  {
+    "source": "MSFT",
+    "target": "TSLA",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.63855931602774e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.844936"
+  },
+  {
+    "source": "TSLA",
+    "target": "MSFT",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.63855931602774e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.849383"
+  },
+  {
+    "source": "GOOGL",
+    "target": "AVGO",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.389013661146431e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.405348"
+  },
+  {
+    "source": "AVGO",
+    "target": "GOOGL",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.389013661146431e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.409635"
+  },
+  {
+    "source": "AMZN",
+    "target": "TXN",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.6513508337754834e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.928978"
+  },
+  {
+    "source": "TXN",
+    "target": "AMZN",
+    "correlation": 0.401,
+    "lag_days": 3,
+    "p_value": 1.6513508337754834e-20,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.933626"
+  },
+  {
+    "source": "GOOGL",
+    "target": "NVDA",
+    "correlation": 0.398,
+    "lag_days": 2,
+    "p_value": 2.71627202121342e-20,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.232976"
+  },
+  {
+    "source": "NVDA",
+    "target": "GOOGL",
+    "correlation": 0.398,
+    "lag_days": 2,
+    "p_value": 2.71627202121342e-20,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.237140"
+  },
+  {
+    "source": "AAPL",
+    "target": "MA",
+    "correlation": 0.397,
+    "lag_days": 5,
+    "p_value": 5.78306775214793e-20,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.498887"
+  },
+  {
+    "source": "MA",
+    "target": "AAPL",
+    "correlation": 0.397,
+    "lag_days": 5,
+    "p_value": 5.78306775214793e-20,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.503407"
+  },
+  {
+    "source": "AAPL",
+    "target": "AMD",
+    "correlation": 0.392,
+    "lag_days": 4,
+    "p_value": 1.5502117279111207e-19,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.732117"
+  },
+  {
+    "source": "AMD",
+    "target": "AAPL",
+    "correlation": 0.392,
+    "lag_days": 4,
+    "p_value": 1.5502117279111207e-19,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.736398"
+  },
+  {
+    "source": "MSFT",
+    "target": "CAT",
+    "correlation": 0.389,
+    "lag_days": 3,
+    "p_value": 2.6499795710221265e-19,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.216248"
+  },
+  {
+    "source": "CAT",
+    "target": "MSFT",
+    "correlation": 0.389,
+    "lag_days": 3,
+    "p_value": 2.6499795710221265e-19,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.220416"
+  },
+  {
+    "source": "GOOGL",
+    "target": "QCOM",
+    "correlation": 0.381,
+    "lag_days": 5,
+    "p_value": 1.97080288504944e-18,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.576604"
+  },
+  {
+    "source": "QCOM",
+    "target": "GOOGL",
+    "correlation": 0.381,
+    "lag_days": 5,
+    "p_value": 1.97080288504944e-18,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.580801"
+  },
+  {
+    "source": "AAPL",
+    "target": "META",
+    "correlation": 0.376,
+    "lag_days": 3,
+    "p_value": 4.529111834453203e-18,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.419715"
+  },
+  {
+    "source": "META",
+    "target": "AAPL",
+    "correlation": 0.376,
+    "lag_days": 3,
+    "p_value": 4.529111834453203e-18,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.424170"
+  },
+  {
+    "source": "AAPL",
+    "target": "V",
+    "correlation": 0.376,
+    "lag_days": 4,
+    "p_value": 5.029087460471653e-18,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.473205"
+  },
+  {
+    "source": "V",
+    "target": "AAPL",
+    "correlation": 0.376,
+    "lag_days": 4,
+    "p_value": 5.029087460471653e-18,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.477379"
+  },
+  {
+    "source": "NVDA",
+    "target": "TSLA",
+    "correlation": 0.375,
+    "lag_days": 2,
+    "p_value": 4.645611033407005e-18,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.070559"
+  },
+  {
+    "source": "TSLA",
+    "target": "NVDA",
+    "correlation": 0.375,
+    "lag_days": 2,
+    "p_value": 4.645611033407005e-18,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.074849"
+  },
+  {
+    "source": "AMZN",
+    "target": "MA",
+    "correlation": 0.368,
+    "lag_days": 5,
+    "p_value": 3.295137240632738e-17,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.718081"
+  },
+  {
+    "source": "MA",
+    "target": "AMZN",
+    "correlation": 0.368,
+    "lag_days": 5,
+    "p_value": 3.295137240632738e-17,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.722215"
+  },
+  {
+    "source": "AAPL",
+    "target": "HON",
+    "correlation": 0.367,
+    "lag_days": 5,
+    "p_value": 4.054255567823098e-17,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.775508"
+  },
+  {
+    "source": "HON",
+    "target": "AAPL",
+    "correlation": 0.367,
+    "lag_days": 5,
+    "p_value": 4.054255567823098e-17,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.779852"
+  },
+  {
+    "source": "MSFT",
+    "target": "ADBE",
+    "correlation": 0.367,
+    "lag_days": 3,
+    "p_value": 3.3780731978889463e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.081827"
+  },
+  {
+    "source": "ADBE",
+    "target": "MSFT",
+    "correlation": 0.367,
+    "lag_days": 3,
+    "p_value": 3.3780731978889463e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.086046"
+  },
+  {
+    "source": "AMZN",
+    "target": "ACN",
+    "correlation": 0.367,
+    "lag_days": 3,
+    "p_value": 3.3519074328261785e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.854546"
+  },
+  {
+    "source": "ACN",
+    "target": "AMZN",
+    "correlation": 0.367,
+    "lag_days": 3,
+    "p_value": 3.3519074328261785e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.859756"
+  },
+  {
+    "source": "AAPL",
+    "target": "LIN",
+    "correlation": 0.365,
+    "lag_days": 3,
+    "p_value": 5.128297713001788e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.655936"
+  },
+  {
+    "source": "LIN",
+    "target": "AAPL",
+    "correlation": 0.365,
+    "lag_days": 3,
+    "p_value": 5.128297713001788e-17,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.660129"
+  },
+  {
+    "source": "MSFT",
+    "target": "MA",
+    "correlation": 0.361,
+    "lag_days": 5,
+    "p_value": 1.3939740987129816e-16,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.918179"
+  },
+  {
+    "source": "MA",
+    "target": "MSFT",
+    "correlation": 0.361,
+    "lag_days": 5,
+    "p_value": 1.3939740987129816e-16,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.922569"
+  },
+  {
+    "source": "GOOGL",
+    "target": "CAT",
+    "correlation": 0.355,
+    "lag_days": 0,
+    "p_value": 2.4406101783914844e-16,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.626565"
+  },
+  {
+    "source": "CAT",
+    "target": "GOOGL",
+    "correlation": 0.355,
+    "lag_days": 0,
+    "p_value": 2.4406101783914844e-16,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.630750"
+  },
+  {
+    "source": "AMZN",
+    "target": "INTC",
+    "correlation": 0.354,
+    "lag_days": 5,
+    "p_value": 6.432006963101252e-16,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.990312"
+  },
+  {
+    "source": "INTC",
+    "target": "AMZN",
+    "correlation": 0.354,
+    "lag_days": 5,
+    "p_value": 6.432006963101252e-16,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.994665"
+  },
+  {
+    "source": "AAPL",
+    "target": "NVDA",
+    "correlation": 0.352,
+    "lag_days": 3,
+    "p_value": 6.663946084141497e-16,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.410455"
+  },
+  {
+    "source": "NVDA",
+    "target": "AAPL",
+    "correlation": 0.352,
+    "lag_days": 3,
+    "p_value": 6.663946084141497e-16,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.415235"
+  },
+  {
+    "source": "AAPL",
+    "target": "NKE",
+    "correlation": 0.351,
+    "lag_days": 4,
+    "p_value": 1.0453266633122392e-15,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.672891"
+  },
+  {
+    "source": "NKE",
+    "target": "AAPL",
+    "correlation": 0.351,
+    "lag_days": 4,
+    "p_value": 1.0453266633122392e-15,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.677080"
+  },
+  {
+    "source": "AAPL",
+    "target": "CAT",
+    "correlation": 0.35,
+    "lag_days": 3,
+    "p_value": 1.0276750095499395e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.801570"
+  },
+  {
+    "source": "CAT",
+    "target": "AAPL",
+    "correlation": 0.35,
+    "lag_days": 3,
+    "p_value": 1.0276750095499395e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.805892"
+  },
+  {
+    "source": "AAPL",
+    "target": "BRK-B",
+    "correlation": 0.348,
+    "lag_days": 3,
+    "p_value": 1.6431182083541708e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.437446"
+  },
+  {
+    "source": "BRK-B",
+    "target": "AAPL",
+    "correlation": 0.348,
+    "lag_days": 3,
+    "p_value": 1.6431182083541708e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.441841"
+  },
+  {
+    "source": "MSFT",
+    "target": "TXN",
+    "correlation": 0.347,
+    "lag_days": 3,
+    "p_value": 2.0413347530168525e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.098759"
+  },
+  {
+    "source": "TXN",
+    "target": "MSFT",
+    "correlation": 0.347,
+    "lag_days": 3,
+    "p_value": 2.0413347530168525e-15,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.102989"
+  },
+  {
+    "source": "MSFT",
+    "target": "COST",
+    "correlation": 0.344,
+    "lag_days": 4,
+    "p_value": 3.838343733110288e-15,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.979608"
+  },
+  {
+    "source": "COST",
+    "target": "MSFT",
+    "correlation": 0.344,
+    "lag_days": 4,
+    "p_value": 3.838343733110288e-15,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.984073"
+  },
+  {
+    "source": "AAPL",
+    "target": "UPS",
+    "correlation": 0.342,
+    "lag_days": 1,
+    "p_value": 3.611153668962635e-15,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.758216"
+  },
+  {
+    "source": "UPS",
+    "target": "AAPL",
+    "correlation": 0.342,
+    "lag_days": 1,
+    "p_value": 3.611153668962635e-15,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.762534"
+  },
+  {
+    "source": "AMZN",
+    "target": "V",
+    "correlation": 0.341,
+    "lag_days": 2,
+    "p_value": 5.362222232918398e-15,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.693239"
+  },
+  {
+    "source": "V",
+    "target": "AMZN",
+    "correlation": 0.341,
+    "lag_days": 2,
+    "p_value": 5.362222232918398e-15,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.697376"
+  },
+  {
+    "source": "AAPL",
+    "target": "HD",
+    "correlation": 0.338,
+    "lag_days": 3,
+    "p_value": 1.1233372018098855e-14,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.507800"
+  },
+  {
+    "source": "HD",
+    "target": "AAPL",
+    "correlation": 0.338,
+    "lag_days": 3,
+    "p_value": 1.1233372018098855e-14,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.512046"
+  },
+  {
+    "source": "MSFT",
+    "target": "V",
+    "correlation": 0.338,
+    "lag_days": 2,
+    "p_value": 9.750202383694718e-15,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.890089"
+  },
+  {
+    "source": "V",
+    "target": "MSFT",
+    "correlation": 0.338,
+    "lag_days": 2,
+    "p_value": 9.750202383694718e-15,
+    "n_observations": 497,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.894693"
+  },
+  {
+    "source": "AMZN",
+    "target": "HON",
+    "correlation": 0.338,
+    "lag_days": 1,
+    "p_value": 8.848947033551652e-15,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.024768"
+  },
+  {
+    "source": "HON",
+    "target": "AMZN",
+    "correlation": 0.338,
+    "lag_days": 1,
+    "p_value": 8.848947033551652e-15,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.029056"
+  },
+  {
+    "source": "AAPL",
+    "target": "DHR",
+    "correlation": 0.337,
+    "lag_days": 4,
+    "p_value": 1.4214742875002315e-14,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.638658"
+  },
+  {
+    "source": "DHR",
+    "target": "AAPL",
+    "correlation": 0.337,
+    "lag_days": 4,
+    "p_value": 1.4214742875002315e-14,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.643035"
+  },
+  {
+    "source": "MSFT",
+    "target": "JPM",
+    "correlation": 0.337,
+    "lag_days": 3,
+    "p_value": 1.2387439538827466e-14,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.879693"
+  },
+  {
+    "source": "JPM",
+    "target": "MSFT",
+    "correlation": 0.337,
+    "lag_days": 3,
+    "p_value": 1.2387439538827466e-14,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.884299"
+  },
+  {
+    "source": "GOOGL",
+    "target": "CSCO",
+    "correlation": 0.336,
+    "lag_days": 0,
+    "p_value": 1.0405311354529209e-14,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.431832"
+  },
+  {
+    "source": "CSCO",
+    "target": "GOOGL",
+    "correlation": 0.336,
+    "lag_days": 0,
+    "p_value": 1.0405311354529209e-14,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.436148"
+  },
+  {
+    "source": "AAPL",
+    "target": "COST",
+    "correlation": 0.335,
+    "lag_days": 4,
+    "p_value": 1.96506396605297e-14,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.561172"
+  },
+  {
+    "source": "COST",
+    "target": "AAPL",
+    "correlation": 0.335,
+    "lag_days": 4,
+    "p_value": 1.96506396605297e-14,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.565673"
+  },
+  {
+    "source": "AAPL",
+    "target": "AVGO",
+    "correlation": 0.333,
+    "lag_days": 0,
+    "p_value": 1.9172232487290562e-14,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.578618"
+  },
+  {
+    "source": "AVGO",
+    "target": "AAPL",
+    "correlation": 0.333,
+    "lag_days": 0,
+    "p_value": 1.9172232487290562e-14,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.582889"
+  },
+  {
+    "source": "AAPL",
+    "target": "ADBE",
+    "correlation": 0.324,
+    "lag_days": 3,
+    "p_value": 1.4559902637639994e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.664411"
+  },
+  {
+    "source": "ADBE",
+    "target": "AAPL",
+    "correlation": 0.324,
+    "lag_days": 3,
+    "p_value": 1.4559902637639994e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.668651"
+  },
+  {
+    "source": "AMZN",
+    "target": "ORCL",
+    "correlation": 0.321,
+    "lag_days": 3,
+    "p_value": 2.4617204016085365e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.972827"
+  },
+  {
+    "source": "ORCL",
+    "target": "AMZN",
+    "correlation": 0.321,
+    "lag_days": 3,
+    "p_value": 2.4617204016085365e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.977107"
+  },
+  {
+    "source": "AAPL",
+    "target": "CRM",
+    "correlation": 0.32,
+    "lag_days": 3,
+    "p_value": 3.1876126068907214e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.698223"
+  },
+  {
+    "source": "CRM",
+    "target": "AAPL",
+    "correlation": 0.32,
+    "lag_days": 3,
+    "p_value": 3.1876126068907214e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.702454"
+  },
+  {
+    "source": "AAPL",
+    "target": "LOW",
+    "correlation": 0.316,
+    "lag_days": 3,
+    "p_value": 6.506541723809419e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.784195"
+  },
+  {
+    "source": "LOW",
+    "target": "AAPL",
+    "correlation": 0.316,
+    "lag_days": 3,
+    "p_value": 6.506541723809419e-13,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.788484"
+  },
+  {
+    "source": "AMZN",
+    "target": "NKE",
+    "correlation": 0.315,
+    "lag_days": 1,
+    "p_value": 6.262633255838462e-13,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.920351"
+  },
+  {
+    "source": "NKE",
+    "target": "AMZN",
+    "correlation": 0.315,
+    "lag_days": 1,
+    "p_value": 6.262633255838462e-13,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.924678"
+  },
+  {
+    "source": "AMZN",
+    "target": "COST",
+    "correlation": 0.311,
+    "lag_days": 4,
+    "p_value": 1.6510947647000687e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.778483"
+  },
+  {
+    "source": "COST",
+    "target": "AMZN",
+    "correlation": 0.311,
+    "lag_days": 4,
+    "p_value": 1.6510947647000687e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.784198"
+  },
+  {
+    "source": "AAPL",
+    "target": "JPM",
+    "correlation": 0.31,
+    "lag_days": 1,
+    "p_value": 1.3770035374881926e-12,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.464418"
+  },
+  {
+    "source": "JPM",
+    "target": "AAPL",
+    "correlation": 0.31,
+    "lag_days": 1,
+    "p_value": 1.3770035374881926e-12,
+    "n_observations": 499,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.468794"
+  },
+  {
+    "source": "GOOGL",
+    "target": "CRM",
+    "correlation": 0.31,
+    "lag_days": 0,
+    "p_value": 1.2125077376708029e-12,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.526369"
+  },
+  {
+    "source": "CRM",
+    "target": "GOOGL",
+    "correlation": 0.31,
+    "lag_days": 0,
+    "p_value": 1.2125077376708029e-12,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.530549"
+  },
+  {
+    "source": "AMZN",
+    "target": "DHR",
+    "correlation": 0.308,
+    "lag_days": 4,
+    "p_value": 2.6443943956583e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.878188"
+  },
+  {
+    "source": "DHR",
+    "target": "AMZN",
+    "correlation": 0.308,
+    "lag_days": 4,
+    "p_value": 2.6443943956583e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.885933"
+  },
+  {
+    "source": "AAPL",
+    "target": "ACN",
+    "correlation": 0.306,
+    "lag_days": 3,
+    "p_value": 3.6309244003014897e-12,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.621438"
+  },
+  {
+    "source": "ACN",
+    "target": "AAPL",
+    "correlation": 0.306,
+    "lag_days": 3,
+    "p_value": 3.6309244003014897e-12,
+    "n_observations": 495,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.625870"
+  },
+  {
+    "source": "AAPL",
+    "target": "TMO",
+    "correlation": 0.305,
+    "lag_days": 4,
+    "p_value": 4.397337436359405e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.612996"
+  },
+  {
+    "source": "TMO",
+    "target": "AAPL",
+    "correlation": 0.305,
+    "lag_days": 4,
+    "p_value": 4.397337436359405e-12,
+    "n_observations": 493,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:38.617181"
+  },
+  {
+    "source": "MSFT",
+    "target": "LIN",
+    "correlation": 0.301,
+    "lag_days": 0,
+    "p_value": 6.295594630502936e-12,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.073157"
+  },
+  {
+    "source": "LIN",
+    "target": "MSFT",
+    "correlation": 0.301,
+    "lag_days": 0,
+    "p_value": 6.295594630502936e-12,
+    "n_observations": 501,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:39.077468"
+  },
+  {
+    "source": "NVDA",
+    "target": "JNJ",
+    "correlation": -0.301,
+    "lag_days": 5,
+    "p_value": 9.325519536836009e-12,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.095774"
+  },
+  {
+    "source": "JNJ",
+    "target": "NVDA",
+    "correlation": -0.301,
+    "lag_days": 5,
+    "p_value": 9.325519536836009e-12,
+    "n_observations": 491,
+    "period": "2y",
+    "calculated_at": "2026-01-24T12:24:40.099948"
+  }
+]

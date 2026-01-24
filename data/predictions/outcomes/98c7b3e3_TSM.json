@@ -1,0 +1,12 @@
+{
+  "prediction_id": "98c7b3e3",
+  "ticker": "TSM",
+  "predicted_magnitude": -2.5,
+  "actual_magnitude": 9.142769730579161,
+  "predicted_day": 1.0,
+  "actual_day": 1.0,
+  "error": 11.642769730579161,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:00:06.653981"
+}

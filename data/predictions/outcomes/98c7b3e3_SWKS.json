@@ -1,0 +1,12 @@
+{
+  "prediction_id": "98c7b3e3",
+  "ticker": "SWKS",
+  "predicted_magnitude": -3.2,
+  "actual_magnitude": 4.759761214657826,
+  "predicted_day": 0.5,
+  "actual_day": 2.0,
+  "error": 7.959761214657826,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:00:06.882160"
+}

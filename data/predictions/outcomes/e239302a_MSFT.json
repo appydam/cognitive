@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "MSFT",
+  "predicted_magnitude": -3.0272,
+  "actual_magnitude": 4.785256483525565,
+  "predicted_day": 1.833757681678192,
+  "actual_day": 4.0,
+  "error": 7.812456483525565,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:58.195602"
+}

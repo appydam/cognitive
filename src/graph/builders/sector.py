@@ -1,8 +1,15 @@
 """Build sector and index relationships for the causal graph."""
 
-from ..causal_graph import CausalGraph
-from ..entities import Entity, EntityType, SECTOR_ETFS, INDICES, SEMICONDUCTOR_ETFS
-from ..links import CausalLink, RelationshipType, create_sector_link
+from src.core.graph import CausalGraph, CausalLink
+from src.adapters.securities import (
+    create_company,
+    create_etf,
+    create_sector_link,
+    RelationshipType,
+    SECTOR_ETFS,
+    INDICES,
+    SEMICONDUCTOR_ETFS,
+)
 
 
 # Major companies and their sector ETF weights (approximate)
@@ -145,9 +152,8 @@ def build_sector_graph() -> CausalGraph:
 
     # Add sector ETF entities
     for sector_name, etf_ticker in SECTOR_ETFS.items():
-        entity = Entity(
-            id=etf_ticker,
-            type=EntityType.ETF,
+        entity = create_etf(
+            ticker=etf_ticker,
             name=f"{sector_name} Select Sector SPDR",
             sector=sector_name,
         )
@@ -155,19 +161,17 @@ def build_sector_graph() -> CausalGraph:
 
     # Add semiconductor ETFs
     for name, ticker in SEMICONDUCTOR_ETFS.items():
-        entity = Entity(
-            id=ticker,
-            type=EntityType.ETF,
+        entity = create_etf(
+            ticker=ticker,
             name=name,
             sector="Technology",
         )
         graph.add_entity(entity)
 
-    # Add index entities
+    # Add index entities (use ETF as entity type since they're traded)
     for index_name, ticker in INDICES.items():
-        entity = Entity(
-            id=ticker,
-            type=EntityType.INDEX,
+        entity = create_etf(
+            ticker=ticker,
             name=index_name,
         )
         graph.add_entity(entity)
@@ -180,9 +184,8 @@ def build_sector_graph() -> CausalGraph:
 
     for ticker in all_tickers:
         if ticker not in graph.entities:
-            entity = Entity(
-                id=ticker,
-                type=EntityType.COMPANY,
+            entity = create_company(
+                ticker=ticker,
                 name=ticker,
             )
             graph.add_entity(entity)
@@ -199,9 +202,8 @@ def build_sector_graph() -> CausalGraph:
     # Add SPY links for top companies
     for company_ticker, weight in SPY_WEIGHTS.items():
         if company_ticker not in graph.entities:
-            graph.add_entity(Entity(
-                id=company_ticker,
-                type=EntityType.COMPANY,
+            graph.add_entity(create_company(
+                ticker=company_ticker,
                 name=company_ticker
             ))
         link = create_sector_link(company_ticker, "SPY", weight)
@@ -217,9 +219,8 @@ def build_sector_graph() -> CausalGraph:
 
         for competitor in competitors:
             if competitor not in graph.entities:
-                graph.add_entity(Entity(
-                    id=competitor,
-                    type=EntityType.COMPANY,
+                graph.add_entity(create_company(
+                    ticker=competitor,
                     name=competitor
                 ))
 
@@ -228,7 +229,7 @@ def build_sector_graph() -> CausalGraph:
             link = CausalLink(
                 source=company,
                 target=competitor,
-                relationship=RelationshipType.COMPETES_WITH,
+                relationship_type=RelationshipType.COMPETES_WITH.value,
                 strength=0.15,  # Moderate effect
                 delay_mean=1.0,
                 delay_std=0.5,

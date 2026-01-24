@@ -7,8 +7,9 @@ from typing import Any
 from datetime import datetime
 
 from ..graph.builders import build_initial_graph, load_or_build_graph
-from ..engine import create_earnings_event, propagate_with_explanation
+from ..engine import propagate_with_explanation
 from ..explain import explain_cascade
+from src.adapters.securities import create_earnings_event
 
 # Initialize app
 app = FastAPI(

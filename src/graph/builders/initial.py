@@ -1,7 +1,8 @@
 """Build the initial combined causal graph."""
 
-from ..causal_graph import CausalGraph, merge_graphs
-from ..entities import Entity, EntityType
+from src.core.graph import CausalGraph
+from src.core.graph.graph import merge_graphs
+from src.adapters.securities import create_company
 from .supply_chain import build_supply_chain_graph
 from .sector import build_sector_graph
 
@@ -83,9 +84,8 @@ def build_initial_graph(
 
     for ticker, name, sector in top_companies:
         if ticker not in combined.entities:
-            entity = Entity(
-                id=ticker,
-                type=EntityType.COMPANY,
+            entity = create_company(
+                ticker=ticker,
                 name=name,
                 sector=sector,
             )
@@ -95,7 +95,7 @@ def build_initial_graph(
             existing = combined.entities[ticker]
             if existing.name == ticker:
                 existing.name = name
-                existing.sector = sector
+                existing.attributes["sector"] = sector
 
     print(f"Graph built: {combined.num_entities} entities, {combined.num_links} links")
     return combined

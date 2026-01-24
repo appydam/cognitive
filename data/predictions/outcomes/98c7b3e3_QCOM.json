@@ -1,0 +1,12 @@
+{
+  "prediction_id": "98c7b3e3",
+  "ticker": "QCOM",
+  "predicted_magnitude": -1.8,
+  "actual_magnitude": 4.478003999595877,
+  "predicted_day": 0.5,
+  "actual_day": 2.0,
+  "error": 6.278003999595877,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:00:06.779134"
+}

@@ -9,9 +9,10 @@ This script demonstrates:
 """
 
 from pathlib import Path
-from src.graph import CausalGraph
+from src.core.graph import CausalGraph
 from src.graph.builders import build_initial_graph
-from src.engine import Event, propagate_with_explanation, create_earnings_event
+from src.engine import Event, propagate_with_explanation
+from src.adapters.securities import create_earnings_event
 
 
 def print_cascade_results(cascade):

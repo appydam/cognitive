@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "GOOGL",
+  "predicted_magnitude": -1.15275776,
+  "actual_magnitude": 1.4420900470633153,
+  "predicted_day": 3.527037115352501,
+  "actual_day": 3.0,
+  "error": 2.5948478070633154,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:58.389186"
+}

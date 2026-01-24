@@ -1,8 +1,7 @@
 """Build supply chain relationships for the causal graph."""
 
-from ..causal_graph import CausalGraph
-from ..entities import Entity, EntityType
-from ..links import CausalLink, RelationshipType, create_supplier_link
+from src.core.graph import CausalGraph
+from src.adapters.securities import create_company, create_supplier_link
 
 
 # Curated supply chain relationships for major tech companies
@@ -100,9 +99,8 @@ def build_supply_chain_graph() -> CausalGraph:
 
     # Create entities (we'll update with real info from yfinance later)
     for ticker in tickers:
-        entity = Entity(
-            id=ticker,
-            type=EntityType.COMPANY,
+        entity = create_company(
+            ticker=ticker,
             name=ticker,  # Will be updated
         )
         graph.add_entity(entity)
@@ -144,14 +142,13 @@ def add_company_to_supply_chain(
     """
     # Ensure company exists
     if ticker not in graph.entities:
-        graph.add_entity(Entity(id=ticker, type=EntityType.COMPANY, name=ticker))
+        graph.add_entity(create_company(ticker=ticker, name=ticker))
 
     # Add supplier links
     for sup in suppliers:
         if sup["ticker"] not in graph.entities:
-            graph.add_entity(Entity(
-                id=sup["ticker"],
-                type=EntityType.COMPANY,
+            graph.add_entity(create_company(
+                ticker=sup["ticker"],
                 name=sup["ticker"]
             ))
 
@@ -165,9 +162,8 @@ def add_company_to_supply_chain(
     # Add customer links
     for cust in customers:
         if cust["ticker"] not in graph.entities:
-            graph.add_entity(Entity(
-                id=cust["ticker"],
-                type=EntityType.COMPANY,
+            graph.add_entity(create_company(
+                ticker=cust["ticker"],
                 name=cust["ticker"]
             ))
 

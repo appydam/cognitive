@@ -1,0 +1,114 @@
+name: Weekly Backtest
+
+# Runs weekly to validate system accuracy
+# Ensures prediction quality stays above threshold
+on:
+  schedule:
+    - cron: '0 12 * * 1'  # Every Monday at 12pm UTC
+  workflow_dispatch:
+
+jobs:
+  run-backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run backtest
+        run: |
+          python scripts/backtest.py --events=10
+
+      - name: Check accuracy threshold
+        run: |
+          # Parse backtest results
+          ACCURACY=$(python -c "import json; data=json.load(open('data/backtest_results.json')); print(data['direction_correct']/data['total_predictions']*100)")
+
+          echo "Backtest accuracy: ${ACCURACY}%"
+
+          # Fail if below 70% threshold
+          if (( $(echo "$ACCURACY < 70" | bc -l) )); then
+            echo "❌ Accuracy below 70% threshold!"
+            exit 1
+          else
+            echo "✅ Accuracy meets threshold (≥70%)"
+          fi
+
+      - name: Upload backtest results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-results-${{ github.run_number }}
+          path: data/backtest_results.json
+          retention-days: 90
+
+      - name: Create issue on low accuracy
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '⚠️ Backtest Accuracy Below Threshold',
+              body: `## Backtest Accuracy Alert
+
+              **Date**: ${new Date().toISOString().split('T')[0]}
+              **Status**: ❌ FAILED
+
+              The weekly backtest has fallen below the 70% accuracy threshold.
+
+              **Action Required**:
+              1. Review backtest results in workflow artifacts
+              2. Check for data quality issues
+              3. Investigate recent graph weight updates
+              4. Review failed predictions for patterns
+              5. Update relationships if needed
+
+              **Workflow**: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+              See [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md#phase-2-learning--validation-3-4-hours) for troubleshooting.
+              `,
+              labels: ['accuracy-alert', 'high-priority']
+            })
+
+      - name: Post results comment (if on PR)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('data/backtest_results.json', 'utf8'));
+
+            const accuracy = (results.direction_correct / results.total_predictions * 100).toFixed(1);
+            const status = accuracy >= 70 ? '✅' : '❌';
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## Backtest Results ${status}
+
+              **Overall Accuracy**: ${accuracy}% (${results.direction_correct}/${results.total_predictions})
+
+              **By Order**:
+              - 1st order: ${(results.by_order[1].correct / results.by_order[1].total * 100).toFixed(1)}%
+              - 2nd order: ${(results.by_order[2].correct / results.by_order[2].total * 100).toFixed(1)}%
+
+              **Events Tested**: ${results.events_tested}
+
+              ${accuracy >= 70 ? '✅ Meets 70% threshold' : '❌ Below 70% threshold - review required'}
+              `
+            })

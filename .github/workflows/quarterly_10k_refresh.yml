@@ -1,0 +1,72 @@
+name: Quarterly 10-K Refresh
+
+# Runs on the 1st of each month at 2am UTC
+# To catch new 10-K filings from previous quarter
+on:
+  schedule:
+    - cron: '0 2 1 * *'  # 1st of month, 2am UTC
+  workflow_dispatch:
+
+jobs:
+  refresh-10k-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Check for new 10-K filings
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          echo "Checking for new SEC 10-K filings..."
+          # This would run SEC parser to find new filings
+          # python scripts/update_sec_relationships.py
+
+          echo "⚠️  Automated 10-K parsing not yet implemented"
+          echo "Manual review required for:"
+          echo "- New customer concentration disclosures"
+          echo "- Material relationship changes (>10% revenue)"
+          echo "- New supplier dependencies"
+
+      - name: Create issue for manual review
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: 'Quarterly 10-K Review Required',
+              body: `## Quarterly SEC Filing Review
+
+              **Date**: ${new Date().toISOString().split('T')[0]}
+
+              Please manually review recent 10-K filings for:
+              - [ ] New customer concentration disclosures (>10% revenue)
+              - [ ] Material supplier relationship changes
+              - [ ] Updated revenue percentages for existing relationships
+
+              **Action Required**:
+              1. Review SEC EDGAR filings from past 3 months
+              2. Update \`data/verified_relationships.json\` if needed
+              3. Run \`python scripts/validate_data_quality.py\`
+              4. Run \`python scripts/migrate_to_db.py\` to update database
+              5. Close this issue when complete
+
+              See [DATA_QUALITY_GUIDE.md](DATA_QUALITY_GUIDE.md) for details.
+              `,
+              labels: ['data-quality', 'quarterly-review']
+            })

@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "AVGO",
+  "predicted_magnitude": -1.92,
+  "actual_magnitude": 5.662275058321652,
+  "predicted_day": 1.2739195749022374,
+  "actual_day": 3.0,
+  "error": 7.582275058321652,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:57.822816"
+}

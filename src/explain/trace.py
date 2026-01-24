@@ -3,7 +3,7 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-from ..graph import CausalGraph, CausalLink
+from src.core.graph import CausalGraph, CausalLink
 from ..engine import Event, Effect, Cascade
 
 

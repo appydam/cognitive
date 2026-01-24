@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import Any
 import math
 
-from ..graph import CausalGraph, CausalLink
+from src.core.graph import CausalGraph, CausalLink
 from ..engine import Effect, Cascade
 
 

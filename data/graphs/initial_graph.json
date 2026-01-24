@@ -2,1060 +2,1165 @@
   "entities": [
     {
       "id": "WBA",
-      "type": "company",
+      "entity_type": "company",
       "name": "WBA",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "INTC",
-      "type": "company",
-      "name": "Intel Corporation",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CL",
-      "type": "company",
-      "name": "CL",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "APTV",
-      "type": "company",
-      "name": "APTV",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "KO",
-      "type": "company",
-      "name": "Coca-Cola Company",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MAS",
-      "type": "company",
-      "name": "MAS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "COST",
-      "type": "company",
-      "name": "Costco Wholesale Corporation",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ABC",
-      "type": "company",
-      "name": "ABC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AMD",
-      "type": "company",
-      "name": "Advanced Micro Devices Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "TSLA",
-      "type": "company",
-      "name": "Tesla Inc.",
-      "attributes": {},
-      "sector": "Consumer Discretionary",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "TXN",
-      "type": "company",
-      "name": "Texas Instruments Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CRUS",
-      "type": "company",
-      "name": "CRUS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "SHW",
-      "type": "company",
-      "name": "SHW",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "TSM",
-      "type": "company",
-      "name": "Taiwan Semiconductor Manufacturing",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "WMT",
-      "type": "company",
-      "name": "Walmart Inc.",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ADI",
-      "type": "company",
-      "name": "ADI",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ASML",
-      "type": "company",
-      "name": "ASML Holding N.V.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "PG",
-      "type": "company",
-      "name": "Procter & Gamble Co.",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "GIS",
-      "type": "company",
-      "name": "GIS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ALB",
-      "type": "company",
-      "name": "ALB",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AMZN",
-      "type": "company",
-      "name": "Amazon.com Inc.",
-      "attributes": {},
-      "sector": "Consumer Discretionary",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MSFT",
-      "type": "company",
-      "name": "Microsoft Corporation",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AVGO",
-      "type": "company",
-      "name": "Broadcom Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "SAMSUNG",
-      "type": "company",
-      "name": "SAMSUNG",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "SWKS",
-      "type": "company",
-      "name": "SWKS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AAPL",
-      "type": "company",
-      "name": "Apple Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "UNH",
-      "type": "company",
+      "entity_type": "company",
       "name": "UnitedHealth Group Inc.",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "MU",
-      "type": "company",
-      "name": "MU",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "SWKS",
+      "entity_type": "company",
+      "name": "SWKS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "WDC",
-      "type": "company",
-      "name": "WDC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "AVGO",
+      "entity_type": "company",
+      "name": "Broadcom Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "QCOM",
-      "type": "company",
-      "name": "Qualcomm Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "PEP",
-      "type": "company",
-      "name": "PepsiCo Inc.",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MCK",
-      "type": "company",
-      "name": "MCK",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "NVDA",
-      "type": "company",
-      "name": "NVIDIA Corporation",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ABT",
-      "type": "company",
-      "name": "Abbott Laboratories",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "HD",
-      "type": "company",
-      "name": "Home Depot Inc.",
-      "attributes": {},
-      "sector": "Consumer Discretionary",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "LRCX",
-      "type": "company",
-      "name": "LRCX",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CVS",
-      "type": "company",
-      "name": "CVS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AMAT",
-      "type": "company",
-      "name": "AMAT",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "UPS",
-      "type": "company",
-      "name": "UPS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "ALB",
+      "entity_type": "company",
+      "name": "ALB",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "KLAC",
-      "type": "company",
+      "entity_type": "company",
       "name": "KLAC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "INTC",
+      "entity_type": "company",
+      "name": "Intel Corporation",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "APTV",
+      "entity_type": "company",
+      "name": "APTV",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "QCOM",
+      "entity_type": "company",
+      "name": "Qualcomm Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "AMAT",
+      "entity_type": "company",
+      "name": "AMAT",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CL",
+      "entity_type": "company",
+      "name": "CL",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "AAPL",
+      "entity_type": "company",
+      "name": "Apple Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "PG",
+      "entity_type": "company",
+      "name": "Procter & Gamble Co.",
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "LRCX",
+      "entity_type": "company",
+      "name": "LRCX",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ADI",
+      "entity_type": "company",
+      "name": "ADI",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "WDC",
+      "entity_type": "company",
+      "name": "WDC",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "TSLA",
+      "entity_type": "company",
+      "name": "Tesla Inc.",
+      "attributes": {
+        "sector": "Consumer Discretionary",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MCK",
+      "entity_type": "company",
+      "name": "MCK",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "AMZN",
+      "entity_type": "company",
+      "name": "Amazon.com Inc.",
+      "attributes": {
+        "sector": "Consumer Discretionary",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "FDX",
-      "type": "company",
+      "entity_type": "company",
       "name": "FDX",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ABT",
+      "entity_type": "company",
+      "name": "Abbott Laboratories",
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MSFT",
+      "entity_type": "company",
+      "name": "Microsoft Corporation",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "COST",
+      "entity_type": "company",
+      "name": "Costco Wholesale Corporation",
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "KO",
+      "entity_type": "company",
+      "name": "Coca-Cola Company",
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "NVDA",
+      "entity_type": "company",
+      "name": "NVIDIA Corporation",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "AMD",
+      "entity_type": "company",
+      "name": "Advanced Micro Devices Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "UPS",
+      "entity_type": "company",
+      "name": "UPS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "SHW",
+      "entity_type": "company",
+      "name": "SHW",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MAS",
+      "entity_type": "company",
+      "name": "MAS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "TXN",
+      "entity_type": "company",
+      "name": "Texas Instruments Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ASML",
+      "entity_type": "company",
+      "name": "ASML Holding N.V.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "WMT",
+      "entity_type": "company",
+      "name": "Walmart Inc.",
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "GIS",
+      "entity_type": "company",
+      "name": "GIS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MU",
+      "entity_type": "company",
+      "name": "MU",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "HD",
+      "entity_type": "company",
+      "name": "Home Depot Inc.",
+      "attributes": {
+        "sector": "Consumer Discretionary",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "TSM",
+      "entity_type": "company",
+      "name": "Taiwan Semiconductor Manufacturing",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CRUS",
+      "entity_type": "company",
+      "name": "CRUS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "SAMSUNG",
+      "entity_type": "company",
+      "name": "SAMSUNG",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CVS",
+      "entity_type": "company",
+      "name": "CVS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "PEP",
+      "entity_type": "company",
+      "name": "PepsiCo Inc.",
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ABC",
+      "entity_type": "company",
+      "name": "ABC",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLK",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Technology Select Sector SPDR",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLV",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Healthcare Select Sector SPDR",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLF",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Financials Select Sector SPDR",
-      "attributes": {},
-      "sector": "Financials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Financials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLY",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Consumer Discretionary Select Sector SPDR",
-      "attributes": {},
-      "sector": "Consumer Discretionary",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Consumer Discretionary",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLP",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Consumer Staples Select Sector SPDR",
-      "attributes": {},
-      "sector": "Consumer Staples",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Consumer Staples",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLE",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Energy Select Sector SPDR",
-      "attributes": {},
-      "sector": "Energy",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Energy",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLI",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Industrials Select Sector SPDR",
-      "attributes": {},
-      "sector": "Industrials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Industrials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLB",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Materials Select Sector SPDR",
-      "attributes": {},
-      "sector": "Materials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Materials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLU",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Utilities Select Sector SPDR",
-      "attributes": {},
-      "sector": "Utilities",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Utilities",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLRE",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Real Estate Select Sector SPDR",
-      "attributes": {},
-      "sector": "Real Estate",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Real Estate",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "XLC",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Communication Services Select Sector SPDR",
-      "attributes": {},
-      "sector": "Communication Services",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Communication Services",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "SMH",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Semiconductors",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "SOXX",
-      "type": "etf",
+      "entity_type": "etf",
       "name": "Semiconductor Equipment",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "SPY",
-      "type": "index",
+      "entity_type": "etf",
       "name": "S&P 500",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "QQQ",
-      "type": "index",
+      "entity_type": "etf",
       "name": "Nasdaq 100",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "DIA",
-      "type": "index",
+      "entity_type": "etf",
       "name": "Dow Jones",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "IWM",
-      "type": "index",
+      "entity_type": "etf",
       "name": "Russell 2000",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ACN",
-      "type": "company",
-      "name": "Accenture plc",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "PSX",
-      "type": "company",
-      "name": "PSX",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MS",
-      "type": "company",
-      "name": "MS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ORCL",
-      "type": "company",
-      "name": "Oracle Corporation",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CSCO",
-      "type": "company",
-      "name": "Cisco Systems Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "BMY",
-      "type": "company",
-      "name": "BMY",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "NKE",
-      "type": "company",
-      "name": "NKE",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "SCHW",
-      "type": "company",
-      "name": "SCHW",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "XOM",
-      "type": "company",
-      "name": "Exxon Mobil Corporation",
-      "attributes": {},
-      "sector": "Energy",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "AXP",
-      "type": "company",
-      "name": "AXP",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MCD",
-      "type": "company",
-      "name": "McDonald's Corporation",
-      "attributes": {},
-      "sector": "Consumer Discretionary",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "WFC",
-      "type": "company",
-      "name": "WFC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "PFE",
-      "type": "company",
-      "name": "PFE",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "VLO",
-      "type": "company",
-      "name": "VLO",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "JPM",
-      "type": "company",
-      "name": "JPMorgan Chase & Co.",
-      "attributes": {},
-      "sector": "Financials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MO",
-      "type": "company",
-      "name": "MO",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "TMO",
-      "type": "company",
-      "name": "Thermo Fisher Scientific Inc.",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "EOG",
-      "type": "company",
-      "name": "EOG",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MA",
-      "type": "company",
-      "name": "Mastercard Inc.",
-      "attributes": {},
-      "sector": "Financials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CVX",
-      "type": "company",
-      "name": "Chevron Corporation",
-      "attributes": {},
-      "sector": "Energy",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ADBE",
-      "type": "company",
-      "name": "Adobe Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "TJX",
-      "type": "company",
-      "name": "TJX",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "DHR",
-      "type": "company",
-      "name": "DHR",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "ABBV",
-      "type": "company",
-      "name": "AbbVie Inc.",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "COP",
-      "type": "company",
+      "entity_type": "company",
       "name": "COP",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "SLB",
-      "type": "company",
-      "name": "SLB",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "MCD",
+      "entity_type": "company",
+      "name": "McDonald's Corporation",
+      "attributes": {
+        "sector": "Consumer Discretionary",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "JNJ",
-      "type": "company",
-      "name": "Johnson & Johnson",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "BKNG",
-      "type": "company",
-      "name": "BKNG",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "V",
-      "type": "company",
-      "name": "Visa Inc.",
-      "attributes": {},
-      "sector": "Financials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MDLZ",
-      "type": "company",
-      "name": "MDLZ",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "PM",
-      "type": "company",
-      "name": "PM",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "GS",
-      "type": "company",
-      "name": "GS",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "LOW",
-      "type": "company",
-      "name": "LOW",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "CRM",
-      "type": "company",
-      "name": "Salesforce Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "MPC",
-      "type": "company",
-      "name": "MPC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
-    },
-    {
-      "id": "SBUX",
-      "type": "company",
-      "name": "SBUX",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "MO",
+      "entity_type": "company",
+      "name": "MO",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "BAC",
-      "type": "company",
+      "entity_type": "company",
       "name": "BAC",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "BRK-B",
-      "type": "company",
-      "name": "Berkshire Hathaway Inc.",
-      "attributes": {},
-      "sector": "Financials",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "MS",
+      "entity_type": "company",
+      "name": "MS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
-      "id": "IBM",
-      "type": "company",
-      "name": "IBM Corporation",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "id": "ACN",
+      "entity_type": "company",
+      "name": "Accenture plc",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "LLY",
-      "type": "company",
+      "entity_type": "company",
       "name": "Eli Lilly and Company",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "MRK",
-      "type": "company",
+      "entity_type": "company",
       "name": "Merck & Co. Inc.",
-      "attributes": {},
-      "sector": "Healthcare",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "VLO",
+      "entity_type": "company",
+      "name": "VLO",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ABBV",
+      "entity_type": "company",
+      "name": "AbbVie Inc.",
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "TMO",
+      "entity_type": "company",
+      "name": "Thermo Fisher Scientific Inc.",
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CVX",
+      "entity_type": "company",
+      "name": "Chevron Corporation",
+      "attributes": {
+        "sector": "Energy",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MPC",
+      "entity_type": "company",
+      "name": "MPC",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "V",
+      "entity_type": "company",
+      "name": "Visa Inc.",
+      "attributes": {
+        "sector": "Financials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "TJX",
+      "entity_type": "company",
+      "name": "TJX",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "BKNG",
+      "entity_type": "company",
+      "name": "BKNG",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "XOM",
+      "entity_type": "company",
+      "name": "Exxon Mobil Corporation",
+      "attributes": {
+        "sector": "Energy",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "SCHW",
+      "entity_type": "company",
+      "name": "SCHW",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "LOW",
+      "entity_type": "company",
+      "name": "LOW",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ADBE",
+      "entity_type": "company",
+      "name": "Adobe Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "PM",
+      "entity_type": "company",
+      "name": "PM",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "SBUX",
+      "entity_type": "company",
+      "name": "SBUX",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "ORCL",
+      "entity_type": "company",
+      "name": "Oracle Corporation",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "PFE",
+      "entity_type": "company",
+      "name": "PFE",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "IBM",
+      "entity_type": "company",
+      "name": "IBM Corporation",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "EOG",
+      "entity_type": "company",
+      "name": "EOG",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CRM",
+      "entity_type": "company",
+      "name": "Salesforce Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MA",
+      "entity_type": "company",
+      "name": "Mastercard Inc.",
+      "attributes": {
+        "sector": "Financials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "JNJ",
+      "entity_type": "company",
+      "name": "Johnson & Johnson",
+      "attributes": {
+        "sector": "Healthcare",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "JPM",
+      "entity_type": "company",
+      "name": "JPMorgan Chase & Co.",
+      "attributes": {
+        "sector": "Financials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "MDLZ",
+      "entity_type": "company",
+      "name": "MDLZ",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "AXP",
+      "entity_type": "company",
+      "name": "AXP",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "GS",
+      "entity_type": "company",
+      "name": "GS",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "SLB",
+      "entity_type": "company",
+      "name": "SLB",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "BRK-B",
+      "entity_type": "company",
+      "name": "Berkshire Hathaway Inc.",
+      "attributes": {
+        "sector": "Financials",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "BMY",
+      "entity_type": "company",
+      "name": "BMY",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "NKE",
+      "entity_type": "company",
+      "name": "NKE",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "CSCO",
+      "entity_type": "company",
+      "name": "Cisco Systems Inc.",
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "DHR",
+      "entity_type": "company",
+      "name": "DHR",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "WFC",
+      "entity_type": "company",
+      "name": "WFC",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
+    },
+    {
+      "id": "PSX",
+      "entity_type": "company",
+      "name": "PSX",
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "META",
-      "type": "company",
+      "entity_type": "company",
       "name": "Meta Platforms Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "GOOGL",
-      "type": "company",
+      "entity_type": "company",
       "name": "Alphabet Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "GOOG",
-      "type": "company",
+      "entity_type": "company",
       "name": "GOOG",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "TGT",
-      "type": "company",
+      "entity_type": "company",
       "name": "TGT",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "PYPL",
-      "type": "company",
+      "entity_type": "company",
       "name": "PYPL",
-      "attributes": {},
-      "sector": null,
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": null,
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     },
     {
       "id": "NFLX",
-      "type": "company",
+      "entity_type": "company",
       "name": "Netflix Inc.",
-      "attributes": {},
-      "sector": "Technology",
-      "industry": null,
-      "market_cap": null,
-      "country": "US"
+      "attributes": {
+        "sector": "Technology",
+        "industry": null,
+        "market_cap": null,
+        "country": "US"
+      }
     }
   ],
   "links": [
     {
       "source": "AAPL",
       "target": "TSM",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.3,
       "delay_mean": 1.5,
       "delay_std": 0.44999999999999996,
@@ -1072,7 +1177,7 @@
     {
       "source": "AAPL",
       "target": "QCOM",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.24,
       "delay_mean": 1.5,
       "delay_std": 0.44999999999999996,
@@ -1089,7 +1194,7 @@
     {
       "source": "AAPL",
       "target": "AVGO",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.24,
       "delay_mean": 1.5,
       "delay_std": 0.44999999999999996,
@@ -1106,7 +1211,7 @@
     {
       "source": "AAPL",
       "target": "TXN",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.144,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1123,7 +1228,7 @@
     {
       "source": "AAPL",
       "target": "ADI",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.12,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1140,7 +1245,7 @@
     {
       "source": "AAPL",
       "target": "SWKS",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.66,
       "delay_mean": 1.0,
       "delay_std": 0.3,
@@ -1157,7 +1262,7 @@
     {
       "source": "AAPL",
       "target": "CRUS",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.8,
       "delay_mean": 1.0,
       "delay_std": 0.3,
@@ -1174,7 +1279,7 @@
     {
       "source": "AAPL",
       "target": "MU",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1191,7 +1296,7 @@
     {
       "source": "AAPL",
       "target": "WDC",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1208,7 +1313,7 @@
     {
       "source": "AAPL",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1225,7 +1330,7 @@
     {
       "source": "AAPL",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.14,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1242,7 +1347,7 @@
     {
       "source": "AAPL",
       "target": "MSFT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1259,7 +1364,7 @@
     {
       "source": "AAPL",
       "target": "GOOGL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1276,7 +1381,7 @@
     {
       "source": "AAPL",
       "target": "SAMSUNG",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1293,7 +1398,7 @@
     {
       "source": "NVDA",
       "target": "TSM",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 1.5,
       "delay_std": 0.44999999999999996,
@@ -1310,7 +1415,7 @@
     {
       "source": "NVDA",
       "target": "AVGO",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1327,7 +1432,7 @@
     {
       "source": "NVDA",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.12,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1344,7 +1449,7 @@
     {
       "source": "NVDA",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1361,7 +1466,7 @@
     {
       "source": "NVDA",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1378,7 +1483,7 @@
     {
       "source": "NVDA",
       "target": "AMD",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1395,7 +1500,7 @@
     {
       "source": "NVDA",
       "target": "INTC",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1412,7 +1517,7 @@
     {
       "source": "MSFT",
       "target": "INTC",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1429,7 +1534,7 @@
     {
       "source": "MSFT",
       "target": "AMD",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1446,7 +1551,7 @@
     {
       "source": "MSFT",
       "target": "NVDA",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1463,7 +1568,7 @@
     {
       "source": "MSFT",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1480,7 +1585,7 @@
     {
       "source": "MSFT",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.14,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1497,7 +1602,7 @@
     {
       "source": "MSFT",
       "target": "AAPL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1514,7 +1619,7 @@
     {
       "source": "MSFT",
       "target": "GOOGL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1531,7 +1636,7 @@
     {
       "source": "MSFT",
       "target": "AMZN",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1548,7 +1653,7 @@
     {
       "source": "MSFT",
       "target": "CRM",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1565,7 +1670,7 @@
     {
       "source": "MSFT",
       "target": "ORCL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1582,7 +1687,7 @@
     {
       "source": "AMZN",
       "target": "UPS",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.12,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1599,7 +1704,7 @@
     {
       "source": "AMZN",
       "target": "FDX",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1616,7 +1721,7 @@
     {
       "source": "AMZN",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1633,7 +1738,7 @@
     {
       "source": "AMZN",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1650,7 +1755,7 @@
     {
       "source": "AMZN",
       "target": "WMT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1667,7 +1772,7 @@
     {
       "source": "AMZN",
       "target": "TGT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1684,7 +1789,7 @@
     {
       "source": "AMZN",
       "target": "COST",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1701,7 +1806,7 @@
     {
       "source": "AMZN",
       "target": "MSFT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1718,7 +1823,7 @@
     {
       "source": "AMZN",
       "target": "GOOGL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1735,7 +1840,7 @@
     {
       "source": "TSLA",
       "target": "ALB",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1752,7 +1857,7 @@
     {
       "source": "TSLA",
       "target": "APTV",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1769,7 +1874,7 @@
     {
       "source": "TSLA",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.26,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1786,7 +1891,7 @@
     {
       "source": "TSLA",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1803,7 +1908,7 @@
     {
       "source": "TSM",
       "target": "ASML",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.3,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1820,7 +1925,7 @@
     {
       "source": "TSM",
       "target": "LRCX",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.24,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1837,7 +1942,7 @@
     {
       "source": "TSM",
       "target": "AMAT",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.216,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1854,7 +1959,7 @@
     {
       "source": "TSM",
       "target": "KLAC",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1871,7 +1976,7 @@
     {
       "source": "TSM",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.24,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1888,7 +1993,7 @@
     {
       "source": "INTC",
       "target": "ASML",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.24,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1905,7 +2010,7 @@
     {
       "source": "INTC",
       "target": "LRCX",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1922,7 +2027,7 @@
     {
       "source": "INTC",
       "target": "AMAT",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.144,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -1939,7 +2044,7 @@
     {
       "source": "INTC",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1956,7 +2061,7 @@
     {
       "source": "INTC",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -1973,7 +2078,7 @@
     {
       "source": "INTC",
       "target": "AMD",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -1990,7 +2095,7 @@
     {
       "source": "INTC",
       "target": "NVDA",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2007,7 +2112,7 @@
     {
       "source": "INTC",
       "target": "TSM",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2024,7 +2129,7 @@
     {
       "source": "SAMSUNG",
       "target": "ASML",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2041,7 +2146,7 @@
     {
       "source": "WMT",
       "target": "PG",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2058,7 +2163,7 @@
     {
       "source": "WMT",
       "target": "KO",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.12,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2075,7 +2180,7 @@
     {
       "source": "WMT",
       "target": "PEP",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2092,7 +2197,7 @@
     {
       "source": "WMT",
       "target": "CL",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.144,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2109,7 +2214,7 @@
     {
       "source": "WMT",
       "target": "GIS",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.12,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2126,7 +2231,7 @@
     {
       "source": "WMT",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2143,7 +2248,7 @@
     {
       "source": "WMT",
       "target": "COST",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2160,7 +2265,7 @@
     {
       "source": "WMT",
       "target": "TGT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2177,7 +2282,7 @@
     {
       "source": "WMT",
       "target": "AMZN",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2194,7 +2299,7 @@
     {
       "source": "COST",
       "target": "KO",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2211,7 +2316,7 @@
     {
       "source": "COST",
       "target": "PG",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.096,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2228,7 +2333,7 @@
     {
       "source": "COST",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.24,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2245,7 +2350,7 @@
     {
       "source": "COST",
       "target": "WMT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2262,7 +2367,7 @@
     {
       "source": "COST",
       "target": "TGT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2279,7 +2384,7 @@
     {
       "source": "HD",
       "target": "SHW",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.12,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2296,7 +2401,7 @@
     {
       "source": "HD",
       "target": "MAS",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2313,7 +2418,7 @@
     {
       "source": "HD",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2330,7 +2435,7 @@
     {
       "source": "HD",
       "target": "LOW",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2347,7 +2452,7 @@
     {
       "source": "WBA",
       "target": "ABC",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.18,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2364,7 +2469,7 @@
     {
       "source": "CVS",
       "target": "MCK",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.24,
       "delay_mean": 2.0,
       "delay_std": 0.6,
@@ -2381,7 +2486,7 @@
     {
       "source": "UNH",
       "target": "ABT",
-      "relationship": "customer_of",
+      "relationship_type": "customer_of",
       "strength": 0.06,
       "delay_mean": 2.5,
       "delay_std": 0.75,
@@ -2398,7 +2503,7 @@
     {
       "source": "UNH",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.2,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2415,7 +2520,7 @@
     {
       "source": "UNH",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.02,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2432,7 +2537,7 @@
     {
       "source": "AVGO",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2449,7 +2554,7 @@
     {
       "source": "AVGO",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2466,7 +2571,7 @@
     {
       "source": "CRM",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2483,7 +2588,7 @@
     {
       "source": "ADBE",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2500,7 +2605,7 @@
     {
       "source": "CSCO",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2517,7 +2622,7 @@
     {
       "source": "ACN",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2534,7 +2639,7 @@
     {
       "source": "ORCL",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2551,7 +2656,7 @@
     {
       "source": "AMD",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2568,7 +2673,7 @@
     {
       "source": "AMD",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2585,7 +2690,7 @@
     {
       "source": "AMD",
       "target": "NVDA",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2602,7 +2707,7 @@
     {
       "source": "AMD",
       "target": "INTC",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2619,7 +2724,7 @@
     {
       "source": "QCOM",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2636,7 +2741,7 @@
     {
       "source": "QCOM",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2653,7 +2758,7 @@
     {
       "source": "TXN",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2670,7 +2775,7 @@
     {
       "source": "TXN",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2687,7 +2792,7 @@
     {
       "source": "IBM",
       "target": "XLK",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2704,7 +2809,7 @@
     {
       "source": "JNJ",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2721,7 +2826,7 @@
     {
       "source": "JNJ",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.02,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2738,7 +2843,7 @@
     {
       "source": "LLY",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2755,7 +2860,7 @@
     {
       "source": "MRK",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.12,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2772,7 +2877,7 @@
     {
       "source": "ABBV",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.12,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2789,7 +2894,7 @@
     {
       "source": "PFE",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2806,7 +2911,7 @@
     {
       "source": "TMO",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2823,7 +2928,7 @@
     {
       "source": "ABT",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2840,7 +2945,7 @@
     {
       "source": "DHR",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2857,7 +2962,7 @@
     {
       "source": "BMY",
       "target": "XLV",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2874,7 +2979,7 @@
     {
       "source": "BRK-B",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.28,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2891,7 +2996,7 @@
     {
       "source": "BRK-B",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2908,7 +3013,7 @@
     {
       "source": "JPM",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.2,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2925,7 +3030,7 @@
     {
       "source": "JPM",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.02,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2942,7 +3047,7 @@
     {
       "source": "V",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.16,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2959,7 +3064,7 @@
     {
       "source": "V",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.02,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -2976,7 +3081,7 @@
     {
       "source": "V",
       "target": "MA",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -2993,7 +3098,7 @@
     {
       "source": "V",
       "target": "PYPL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3010,7 +3115,7 @@
     {
       "source": "MA",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.14,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3027,7 +3132,7 @@
     {
       "source": "MA",
       "target": "V",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3044,7 +3149,7 @@
     {
       "source": "MA",
       "target": "PYPL",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3061,7 +3166,7 @@
     {
       "source": "BAC",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3078,7 +3183,7 @@
     {
       "source": "WFC",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3095,7 +3200,7 @@
     {
       "source": "GS",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3112,7 +3217,7 @@
     {
       "source": "MS",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3129,7 +3234,7 @@
     {
       "source": "SCHW",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3146,7 +3251,7 @@
     {
       "source": "AXP",
       "target": "XLF",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3163,7 +3268,7 @@
     {
       "source": "MCD",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3180,7 +3285,7 @@
     {
       "source": "NKE",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3197,7 +3302,7 @@
     {
       "source": "LOW",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3214,7 +3319,7 @@
     {
       "source": "LOW",
       "target": "HD",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3231,7 +3336,7 @@
     {
       "source": "SBUX",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3248,7 +3353,7 @@
     {
       "source": "TJX",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3265,7 +3370,7 @@
     {
       "source": "BKNG",
       "target": "XLY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3282,7 +3387,7 @@
     {
       "source": "PG",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3299,7 +3404,7 @@
     {
       "source": "KO",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.2,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3316,7 +3421,7 @@
     {
       "source": "KO",
       "target": "PEP",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3333,7 +3438,7 @@
     {
       "source": "PEP",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.2,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3350,7 +3455,7 @@
     {
       "source": "PEP",
       "target": "KO",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3367,7 +3472,7 @@
     {
       "source": "PM",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3384,7 +3489,7 @@
     {
       "source": "MO",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3401,7 +3506,7 @@
     {
       "source": "MDLZ",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3418,7 +3523,7 @@
     {
       "source": "CL",
       "target": "XLP",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3435,7 +3540,7 @@
     {
       "source": "XOM",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3452,7 +3557,7 @@
     {
       "source": "XOM",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.02,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3469,7 +3574,7 @@
     {
       "source": "CVX",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.3,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3486,7 +3591,7 @@
     {
       "source": "SLB",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3503,7 +3608,7 @@
     {
       "source": "EOG",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3520,7 +3625,7 @@
     {
       "source": "COP",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.1,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3537,7 +3642,7 @@
     {
       "source": "MPC",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3554,7 +3659,7 @@
     {
       "source": "PSX",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3571,7 +3676,7 @@
     {
       "source": "VLO",
       "target": "XLE",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3588,7 +3693,7 @@
     {
       "source": "ASML",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.14,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3605,7 +3710,7 @@
     {
       "source": "LRCX",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3622,7 +3727,7 @@
     {
       "source": "AMAT",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3639,7 +3744,7 @@
     {
       "source": "MU",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.08,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3656,7 +3761,7 @@
     {
       "source": "KLAC",
       "target": "SMH",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.06,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3673,7 +3778,7 @@
     {
       "source": "META",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3690,7 +3795,7 @@
     {
       "source": "GOOGL",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,
@@ -3707,7 +3812,7 @@
     {
       "source": "GOOGL",
       "target": "META",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3724,7 +3829,7 @@
     {
       "source": "GOOGL",
       "target": "MSFT",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3741,7 +3846,7 @@
     {
       "source": "GOOGL",
       "target": "AMZN",
-      "relationship": "competes_with",
+      "relationship_type": "competes_with",
       "strength": 0.15,
       "delay_mean": 1.0,
       "delay_std": 0.5,
@@ -3758,7 +3863,7 @@
     {
       "source": "GOOG",
       "target": "SPY",
-      "relationship": "in_sector",
+      "relationship_type": "in_sector",
       "strength": 0.04,
       "delay_mean": 0.25,
       "delay_std": 0.1,

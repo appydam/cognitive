@@ -1,0 +1,83 @@
+{
+  "prediction_id": "e239302a",
+  "timestamp": "2026-01-24T13:04:56.634722",
+  "trigger": {
+    "ticker": "AAPL",
+    "surprise_pct": -8.0,
+    "event_date": "2025-01-15T00:00:00"
+  },
+  "horizon_days": 7,
+  "predictions": [
+    {
+      "ticker": "SPY",
+      "predicted_magnitude": -1.12,
+      "predicted_day": 0.23603742034588926,
+      "confidence": 0.9,
+      "order": 1
+    },
+    {
+      "ticker": "XLK",
+      "predicted_magnitude": -2.4,
+      "predicted_day": 0.27909169540744927,
+      "confidence": 0.9,
+      "order": 1
+    },
+    {
+      "ticker": "CSCO",
+      "predicted_magnitude": -2.624,
+      "predicted_day": 0.756267461654981,
+      "confidence": 0.5,
+      "order": 1
+    },
+    {
+      "ticker": "AVGO",
+      "predicted_magnitude": -1.92,
+      "predicted_day": 1.2739195749022374,
+      "confidence": 0.75,
+      "order": 1
+    },
+    {
+      "ticker": "TSM",
+      "predicted_magnitude": -2.4,
+      "predicted_day": 1.6364471729521777,
+      "confidence": 0.75,
+      "order": 1
+    },
+    {
+      "ticker": "QCOM",
+      "predicted_magnitude": -1.44,
+      "predicted_day": 1.6823593270986168,
+      "confidence": 0.75,
+      "order": 1
+    },
+    {
+      "ticker": "MSFT",
+      "predicted_magnitude": -3.0272,
+      "predicted_day": 1.833757681678192,
+      "confidence": 0.5,
+      "order": 1
+    },
+    {
+      "ticker": "TSLA",
+      "predicted_magnitude": -2.8864,
+      "predicted_day": 3.493076421448142,
+      "confidence": 0.5,
+      "order": 1
+    },
+    {
+      "ticker": "GOOGL",
+      "predicted_magnitude": -1.15275776,
+      "predicted_day": 3.527037115352501,
+      "confidence": 0.25,
+      "order": 2
+    },
+    {
+      "ticker": "NVDA",
+      "predicted_magnitude": -1.31259392,
+      "predicted_day": 3.6766893036490584,
+      "confidence": 0.25,
+      "order": 2
+    }
+  ],
+  "status": "validated"
+}

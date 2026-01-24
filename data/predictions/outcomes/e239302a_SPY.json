@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "SPY",
+  "predicted_magnitude": -1.12,
+  "actual_magnitude": 2.8627783395616864,
+  "predicted_day": 0.23603742034588926,
+  "actual_day": 4.0,
+  "error": 3.9827783395616865,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:57.336202"
+}

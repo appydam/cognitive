@@ -1,0 +1,619 @@
+{
+  "events_tested": 5,
+  "total_predictions": 45,
+  "direction_correct": 33,
+  "magnitude_errors": [
+    0.5188711093772413,
+    0.22946289940039,
+    6.2687769164977425,
+    4.101836858307211,
+    15.80653920769646,
+    4.648776916497743,
+    0.36514782874310914,
+    9.262845071733231,
+    8.190701693736981,
+    8.8391214644105,
+    1.2332703443686523,
+    3.2893171096256846,
+    2.3534006879701432,
+    0.4476365006357974,
+    1.6715788368056388,
+    4.314364030208261,
+    6.8589617970153895,
+    3.425863589256339,
+    25.736336431342778,
+    7.551250808559393,
+    5.396407401147755,
+    0.23683897545033084,
+    3.656805771217468,
+    3.2899961048387762,
+    2.9584980152530447,
+    7.99099180566391,
+    8.94221377849614,
+    8.678811116171271,
+    5.865374433677562,
+    10.674953087421502,
+    0.7018489712174674,
+    1.9014246524989087,
+    3.0875621093118575,
+    13.678476309329172,
+    4.678579892339073,
+    1.7014090057560065,
+    6.490669282504376,
+    6.459926972244506,
+    2.8352228168882316,
+    7.706506068837138,
+    1.7158376321973672,
+    5.407861920966513,
+    6.510499668837138,
+    7.758752482504376,
+    7.298754913700704
+  ],
+  "timing_errors": [
+    2.7822883996665166,
+    2.7762277615510267,
+    3.67841361932258,
+    2.0903437573938612,
+    2.5071043226702594,
+    2.0231810273432274,
+    0.3294363287553064,
+    1.6267812470613263,
+    1.5221972865686246,
+    1.7584135791372728,
+    0.15667771357335125,
+    0.10199361404032947,
+    0.9386155491767143,
+    2.9518287530716183,
+    0.11417112670653395,
+    1.1903546710789148,
+    4.628150474227042,
+    2.798717041245275,
+    3.688873370297921,
+    3.6429652849993843,
+    2.385022615990633,
+    2.0649805219907833,
+    1.9211578095064001,
+    0.7139614073147951,
+    0.4357944768778452,
+    0.4062621432794735,
+    1.3679409327380059,
+    0.12415705781856312,
+    2.094446724954005,
+    0.7298213697846547,
+    0.7210697568562447,
+    4.796409355226642,
+    3.2360750725563228,
+    2.5061068445289374,
+    2.418450295393792,
+    1.9565767960460327,
+    1.6781443332344872,
+    1.5204155756070534,
+    1.4697229476379623,
+    2.1975867058599325,
+    0.6791503017668497,
+    2.7608019475395267,
+    3.1413394607684326,
+    1.7793807577698786,
+    6.7847368591581745
+  ],
+  "by_order": {
+    "1": {
+      "correct": 24,
+      "total": 31
+    },
+    "2": {
+      "correct": 9,
+      "total": 14
+    },
+    "3": {
+      "correct": 0,
+      "total": 0
+    }
+  },
+  "events": [
+    {
+      "ticker": "AAPL",
+      "date": "2024-11-01T00:00:00",
+      "surprise_pct": -2.5,
+      "predictions": [],
+      "accuracy": {
+        "direction": 0.0,
+        "predictions": 0
+      }
+    },
+    {
+      "ticker": "NVDA",
+      "date": "2024-11-20T00:00:00",
+      "surprise_pct": 15.0,
+      "predictions": [
+        {
+          "entity": "SPY",
+          "predicted": 1.2,
+          "actual": 1.7188711093772413,
+          "predicted_day": 0.21771160033348336,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 0.5188711093772413,
+          "order": 1
+        },
+        {
+          "entity": "XLK",
+          "predicted": 1.7999999999999998,
+          "actual": 1.5705371005996098,
+          "predicted_day": 0.2237722384489732,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 0.22946289940039,
+          "order": 1
+        },
+        {
+          "entity": "SMH",
+          "predicted": 4.5,
+          "actual": -1.768776916497743,
+          "predicted_day": 0.32158638067742035,
+          "actual_day": 4.0,
+          "direction_correct": false,
+          "magnitude_error": 6.2687769164977425,
+          "order": 1
+        },
+        {
+          "entity": "META",
+          "predicted": 5.5200000000000005,
+          "actual": 1.4181631416927893,
+          "predicted_day": 0.9096562426061385,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 4.101836858307211,
+          "order": 1
+        },
+        {
+          "entity": "TSM",
+          "predicted": 12.0,
+          "actual": -3.8065392076964604,
+          "predicted_day": 1.4928956773297408,
+          "actual_day": 4.0,
+          "direction_correct": false,
+          "magnitude_error": 15.80653920769646,
+          "order": 1
+        },
+        {
+          "entity": "SMH",
+          "predicted": 2.88,
+          "actual": -1.768776916497743,
+          "predicted_day": 1.9768189726567726,
+          "actual_day": 4.0,
+          "direction_correct": false,
+          "magnitude_error": 4.648776916497743,
+          "order": 2
+        },
+        {
+          "entity": "ASML",
+          "predicted": 4.319999999999999,
+          "actual": 3.9548521712568903,
+          "predicted_day": 2.3294363287553064,
+          "actual_day": 2.0,
+          "direction_correct": true,
+          "magnitude_error": 0.36514782874310914,
+          "order": 2
+        },
+        {
+          "entity": "NVDA",
+          "predicted": 2.0313600000000003,
+          "actual": -7.23148507173323,
+          "predicted_day": 2.3732187529386737,
+          "actual_day": 4.0,
+          "direction_correct": false,
+          "magnitude_error": 9.262845071733231,
+          "order": 2
+        },
+        {
+          "entity": "GOOGL",
+          "predicted": 1.8149760000000001,
+          "actual": -6.375725693736982,
+          "predicted_day": 2.5221972865686246,
+          "actual_day": 1.0,
+          "direction_correct": false,
+          "magnitude_error": 8.190701693736981,
+          "order": 2
+        },
+        {
+          "entity": "AMZN",
+          "predicted": 6.0,
+          "actual": -2.8391214644105,
+          "predicted_day": 2.758413579137273,
+          "actual_day": 1.0,
+          "direction_correct": false,
+          "magnitude_error": 8.8391214644105,
+          "order": 1
+        },
+        {
+          "entity": "XLY",
+          "predicted": 1.7999999999999998,
+          "actual": 3.033270344368652,
+          "predicted_day": 2.8433222864266487,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 1.2332703443686523,
+          "order": 2
+        },
+        {
+          "entity": "MSFT",
+          "predicted": 6.5040000000000004,
+          "actual": 3.214682890374316,
+          "predicted_day": 2.8980063859596705,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 3.2893171096256846,
+          "order": 1
+        },
+        {
+          "entity": "KLAC",
+          "predicted": 2.1599999999999997,
+          "actual": 4.513400687970143,
+          "predicted_day": 2.9386155491767143,
+          "actual_day": 2.0,
+          "direction_correct": true,
+          "magnitude_error": 2.3534006879701432,
+          "order": 2
+        },
+        {
+          "entity": "AMAT",
+          "predicted": 2.88,
+          "actual": 3.3276365006357973,
+          "predicted_day": 2.9518287530716183,
+          "actual_day": 0.0,
+          "direction_correct": true,
+          "magnitude_error": 0.4476365006357974,
+          "order": 2
+        },
+        {
+          "entity": "CSCO",
+          "predicted": 1.9632,
+          "actual": 3.634778836805639,
+          "predicted_day": 3.114171126706534,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 1.6715788368056388,
+          "order": 2
+        }
+      ],
+      "accuracy": {
+        "direction": 60.0,
+        "predictions": 15
+      }
+    },
+    {
+      "ticker": "TSM",
+      "date": "2024-10-17T00:00:00",
+      "surprise_pct": -3.0,
+      "predictions": [
+        {
+          "entity": "ASML",
+          "predicted": -1.0799999999999998,
+          "actual": 3.234364030208261,
+          "predicted_day": 1.1903546710789148,
+          "actual_day": 0.0,
+          "direction_correct": false,
+          "magnitude_error": 4.314364030208261,
+          "order": 1
+        }
+      ],
+      "accuracy": {
+        "direction": 0.0,
+        "predictions": 1
+      }
+    },
+    {
+      "ticker": "AMZN",
+      "date": "2024-10-31T00:00:00",
+      "surprise_pct": 8.0,
+      "predictions": [
+        {
+          "entity": "XLY",
+          "predicted": 2.4,
+          "actual": 9.25896179701539,
+          "predicted_day": 0.37184952577295766,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 6.8589617970153895,
+          "order": 1
+        },
+        {
+          "entity": "CSCO",
+          "predicted": 2.6176,
+          "actual": 6.043463589256339,
+          "predicted_day": 1.201282958754725,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 3.425863589256339,
+          "order": 1
+        },
+        {
+          "entity": "TSLA",
+          "predicted": 2.8288,
+          "actual": 28.56513643134278,
+          "predicted_day": 1.3111266297020792,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 25.736336431342778,
+          "order": 1
+        },
+        {
+          "entity": "CRM",
+          "predicted": 2.9440000000000004,
+          "actual": 10.495250808559394,
+          "predicted_day": 1.357034715000616,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 7.551250808559393,
+          "order": 1
+        },
+        {
+          "entity": "AVGO",
+          "predicted": 2.8736,
+          "actual": 8.270007401147755,
+          "predicted_day": 1.6149773840093669,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 5.396407401147755,
+          "order": 1
+        },
+        {
+          "entity": "META",
+          "predicted": 4.0128,
+          "actual": 4.249638975450331,
+          "predicted_day": 1.9350194780092167,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 0.23683897545033084,
+          "order": 1
+        },
+        {
+          "entity": "MSFT",
+          "predicted": 1.0386432,
+          "actual": 4.695448971217468,
+          "predicted_day": 2.0788421904936,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 3.656805771217468,
+          "order": 2
+        },
+        {
+          "entity": "QCOM",
+          "predicted": 2.9888000000000003,
+          "actual": 6.278796104838777,
+          "predicted_day": 2.286038592685205,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 3.2899961048387762,
+          "order": 1
+        },
+        {
+          "entity": "ADBE",
+          "predicted": 2.6368,
+          "actual": 5.595298015253045,
+          "predicted_day": 2.5642055231221548,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 2.9584980152530447,
+          "order": 1
+        },
+        {
+          "entity": "CAT",
+          "predicted": 2.8224,
+          "actual": 10.81339180566391,
+          "predicted_day": 2.5937378567205265,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 7.99099180566391,
+          "order": 1
+        },
+        {
+          "entity": "NVDA",
+          "predicted": 3.2,
+          "actual": 12.142213778496139,
+          "predicted_day": 2.632059067261994,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 8.94221377849614,
+          "order": 1
+        },
+        {
+          "entity": "JPM",
+          "predicted": 2.6496,
+          "actual": 11.32841111617127,
+          "predicted_day": 2.875842942181437,
+          "actual_day": 3.0,
+          "direction_correct": true,
+          "magnitude_error": 8.678811116171271,
+          "order": 1
+        },
+        {
+          "entity": "TXN",
+          "predicted": 2.5664000000000002,
+          "actual": 8.431774433677562,
+          "predicted_day": 2.905553275045995,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 5.865374433677562,
+          "order": 1
+        },
+        {
+          "entity": "AMZN",
+          "predicted": 2.0128204800000002,
+          "actual": 12.687773567421502,
+          "predicted_day": 3.2701786302153453,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 10.674953087421502,
+          "order": 2
+        },
+        {
+          "entity": "MSFT",
+          "predicted": 3.9936000000000007,
+          "actual": 4.695448971217468,
+          "predicted_day": 3.2789302431437553,
+          "actual_day": 4.0,
+          "direction_correct": true,
+          "magnitude_error": 0.7018489712174674,
+          "order": 1
+        }
+      ],
+      "accuracy": {
+        "direction": 100.0,
+        "predictions": 15
+      }
+    },
+    {
+      "ticker": "MSFT",
+      "date": "2024-10-30T00:00:00",
+      "surprise_pct": 5.0,
+      "predictions": [
+        {
+          "entity": "XLK",
+          "predicted": 1.5,
+          "actual": 3.4014246524989087,
+          "predicted_day": 0.20359064477335853,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 1.9014246524989087,
+          "order": 1
+        },
+        {
+          "entity": "CRM",
+          "predicted": 1.764,
+          "actual": 4.851562109311858,
+          "predicted_day": 1.7639249274436772,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 3.0875621093118575,
+          "order": 1
+        },
+        {
+          "entity": "TSLA",
+          "predicted": 1.6040000000000003,
+          "actual": 15.282476309329173,
+          "predicted_day": 2.4938931554710626,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 13.678476309329172,
+          "order": 1
+        },
+        {
+          "entity": "NVDA",
+          "predicted": 2.1680000000000006,
+          "actual": 6.846579892339073,
+          "predicted_day": 2.581549704606208,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 4.678579892339073,
+          "order": 1
+        },
+        {
+          "entity": "GOOGL",
+          "predicted": 1.9040000000000001,
+          "actual": 3.6054090057560066,
+          "predicted_day": 3.0434232039539673,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 1.7014090057560065,
+          "order": 1
+        },
+        {
+          "entity": "AMZN",
+          "predicted": 2.4960000000000004,
+          "actual": 8.986669282504376,
+          "predicted_day": 3.321855666765513,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 6.490669282504376,
+          "order": 1
+        },
+        {
+          "entity": "AVGO",
+          "predicted": 1.8800000000000001,
+          "actual": -4.579926972244506,
+          "predicted_day": 3.5204155756070534,
+          "actual_day": 2.0,
+          "direction_correct": false,
+          "magnitude_error": 6.459926972244506,
+          "order": 1
+        },
+        {
+          "entity": "CSCO",
+          "predicted": 1.644,
+          "actual": 4.479222816888232,
+          "predicted_day": 3.5302770523620377,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 2.8352228168882316,
+          "order": 1
+        },
+        {
+          "entity": "META",
+          "predicted": 2.4480000000000004,
+          "actual": -5.2585060688371374,
+          "predicted_day": 4.1975867058599325,
+          "actual_day": 2.0,
+          "direction_correct": false,
+          "magnitude_error": 7.706506068837138,
+          "order": 1
+        },
+        {
+          "entity": "TSM",
+          "predicted": 1.7344000000000006,
+          "actual": 3.450237632197368,
+          "predicted_day": 4.32084969823315,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 1.7158376321973672,
+          "order": 2
+        },
+        {
+          "entity": "AAPL",
+          "predicted": 1.8920000000000003,
+          "actual": -3.515861920966513,
+          "predicted_day": 4.760801947539527,
+          "actual_day": 2.0,
+          "direction_correct": false,
+          "magnitude_error": 5.407861920966513,
+          "order": 1
+        },
+        {
+          "entity": "META",
+          "predicted": 1.2519936000000003,
+          "actual": -5.2585060688371374,
+          "predicted_day": 5.141339460768433,
+          "actual_day": 2.0,
+          "direction_correct": false,
+          "magnitude_error": 6.510499668837138,
+          "order": 2
+        },
+        {
+          "entity": "AMZN",
+          "predicted": 1.2279168000000003,
+          "actual": 8.986669282504376,
+          "predicted_day": 6.779380757769879,
+          "actual_day": 5.0,
+          "direction_correct": true,
+          "magnitude_error": 7.758752482504376,
+          "order": 2
+        },
+        {
+          "entity": "MSFT",
+          "predicted": 1.2460032000000003,
+          "actual": -6.052751713700704,
+          "predicted_day": 6.7847368591581745,
+          "actual_day": 0.0,
+          "direction_correct": false,
+          "magnitude_error": 7.298754913700704,
+          "order": 2
+        }
+      ],
+      "accuracy": {
+        "direction": 64.28571428571429,
+        "predictions": 14
+      }
+    }
+  ]
+}

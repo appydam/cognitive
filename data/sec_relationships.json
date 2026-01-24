@@ -1,0 +1,137 @@
+[
+  {
+    "supplier": "TSM",
+    "customer": "AAPL",
+    "customer_name": "AAPL",
+    "revenue_pct": 25.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267318"
+  },
+  {
+    "supplier": "QCOM",
+    "customer": "AAPL",
+    "customer_name": "AAPL",
+    "revenue_pct": 15.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267333"
+  },
+  {
+    "supplier": "AVGO",
+    "customer": "AAPL",
+    "customer_name": "AAPL",
+    "revenue_pct": 20.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267334"
+  },
+  {
+    "supplier": "TXN",
+    "customer": "AAPL",
+    "customer_name": "AAPL",
+    "revenue_pct": 10.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267336"
+  },
+  {
+    "supplier": "ADI",
+    "customer": "AAPL",
+    "customer_name": "AAPL",
+    "revenue_pct": 8.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267337"
+  },
+  {
+    "supplier": "TSM",
+    "customer": "NVDA",
+    "customer_name": "NVDA",
+    "revenue_pct": 100.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267338"
+  },
+  {
+    "supplier": "PCRFY",
+    "customer": "TSLA",
+    "customer_name": "TSLA",
+    "revenue_pct": 15.0,
+    "year": 2024,
+    "source": "Estimate",
+    "fetched_at": "2026-01-24T12:19:06.267338"
+  },
+  {
+    "supplier": "ORCL",
+    "customer": "MSFT",
+    "customer_name": "MSFT",
+    "revenue_pct": 5.0,
+    "year": 2024,
+    "source": "Estimate",
+    "fetched_at": "2026-01-24T12:19:06.267339"
+  },
+  {
+    "supplier": "ASML",
+    "customer": "TSM",
+    "customer_name": "TSM",
+    "revenue_pct": 30.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267340"
+  },
+  {
+    "supplier": "LRCX",
+    "customer": "TSM",
+    "customer_name": "TSM",
+    "revenue_pct": 25.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267341"
+  },
+  {
+    "supplier": "AMAT",
+    "customer": "TSM",
+    "customer_name": "TSM",
+    "revenue_pct": 20.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267342"
+  },
+  {
+    "supplier": "KLAC",
+    "customer": "TSM",
+    "customer_name": "TSM",
+    "revenue_pct": 15.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267343"
+  },
+  {
+    "supplier": "PG",
+    "customer": "WMT",
+    "customer_name": "WMT",
+    "revenue_pct": 15.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267344"
+  },
+  {
+    "supplier": "KO",
+    "customer": "WMT",
+    "customer_name": "WMT",
+    "revenue_pct": 10.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267345"
+  },
+  {
+    "supplier": "PEP",
+    "customer": "WMT",
+    "customer_name": "WMT",
+    "revenue_pct": 8.0,
+    "year": 2024,
+    "source": "10-K FY2024",
+    "fetched_at": "2026-01-24T12:19:06.267346"
+  }
+]

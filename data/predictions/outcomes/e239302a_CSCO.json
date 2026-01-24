@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "CSCO",
+  "predicted_magnitude": -2.624,
+  "actual_magnitude": 3.75125118685639,
+  "predicted_day": 0.756267461654981,
+  "actual_day": 4.0,
+  "error": 6.37525118685639,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:57.702037"
+}

@@ -11,7 +11,6 @@ from typing import Any
 # SEC requires a user agent with contact info
 SEC_USER_AGENT = "ConsequenceAI research@consequence.ai"
 SEC_BASE_URL = "https://data.sec.gov"
-EDGAR_SEARCH_URL = "https://efts.sec.gov/LATEST/search-index"
 
 
 @dataclass
@@ -57,7 +56,7 @@ def get_company_cik(ticker: str) -> str | None:
         if response.status_code == 200:
             data = response.json()
             return str(data.get("cik", "")).zfill(10)
-
+ 
         # Try company tickers lookup
         tickers_url = "https://www.sec.gov/files/company_tickers.json"
         response = requests.get(tickers_url, headers=headers, timeout=10)

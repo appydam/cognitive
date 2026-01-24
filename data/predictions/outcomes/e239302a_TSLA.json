@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "TSLA",
+  "predicted_magnitude": -2.8864,
+  "actual_magnitude": -3.699032341491855,
+  "predicted_day": 3.493076421448142,
+  "actual_day": 4.0,
+  "error": 0.812632341491855,
+  "direction_correct": true,
+  "within_confidence_bounds": true,
+  "timestamp": "2026-01-24T13:04:58.289627"
+}

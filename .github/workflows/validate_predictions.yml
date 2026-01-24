@@ -1,0 +1,50 @@
+name: Validate Predictions
+
+# Runs every day at 6:30am ET (11:30am UTC)
+# 30 minutes after daily update to ensure prices are fresh
+on:
+  schedule:
+    - cron: '30 11 * * *'  # 6:30am ET = 11:30am UTC
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validate pending predictions
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python scripts/daily_update.py --skip-prices --skip-cleanup
+
+      - name: Generate accuracy report
+        if: success()
+        run: |
+          echo "Prediction validation complete"
+          # Could add script to generate accuracy report here
+          # python scripts/generate_accuracy_report.py
+
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-logs
+          path: |
+            *.log
+          retention-days: 7

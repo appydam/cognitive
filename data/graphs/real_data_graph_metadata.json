@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-01-24T12:24:52.229244",
+  "num_entities": 92,
+  "num_links": 200,
+  "source_files": [
+    "data/sec_relationships.json",
+    "data/correlations.json"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "prediction_id": "e239302a",
+  "ticker": "NVDA",
+  "predicted_magnitude": -1.31259392,
+  "actual_magnitude": 8.05930059250403,
+  "predicted_day": 3.6766893036490584,
+  "actual_day": 4.0,
+  "error": 9.37189451250403,
+  "direction_correct": false,
+  "within_confidence_bounds": false,
+  "timestamp": "2026-01-24T13:04:58.501306"
+}

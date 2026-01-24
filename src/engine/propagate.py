@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any
 
-from ..graph import CausalGraph, CausalLink
+from src.core.graph import CausalGraph, CausalLink
 
 
 @dataclass
@@ -358,7 +358,7 @@ def _generate_explanation(effect: Effect, graph: CausalGraph) -> str:
             source_name = source_entity.name if source_entity else item.source
             target_name = target_entity.name if target_entity else item.target
 
-            relationship = item.relationship.value.replace("_", " ")
+            relationship = item.relationship_type.replace("_", " ")
             parts.append(f"{source_name} → {target_name} ({relationship})")
 
     if not parts:
