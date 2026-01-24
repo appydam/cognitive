@@ -44,7 +44,7 @@ export default function GraphVisualization() {
   const [error, setError] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
-  const fgRef = useRef<any>();
+  const fgRef = useRef<any>(null);
 
   useEffect(() => {
     loadGraphData();
@@ -143,12 +143,14 @@ export default function GraphVisualization() {
   return (
     <div className="space-y-4">
       {/* Info Banner */}
-      <Card className="p-4 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+      <Card className="p-4 glass-card border-blue-400/30 animate-fade-in">
         <div className="flex items-start gap-3">
-          <Info className="h-5 w-5 text-blue-600 mt-0.5 shrink-0" />
+          <Info className="h-5 w-5 text-blue-500 mt-0.5 shrink-0" />
           <div className="flex-1">
-            <p className="text-sm text-gray-700">
-              <span className="font-semibold">Interactive Causal Graph:</span>{" "}
+            <p className="text-sm text-gray-800">
+              <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                Interactive Causal Graph:
+              </span>{" "}
               Click nodes to explore connections, drag to move, scroll to zoom.
               Node size represents importance, link thickness shows strength.
             </p>
@@ -175,42 +177,88 @@ export default function GraphVisualization() {
                 const fontSize = 12 / globalScale;
                 ctx.font = `${fontSize}px Sans-Serif`;
 
-                // Draw glow
-                const gradient = ctx.createRadialGradient(
+                // Pulsing animation effect
+                const time = Date.now() / 1000;
+                const pulseScale = 1 + Math.sin(time * 2) * 0.15;
+
+                // Draw outer glow (pulsing)
+                const outerGlow = ctx.createRadialGradient(
                   node.x!,
                   node.y!,
                   0,
                   node.x!,
                   node.y!,
-                  node.val * 1.5
+                  node.val * 3 * pulseScale
                 );
-                gradient.addColorStop(0, node.color + "40");
-                gradient.addColorStop(1, "transparent");
-                ctx.fillStyle = gradient;
+                outerGlow.addColorStop(0, node.color + "30");
+                outerGlow.addColorStop(0.5, node.color + "15");
+                outerGlow.addColorStop(1, "transparent");
+                ctx.fillStyle = outerGlow;
                 ctx.beginPath();
-                ctx.arc(node.x!, node.y!, node.val * 2, 0, 2 * Math.PI);
+                ctx.arc(node.x!, node.y!, node.val * 3 * pulseScale, 0, 2 * Math.PI);
                 ctx.fill();
 
-                // Draw node
-                ctx.fillStyle = node.color;
+                // Draw pulsing ring
+                const pulseRadius = node.val * (1 + Math.sin(time * 2) * 0.2);
+                ctx.beginPath();
+                ctx.arc(node.x!, node.y!, pulseRadius * 1.3, 0, 2 * Math.PI);
+                ctx.strokeStyle = node.color + "60";
+                ctx.lineWidth = 2 / globalScale;
+                ctx.stroke();
+
+                // Draw inner glow
+                const innerGlow = ctx.createRadialGradient(
+                  node.x!,
+                  node.y!,
+                  0,
+                  node.x!,
+                  node.y!,
+                  node.val
+                );
+                innerGlow.addColorStop(0, node.color);
+                innerGlow.addColorStop(0.7, node.color);
+                innerGlow.addColorStop(1, node.color + "CC");
+                ctx.fillStyle = innerGlow;
                 ctx.beginPath();
                 ctx.arc(node.x!, node.y!, node.val, 0, 2 * Math.PI);
                 ctx.fill();
 
-                // Draw border
-                ctx.strokeStyle = "white";
-                ctx.lineWidth = 2 / globalScale;
+                // Draw bright border
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+                ctx.lineWidth = 2.5 / globalScale;
                 ctx.stroke();
 
-                // Draw label
+                // Draw inner highlight
+                const highlight = ctx.createRadialGradient(
+                  node.x! - node.val * 0.3,
+                  node.y! - node.val * 0.3,
+                  0,
+                  node.x!,
+                  node.y!,
+                  node.val
+                );
+                highlight.addColorStop(0, "rgba(255, 255, 255, 0.4)");
+                highlight.addColorStop(1, "transparent");
+                ctx.fillStyle = highlight;
+                ctx.beginPath();
+                ctx.arc(node.x!, node.y!, node.val, 0, 2 * Math.PI);
+                ctx.fill();
+
+                // Draw label with shadow
+                ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+                ctx.shadowBlur = 4;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 1;
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
                 ctx.fillStyle = "white";
-                ctx.fillText(label, node.x!, node.y! + node.val + fontSize + 2);
+                ctx.font = `bold ${fontSize}px Sans-Serif`;
+                ctx.fillText(label, node.x!, node.y! + node.val + fontSize + 4);
+                ctx.shadowBlur = 0;
               }}
-              linkDirectionalArrowLength={6}
+              linkDirectionalArrowLength={8}
               linkDirectionalArrowRelPos={1}
-              linkCurvature={0.2}
+              linkCurvature={0.25}
               linkWidth={(link: any) => link.width}
               linkColor={(link: any) => link.color}
               onNodeClick={handleNodeClick}
@@ -219,10 +267,13 @@ export default function GraphVisualization() {
               enableZoomInteraction={true}
               enablePanInteraction={true}
               backgroundColor="transparent"
-              linkDirectionalParticles={2}
-              linkDirectionalParticleSpeed={0.005}
-              linkDirectionalParticleWidth={2}
+              linkDirectionalParticles={4}
+              linkDirectionalParticleSpeed={0.008}
+              linkDirectionalParticleWidth={3}
+              linkDirectionalParticleColor={() => 'rgba(99, 102, 241, 0.8)'}
               d3VelocityDecay={0.3}
+              cooldownTicks={100}
+              onEngineStop={() => fgRef.current?.zoomToFit(400, 50)}
             />
 
             {/* Controls Overlay */}
@@ -230,7 +281,7 @@ export default function GraphVisualization() {
               <Button
                 size="sm"
                 variant="secondary"
-                className="bg-white/90 backdrop-blur hover:bg-white"
+                className="glass-card interactive-button hover:box-glow-blue border-white/20"
                 onClick={handleZoomIn}
               >
                 <ZoomIn className="h-4 w-4" />
@@ -238,7 +289,7 @@ export default function GraphVisualization() {
               <Button
                 size="sm"
                 variant="secondary"
-                className="bg-white/90 backdrop-blur hover:bg-white"
+                className="glass-card interactive-button hover:box-glow-blue border-white/20"
                 onClick={handleZoomOut}
               >
                 <ZoomOut className="h-4 w-4" />
@@ -246,7 +297,7 @@ export default function GraphVisualization() {
               <Button
                 size="sm"
                 variant="secondary"
-                className="bg-white/90 backdrop-blur hover:bg-white"
+                className="glass-card interactive-button hover:box-glow-blue border-white/20"
                 onClick={handleFitView}
               >
                 <Maximize2 className="h-4 w-4" />
@@ -254,19 +305,19 @@ export default function GraphVisualization() {
             </div>
 
             {/* Legend */}
-            <div className="absolute bottom-4 left-4 bg-black/80 backdrop-blur rounded-lg p-4 text-white text-sm">
-              <div className="font-semibold mb-2">Legend</div>
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-blue-500"></div>
+            <div className="absolute bottom-4 left-4 glass-card-dark rounded-lg p-4 text-white text-sm border border-white/10">
+              <div className="font-semibold mb-2 neon-glow">Legend</div>
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
+                  <div className="w-3 h-3 rounded-full bg-blue-500 box-glow-blue pulse-dot"></div>
                   <span className="text-xs">Company</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
+                  <div className="w-3 h-3 rounded-full bg-purple-500 box-glow-purple pulse-dot"></div>
                   <span className="text-xs">ETF</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
+                  <div className="w-3 h-3 rounded-full bg-green-500 pulse-dot"></div>
                   <span className="text-xs">Sector</span>
                 </div>
               </div>
@@ -276,20 +327,22 @@ export default function GraphVisualization() {
 
         {/* Selected Node Info */}
         {selectedNode && (
-          <Card className="mt-4 p-6 bg-gradient-to-br from-blue-50 to-white border-blue-200 animate-fade-in">
+          <Card className="mt-4 p-6 glass-card interactive-card border-blue-400/30 animate-fade-in">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-2xl font-bold">{selectedNode.id}</h3>
-                <p className="text-gray-700 text-lg">{selectedNode.name}</p>
+                <h3 className="text-2xl font-bold holographic-text">{selectedNode.id}</h3>
+                <p className="text-gray-800 text-lg">{selectedNode.name}</p>
               </div>
-              <Badge variant="secondary" className="text-base capitalize">
+              <Badge variant="secondary" className="text-base capitalize neon-border bg-blue-500/10">
                 {selectedNode.type}
               </Badge>
             </div>
             {selectedNode.sector && (
               <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-600">Sector:</span>
-                <Badge className="bg-blue-600">{selectedNode.sector}</Badge>
+                <span className="text-sm text-gray-700 font-medium">Sector:</span>
+                <Badge className="bg-gradient-to-r from-blue-600 to-purple-600 border-0">
+                  {selectedNode.sector}
+                </Badge>
               </div>
             )}
           </Card>
@@ -298,27 +351,27 @@ export default function GraphVisualization() {
 
       {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="p-4 bg-gradient-to-br from-blue-50 to-cyan-50 border-blue-200">
-          <div className="text-gray-600 text-sm mb-1">Total Nodes</div>
-          <div className="text-3xl font-bold text-blue-600">
+        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-400/30 slide-up stagger-1">
+          <div className="text-gray-700 text-sm mb-1 font-medium">Total Nodes</div>
+          <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
             {graphData.nodes.length}
           </div>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
-          <div className="text-gray-600 text-sm mb-1">Total Links</div>
-          <div className="text-3xl font-bold text-purple-600">
+        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-400/30 slide-up stagger-2">
+          <div className="text-gray-700 text-sm mb-1 font-medium">Total Links</div>
+          <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             {graphData.links.length}
           </div>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-green-50 to-emerald-50 border-green-200">
-          <div className="text-gray-600 text-sm mb-1">Avg. Connections</div>
-          <div className="text-3xl font-bold text-green-600">
+        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-400/30 slide-up stagger-3">
+          <div className="text-gray-700 text-sm mb-1 font-medium">Avg. Connections</div>
+          <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
             {(graphData.links.length / graphData.nodes.length).toFixed(1)}
           </div>
         </Card>
-        <Card className="p-4 bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-200">
-          <div className="text-gray-600 text-sm mb-1">Network Density</div>
-          <div className="text-3xl font-bold text-orange-600">
+        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border-orange-400/30 slide-up stagger-4">
+          <div className="text-gray-700 text-sm mb-1 font-medium">Network Density</div>
+          <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent">
             {(
               (graphData.links.length /
                 (graphData.nodes.length * (graphData.nodes.length - 1))) *
