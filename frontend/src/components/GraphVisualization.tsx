@@ -52,8 +52,13 @@ export default function GraphVisualization() {
 
   const loadGraphData = async () => {
     try {
+      setLoading(true);
+      setError(null);
+      console.log("[GraphVisualization] Fetching graph data...");
+
       // Fetch actual graph data from backend
       const data = await ConsequenceAPI.getFullGraph();
+      console.log(`[GraphVisualization] Received ${data.nodes.length} nodes and ${data.links.length} links`);
 
       // Helper functions for colors
       const getColorForType = (type: string): string => {
@@ -94,8 +99,10 @@ export default function GraphVisualization() {
       }));
 
       setGraphData({ nodes, links });
+      console.log("[GraphVisualization] Graph data loaded successfully");
       setLoading(false);
     } catch (err: any) {
+      console.error("[GraphVisualization] Error loading graph:", err);
       setError(err.message || "Failed to load graph");
       setLoading(false);
     }
@@ -130,22 +137,38 @@ export default function GraphVisualization() {
 
   if (loading) {
     return (
-      <Card className="p-6">
-        <Skeleton className="h-[600px] w-full" />
+      <Card className="p-6 hud-panel">
+        <div className="space-y-4">
+          <div className="text-center py-8">
+            <div className="military-font text-green-400 text-lg mb-4">
+              &gt; LOADING GRAPH DATABASE_
+            </div>
+            <div className="text-xs text-green-400/60 font-mono mb-6">
+              FETCHING 105 ENTITIES | 160 CAUSAL LINKS | STANDBY...
+            </div>
+            <Skeleton className="h-[500px] w-full bg-green-500/10" />
+          </div>
+        </div>
       </Card>
     );
   }
 
   if (error) {
     return (
-      <Card className="p-8 bg-red-50 border-red-200">
+      <Card className="p-8 hud-panel border-red-500/30">
         <div className="flex items-start gap-3">
-          <AlertCircle className="h-6 w-6 text-red-600 mt-0.5" />
+          <AlertCircle className="h-6 w-6 text-red-400 mt-0.5" />
           <div>
-            <p className="font-semibold text-red-900 text-lg">
-              Failed to Load Graph
+            <p className="font-semibold text-red-400 text-lg military-font">
+              &gt; CRITICAL ERROR: GRAPH LOAD FAILED
             </p>
-            <p className="text-sm text-red-700 mt-1">{error}</p>
+            <p className="text-sm text-red-400/70 mt-2 font-mono">{error}</p>
+            <button
+              onClick={loadGraphData}
+              className="mt-4 tactical-button px-4 py-2 text-sm"
+            >
+              &gt; RETRY CONNECTION
+            </button>
           </div>
         </div>
       </Card>

@@ -284,11 +284,11 @@ export default function HomePage() {
               </div>
               <div className="text-center">
                 <div className="text-green-400/60">ENTITIES</div>
-                <div className="text-green-400 font-bold">8 NODES</div>
+                <div className="text-green-400 font-bold">105 NODES</div>
               </div>
               <div className="text-center">
                 <div className="text-green-400/60">LINKS</div>
-                <div className="text-green-400 font-bold">8 EDGES</div>
+                <div className="text-green-400 font-bold">160 EDGES</div>
               </div>
             </div>
           </div>

@@ -98,6 +98,8 @@ export class ConsequenceAPI {
       confidence: number;
     }>;
   }> {
+    console.log(`[API] Fetching all entities from ${API_BASE_URL}/entities/search`);
+
     // Get all entities
     const searchRes = await fetch(
       `${API_BASE_URL}/entities/search?q=&limit=200`
@@ -105,10 +107,14 @@ export class ConsequenceAPI {
     if (!searchRes.ok) throw new Error("Failed to fetch entities");
     const searchData = await searchRes.json();
     const nodes = searchData.results;
+    console.log(`[API] Fetched ${nodes.length} entities`);
 
     // Get connections for all entities
     const links: any[] = [];
     const seenLinks = new Set<string>();
+    let processedCount = 0;
+
+    console.log(`[API] Fetching connections for ${nodes.length} entities...`);
 
     for (const node of nodes) {
       try {
@@ -134,11 +140,16 @@ export class ConsequenceAPI {
             }
           }
         }
+        processedCount++;
+        if (processedCount % 20 === 0) {
+          console.log(`[API] Processed ${processedCount}/${nodes.length} entities (${links.length} links so far)`);
+        }
       } catch (err) {
-        console.warn(`Failed to fetch connections for ${node.id}`);
+        console.warn(`[API] Failed to fetch connections for ${node.id}:`, err);
       }
     }
 
+    console.log(`[API] Complete! Total: ${nodes.length} nodes, ${links.length} links`);
     return { nodes, links };
   }
 }
