@@ -44,6 +44,8 @@ export default function GraphVisualization() {
   const [error, setError] = useState<string | null>(null);
   const [selectedNode, setSelectedNode] = useState<GraphNode | null>(null);
   const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filterType, setFilterType] = useState<string>("all");
   const fgRef = useRef<any>(null);
 
   useEffect(() => {
@@ -177,31 +179,116 @@ export default function GraphVisualization() {
 
   if (!graphData) return null;
 
+  // Filter and search functionality
+  const filteredData = graphData
+    ? {
+        nodes: graphData.nodes.filter((node) => {
+          const matchesSearch = searchQuery === "" ||
+            node.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            node.name.toLowerCase().includes(searchQuery.toLowerCase());
+          const matchesType = filterType === "all" || node.type === filterType;
+          return matchesSearch && matchesType;
+        }),
+        links: graphData.links.filter((link) => {
+          const sourceId = typeof link.source === 'string' ? link.source : (link.source as any).id;
+          const targetId = typeof link.target === 'string' ? link.target : (link.target as any).id;
+          const sourceNode = graphData.nodes.find((n) => n.id === sourceId);
+          const targetNode = graphData.nodes.find((n) => n.id === targetId);
+          const sourceMatches = searchQuery === "" ||
+            sourceId.toLowerCase().includes(searchQuery.toLowerCase());
+          const targetMatches = searchQuery === "" ||
+            targetId.toLowerCase().includes(searchQuery.toLowerCase());
+          const typeMatches = filterType === "all" ||
+            sourceNode?.type === filterType ||
+            targetNode?.type === filterType;
+          return (sourceMatches || targetMatches) && typeMatches;
+        }),
+      }
+    : null;
+
   return (
     <div className="space-y-4">
-      {/* Info Banner */}
-      <Card className="p-4 glass-card border-blue-400/30 animate-fade-in">
-        <div className="flex items-start gap-3">
-          <Info className="h-5 w-5 text-blue-500 mt-0.5 shrink-0" />
+      {/* Search and Filter Bar */}
+      <Card className="p-4 hud-panel border-green-500/30 animate-fade-in">
+        <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <p className="text-sm text-gray-800">
-              <span className="font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                Interactive Causal Graph:
-              </span>{" "}
-              Click nodes to explore connections, drag to move, scroll to zoom.
-              Node size represents importance, link thickness shows strength.
-            </p>
+            <label className="military-font text-green-400 text-xs mb-2 block">&gt; SEARCH ENTITIES</label>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Enter ticker or name..."
+              className="w-full bg-black/50 border border-green-500/30 text-green-400 px-4 py-2 rounded font-mono text-sm focus:border-green-500 focus:outline-none"
+            />
+          </div>
+          <div className="md:w-48">
+            <label className="military-font text-green-400 text-xs mb-2 block">&gt; FILTER TYPE</label>
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value)}
+              className="w-full bg-black/50 border border-green-500/30 text-green-400 px-4 py-2 rounded font-mono text-sm focus:border-green-500 focus:outline-none"
+            >
+              <option value="all">ALL TYPES</option>
+              <option value="company">COMPANIES</option>
+              <option value="etf">ETFs</option>
+              <option value="sector">SECTORS</option>
+            </select>
+          </div>
+          {(searchQuery || filterType !== "all") && (
+            <div className="flex items-end">
+              <button
+                onClick={() => {
+                  setSearchQuery("");
+                  setFilterType("all");
+                }}
+                className="tactical-button px-4 py-2 text-xs whitespace-nowrap"
+              >
+                CLEAR FILTERS
+              </button>
+            </div>
+          )}
+        </div>
+        {(searchQuery || filterType !== "all") && filteredData && (
+          <div className="mt-3 pt-3 border-t border-green-500/20 font-mono text-xs text-green-400/70">
+            SHOWING {filteredData.nodes.length} / {graphData?.nodes.length || 0} ENTITIES
+          </div>
+        )}
+      </Card>
+
+      {/* Interactive Instructions - Military Style */}
+      <Card className="p-6 hud-panel border-green-500/30 animate-fade-in">
+        <div className="mb-4">
+          <h3 className="military-font text-green-400 text-sm mb-2">&gt; GRAPH CONTROLS</h3>
+        </div>
+        <div className="grid md:grid-cols-3 gap-4 text-xs font-mono">
+          <div className="flex items-center gap-2">
+            <div className="bg-green-500/20 border border-green-500 p-2 rounded">
+              <span className="text-green-400 font-bold">CLICK</span>
+            </div>
+            <span className="text-green-400/70">Select entity & view connections</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="bg-cyan-500/20 border border-cyan-500 p-2 rounded">
+              <span className="text-cyan-400 font-bold">DRAG</span>
+            </div>
+            <span className="text-cyan-400/70">Move entities & reposition graph</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="bg-yellow-500/20 border border-yellow-500 p-2 rounded">
+              <span className="text-yellow-400 font-bold">SCROLL</span>
+            </div>
+            <span className="text-yellow-400/70">Zoom in/out for detail view</span>
           </div>
         </div>
       </Card>
 
       {/* Graph Container */}
       <div className="relative">
-        <Card className="overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 border-gray-700">
-          <div className="relative h-[600px] w-full">
+        <Card className="overflow-hidden hud-panel border-green-500/30">
+          <div className="relative h-[600px] w-full bg-black/40">
             <ForceGraph2D
               ref={fgRef}
-              graphData={graphData}
+              graphData={filteredData || graphData}
               nodeLabel={(node: any) => `
                 <div style="background: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 8px; font-family: sans-serif;">
                   <div style="font-weight: bold; font-size: 14px; margin-bottom: 4px;">${node.id}</div>
@@ -377,109 +464,157 @@ export default function GraphVisualization() {
               onEngineStop={() => fgRef.current?.zoomToFit(400, 50)}
             />
 
-            {/* Controls Overlay */}
-            <div className="absolute top-4 right-4 flex flex-col gap-2">
-              <Button
-                size="sm"
-                variant="secondary"
-                className="glass-card interactive-button hover:box-glow-blue border-white/20"
-                onClick={handleZoomIn}
-              >
-                <ZoomIn className="h-4 w-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                className="glass-card interactive-button hover:box-glow-blue border-white/20"
-                onClick={handleZoomOut}
-              >
-                <ZoomOut className="h-4 w-4" />
-              </Button>
-              <Button
-                size="sm"
-                variant="secondary"
-                className="glass-card interactive-button hover:box-glow-blue border-white/20"
-                onClick={handleFitView}
-              >
-                <Maximize2 className="h-4 w-4" />
-              </Button>
+            {/* Controls Overlay - Military Style */}
+            <div className="absolute top-4 right-4 hud-panel p-3 border-green-500/30">
+              <div className="military-font text-green-400 text-[10px] mb-2">&gt; VIEW CONTROLS</div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={handleZoomIn}
+                  className="tactical-button px-3 py-2 text-xs flex items-center gap-2"
+                  title="Zoom In"
+                >
+                  <ZoomIn className="h-3 w-3" />
+                  <span>ZOOM IN</span>
+                </button>
+                <button
+                  onClick={handleZoomOut}
+                  className="tactical-button px-3 py-2 text-xs flex items-center gap-2"
+                  title="Zoom Out"
+                >
+                  <ZoomOut className="h-3 w-3" />
+                  <span>ZOOM OUT</span>
+                </button>
+                <button
+                  onClick={handleFitView}
+                  className="tactical-button px-3 py-2 text-xs flex items-center gap-2"
+                  title="Fit to Screen"
+                >
+                  <Maximize2 className="h-3 w-3" />
+                  <span>FIT VIEW</span>
+                </button>
+              </div>
             </div>
 
-            {/* Legend */}
-            <div className="absolute bottom-4 left-4 glass-card-dark rounded-lg p-4 text-white text-sm border border-white/10">
-              <div className="font-semibold mb-2 neon-glow">Legend</div>
-              <div className="space-y-2">
-                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
-                  <div className="w-3 h-3 rounded-full bg-blue-500 box-glow-blue pulse-dot"></div>
-                  <span className="text-xs">Company</span>
+            {/* Legend - Military Style */}
+            <div className="absolute bottom-4 left-4 hud-panel p-4 border-green-500/30">
+              <div className="military-font text-green-400 text-xs mb-3">&gt; ENTITY TYPES</div>
+              <div className="space-y-3 font-mono text-xs">
+                <div className="flex items-center gap-3">
+                  <div className="w-4 h-4 rounded-full bg-green-500 border-2 border-green-400 pulse-dot"></div>
+                  <div>
+                    <div className="text-green-400 font-bold">COMPANY</div>
+                    <div className="text-green-400/50 text-[10px]">Individual securities</div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
-                  <div className="w-3 h-3 rounded-full bg-purple-500 box-glow-purple pulse-dot"></div>
-                  <span className="text-xs">ETF</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-4 h-4 rounded-full bg-cyan-500 border-2 border-cyan-400 pulse-dot"></div>
+                  <div>
+                    <div className="text-cyan-400 font-bold">ETF</div>
+                    <div className="text-cyan-400/50 text-[10px]">Exchange traded funds</div>
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 transition-all hover:translate-x-1">
-                  <div className="w-3 h-3 rounded-full bg-green-500 pulse-dot"></div>
-                  <span className="text-xs">Sector</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-4 h-4 rounded-full bg-yellow-500 border-2 border-yellow-400 pulse-dot"></div>
+                  <div>
+                    <div className="text-yellow-400 font-bold">SECTOR</div>
+                    <div className="text-yellow-400/50 text-[10px]">Market sectors</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 pt-3 border-t border-green-500/20 military-font text-green-400 text-xs">
+                &gt; RELATIONSHIPS
+              </div>
+              <div className="space-y-2 mt-2 font-mono text-[10px]">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-0.5 bg-cyan-400"></div>
+                  <span className="text-cyan-400">CUSTOMER OF</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-0.5 bg-yellow-400"></div>
+                  <span className="text-yellow-400">IN SECTOR</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-0.5 bg-red-400"></div>
+                  <span className="text-red-400">COMPETES WITH</span>
                 </div>
               </div>
             </div>
           </div>
         </Card>
 
-        {/* Selected Node Info */}
+        {/* Selected Node Info - Military Style */}
         {selectedNode && (
-          <Card className="mt-4 p-6 glass-card interactive-card border-blue-400/30 animate-fade-in">
+          <Card className="mt-4 p-6 hud-panel border-green-500/30 animate-fade-in">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-2xl font-bold holographic-text">{selectedNode.id}</h3>
-                <p className="text-gray-800 text-lg">{selectedNode.name}</p>
+                <div className="military-font text-green-400 text-xs mb-2">&gt; ENTITY SELECTED</div>
+                <h3 className="text-3xl font-bold terminal-text">{selectedNode.id}</h3>
+                <p className="text-green-400/70 text-base font-mono mt-1">{selectedNode.name}</p>
               </div>
-              <Badge variant="secondary" className="text-base capitalize neon-border bg-blue-500/10">
-                {selectedNode.type}
-              </Badge>
+              <div className={`px-3 py-1 border-2 rounded military-font text-xs ${
+                selectedNode.type === 'company' ? 'bg-green-500/20 border-green-500 text-green-400' :
+                selectedNode.type === 'etf' ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400' :
+                'bg-yellow-500/20 border-yellow-500 text-yellow-400'
+              }`}>
+                {selectedNode.type.toUpperCase()}
+              </div>
             </div>
             {selectedNode.sector && (
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-700 font-medium">Sector:</span>
-                <Badge className="bg-gradient-to-r from-blue-600 to-purple-600 border-0">
-                  {selectedNode.sector}
-                </Badge>
+              <div className="mt-4 pt-4 border-t border-green-500/20">
+                <div className="flex items-center gap-2 font-mono text-sm">
+                  <span className="text-green-400/60">SECTOR:</span>
+                  <span className="text-green-400 font-bold">{selectedNode.sector}</span>
+                </div>
               </div>
             )}
+            <div className="mt-4 pt-4 border-t border-green-500/20">
+              <div className="text-xs military-font text-green-400/60 mb-2">&gt; ACTIONS</div>
+              <div className="flex gap-2">
+                <button className="tactical-button px-4 py-2 text-xs flex-1">
+                  VIEW CONNECTIONS
+                </button>
+                <button className="tactical-button px-4 py-2 text-xs flex-1">
+                  RUN PREDICTION
+                </button>
+              </div>
+            </div>
           </Card>
         )}
       </div>
 
-      {/* Stats */}
+      {/* Stats - Military Dashboard */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-400/30 slide-up stagger-1">
-          <div className="text-gray-700 text-sm mb-1 font-medium">Total Nodes</div>
-          <div className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
+        <Card className="p-4 hud-panel border-green-500/30 slide-up stagger-1">
+          <div className="military-font text-green-400/60 text-[10px] mb-1">TOTAL_ENTITIES</div>
+          <div className="text-3xl font-bold terminal-text">
             {graphData.nodes.length}
           </div>
+          <div className="text-xs text-green-400/50 font-mono mt-1">NODES</div>
         </Card>
-        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-400/30 slide-up stagger-2">
-          <div className="text-gray-700 text-sm mb-1 font-medium">Total Links</div>
-          <div className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+        <Card className="p-4 hud-panel border-cyan-500/30 slide-up stagger-2">
+          <div className="military-font text-cyan-400/60 text-[10px] mb-1">TOTAL_LINKS</div>
+          <div className="text-3xl font-bold text-cyan-400">
             {graphData.links.length}
           </div>
+          <div className="text-xs text-cyan-400/50 font-mono mt-1">RELATIONSHIPS</div>
         </Card>
-        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-400/30 slide-up stagger-3">
-          <div className="text-gray-700 text-sm mb-1 font-medium">Avg. Connections</div>
-          <div className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+        <Card className="p-4 hud-panel border-yellow-500/30 slide-up stagger-3">
+          <div className="military-font text-yellow-400/60 text-[10px] mb-1">AVG_CONNECTIONS</div>
+          <div className="text-3xl font-bold text-yellow-400">
             {(graphData.links.length / graphData.nodes.length).toFixed(1)}
           </div>
+          <div className="text-xs text-yellow-400/50 font-mono mt-1">PER ENTITY</div>
         </Card>
-        <Card className="p-4 glass-card interactive-card bg-gradient-to-br from-orange-500/10 to-yellow-500/10 border-orange-400/30 slide-up stagger-4">
-          <div className="text-gray-700 text-sm mb-1 font-medium">Network Density</div>
-          <div className="text-3xl font-bold bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent">
+        <Card className="p-4 hud-panel border-red-500/30 slide-up stagger-4">
+          <div className="military-font text-red-400/60 text-[10px] mb-1">NETWORK_DENSITY</div>
+          <div className="text-3xl font-bold text-red-400">
             {(
               (graphData.links.length /
                 (graphData.nodes.length * (graphData.nodes.length - 1))) *
               100
-            ).toFixed(0)}
-            %
+            ).toFixed(1)}%
           </div>
+          <div className="text-xs text-red-400/50 font-mono mt-1">CONNECTIVITY</div>
         </Card>
       </div>
     </div>
