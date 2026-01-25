@@ -17,31 +17,29 @@ interface CascadeTimelineProps {
 }
 
 export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
+  // Sort periods by time (backend returns "Hour 0-4", "Day 1", "Day 2-3", etc.)
   const periods = Object.keys(cascade.timeline).sort((a, b) => {
-    const order: Record<string, number> = {
-      immediate: 0,
-      short_term: 1,
-      medium_term: 2,
+    // Extract numeric value for sorting
+    const getNumeric = (str: string) => {
+      if (str.includes("Hour")) return 0;
+      const match = str.match(/Day (\d+)/);
+      return match ? parseInt(match[1]) : 999;
     };
-    return order[a] - order[b];
+    return getNumeric(a) - getNumeric(b);
   });
 
-  const periodLabels: Record<string, string> = {
-    immediate: "Immediate (0-2 days)",
-    short_term: "Short Term (3-7 days)",
-    medium_term: "Medium Term (8-14 days)",
+  // Helper to get icon based on period
+  const getIconForPeriod = (period: string) => {
+    if (period.includes("Hour")) return Zap;
+    if (period.includes("Day 1")) return Clock;
+    return Target;
   };
 
-  const periodIcons: Record<string, any> = {
-    immediate: Zap,
-    short_term: Clock,
-    medium_term: Target,
-  };
-
-  const periodColors: Record<string, string> = {
-    immediate: "from-red-50 to-orange-50 border-red-200",
-    short_term: "from-yellow-50 to-amber-50 border-yellow-200",
-    medium_term: "from-blue-50 to-cyan-50 border-blue-200",
+  // Helper to get color based on period
+  const getColorForPeriod = (period: string) => {
+    if (period.includes("Hour")) return "from-red-50 to-orange-50 border-red-200";
+    if (period.includes("Day 1")) return "from-yellow-50 to-amber-50 border-yellow-200";
+    return "from-blue-50 to-cyan-50 border-blue-200";
   };
 
   return (
@@ -75,7 +73,8 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
 
       {/* Timeline */}
       {periods.map((period, periodIdx) => {
-        const Icon = periodIcons[period];
+        const Icon = getIconForPeriod(period);
+        const periodColor = getColorForPeriod(period);
         return (
           <div
             key={period}
@@ -84,7 +83,7 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
           >
             <div className="flex items-center gap-2 mb-4">
               <Icon className="h-5 w-5 text-gray-700" />
-              <h3 className="text-lg font-semibold">{periodLabels[period]}</h3>
+              <h3 className="text-lg font-semibold">{period}</h3>
               <Badge variant="secondary" className="ml-2">
                 {cascade.timeline[period].length} effects
               </Badge>
@@ -94,7 +93,7 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
                 <EffectCard
                   key={idx}
                   effect={effect}
-                  periodColor={periodColors[period]}
+                  periodColor={periodColor}
                   delay={idx * 50}
                 />
               ))}

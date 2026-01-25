@@ -80,4 +80,65 @@ export class ConsequenceAPI {
     if (!res.ok) throw new Error("Failed to get explanation");
     return res.json();
   }
+
+  // Get full graph data (all entities and connections)
+  static async getFullGraph(): Promise<{
+    nodes: Array<{
+      id: string;
+      name: string;
+      type: string;
+      sector: string | null;
+    }>;
+    links: Array<{
+      source: string;
+      target: string;
+      relationship: string;
+      strength: number;
+      delay_days: number;
+      confidence: number;
+    }>;
+  }> {
+    // Get all entities
+    const searchRes = await fetch(
+      `${API_BASE_URL}/entities/search?q=&limit=200`
+    );
+    if (!searchRes.ok) throw new Error("Failed to fetch entities");
+    const searchData = await searchRes.json();
+    const nodes = searchData.results;
+
+    // Get connections for all entities
+    const links: any[] = [];
+    const seenLinks = new Set<string>();
+
+    for (const node of nodes) {
+      try {
+        const connRes = await fetch(
+          `${API_BASE_URL}/graph/entity/${node.id}/connections`
+        );
+        if (connRes.ok) {
+          const connData = await connRes.json();
+
+          // Add outgoing connections
+          for (const conn of connData.outgoing || []) {
+            const linkId = `${node.id}-${conn.target}-${conn.relationship}`;
+            if (!seenLinks.has(linkId)) {
+              links.push({
+                source: node.id,
+                target: conn.target,
+                relationship: conn.relationship,
+                strength: conn.strength,
+                delay_days: conn.delay_days,
+                confidence: conn.confidence,
+              });
+              seenLinks.add(linkId);
+            }
+          }
+        }
+      } catch (err) {
+        console.warn(`Failed to fetch connections for ${node.id}`);
+      }
+    }
+
+    return { nodes, links };
+  }
 }

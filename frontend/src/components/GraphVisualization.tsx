@@ -52,34 +52,48 @@ export default function GraphVisualization() {
 
   const loadGraphData = async () => {
     try {
-      const stats = await ConsequenceAPI.getGraphStats();
+      // Fetch actual graph data from backend
+      const data = await ConsequenceAPI.getFullGraph();
 
-      // For now, create sample nodes
-      // In production, you'd fetch actual graph data
-      const sampleData: GraphData = {
-        nodes: [
-          { id: "AAPL", name: "Apple Inc.", type: "company", sector: "Technology", val: 30, color: "#3b82f6" },
-          { id: "TSM", name: "TSMC", type: "company", sector: "Technology", val: 25, color: "#3b82f6" },
-          { id: "NVDA", name: "NVIDIA", type: "company", sector: "Technology", val: 28, color: "#3b82f6" },
-          { id: "QCOM", name: "Qualcomm", type: "company", sector: "Technology", val: 20, color: "#3b82f6" },
-          { id: "AMD", name: "AMD", type: "company", sector: "Technology", val: 22, color: "#3b82f6" },
-          { id: "INTC", name: "Intel", type: "company", sector: "Technology", val: 24, color: "#3b82f6" },
-          { id: "SMH", name: "Semiconductor ETF", type: "etf", val: 18, color: "#8b5cf6" },
-          { id: "TECH", name: "Technology Sector", type: "sector", val: 15, color: "#10b981" },
-        ],
-        links: [
-          { source: "AAPL", target: "TSM", strength: 0.8, relationship: "supplier", color: "#60a5fa", width: 4 },
-          { source: "AAPL", target: "QCOM", strength: 0.6, relationship: "supplier", color: "#60a5fa", width: 3 },
-          { source: "NVDA", target: "TSM", strength: 0.9, relationship: "supplier", color: "#60a5fa", width: 5 },
-          { source: "AMD", target: "TSM", strength: 0.7, relationship: "supplier", color: "#60a5fa", width: 3.5 },
-          { source: "TSM", target: "SMH", strength: 0.5, relationship: "constituent", color: "#a78bfa", width: 2 },
-          { source: "NVDA", target: "SMH", strength: 0.6, relationship: "constituent", color: "#a78bfa", width: 2.5 },
-          { source: "AMD", target: "SMH", strength: 0.4, relationship: "constituent", color: "#a78bfa", width: 2 },
-          { source: "SMH", target: "TECH", strength: 0.3, relationship: "sector", color: "#34d399", width: 2 },
-        ],
+      // Helper functions for colors
+      const getColorForType = (type: string): string => {
+        const colors: Record<string, string> = {
+          company: "#00ff00",    // Military green for companies
+          etf: "#00ffff",        // Cyan for ETFs
+          sector: "#ffff00",     // Yellow for sectors
+        };
+        return colors[type.toLowerCase()] || "#00ff00";
       };
 
-      setGraphData(sampleData);
+      const getColorForRelationship = (relationship: string): string => {
+        const colors: Record<string, string> = {
+          customer_of: "#00ffff",      // Cyan
+          in_sector: "#ffff00",        // Yellow
+          competes_with: "#ff0000",    // Red
+        };
+        return colors[relationship] || "#00ff00";
+      };
+
+      // Transform data for visualization
+      const nodes: GraphNode[] = data.nodes.map((node) => ({
+        id: node.id,
+        name: node.name,
+        type: node.type,
+        sector: node.sector || undefined,
+        val: 15 + Math.random() * 15, // Size variation
+        color: getColorForType(node.type),
+      }));
+
+      const links: GraphLink[] = data.links.map((link) => ({
+        source: link.source,
+        target: link.target,
+        strength: link.strength,
+        relationship: link.relationship,
+        color: getColorForRelationship(link.relationship),
+        width: 1 + link.strength * 3,
+      }));
+
+      setGraphData({ nodes, links });
       setLoading(false);
     } catch (err: any) {
       setError(err.message || "Failed to load graph");
@@ -292,6 +306,38 @@ export default function GraphVisualization() {
               linkCurvature={0.25}
               linkWidth={(link: any) => link.width}
               linkColor={(link: any) => link.color}
+              linkLabel={(link: any) => `${link.relationship} (${(link.strength * 100).toFixed(0)}%)`}
+              linkCanvasObject={(link: any, ctx: any, globalScale: number) => {
+                // Draw relationship label on link
+                const start = link.source;
+                const end = link.target;
+
+                if (!start.x || !start.y || !end.x || !end.y) return;
+
+                // Calculate midpoint
+                const midX = (start.x + end.x) / 2;
+                const midY = (start.y + end.y) / 2;
+
+                // Draw label background
+                const label = link.relationship.replace(/_/g, ' ');
+                const fontSize = 10 / globalScale;
+                ctx.font = `${fontSize}px Courier New, monospace`;
+                const textWidth = ctx.measureText(label).width;
+
+                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+                ctx.fillRect(
+                  midX - textWidth / 2 - 2,
+                  midY - fontSize / 2 - 1,
+                  textWidth + 4,
+                  fontSize + 2
+                );
+
+                // Draw label text
+                ctx.fillStyle = link.color || "#00ffff";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(label, midX, midY);
+              }}
               onNodeClick={handleNodeClick}
               onNodeHover={(node: any) => setHoveredNode(node)}
               enableNodeDrag={true}
@@ -301,9 +347,10 @@ export default function GraphVisualization() {
               linkDirectionalParticles={4}
               linkDirectionalParticleSpeed={0.008}
               linkDirectionalParticleWidth={3}
-              linkDirectionalParticleColor={() => 'rgba(99, 102, 241, 0.8)'}
-              d3VelocityDecay={0.3}
-              cooldownTicks={100}
+              linkDirectionalParticleColor={() => 'rgba(0, 255, 255, 0.6)'}
+              d3VelocityDecay={0.7}
+              d3AlphaDecay={0.01}
+              cooldownTicks={200}
               onEngineStop={() => fgRef.current?.zoomToFit(400, 50)}
             />
 
