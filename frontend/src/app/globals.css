@@ -397,3 +397,432 @@
 * {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ========================================
+   MILITARY / SCI-FI COMMAND CENTER UI
+   ======================================== */
+
+/* Terminal/HUD Font */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap');
+
+/* Scanline effect overlay */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 50%,
+    rgba(0, 255, 0, 0.02) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.scanlines::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.5),
+    transparent
+  );
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+  z-index: 1001;
+}
+
+/* Military HUD corners */
+.hud-corners {
+  position: relative;
+}
+
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #00ff00;
+  pointer-events: none;
+}
+
+.hud-corners::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.hud-corners::after {
+  top: 0;
+  right: 0;
+  border-left: none;
+  border-bottom: none;
+}
+
+/* Terminal text effect */
+.terminal-text {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 5px rgba(0, 255, 0, 0.7),
+               0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.terminal-cursor::after {
+  content: '▮';
+  animation: cursor-blink 1s infinite;
+  color: #00ff00;
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Military display font */
+.military-font {
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* HUD status indicator */
+.status-indicator {
+  position: relative;
+  padding-left: 16px;
+}
+
+.status-indicator::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background: #00ff00;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #00ff00,
+              0 0 20px #00ff00;
+  animation: status-pulse 2s infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-50%) scale(1.2);
+  }
+}
+
+/* Tactical grid background */
+.tactical-grid {
+  background-image:
+    linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+  background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+}
+
+/* Data stream effect */
+@keyframes data-stream {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.data-stream {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.data-stream-line {
+  position: absolute;
+  width: 1px;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 255, 0, 0.5),
+    transparent
+  );
+  animation: data-stream 8s linear infinite;
+}
+
+/* HUD panel */
+.hud-panel {
+  background: rgba(0, 20, 0, 0.9);
+  border: 1px solid rgba(0, 255, 0, 0.3);
+  box-shadow:
+    0 0 20px rgba(0, 255, 0, 0.1),
+    inset 0 0 20px rgba(0, 255, 0, 0.05);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.5),
+    transparent
+  );
+}
+
+/* Classified header */
+.classified-header {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 0, 0, 0.2),
+    transparent
+  );
+  border-top: 2px solid #ff0000;
+  border-bottom: 2px solid #ff0000;
+  padding: 8px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  color: #ff0000;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* Radar sweep */
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.radar-sweep {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  animation: radar-sweep 4s linear infinite;
+  pointer-events: none;
+}
+
+.radar-sweep::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 255, 0, 0.8),
+    transparent
+  );
+  transform-origin: left center;
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch-effect {
+  animation: glitch 0.3s infinite;
+}
+
+/* Tactical button */
+.tactical-button {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 255, 0, 0.1),
+    rgba(0, 255, 0, 0.05)
+  );
+  border: 2px solid rgba(0, 255, 0, 0.5);
+  color: #00ff00;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.tactical-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 255, 0, 0.3),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.tactical-button:hover::before {
+  left: 100%;
+}
+
+.tactical-button:hover {
+  border-color: #00ff00;
+  box-shadow:
+    0 0 20px rgba(0, 255, 0, 0.5),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Target reticle */
+.target-reticle {
+  position: relative;
+}
+
+.target-reticle::before,
+.target-reticle::after {
+  content: '';
+  position: absolute;
+  border: 2px solid #00ff00;
+}
+
+.target-reticle::before {
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+
+.target-reticle::after {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  animation: reticle-scan 2s infinite;
+}
+
+@keyframes reticle-scan {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+}
+
+/* Cyberpunk border */
+.cyber-border {
+  position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.cyber-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00ff00, #00ffff, #00ff00);
+  background-size: 200% 200%;
+  animation: border-flow 3s linear infinite;
+  z-index: -1;
+}
+
+@keyframes border-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.1;
+}

@@ -173,46 +173,65 @@ export default function GraphVisualization() {
                 </div>
               `}
               nodeCanvasObject={(node: any, ctx, globalScale) => {
+                // Safety check for node position
+                if (!node.x || !node.y || !isFinite(node.x) || !isFinite(node.y)) {
+                  return;
+                }
+
                 const label = node.id;
                 const fontSize = 12 / globalScale;
-                ctx.font = `${fontSize}px Sans-Serif`;
+                ctx.font = `${fontSize}px Courier New, monospace`;
 
                 // Pulsing animation effect
                 const time = Date.now() / 1000;
                 const pulseScale = 1 + Math.sin(time * 2) * 0.15;
 
-                // Draw outer glow (pulsing)
+                // Draw outer glow (pulsing) - Military radar style
                 const outerGlow = ctx.createRadialGradient(
-                  node.x!,
-                  node.y!,
+                  node.x,
+                  node.y,
                   0,
-                  node.x!,
-                  node.y!,
+                  node.x,
+                  node.y,
                   node.val * 3 * pulseScale
                 );
-                outerGlow.addColorStop(0, node.color + "30");
-                outerGlow.addColorStop(0.5, node.color + "15");
+                outerGlow.addColorStop(0, node.color + "40");
+                outerGlow.addColorStop(0.5, node.color + "20");
                 outerGlow.addColorStop(1, "transparent");
                 ctx.fillStyle = outerGlow;
                 ctx.beginPath();
-                ctx.arc(node.x!, node.y!, node.val * 3 * pulseScale, 0, 2 * Math.PI);
+                ctx.arc(node.x, node.y, node.val * 3 * pulseScale, 0, 2 * Math.PI);
                 ctx.fill();
 
-                // Draw pulsing ring
+                // Draw pulsing ring - Radar sweep effect
                 const pulseRadius = node.val * (1 + Math.sin(time * 2) * 0.2);
                 ctx.beginPath();
-                ctx.arc(node.x!, node.y!, pulseRadius * 1.3, 0, 2 * Math.PI);
-                ctx.strokeStyle = node.color + "60";
+                ctx.arc(node.x, node.y, pulseRadius * 1.3, 0, 2 * Math.PI);
+                ctx.strokeStyle = node.color + "80";
                 ctx.lineWidth = 2 / globalScale;
                 ctx.stroke();
 
-                // Draw inner glow
+                // Draw hexagonal outline for military/tech feel
+                ctx.beginPath();
+                for (let i = 0; i < 6; i++) {
+                  const angle = (Math.PI / 3) * i;
+                  const x = node.x + Math.cos(angle) * node.val * 1.5;
+                  const y = node.y + Math.sin(angle) * node.val * 1.5;
+                  if (i === 0) ctx.moveTo(x, y);
+                  else ctx.lineTo(x, y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = node.color + "40";
+                ctx.lineWidth = 1 / globalScale;
+                ctx.stroke();
+
+                // Draw inner glow - Core
                 const innerGlow = ctx.createRadialGradient(
-                  node.x!,
-                  node.y!,
+                  node.x,
+                  node.y,
                   0,
-                  node.x!,
-                  node.y!,
+                  node.x,
+                  node.y,
                   node.val
                 );
                 innerGlow.addColorStop(0, node.color);
@@ -220,41 +239,53 @@ export default function GraphVisualization() {
                 innerGlow.addColorStop(1, node.color + "CC");
                 ctx.fillStyle = innerGlow;
                 ctx.beginPath();
-                ctx.arc(node.x!, node.y!, node.val, 0, 2 * Math.PI);
+                ctx.arc(node.x, node.y, node.val, 0, 2 * Math.PI);
                 ctx.fill();
 
-                // Draw bright border
-                ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
-                ctx.lineWidth = 2.5 / globalScale;
+                // Draw bright border with scan line
+                ctx.strokeStyle = node.color;
+                ctx.lineWidth = 3 / globalScale;
                 ctx.stroke();
 
-                // Draw inner highlight
-                const highlight = ctx.createRadialGradient(
-                  node.x! - node.val * 0.3,
-                  node.y! - node.val * 0.3,
-                  0,
-                  node.x!,
-                  node.y!,
-                  node.val
-                );
-                highlight.addColorStop(0, "rgba(255, 255, 255, 0.4)");
-                highlight.addColorStop(1, "transparent");
-                ctx.fillStyle = highlight;
+                // Draw crosshair in center
+                ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
+                ctx.lineWidth = 1.5 / globalScale;
                 ctx.beginPath();
-                ctx.arc(node.x!, node.y!, node.val, 0, 2 * Math.PI);
-                ctx.fill();
+                ctx.moveTo(node.x - node.val * 0.5, node.y);
+                ctx.lineTo(node.x + node.val * 0.5, node.y);
+                ctx.moveTo(node.x, node.y - node.val * 0.5);
+                ctx.lineTo(node.x, node.y + node.val * 0.5);
+                ctx.stroke();
 
-                // Draw label with shadow
-                ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
-                ctx.shadowBlur = 4;
-                ctx.shadowOffsetX = 0;
-                ctx.shadowOffsetY = 1;
+                // Draw label with military-style background
+                const labelY = node.y + node.val + fontSize + 6;
+                const labelWidth = ctx.measureText(label).width;
+
+                // Label background
+                ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
+                ctx.fillRect(
+                  node.x - labelWidth / 2 - 4,
+                  labelY - fontSize,
+                  labelWidth + 8,
+                  fontSize + 4
+                );
+
+                // Label border
+                ctx.strokeStyle = node.color;
+                ctx.lineWidth = 1 / globalScale;
+                ctx.strokeRect(
+                  node.x - labelWidth / 2 - 4,
+                  labelY - fontSize,
+                  labelWidth + 8,
+                  fontSize + 4
+                );
+
+                // Draw label text
+                ctx.fillStyle = "#00ff00"; // Military green terminal color
                 ctx.textAlign = "center";
                 ctx.textBaseline = "middle";
-                ctx.fillStyle = "white";
-                ctx.font = `bold ${fontSize}px Sans-Serif`;
-                ctx.fillText(label, node.x!, node.y! + node.val + fontSize + 4);
-                ctx.shadowBlur = 0;
+                ctx.font = `bold ${fontSize}px Courier New, monospace`;
+                ctx.fillText(label, node.x, labelY - fontSize / 2 + 2);
               }}
               linkDirectionalArrowLength={8}
               linkDirectionalArrowRelPos={1}

@@ -18,68 +18,71 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className + " bg-black"}>
         <Navbar />
-        <main className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+        <main className="min-h-screen bg-black">
           {children}
         </main>
-        <footer className="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white py-12 mt-20 relative overflow-hidden">
-          <div className="absolute inset-0 grid-background opacity-10" />
+        <footer className="bg-black border-t-2 border-green-500/30 tactical-grid scanlines py-12 relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
             <div className="grid md:grid-cols-3 gap-8">
               <div>
-                <div className="flex items-center gap-2 text-xl font-bold mb-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-blue-500 p-2 rounded-lg box-glow-blue">
-                    <TrendingUp className="h-5 w-5 text-white" />
+                <div className="flex items-center gap-3 text-lg font-bold mb-4">
+                  <div className="bg-green-500/20 border-2 border-green-500 p-2 target-reticle">
+                    <TrendingUp className="h-5 w-5 text-green-400" />
                   </div>
-                  <span className="holographic-text neon-glow-cyan">
-                    Consequence AI
+                  <span className="terminal-text military-font">
+                    CONSEQUENCE_AI
                   </span>
                 </div>
-                <p className="text-gray-300 text-sm">
-                  Domain-agnostic causal reasoning infrastructure for predicting
-                  cascade effects in complex systems.
+                <p className="text-green-400/70 text-xs font-mono">
+                  DOMAIN-AGNOSTIC CAUSAL REASONING INFRASTRUCTURE<br />
+                  CASCADE EFFECT PREDICTION SYSTEM
                 </p>
               </div>
               <div>
-                <h4 className="font-semibold mb-3 neon-glow">Product</h4>
-                <div className="space-y-2 text-sm">
+                <h4 className="military-font text-green-400 text-sm mb-3">&gt; OPERATIONS</h4>
+                <div className="space-y-2 text-xs font-mono">
                   <a
                     href="/predict"
-                    className="block text-gray-300 hover:text-white transition-all hover:translate-x-1"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
                   >
-                    → Predict Cascade
+                    PREDICT_CASCADE
                   </a>
                   <a
                     href="/explore"
-                    className="block text-gray-300 hover:text-white transition-all hover:translate-x-1"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
                   >
-                    → Explore Graph
+                    EXPLORE_GRAPH
                   </a>
                   <a
                     href="/accuracy"
-                    className="block text-gray-300 hover:text-white transition-all hover:translate-x-1"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
                   >
-                    → Track Record
+                    TRACK_RECORD
                   </a>
                 </div>
               </div>
               <div>
-                <h4 className="font-semibold mb-3 neon-glow-purple">Technology</h4>
-                <div className="space-y-2 text-sm">
-                  <p className="text-gray-300 flex items-center gap-2">
-                    <span className="pulse-dot w-2 h-2 bg-green-500 rounded-full"></span>
-                    Built with FastAPI & Next.js
+                <h4 className="military-font text-cyan-400 text-sm mb-3">&gt; TECH_STACK</h4>
+                <div className="space-y-2 text-xs font-mono">
+                  <p className="text-cyan-400/70 flex items-center gap-2">
+                    <span className="pulse-dot w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                    BACKEND: FastAPI + PostgreSQL
                   </p>
-                  <p className="text-gray-300 flex items-center gap-2">
-                    <span className="pulse-dot w-2 h-2 bg-blue-500 rounded-full"></span>
-                    Powered by Causal AI
+                  <p className="text-cyan-400/70 flex items-center gap-2">
+                    <span className="pulse-dot w-1.5 h-1.5 bg-cyan-500 rounded-full"></span>
+                    FRONTEND: Next.js 16 + React 19
+                  </p>
+                  <p className="text-cyan-400/70 flex items-center gap-2">
+                    <span className="pulse-dot w-1.5 h-1.5 bg-yellow-500 rounded-full"></span>
+                    AI_CORE: Bayesian Learning Engine
                   </p>
                 </div>
               </div>
             </div>
-            <div className="border-t border-white/10 mt-8 pt-8 text-center text-sm text-gray-400">
-              © 2025 Consequence AI. All rights reserved.
+            <div className="border-t border-green-500/20 mt-8 pt-8 text-center text-xs text-green-400/50 military-font">
+              © 2025 CONSEQUENCE_AI_SYSTEMS | CLEARANCE_LEVEL: PUBLIC | STATUS: OPERATIONAL
             </div>
           </div>
         </footer>
