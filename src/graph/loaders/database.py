@@ -1,8 +1,10 @@
 """Load causal graph from PostgreSQL database."""
 
-from ...core.graph import CausalGraph, Entity, CausalLink
+from ...core.graph import CausalGraph
+from ...core.graph import Entity as GraphEntity
+from ...core.graph import CausalLink as GraphLink
 from ...db.connection import get_db_session
-from ...db.models import EntityModel, CausalLinkModel
+from ...db.models import Entity as EntityModel, CausalLink as CausalLinkModel
 
 
 def load_graph_from_database() -> CausalGraph:
@@ -18,11 +20,11 @@ def load_graph_from_database() -> CausalGraph:
         print(f"Loading {len(entities)} entities from database...")
 
         for entity_model in entities:
-            entity = Entity(
+            entity = GraphEntity(
                 id=entity_model.id,
-                entity_type=entity_model.type,
+                entity_type=entity_model.entity_type,
                 name=entity_model.name,
-                attributes=entity_model.metadata or {}
+                attributes=entity_model.metadata_json or {}
             )
             graph.add_entity(entity)
 
@@ -31,17 +33,17 @@ def load_graph_from_database() -> CausalGraph:
         print(f"Loading {len(links)} causal links from database...")
 
         for link_model in links:
-            link = CausalLink(
+            link = GraphLink(
                 source=link_model.source,
                 target=link_model.target,
-                relationship_type=link_model.relationship,
+                relationship_type=link_model.relationship_type,
                 strength=link_model.strength,
                 delay_mean=link_model.delay_mean,
                 delay_std=link_model.delay_std,
                 confidence=link_model.confidence,
-                direction=1.0,  # Positive direction by default
+                direction=link_model.direction or 1.0,
                 evidence=link_model.evidence or [],
-                historical_accuracy=1.0,  # Default to perfect accuracy
+                historical_accuracy=link_model.historical_accuracy or 1.0,
                 observation_count=link_model.observation_count or 0
             )
             graph.add_link(link)
