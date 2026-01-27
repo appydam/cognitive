@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TrendingUp, Sparkles, Network, BarChart3 } from "lucide-react";
+import { TrendingUp, Sparkles, Network, BarChart3, Lightbulb } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export default function Navbar() {
@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: "/predict", label: "Predict", icon: Sparkles },
     { href: "/explore", label: "Explore", icon: Network },
     { href: "/accuracy", label: "Track Record", icon: BarChart3 },
+    { href: "/vision", label: "Vision", icon: Lightbulb },
   ];
 
   return (
