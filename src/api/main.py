@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import Any
 from datetime import datetime
 
@@ -43,7 +43,7 @@ async def startup_event():
 
 # Request/Response models
 class EarningsEventRequest(BaseModel):
-    """Request for an earnings event prediction (legacy - use entity_id instead of ticker)."""
+    """Request for an earnings event prediction."""
 
     entity_id: str | None = Field(None, description="Entity ID (ticker, ETF, or sector)", example="AAPL")
     ticker: str | None = Field(None, description="Stock ticker symbol (deprecated, use entity_id)", example="AAPL")
@@ -62,6 +62,13 @@ class EarningsEventRequest(BaseModel):
         ge=1,
         le=90,
     )
+
+    @model_validator(mode='after')
+    def validate_entity_or_ticker(self):
+        """Ensure either entity_id or ticker is provided."""
+        if not self.entity_id and not self.ticker:
+            raise ValueError("Either entity_id or ticker must be provided")
+        return self
 
     def get_entity_id(self) -> str:
         """Get entity ID, supporting both new and legacy fields."""
