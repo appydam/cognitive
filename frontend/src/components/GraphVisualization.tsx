@@ -90,6 +90,22 @@ export default function GraphVisualization() {
     };
   }, [loading, graphData]);
 
+  // Configure d3 forces for better physics and collision
+  useEffect(() => {
+    if (!fgRef.current || !graphData) return;
+
+    const fg = fgRef.current;
+
+    // Configure forces for better spacing and stability
+    fg.d3Force('charge')?.strength(-800).distanceMax(600);
+    fg.d3Force('link')?.distance(120);
+    fg.d3Force('center')?.strength(0.2);
+
+    // Add collision detection to prevent node overlap
+    const d3 = require('d3-force');
+    fg.d3Force('collision', d3.forceCollide().radius(40));
+  }, [graphData]);
+
   const loadGraphData = async () => {
     try {
       setLoading(true);
@@ -100,23 +116,23 @@ export default function GraphVisualization() {
       const data = await ConsequenceAPI.getFullGraph();
       console.log(`[GraphVisualization] Received ${data.nodes.length} nodes and ${data.links.length} links`);
 
-      // Helper functions for colors
+      // Helper functions for colors - Pastel professional palette
       const getColorForType = (type: string): string => {
         const colors: Record<string, string> = {
-          company: "#00ff00",    // Military green for companies
-          etf: "#00ffff",        // Cyan for ETFs
-          sector: "#ffff00",     // Yellow for sectors
+          company: "#88d498",    // Soft mint green
+          etf: "#7ec8e3",        // Soft sky blue
+          sector: "#f4c095",     // Soft peach/gold
         };
-        return colors[type.toLowerCase()] || "#00ff00";
+        return colors[type.toLowerCase()] || "#88d498";
       };
 
       const getColorForRelationship = (relationship: string): string => {
         const colors: Record<string, string> = {
-          customer_of: "#00ffff",      // Cyan
-          in_sector: "#ffff00",        // Yellow
-          competes_with: "#ff0000",    // Red
+          customer_of: "#7ec8e3",      // Soft blue
+          in_sector: "#b8a4d4",        // Soft purple
+          competes_with: "#e89d9d",    // Soft coral
         };
-        return colors[relationship] || "#00ff00";
+        return colors[relationship] || "#88d498";
       };
 
       // Transform data for visualization
@@ -503,21 +519,22 @@ export default function GraphVisualization() {
               enableNodeDrag={true}
               enableZoomInteraction={true}
               enablePanInteraction={true}
+              enablePointerInteraction={true}
               backgroundColor="transparent"
               linkDirectionalParticles={2}
               linkDirectionalParticleSpeed={0.005}
               linkDirectionalParticleWidth={2}
-              linkDirectionalParticleColor={() => 'rgba(0, 255, 255, 0.5)'}
-              d3VelocityDecay={0.3}
-              d3AlphaDecay={0.015}
-              cooldownTicks={100}
-              d3Force={{
-                charge: { strength: -500, distanceMax: 500 },
-                link: { distance: 100 },
-                center: { strength: 0.3 }
+              linkDirectionalParticleColor={(link: any) => link.color || 'rgba(126, 200, 227, 0.6)'}
+              d3VelocityDecay={0.1}
+              d3AlphaDecay={0.02}
+              cooldownTicks={50}
+              onNodeDragEnd={(node: any) => {
+                // Fix node in place after dragging
+                node.fx = node.x;
+                node.fy = node.y;
               }}
               onEngineStop={() => {
-                // Don't auto-zoom on engine stop to prevent unexpected zoom-outs
+                // Don't auto-zoom on engine stop
               }}
             />
             ) : (
