@@ -37,14 +37,16 @@ def create_db_engine(database_url: str = DATABASE_URL, **kwargs):
     # Default engine settings
     engine_config = {
         'echo': os.getenv('SQL_ECHO', 'false').lower() == 'true',  # Log SQL queries
-        'pool_pre_ping': True,  # Verify connections before using
-        'pool_size': int(os.getenv('DB_POOL_SIZE', '5')),
-        'max_overflow': int(os.getenv('DB_MAX_OVERFLOW', '10')),
     }
 
     # For serverless/Railway, use NullPool to avoid connection limits
     if os.getenv('RAILWAY_ENVIRONMENT'):
         engine_config['poolclass'] = NullPool
+    else:
+        # Only set pool parameters for non-NullPool configurations
+        engine_config['pool_pre_ping'] = True  # Verify connections before using
+        engine_config['pool_size'] = int(os.getenv('DB_POOL_SIZE', '5'))
+        engine_config['max_overflow'] = int(os.getenv('DB_MAX_OVERFLOW', '10'))
 
     # Override with provided kwargs
     engine_config.update(kwargs)
