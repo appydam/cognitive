@@ -177,53 +177,76 @@ export default function VisionPage() {
 
               {/* Cascade Visualization */}
               <motion.div
-                className="relative h-96"
+                className="relative h-[600px]"
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1 }}
               >
-                <svg viewBox="0 0 400 400" className="w-full h-full">
+                <svg viewBox="0 0 800 600" className="w-full h-full">
                   {/* Central node - Apple */}
                   <motion.circle
-                    cx="200"
+                    cx="400"
                     cy="200"
-                    r="40"
+                    r="45"
                     fill="#ef4444"
+                    stroke="#fca5a5"
+                    strokeWidth="3"
                     initial={{ scale: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
                   />
-                  <text x="200" y="205" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold">
+                  <text x="400" y="205" textAnchor="middle" fill="#fff" fontSize="16" fontWeight="bold">
                     AAPL
                   </text>
+                  <text x="400" y="260" textAnchor="middle" fill="#ef4444" fontSize="10" fontWeight="bold">
+                    TRIGGER EVENT
+                  </text>
 
-                  {/* First-order nodes */}
+                  {/* First-order nodes with relationship labels */}
                   {[
-                    { x: 100, y: 100, label: "TSMC", delay: 0.4 },
-                    { x: 300, y: 100, label: "QCOM", delay: 0.5 },
-                    { x: 80, y: 250, label: "XLK", delay: 0.6 },
-                    { x: 320, y: 250, label: "SMSNG", delay: 0.7 },
-                    { x: 200, y: 340, label: "SPY", delay: 0.8 },
+                    { x: 200, y: 80, label: "TSMC", relationship: "supplier", delay: 0.4 },
+                    { x: 600, y: 80, label: "QCOM", relationship: "supplier", delay: 0.5 },
+                    { x: 150, y: 300, label: "XLK", relationship: "in_sector", delay: 0.6 },
+                    { x: 650, y: 300, label: "SMSNG", relationship: "competitor", delay: 0.7 },
+                    { x: 400, y: 380, label: "SPY", relationship: "in_index", delay: 0.8 },
                   ].map((node, i) => (
                     <g key={i}>
+                      {/* Connection line */}
                       <motion.line
-                        x1="200"
+                        x1="400"
                         y1="200"
                         x2={node.x}
                         y2={node.y}
                         stroke="#22c55e"
                         strokeWidth="2"
+                        strokeDasharray="4 2"
                         initial={{ pathLength: 0 }}
                         whileInView={{ pathLength: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: node.delay, duration: 0.5 }}
                       />
+                      {/* Relationship label on line */}
+                      <motion.text
+                        x={(400 + node.x) / 2}
+                        y={(200 + node.y) / 2}
+                        textAnchor="middle"
+                        fill="#22c55e"
+                        fontSize="9"
+                        fontWeight="bold"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay + 0.3 }}
+                      >
+                        {node.relationship}
+                      </motion.text>
+                      {/* Node circle */}
                       <motion.circle
                         cx={node.x}
                         cy={node.y}
-                        r="25"
+                        r="30"
                         fill="#065f46"
                         stroke="#22c55e"
                         strokeWidth="2"
@@ -237,13 +260,185 @@ export default function VisionPage() {
                         y={node.y + 4}
                         textAnchor="middle"
                         fill="#22c55e"
-                        fontSize="11"
+                        fontSize="12"
                         fontWeight="bold"
                       >
                         {node.label}
                       </text>
+                      {/* Order badge */}
+                      <text
+                        x={node.x}
+                        y={node.y - 45}
+                        textAnchor="middle"
+                        fill="#10b981"
+                        fontSize="8"
+                        fontWeight="bold"
+                      >
+                        1st ORDER
+                      </text>
                     </g>
                   ))}
+
+                  {/* Second-order nodes */}
+                  {[
+                    { x: 80, y: 30, label: "AMD", from: { x: 200, y: 80 }, relationship: "competitor", delay: 1.2 },
+                    { x: 320, y: 30, label: "NVDA", from: { x: 200, y: 80 }, relationship: "partner", delay: 1.3 },
+                    { x: 720, y: 30, label: "AVGO", from: { x: 600, y: 80 }, relationship: "supplier", delay: 1.4 },
+                    { x: 50, y: 400, label: "QQQ", from: { x: 150, y: 300 }, relationship: "in_etf", delay: 1.5 },
+                    { x: 720, y: 400, label: "INTC", from: { x: 650, y: 300 }, relationship: "competitor", delay: 1.6 },
+                  ].map((node, i) => (
+                    <g key={`second-${i}`}>
+                      {/* Connection line */}
+                      <motion.line
+                        x1={node.from.x}
+                        y1={node.from.y}
+                        x2={node.x}
+                        y2={node.y}
+                        stroke="#06b6d4"
+                        strokeWidth="1.5"
+                        strokeDasharray="3 3"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay, duration: 0.4 }}
+                      />
+                      {/* Relationship label */}
+                      <motion.text
+                        x={(node.from.x + node.x) / 2}
+                        y={(node.from.y + node.y) / 2}
+                        textAnchor="middle"
+                        fill="#06b6d4"
+                        fontSize="8"
+                        fontWeight="bold"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay + 0.2 }}
+                      >
+                        {node.relationship}
+                      </motion.text>
+                      {/* Node circle */}
+                      <motion.circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="25"
+                        fill="#164e63"
+                        stroke="#06b6d4"
+                        strokeWidth="2"
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay }}
+                      />
+                      <text
+                        x={node.x}
+                        y={node.y + 3}
+                        textAnchor="middle"
+                        fill="#06b6d4"
+                        fontSize="10"
+                        fontWeight="bold"
+                      >
+                        {node.label}
+                      </text>
+                      {/* Order badge */}
+                      <text
+                        x={node.x}
+                        y={node.y - 38}
+                        textAnchor="middle"
+                        fill="#22d3ee"
+                        fontSize="7"
+                        fontWeight="bold"
+                      >
+                        2nd ORDER
+                      </text>
+                    </g>
+                  ))}
+
+                  {/* Third-order nodes */}
+                  {[
+                    { x: 160, y: 500, label: "VGT", from: { x: 50, y: 400 }, relationship: "in_etf", delay: 1.8 },
+                    { x: 280, y: 520, label: "IWF", from: { x: 50, y: 400 }, relationship: "in_etf", delay: 1.9 },
+                    { x: 640, y: 520, label: "SMH", from: { x: 720, y: 400 }, relationship: "sector", delay: 2.0 },
+                  ].map((node, i) => (
+                    <g key={`third-${i}`}>
+                      {/* Connection line */}
+                      <motion.line
+                        x1={node.from.x}
+                        y1={node.from.y}
+                        x2={node.x}
+                        y2={node.y}
+                        stroke="#a855f7"
+                        strokeWidth="1.5"
+                        strokeDasharray="2 2"
+                        initial={{ pathLength: 0 }}
+                        whileInView={{ pathLength: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay, duration: 0.4 }}
+                      />
+                      {/* Relationship label */}
+                      <motion.text
+                        x={(node.from.x + node.x) / 2 + 10}
+                        y={(node.from.y + node.y) / 2}
+                        textAnchor="middle"
+                        fill="#a855f7"
+                        fontSize="7"
+                        fontWeight="bold"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay + 0.2 }}
+                      >
+                        {node.relationship}
+                      </motion.text>
+                      {/* Node circle */}
+                      <motion.circle
+                        cx={node.x}
+                        cy={node.y}
+                        r="22"
+                        fill="#581c87"
+                        stroke="#a855f7"
+                        strokeWidth="2"
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: node.delay }}
+                      />
+                      <text
+                        x={node.x}
+                        y={node.y + 3}
+                        textAnchor="middle"
+                        fill="#a855f7"
+                        fontSize="9"
+                        fontWeight="bold"
+                      >
+                        {node.label}
+                      </text>
+                      {/* Order badge */}
+                      <text
+                        x={node.x}
+                        y={node.y - 35}
+                        textAnchor="middle"
+                        fill="#c084fc"
+                        fontSize="7"
+                        fontWeight="bold"
+                      >
+                        3rd ORDER
+                      </text>
+                    </g>
+                  ))}
+
+                  {/* Legend */}
+                  <g transform="translate(10, 560)">
+                    <text x="0" y="0" fill="#10b981" fontSize="10" fontWeight="bold">
+                      ━━ 1st Order (Direct Impact)
+                    </text>
+                    <text x="200" y="0" fill="#22d3ee" fontSize="10" fontWeight="bold">
+                      ━━ 2nd Order (Secondary)
+                    </text>
+                    <text x="400" y="0" fill="#c084fc" fontSize="10" fontWeight="bold">
+                      ━━ 3rd Order (Tertiary)
+                    </text>
+                  </g>
                 </svg>
               </motion.div>
             </div>
