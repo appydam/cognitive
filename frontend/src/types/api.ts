@@ -54,7 +54,8 @@ export interface SearchResult {
 }
 
 export interface EarningsEventRequest {
-  ticker: string;
+  entity_id?: string;        // Preferred: supports any entity type
+  ticker?: string;           // Legacy: backward compatibility
   surprise_percent: number;
   description?: string;
   horizon_days?: number;

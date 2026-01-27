@@ -14,6 +14,7 @@ import {
   Info,
 } from "lucide-react";
 import { ConsequenceAPI } from "@/lib/api";
+import CascadeEffectsPanel from "@/components/CascadeEffectsPanel";
 
 interface GraphNode {
   id: string;
@@ -29,6 +30,8 @@ interface GraphLink {
   target: string;
   strength: number;
   relationship: string;
+  delay_days: number;
+  confidence: number;
   color: string;
   width: number;
 }
@@ -48,6 +51,9 @@ export default function GraphVisualization() {
   const [filterType, setFilterType] = useState<string>("all");
   const [highlightNodes, setHighlightNodes] = useState<Set<string>>(new Set());
   const [highlightLinks, setHighlightLinks] = useState<Set<string>>(new Set());
+  const [showCascadePanel, setShowCascadePanel] = useState(false);
+  const [cascadeHighlight, setCascadeHighlight] = useState<Set<string>>(new Set());
+  const [cascadeOrderMap, setCascadeOrderMap] = useState<Map<string, number>>(new Map());
   const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
@@ -150,6 +156,8 @@ export default function GraphVisualization() {
         target: link.target,
         strength: link.strength,
         relationship: link.relationship,
+        delay_days: link.delay_days,
+        confidence: link.confidence,
         color: getColorForRelationship(link.relationship),
         width: 1 + link.strength * 3,
       }));
@@ -166,10 +174,18 @@ export default function GraphVisualization() {
 
   const handleNodeClick = (node: any) => {
     setSelectedNode(node);
+    setShowCascadePanel(false); // Reset cascade panel on new selection
+    setCascadeHighlight(new Set()); // Clear cascade highlights
+    setCascadeOrderMap(new Map());
     // Center on node without aggressive zoom
     if (fgRef.current) {
       fgRef.current.centerAt(node.x, node.y, 800);
     }
+  };
+
+  const handleCascadeHighlight = (nodeIds: Set<string>, orderMap: Map<string, number>) => {
+    setCascadeHighlight(nodeIds);
+    setCascadeOrderMap(orderMap);
   };
 
   const handleZoomIn = () => {
@@ -397,6 +413,20 @@ export default function GraphVisualization() {
                 const fontSize = 12 / globalScale;
                 ctx.font = `${fontSize}px Courier New, monospace`;
 
+                // Determine node color - cascade highlight takes precedence
+                let nodeColor = node.color;
+                if (cascadeHighlight.has(node.id)) {
+                  const order = cascadeOrderMap.get(node.id) || 0;
+                  // Cascade colors by order
+                  const cascadeColors = [
+                    "#fcd34d", // Yellow/gold for trigger (order 0)
+                    "#88d498", // Bright mint for 1st order
+                    "#86efac", // Medium green for 2nd order
+                    "#bbf7d0", // Pale green for 3rd+ order
+                  ];
+                  nodeColor = cascadeColors[Math.min(order, cascadeColors.length - 1)];
+                }
+
                 // Pulsing animation effect
                 const time = Date.now() / 1000;
                 const pulseScale = 1 + Math.sin(time * 2) * 0.15;
@@ -410,8 +440,8 @@ export default function GraphVisualization() {
                   node.y,
                   node.val * 3 * pulseScale
                 );
-                outerGlow.addColorStop(0, node.color + "40");
-                outerGlow.addColorStop(0.5, node.color + "20");
+                outerGlow.addColorStop(0, nodeColor + "40");
+                outerGlow.addColorStop(0.5, nodeColor + "20");
                 outerGlow.addColorStop(1, "transparent");
                 ctx.fillStyle = outerGlow;
                 ctx.beginPath();
@@ -422,7 +452,7 @@ export default function GraphVisualization() {
                 const pulseRadius = node.val * (1 + Math.sin(time * 2) * 0.2);
                 ctx.beginPath();
                 ctx.arc(node.x, node.y, pulseRadius * 1.3, 0, 2 * Math.PI);
-                ctx.strokeStyle = node.color + "80";
+                ctx.strokeStyle = nodeColor + "80";
                 ctx.lineWidth = 2 / globalScale;
                 ctx.stroke();
 
@@ -436,7 +466,7 @@ export default function GraphVisualization() {
                   else ctx.lineTo(x, y);
                 }
                 ctx.closePath();
-                ctx.strokeStyle = node.color + "40";
+                ctx.strokeStyle = nodeColor + "40";
                 ctx.lineWidth = 1 / globalScale;
                 ctx.stroke();
 
@@ -449,16 +479,16 @@ export default function GraphVisualization() {
                   node.y,
                   node.val
                 );
-                innerGlow.addColorStop(0, node.color);
-                innerGlow.addColorStop(0.7, node.color);
-                innerGlow.addColorStop(1, node.color + "CC");
+                innerGlow.addColorStop(0, nodeColor);
+                innerGlow.addColorStop(0.7, nodeColor);
+                innerGlow.addColorStop(1, nodeColor + "CC");
                 ctx.fillStyle = innerGlow;
                 ctx.beginPath();
                 ctx.arc(node.x, node.y, node.val, 0, 2 * Math.PI);
                 ctx.fill();
 
                 // Draw bright border with scan line
-                ctx.strokeStyle = node.color;
+                ctx.strokeStyle = nodeColor;
                 ctx.lineWidth = 3 / globalScale;
                 ctx.stroke();
 
@@ -486,7 +516,7 @@ export default function GraphVisualization() {
                 );
 
                 // Label border
-                ctx.strokeStyle = node.color;
+                ctx.strokeStyle = nodeColor;
                 ctx.lineWidth = 1 / globalScale;
                 ctx.strokeRect(
                   node.x - labelWidth / 2 - 4,
@@ -508,9 +538,24 @@ export default function GraphVisualization() {
               linkWidth={(link: any) => Math.max(link.width, 1.5)}
               linkColor={(link: any) => link.color}
               linkLabel={(link: any) => `
-                <div style="background: rgba(0, 0, 0, 0.85); color: ${link.color}; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 11px; border: 1px solid ${link.color};">
-                  ${link.relationship.replace(/_/g, ' ').toUpperCase()}<br/>
-                  <span style="opacity: 0.7;">Strength: ${(link.strength * 100).toFixed(0)}%</span>
+                <div style="background: rgba(0, 0, 0, 0.9); color: ${link.color}; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 11px; border: 1px solid ${link.color}; min-width: 180px;">
+                  <div style="font-weight: bold; font-size: 12px; margin-bottom: 6px; color: ${link.color};">
+                    ${link.relationship.replace(/_/g, ' ').toUpperCase()}
+                  </div>
+                  <div style="color: #aaa; font-size: 10px; line-height: 1.6;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                      <span>Strength:</span>
+                      <span style="color: #fff; font-weight: bold;">${(link.strength * 100).toFixed(0)}%</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                      <span>Delay:</span>
+                      <span style="color: #fff; font-weight: bold;">${link.delay_days ? link.delay_days.toFixed(1) : '0.0'} days</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                      <span>Confidence:</span>
+                      <span style="color: #fff; font-weight: bold;">${link.confidence ? (link.confidence * 100).toFixed(0) : '0'}%</span>
+                    </div>
+                  </div>
                 </div>
               `}
               linkCanvasObjectMode={() => 'after'}
@@ -652,6 +697,14 @@ export default function GraphVisualization() {
               <div className="text-xs military-font text-green-400/60 mb-2">&gt; ACTIONS</div>
               <div className="flex gap-2">
                 <button
+                  onClick={() => setShowCascadePanel(!showCascadePanel)}
+                  className={`tactical-button px-4 py-2 text-xs flex-1 transition-colors ${
+                    showCascadePanel ? 'bg-yellow-500/20 border-yellow-500 text-yellow-400' : 'hover:bg-yellow-500/20'
+                  }`}
+                >
+                  {showCascadePanel ? 'HIDE CASCADE' : 'ANALYZE CASCADE'}
+                </button>
+                <button
                   onClick={handleViewConnections}
                   className="tactical-button px-4 py-2 text-xs flex-1 hover:bg-green-500/20 transition-colors"
                 >
@@ -665,6 +718,15 @@ export default function GraphVisualization() {
                 </button>
               </div>
             </div>
+
+            {/* Cascade Effects Panel */}
+            {showCascadePanel && (
+              <CascadeEffectsPanel
+                entity={selectedNode}
+                onHighlight={handleCascadeHighlight}
+                onClose={() => setShowCascadePanel(false)}
+              />
+            )}
           </Card>
         )}
       </div>

@@ -43,9 +43,10 @@ async def startup_event():
 
 # Request/Response models
 class EarningsEventRequest(BaseModel):
-    """Request for an earnings event prediction."""
+    """Request for an earnings event prediction (legacy - use entity_id instead of ticker)."""
 
-    ticker: str = Field(..., description="Stock ticker symbol", example="AAPL")
+    entity_id: str | None = Field(None, description="Entity ID (ticker, ETF, or sector)", example="AAPL")
+    ticker: str | None = Field(None, description="Stock ticker symbol (deprecated, use entity_id)", example="AAPL")
     surprise_percent: float = Field(
         ...,
         description="Earnings surprise as percentage (negative for miss)",
@@ -61,6 +62,15 @@ class EarningsEventRequest(BaseModel):
         ge=1,
         le=90,
     )
+
+    def get_entity_id(self) -> str:
+        """Get entity ID, supporting both new and legacy fields."""
+        if self.entity_id:
+            return self.entity_id.upper()
+        elif self.ticker:
+            return self.ticker.upper()
+        else:
+            raise ValueError("Either entity_id or ticker must be provided")
 
 
 class EffectResponse(BaseModel):
@@ -216,24 +226,27 @@ async def predict_earnings_cascade(request: EarningsEventRequest):
     """
     Predict cascade effects from an earnings event.
 
-    This is the main prediction endpoint.
+    This is the main prediction endpoint. Supports any entity type (company, ETF, sector).
     """
     if GRAPH is None:
         raise HTTPException(status_code=503, detail="Graph not loaded")
 
-    ticker = request.ticker.upper()
+    try:
+        entity_id = request.get_entity_id()
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
     # Verify entity exists
-    if ticker not in GRAPH.entities:
+    if entity_id not in GRAPH.entities:
         raise HTTPException(
             status_code=404,
-            detail=f"Entity {ticker} not found in graph. Available top entities: "
+            detail=f"Entity {entity_id} not found in graph. Available top entities: "
             f"{', '.join(list(GRAPH.entities.keys())[:10])}...",
         )
 
     # Create event and propagate
     event = create_earnings_event(
-        ticker=ticker,
+        ticker=entity_id,
         surprise_percent=request.surprise_percent,
         description=request.description,
     )
