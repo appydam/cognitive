@@ -104,15 +104,6 @@ export default function GraphVisualization() {
     // Add collision detection to prevent node overlap
     const d3 = require('d3-force');
     fg.d3Force('collision', d3.forceCollide().radius(40));
-
-    // Stop simulation after initial layout to prevent jiggling
-    const timer = setTimeout(() => {
-      if (fg && fg.pauseAnimation) {
-        fg.pauseAnimation();
-      }
-    }, 3000); // Let it stabilize for 3 seconds then freeze
-
-    return () => clearTimeout(timer);
   }, [graphData]);
 
   const loadGraphData = async () => {
@@ -537,23 +528,10 @@ export default function GraphVisualization() {
               d3VelocityDecay={0.8}
               d3AlphaDecay={0.05}
               cooldownTicks={100}
-              onNodeDrag={(node: any) => {
-                // Resume animation when dragging to allow smooth movement
-                if (fgRef.current && fgRef.current.resumeAnimation) {
-                  fgRef.current.resumeAnimation();
-                }
-              }}
               onNodeDragEnd={(node: any) => {
                 // Fix node in place after dragging
                 node.fx = node.x;
                 node.fy = node.y;
-
-                // Pause animation again after a brief settling period
-                setTimeout(() => {
-                  if (fgRef.current && fgRef.current.pauseAnimation) {
-                    fgRef.current.pauseAnimation();
-                  }
-                }, 500);
               }}
               onEngineStop={() => {
                 // Don't auto-zoom on engine stop
