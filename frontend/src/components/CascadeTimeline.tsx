@@ -37,21 +37,21 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
 
   // Helper to get color based on period
   const getColorForPeriod = (period: string) => {
-    if (period.includes("Hour")) return "from-red-50 to-orange-50 border-red-200";
-    if (period.includes("Day 1")) return "from-yellow-50 to-amber-50 border-yellow-200";
-    return "from-blue-50 to-cyan-50 border-blue-200";
+    if (period.includes("Hour")) return "from-red-950/30 to-orange-950/30 border-red-500/30 bg-black/50";
+    if (period.includes("Day 1")) return "from-yellow-950/30 to-amber-950/30 border-yellow-500/30 bg-black/50";
+    return "from-blue-950/30 to-cyan-950/30 border-cyan-500/30 bg-black/50";
   };
 
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Trigger */}
-      <Card className="p-6 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 border-purple-200 shadow-lg">
+      <Card className="p-6 bg-gradient-to-br from-purple-950/30 via-blue-950/30 to-cyan-950/30 border-purple-500/30 shadow-lg shadow-purple-500/10 bg-black/50">
         <div className="flex items-center gap-2 mb-3">
-          <Zap className="h-6 w-6 text-purple-600" />
-          <h3 className="text-xl font-bold">Trigger Event</h3>
+          <Zap className="h-6 w-6 text-purple-400" />
+          <h3 className="text-xl font-bold text-purple-400 military-font">TRIGGER EVENT</h3>
         </div>
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-3xl font-bold text-purple-900">
+          <span className="text-3xl font-bold text-purple-300">
             {cascade.trigger.entity}
           </span>
           <Badge
@@ -65,7 +65,7 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
           </Badge>
         </div>
         {cascade.trigger.description && (
-          <p className="text-gray-700 mt-2 text-base">
+          <p className="text-green-400/70 mt-2 text-base font-mono">
             {cascade.trigger.description}
           </p>
         )}
@@ -84,7 +84,7 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
             <div className="flex items-center gap-2 mb-4">
               <Icon className="h-5 w-5 text-gray-300" />
               <h3 className="text-lg font-semibold text-gray-200">{period}</h3>
-              <Badge variant="secondary" className="ml-2">
+              <Badge variant="secondary" className="ml-2 bg-green-500/20 text-green-400 border-green-500/50">
                 {cascade.timeline[period].length} effects
               </Badge>
             </div>
@@ -103,30 +103,30 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
       })}
 
       {/* Summary */}
-      <Card className="p-6 bg-gradient-to-br from-gray-50 to-slate-50 border-gray-300 animate-fade-in">
+      <Card className="p-6 bg-gradient-to-br from-gray-950/30 to-slate-950/30 border-green-500/30 animate-fade-in bg-black/50">
         <div className="flex items-center gap-2 mb-4">
-          <BarChart3 className="h-5 w-5 text-gray-700" />
-          <h3 className="font-semibold text-lg">Cascade Summary</h3>
+          <BarChart3 className="h-5 w-5 text-green-400" />
+          <h3 className="font-semibold text-lg text-green-400 military-font">CASCADE SUMMARY</h3>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <div className="text-gray-600 text-sm mb-1">Total Effects</div>
-            <div className="text-2xl font-bold text-gray-900">
+          <div className="bg-green-500/10 border border-green-500/30 p-4 rounded-lg shadow-sm">
+            <div className="text-green-400/70 text-sm mb-1 font-mono">Total Effects</div>
+            <div className="text-2xl font-bold text-green-400">
               {cascade.total_effects}
             </div>
           </div>
-          <div className="bg-white p-4 rounded-lg shadow-sm">
-            <div className="text-gray-600 text-sm mb-1">Horizon</div>
-            <div className="text-2xl font-bold text-gray-900">
+          <div className="bg-cyan-500/10 border border-cyan-500/30 p-4 rounded-lg shadow-sm">
+            <div className="text-cyan-400/70 text-sm mb-1 font-mono">Horizon</div>
+            <div className="text-2xl font-bold text-cyan-400">
               {cascade.horizon_days} days
             </div>
           </div>
           {Object.entries(cascade.effects_by_order).map(([order, count]) => (
-            <div key={order} className="bg-white p-4 rounded-lg shadow-sm">
-              <div className="text-gray-600 text-sm mb-1 capitalize">
+            <div key={order} className="bg-purple-500/10 border border-purple-500/30 p-4 rounded-lg shadow-sm">
+              <div className="text-purple-400/70 text-sm mb-1 capitalize font-mono">
                 {order.replace(/_/g, " ")}
               </div>
-              <div className="text-2xl font-bold text-gray-900">{count}</div>
+              <div className="text-2xl font-bold text-purple-400">{count}</div>
             </div>
           ))}
         </div>
@@ -149,23 +149,23 @@ function EffectCard({
 
   // Determine confidence color
   const getConfidenceColor = (conf: number) => {
-    if (conf >= 70) return "text-green-600";
-    if (conf >= 50) return "text-yellow-600";
-    return "text-red-600";
+    if (conf >= 70) return "text-green-400";
+    if (conf >= 50) return "text-yellow-400";
+    return "text-red-400";
   };
 
   return (
     <Card
-      className={`p-5 bg-gradient-to-br ${periodColor} hover:shadow-lg transition-all duration-300 hover:scale-[1.02] animate-fade-in`}
+      className={`p-5 bg-gradient-to-br ${periodColor} hover:shadow-lg hover:shadow-green-500/20 transition-all duration-300 hover:scale-[1.02] animate-fade-in`}
       style={{ animationDelay: `${delay}ms` }}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="font-bold text-xl text-gray-900">
+            <span className="font-bold text-xl text-green-400 military-font">
               {effect.entity}
             </span>
-            <Badge variant="outline" className="font-semibold">
+            <Badge variant="outline" className="font-semibold font-mono text-cyan-400 border-cyan-500/50">
               Order {effect.order}
             </Badge>
             <Badge
@@ -184,28 +184,28 @@ function EffectCard({
             </Badge>
           </div>
 
-          <p className="text-sm text-gray-700 mb-3 leading-relaxed">
+          <p className="text-sm text-green-400/80 mb-3 leading-relaxed font-mono">
             {effect.explanation}
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-            <div className="bg-white/50 rounded-md px-3 py-2">
-              <div className="text-xs text-gray-600 mb-0.5">Timing</div>
-              <div className="font-semibold text-gray-900">
+            <div className="bg-black/30 border border-green-500/20 rounded-md px-3 py-2">
+              <div className="text-xs text-green-400/60 mb-0.5 font-mono">Timing</div>
+              <div className="font-semibold text-green-400 font-mono">
                 Day {effect.day.toFixed(1)}
               </div>
             </div>
-            <div className="bg-white/50 rounded-md px-3 py-2">
-              <div className="text-xs text-gray-600 mb-0.5">Confidence</div>
-              <div className={`font-semibold ${getConfidenceColor(confidencePercent)}`}>
+            <div className="bg-black/30 border border-cyan-500/20 rounded-md px-3 py-2">
+              <div className="text-xs text-cyan-400/60 mb-0.5 font-mono">Confidence</div>
+              <div className={`font-semibold font-mono ${getConfidenceColor(confidencePercent)}`}>
                 {confidencePercent.toFixed(0)}%
               </div>
             </div>
-            <div className="bg-white/50 rounded-md px-3 py-2 col-span-2">
-              <div className="text-xs text-gray-600 mb-0.5">
+            <div className="bg-black/30 border border-purple-500/20 rounded-md px-3 py-2 col-span-2">
+              <div className="text-xs text-purple-400/60 mb-0.5 font-mono">
                 Expected Range
               </div>
-              <div className="font-semibold text-gray-900">
+              <div className="font-semibold text-purple-400 font-mono">
                 {effect.magnitude_range[0].toFixed(2)}% to{" "}
                 {effect.magnitude_range[1].toFixed(2)}%
               </div>
