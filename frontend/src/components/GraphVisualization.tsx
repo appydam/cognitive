@@ -46,11 +46,49 @@ export default function GraphVisualization() {
   const [hoveredNode, setHoveredNode] = useState<GraphNode | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filterType, setFilterType] = useState<string>("all");
+  const [highlightNodes, setHighlightNodes] = useState<Set<string>>(new Set());
+  const [highlightLinks, setHighlightLinks] = useState<Set<string>>(new Set());
   const fgRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
 
   useEffect(() => {
     loadGraphData();
   }, []);
+
+  // Track container dimensions for ForceGraph2D
+  // Depends on loading/graphData because the containerRef div only exists after loading completes
+  useEffect(() => {
+    if (loading || !graphData) return;
+
+    const updateDimensions = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.clientWidth;
+        if (width > 0) {
+          setDimensions({ width, height: 600 });
+        }
+      }
+    };
+
+    // Measure after DOM has painted
+    const timer = setTimeout(updateDimensions, 50);
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (containerRef.current) {
+      resizeObserver = new ResizeObserver((entries) => {
+        const { width } = entries[0].contentRect;
+        if (width > 0) {
+          setDimensions({ width, height: 600 });
+        }
+      });
+      resizeObserver.observe(containerRef.current);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      resizeObserver?.disconnect();
+    };
+  }, [loading, graphData]);
 
   const loadGraphData = async () => {
     try {
@@ -112,10 +150,9 @@ export default function GraphVisualization() {
 
   const handleNodeClick = (node: any) => {
     setSelectedNode(node);
-    // Zoom to node
+    // Center on node without aggressive zoom
     if (fgRef.current) {
-      fgRef.current.centerAt(node.x, node.y, 1000);
-      fgRef.current.zoom(2, 1000);
+      fgRef.current.centerAt(node.x, node.y, 800);
     }
   };
 
@@ -135,6 +172,41 @@ export default function GraphVisualization() {
     if (fgRef.current) {
       fgRef.current.zoomToFit(1000, 50);
     }
+  };
+
+  const handleViewConnections = () => {
+    if (!selectedNode || !graphData) return;
+
+    // Find all connected nodes and links
+    const connectedNodes = new Set<string>([selectedNode.id]);
+    const connectedLinkIds = new Set<string>();
+
+    graphData.links.forEach((link) => {
+      const sourceId = typeof link.source === 'object' ? (link.source as any).id : link.source;
+      const targetId = typeof link.target === 'object' ? (link.target as any).id : link.target;
+
+      if (sourceId === selectedNode.id) {
+        connectedNodes.add(targetId);
+        connectedLinkIds.add(`${sourceId}-${targetId}`);
+      } else if (targetId === selectedNode.id) {
+        connectedNodes.add(sourceId);
+        connectedLinkIds.add(`${sourceId}-${targetId}`);
+      }
+    });
+
+    setHighlightNodes(connectedNodes);
+    setHighlightLinks(connectedLinkIds);
+
+    // Zoom to show all connected nodes
+    if (fgRef.current) {
+      fgRef.current.zoomToFit(800, 100, (node: any) => connectedNodes.has(node.id));
+    }
+  };
+
+  const handleRunPrediction = () => {
+    if (!selectedNode) return;
+    // Navigate to predict page with pre-filled ticker
+    window.location.href = `/predict?ticker=${selectedNode.id}`;
   };
 
   if (loading) {
@@ -285,9 +357,12 @@ export default function GraphVisualization() {
       {/* Graph Container */}
       <div className="relative">
         <Card className="overflow-hidden hud-panel border-green-500/30">
-          <div className="relative h-[600px] w-full bg-black/40">
+          <div ref={containerRef} className="relative h-[600px] w-full bg-black/40">
+            {dimensions.width > 0 ? (
             <ForceGraph2D
               ref={fgRef}
+              width={dimensions.width}
+              height={dimensions.height}
               graphData={filteredData || graphData}
               nodeLabel={(node: any) => `
                 <div style="background: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 8px; font-family: sans-serif;">
@@ -411,58 +486,47 @@ export default function GraphVisualization() {
                 ctx.font = `bold ${fontSize}px Courier New, monospace`;
                 ctx.fillText(label, node.x, labelY - fontSize / 2 + 2);
               }}
-              linkDirectionalArrowLength={8}
-              linkDirectionalArrowRelPos={1}
-              linkCurvature={0.25}
-              linkWidth={(link: any) => link.width}
+              linkDirectionalArrowLength={6}
+              linkDirectionalArrowRelPos={0.99}
+              linkCurvature={0.15}
+              linkWidth={(link: any) => Math.max(link.width, 1.5)}
               linkColor={(link: any) => link.color}
-              linkLabel={(link: any) => `${link.relationship} (${(link.strength * 100).toFixed(0)}%)`}
-              linkCanvasObject={(link: any, ctx: any, globalScale: number) => {
-                // Draw relationship label on link
-                const start = link.source;
-                const end = link.target;
-
-                if (!start.x || !start.y || !end.x || !end.y) return;
-
-                // Calculate midpoint
-                const midX = (start.x + end.x) / 2;
-                const midY = (start.y + end.y) / 2;
-
-                // Draw label background
-                const label = link.relationship.replace(/_/g, ' ');
-                const fontSize = 10 / globalScale;
-                ctx.font = `${fontSize}px Courier New, monospace`;
-                const textWidth = ctx.measureText(label).width;
-
-                ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-                ctx.fillRect(
-                  midX - textWidth / 2 - 2,
-                  midY - fontSize / 2 - 1,
-                  textWidth + 4,
-                  fontSize + 2
-                );
-
-                // Draw label text
-                ctx.fillStyle = link.color || "#00ffff";
-                ctx.textAlign = "center";
-                ctx.textBaseline = "middle";
-                ctx.fillText(label, midX, midY);
-              }}
+              linkLabel={(link: any) => `
+                <div style="background: rgba(0, 0, 0, 0.85); color: ${link.color}; padding: 4px 8px; border-radius: 4px; font-family: monospace; font-size: 11px; border: 1px solid ${link.color};">
+                  ${link.relationship.replace(/_/g, ' ').toUpperCase()}<br/>
+                  <span style="opacity: 0.7;">Strength: ${(link.strength * 100).toFixed(0)}%</span>
+                </div>
+              `}
+              linkCanvasObjectMode={() => 'after'}
               onNodeClick={handleNodeClick}
               onNodeHover={(node: any) => setHoveredNode(node)}
               enableNodeDrag={true}
               enableZoomInteraction={true}
               enablePanInteraction={true}
               backgroundColor="transparent"
-              linkDirectionalParticles={4}
-              linkDirectionalParticleSpeed={0.008}
-              linkDirectionalParticleWidth={3}
-              linkDirectionalParticleColor={() => 'rgba(0, 255, 255, 0.6)'}
-              d3VelocityDecay={0.7}
-              d3AlphaDecay={0.01}
-              cooldownTicks={200}
-              onEngineStop={() => fgRef.current?.zoomToFit(400, 50)}
+              linkDirectionalParticles={2}
+              linkDirectionalParticleSpeed={0.005}
+              linkDirectionalParticleWidth={2}
+              linkDirectionalParticleColor={() => 'rgba(0, 255, 255, 0.5)'}
+              d3VelocityDecay={0.3}
+              d3AlphaDecay={0.015}
+              cooldownTicks={100}
+              d3Force={{
+                charge: { strength: -500, distanceMax: 500 },
+                link: { distance: 100 },
+                center: { strength: 0.3 }
+              }}
+              onEngineStop={() => {
+                // Don't auto-zoom on engine stop to prevent unexpected zoom-outs
+              }}
             />
+            ) : (
+              <div className="flex items-center justify-center h-full">
+                <div className="text-green-400/60 military-font text-sm">
+                  &gt; INITIALIZING GRAPH CANVAS_
+                </div>
+              </div>
+            )}
 
             {/* Controls Overlay - Military Style */}
             <div className="absolute top-4 right-4 hud-panel p-3 border-green-500/30">
@@ -570,10 +634,16 @@ export default function GraphVisualization() {
             <div className="mt-4 pt-4 border-t border-green-500/20">
               <div className="text-xs military-font text-green-400/60 mb-2">&gt; ACTIONS</div>
               <div className="flex gap-2">
-                <button className="tactical-button px-4 py-2 text-xs flex-1">
+                <button
+                  onClick={handleViewConnections}
+                  className="tactical-button px-4 py-2 text-xs flex-1 hover:bg-green-500/20 transition-colors"
+                >
                   VIEW CONNECTIONS
                 </button>
-                <button className="tactical-button px-4 py-2 text-xs flex-1">
+                <button
+                  onClick={handleRunPrediction}
+                  className="tactical-button px-4 py-2 text-xs flex-1 hover:bg-cyan-500/20 transition-colors"
+                >
                   RUN PREDICTION
                 </button>
               </div>

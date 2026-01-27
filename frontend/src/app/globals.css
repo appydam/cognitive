@@ -1,15 +1,21 @@
 @import "tailwindcss";
 
-@layer base {
-  * {
-    border-color: hsl(214.3 31.8% 91.4%);
-  }
+@theme {
+  --font-orbitron: var(--font-orbitron);
+  --font-share-tech-mono: var(--font-share-tech-mono);
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-background: hsl(0 0% 98%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+}
 
-  body {
-    background-color: hsl(0 0% 98%);
-    color: hsl(222.2 84% 4.9%);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  }
+* {
+  border-color: var(--color-border);
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* Custom animations */
@@ -402,8 +408,7 @@
    MILITARY / SCI-FI COMMAND CENTER UI
    ======================================== */
 
-/* Terminal/HUD Font */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap');
+/* Terminal/HUD Font - imported at top of file */
 
 /* Scanline effect overlay */
 @keyframes scanline {
@@ -485,7 +490,7 @@
 
 /* Terminal text effect */
 .terminal-text {
-  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-family: var(--font-share-tech-mono), 'Courier New', monospace;
   color: #00ff00;
   text-shadow: 0 0 5px rgba(0, 255, 0, 0.7),
                0 0 10px rgba(0, 255, 0, 0.5);
@@ -504,7 +509,7 @@
 
 /* Military display font */
 .military-font {
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-orbitron), sans-serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -631,7 +636,7 @@
   border-bottom: 2px solid #ff0000;
   padding: 8px;
   text-align: center;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-orbitron), sans-serif;
   font-weight: 900;
   letter-spacing: 0.3em;
   color: #ff0000;
@@ -709,7 +714,7 @@
   );
   border: 2px solid rgba(0, 255, 0, 0.5);
   color: #00ff00;
-  font-family: 'Orbitron', sans-serif;
+  font-family: var(--font-orbitron), sans-serif;
   font-weight: 700;
   letter-spacing: 0.1em;
   position: relative;

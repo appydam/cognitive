@@ -1,10 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Orbitron, Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { TrendingUp } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
+const orbitron = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-orbitron"
+});
+const shareTechMono = Share_Tech_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-share-tech-mono"
+});
 
 export const metadata: Metadata = {
   title: "Consequence AI - Causal Reasoning for Markets",
@@ -18,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className + " bg-black"} suppressHydrationWarning>
+      <body className={`${inter.className} ${orbitron.variable} ${shareTechMono.variable} bg-black`} suppressHydrationWarning>
         <Navbar />
         <main className="min-h-screen bg-black">
           {children}
