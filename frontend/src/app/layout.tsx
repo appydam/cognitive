@@ -71,6 +71,12 @@ export default function RootLayout({
                   >
                     TRACK_RECORD
                   </a>
+                  <a
+                    href="/data-sources"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
+                  >
+                    DATA_SOURCES
+                  </a>
                 </div>
               </div>
               <div>
