@@ -82,8 +82,8 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
             style={{ animationDelay: `${periodIdx * 100}ms` }}
           >
             <div className="flex items-center gap-2 mb-4">
-              <Icon className="h-5 w-5 text-gray-700" />
-              <h3 className="text-lg font-semibold">{period}</h3>
+              <Icon className="h-5 w-5 text-gray-300" />
+              <h3 className="text-lg font-semibold text-gray-200">{period}</h3>
               <Badge variant="secondary" className="ml-2">
                 {cascade.timeline[period].length} effects
               </Badge>

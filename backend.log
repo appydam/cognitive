@@ -1,0 +1,407 @@
+INFO:     Will watch for changes in these directories: ['/Users/arpitdhamija/Desktop/random 1/consequence-ai']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [33736] using WatchFiles
+Process SpawnProcess-1:
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 10, in <module>
+    from ..graph.loaders import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/__init__.py", line 3, in <module>
+    from .database import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 5, in <module>
+    from ...db.models import EntityModel, CausalLinkModel
+ImportError: cannot import name 'EntityModel' from 'src.db.models' (/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/db/models.py)
+WARNING:  WatchFiles detected changes in 'src/api/main.py'. Reloading...
+Process SpawnProcess-2:
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 10, in <module>
+    from ..graph.loaders import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/__init__.py", line 3, in <module>
+    from .database import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 5, in <module>
+    from ...db.models import EntityModel, CausalLinkModel
+ImportError: cannot import name 'EntityModel' from 'src.db.models' (/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/db/models.py)
+WARNING:  WatchFiles detected changes in 'src/api/main.py'. Reloading...
+Process SpawnProcess-3:
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 10, in <module>
+    from ..graph.loaders import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/__init__.py", line 3, in <module>
+    from .database import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 5, in <module>
+    from ...db.models import EntityModel, CausalLinkModel
+ImportError: cannot import name 'EntityModel' from 'src.db.models' (/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/db/models.py)
+WARNING:  WatchFiles detected changes in 'src/api/main.py'. Reloading...
+Process SpawnProcess-4:
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 10, in <module>
+    from ..graph.loaders import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/__init__.py", line 3, in <module>
+    from .database import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 5, in <module>
+    from ...db.models import EntityModel, CausalLinkModel
+ImportError: cannot import name 'EntityModel' from 'src.db.models' (/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/db/models.py)
+WARNING:  WatchFiles detected changes in 'src/api/main.py'. Reloading...
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
+    self.run()
+    ~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+    ~~~~~~^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 65, in run
+    return asyncio.run(self.serve(sockets=sockets))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 69, in serve
+    await self._serve(sockets)
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/server.py", line 76, in _serve
+    config.load()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/config.py", line 434, in load
+    self.loaded_app = import_from_string(self.app)
+                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+  File "/opt/homebrew/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 10, in <module>
+    from ..graph.loaders import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/__init__.py", line 3, in <module>
+    from .database import load_graph_from_database
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 5, in <module>
+    from ...db.models import EntityModel, CausalLinkModel
+ImportError: cannot import name 'EntityModel' from 'src.db.models' (/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/db/models.py)
+WARNING:  WatchFiles detected changes in 'src/graph/loaders/database.py'. Reloading...
+INFO:     Started server process [56510]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 670, in startup
+    await handler()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 40, in startup_event
+    GRAPH = load_graph_from_database()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 60, in load_graph_from_database
+    session.close()
+    ^^^^^^^^^^^^^
+AttributeError: '_GeneratorContextManager' object has no attribute 'close'
+
+ERROR:    Application startup failed. Exiting.
+Loading causal graph from database...
+Loading graph from PostgreSQL database...
+Error loading graph from database: '_GeneratorContextManager' object has no attribute 'query'
+Falling back to build_initial_graph()
+Building supply chain relationships...
+Building sector relationships...
+Merging graphs...
+Graph built: 105 entities, 160 links
+WARNING:  WatchFiles detected changes in 'src/graph/loaders/database.py'. Reloading...
+INFO:     Started server process [56534]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 670, in startup
+    await handler()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 40, in startup_event
+    GRAPH = load_graph_from_database()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 60, in load_graph_from_database
+    session.close()
+    ^^^^^^^^^^^^^
+AttributeError: '_GeneratorContextManager' object has no attribute 'close'
+
+ERROR:    Application startup failed. Exiting.
+Loading causal graph from database...
+Loading graph from PostgreSQL database...
+Error loading graph from database: '_GeneratorContextManager' object has no attribute 'query'
+Falling back to build_initial_graph()
+Building supply chain relationships...
+Building sector relationships...
+Merging graphs...
+Graph built: 105 entities, 160 links
+WARNING:  WatchFiles detected changes in 'src/graph/loaders/database.py'. Reloading...
+INFO:     Started server process [56556]
+INFO:     Waiting for application startup.
+ERROR:    Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 693, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+               ~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 569, in __aenter__
+    await self._router.startup()
+  File "/opt/homebrew/lib/python3.13/site-packages/starlette/routing.py", line 670, in startup
+    await handler()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/api/main.py", line 40, in startup_event
+    GRAPH = load_graph_from_database()
+  File "/Users/arpitdhamija/Desktop/random 1/consequence-ai/src/graph/loaders/database.py", line 60, in load_graph_from_database
+    session.close()
+    ^^^^^^^^^^^^^
+AttributeError: '_GeneratorContextManager' object has no attribute 'close'
+
+ERROR:    Application startup failed. Exiting.
+Loading causal graph from database...
+Loading graph from PostgreSQL database...
+Error loading graph from database: '_GeneratorContextManager' object has no attribute 'query'
+Falling back to build_initial_graph()
+Building supply chain relationships...
+Building sector relationships...
+Merging graphs...
+Graph built: 105 entities, 160 links
+WARNING:  WatchFiles detected changes in 'src/graph/loaders/database.py'. Reloading...
+INFO:     Started server process [56879]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/add_msft_relationships.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [56879]
+INFO:     Started server process [65635]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/check_entities.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [65635]
+INFO:     Started server process [65878]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/create_missing_entities.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [65878]
+INFO:     Started server process [66580]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/add_msft_relationships.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [66580]
+INFO:     Started server process [66592]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/add_msft_relationships.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [66592]
+INFO:     Started server process [66603]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src/graph/loaders/database.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [66603]
+INFO:     Started server process [73156]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src/db/connection.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73156]
+INFO:     Started server process [73722]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/populate_database_from_initial_graph.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [73722]
+INFO:     Started server process [74564]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src/db/models.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [74564]
+INFO:     Started server process [74826]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'scripts/fix_direction_constraint.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [74826]
+INFO:     Started server process [74834]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.

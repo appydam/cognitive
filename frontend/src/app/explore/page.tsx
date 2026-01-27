@@ -40,17 +40,17 @@ export default function ExplorePage() {
 
       <Tabs defaultValue="visualization" className="space-y-6">
           <TabsList className="grid w-full grid-cols-3 lg:w-auto hud-panel border-green-500/30">
-            <TabsTrigger value="visualization" className="flex items-center gap-2 military-font text-xs data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
+            <TabsTrigger value="visualization" className="flex items-center gap-2 military-font text-xs text-green-400/60 data-[state=active]:bg-green-500/20 data-[state=active]:text-green-400">
               <Network className="h-4 w-4" />
               <span className="hidden sm:inline">VISUALIZATION</span>
               <span className="sm:hidden">GRAPH</span>
             </TabsTrigger>
-            <TabsTrigger value="stats" className="flex items-center gap-2 military-font text-xs data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
+            <TabsTrigger value="stats" className="flex items-center gap-2 military-font text-xs text-cyan-400/60 data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-400">
               <BarChart3 className="h-4 w-4" />
               <span className="hidden sm:inline">STATISTICS</span>
               <span className="sm:hidden">STATS</span>
             </TabsTrigger>
-            <TabsTrigger value="search" className="flex items-center gap-2 military-font text-xs data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
+            <TabsTrigger value="search" className="flex items-center gap-2 military-font text-xs text-yellow-400/60 data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-400">
               <Search className="h-4 w-4" />
               <span>SEARCH</span>
             </TabsTrigger>
