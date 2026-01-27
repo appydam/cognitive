@@ -3,7 +3,7 @@
 from ...core.graph import CausalGraph
 from ...core.graph import Entity as GraphEntity
 from ...core.graph import CausalLink as GraphLink
-from ...db.connection import get_db_session
+from ...db.connection import init_db, get_db_session
 from ...db.models import Entity as EntityModel, CausalLink as CausalLinkModel
 
 
@@ -14,6 +14,9 @@ def load_graph_from_database() -> CausalGraph:
     graph = CausalGraph()
 
     try:
+        # Initialize database connection
+        init_db()
+
         with get_db_session() as session:
             # Load entities
             entities = session.query(EntityModel).all()
