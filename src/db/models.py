@@ -102,7 +102,7 @@ class CausalLink(Base):
         Index('idx_data_source', 'data_source'),
         CheckConstraint('strength >= 0 AND strength <= 1', name='chk_strength_range'),
         CheckConstraint('confidence >= 0 AND confidence <= 1', name='chk_confidence_range'),
-        CheckConstraint('direction IN (-1, 1)', name='chk_direction_values'),
+        CheckConstraint('direction >= -1 AND direction <= 1', name='chk_direction_values'),
     )
 
     def __repr__(self):
