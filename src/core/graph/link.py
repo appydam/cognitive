@@ -113,12 +113,16 @@ class CausalLink:
         """
         Sample a delay from the delay distribution.
 
+        IMPORTANT: For production use with financial data, this returns the MEAN delay
+        to ensure deterministic, consistent predictions. Users trading with real money
+        need reliable, reproducible results.
+
         Returns:
-            A sampled delay value (always non-negative).
+            The mean delay value (deterministic).
         """
-        if self.delay_std == 0:
-            return self.delay_mean
-        return max(0, random.gauss(self.delay_mean, self.delay_std))
+        # Always return mean delay for deterministic predictions
+        # Random sampling was causing inconsistent results for the same input
+        return self.delay_mean
 
     def propagate_magnitude(self, input_magnitude: float) -> float:
         """
