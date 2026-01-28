@@ -92,13 +92,18 @@ class CausalGraph:
         """
         Get all outgoing links from an entity.
 
+        IMPORTANT: Returns links in deterministic order (sorted by target entity)
+        to ensure consistent cascade predictions for financial reliability.
+
         Args:
             entity_id: The entity ID.
 
         Returns:
-            List of outgoing causal links.
+            List of outgoing causal links, sorted by target for determinism.
         """
-        return self._outgoing.get(entity_id, [])
+        links = self._outgoing.get(entity_id, [])
+        # Sort by target entity to ensure deterministic BFS traversal
+        return sorted(links, key=lambda link: link.target)
 
     def get_incoming(self, entity_id: str) -> list[CausalLink]:
         """

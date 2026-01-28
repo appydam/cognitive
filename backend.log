@@ -413,3 +413,11 @@ INFO:     Finished server process [74834]
 INFO:     Started server process [91108]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'src/core/graph/graph.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [91108]
+INFO:     Started server process [92131]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
