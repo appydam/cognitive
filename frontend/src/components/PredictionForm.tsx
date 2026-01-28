@@ -54,15 +54,19 @@ export default function PredictionForm({
   const isMiss = surpriseValue < 0;
 
   return (
-    <Card className="p-6 bg-gradient-to-br from-purple-50 to-white border-purple-200">
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="h-6 w-6 text-purple-600" />
-        <h2 className="text-2xl font-bold">Earnings Event Simulator</h2>
+    <Card className="p-8 bg-gradient-to-br from-slate-900/50 via-gray-900/50 to-black/50 border-slate-700/30 shadow-xl backdrop-blur-sm">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="bg-slate-800 p-2.5 rounded-lg border border-slate-700/50">
+          <Sparkles className="h-5 w-5 text-slate-300" />
+        </div>
+        <h2 className="text-xl font-semibold text-slate-200 military-font">
+          Earnings Event Simulator
+        </h2>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <Label htmlFor="ticker" className="text-base font-semibold">
+          <Label htmlFor="ticker" className="text-sm font-medium text-slate-300 mb-2 block">
             Stock Ticker
           </Label>
           <Input
@@ -71,16 +75,16 @@ export default function PredictionForm({
             value={ticker}
             onChange={(e) => setTicker(e.target.value.toUpperCase())}
             required
-            className="mt-1.5 text-lg font-mono uppercase transition-all focus:ring-2 focus:ring-purple-500"
+            className="text-base font-mono uppercase bg-slate-900/50 border-slate-700/50 text-slate-200 placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20 transition-all"
             disabled={loading}
           />
         </div>
 
         <div>
-          <Label htmlFor="surprise" className="text-base font-semibold">
+          <Label htmlFor="surprise" className="text-sm font-medium text-slate-300 mb-2 block">
             Earnings Surprise (%)
           </Label>
-          <div className="relative mt-1.5">
+          <div className="relative">
             <Input
               id="surprise"
               type="number"
@@ -89,32 +93,32 @@ export default function PredictionForm({
               value={surprise}
               onChange={(e) => setSurprise(e.target.value)}
               required
-              className={`text-lg pr-12 transition-all ${
+              className={`text-base pr-12 font-mono bg-slate-900/50 transition-all ${
                 isMiss
-                  ? "border-red-300 focus:ring-red-500"
+                  ? "border-red-500/40 text-red-400 focus:border-red-500/60 focus:ring-red-500/20"
                   : isPositive
-                  ? "border-green-300 focus:ring-green-500"
-                  : ""
+                  ? "border-emerald-500/40 text-emerald-400 focus:border-emerald-500/60 focus:ring-emerald-500/20"
+                  : "border-slate-700/50 text-slate-300 focus:border-blue-500/50 focus:ring-blue-500/20"
               }`}
               disabled={loading}
             />
             {isMiss && (
-              <TrendingDown className="absolute right-3 top-3 h-5 w-5 text-red-600" />
+              <TrendingDown className="absolute right-3 top-3 h-4 w-4 text-red-400" />
             )}
             {isPositive && (
-              <TrendingUp className="absolute right-3 top-3 h-5 w-5 text-green-600" />
+              <TrendingUp className="absolute right-3 top-3 h-4 w-4 text-emerald-400" />
             )}
           </div>
-          <div className="flex items-center justify-between mt-2">
-            <p className="text-sm text-gray-600">
-              {isMiss && "Earnings miss - negative impact expected"}
-              {isPositive && "Earnings beat - positive impact expected"}
+          <div className="flex items-center justify-between mt-1.5">
+            <p className="text-xs text-slate-400">
+              {isMiss && "Earnings miss - negative cascade expected"}
+              {isPositive && "Earnings beat - positive cascade expected"}
               {!isMiss && !isPositive && "Negative for miss, positive for beat"}
             </p>
             {surpriseValue !== 0 && (
               <Badge
                 variant={isMiss ? "destructive" : "default"}
-                className="ml-2"
+                className="ml-2 text-xs"
               >
                 {isPositive ? "+" : ""}
                 {surpriseValue.toFixed(1)}%
@@ -124,25 +128,25 @@ export default function PredictionForm({
         </div>
 
         <div>
-          <Label htmlFor="description" className="text-base font-semibold">
+          <Label htmlFor="description" className="text-sm font-medium text-slate-300 mb-2 block">
             Description
-            <span className="text-gray-400 font-normal ml-1">(optional)</span>
+            <span className="text-slate-500 font-normal ml-1">(optional)</span>
           </Label>
           <Input
             id="description"
             placeholder="e.g., Q4 2024 earnings miss due to supply chain"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="mt-1.5"
+            className="bg-slate-900/50 border-slate-700/50 text-slate-300 placeholder:text-slate-500 focus:border-blue-500/50 focus:ring-blue-500/20"
             disabled={loading}
           />
         </div>
 
         <div>
-          <Label htmlFor="horizon" className="text-base font-semibold">
+          <Label htmlFor="horizon" className="text-sm font-medium text-slate-300 mb-2 block">
             Prediction Horizon
           </Label>
-          <div className="flex items-center gap-3 mt-1.5">
+          <div className="flex items-center gap-3 flex-wrap">
             <Input
               id="horizon"
               type="number"
@@ -151,18 +155,22 @@ export default function PredictionForm({
               value={horizon}
               onChange={(e) => setHorizon(e.target.value)}
               required
-              className="w-24 text-lg text-center"
+              className="w-20 text-base text-center bg-slate-900/50 border-slate-700/50 text-slate-200 focus:border-blue-500/50 focus:ring-blue-500/20 font-mono"
               disabled={loading}
             />
-            <span className="text-gray-600">days</span>
-            <div className="flex-1 flex gap-2">
+            <span className="text-slate-400 text-sm">days</span>
+            <div className="flex gap-2">
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
                 onClick={() => setHorizon("7")}
                 disabled={loading}
-                className={horizon === "7" ? "bg-purple-100" : ""}
+                className={`text-xs ${
+                  horizon === "7"
+                    ? "bg-slate-700/50 text-slate-200 border-slate-600"
+                    : "bg-slate-900/30 text-slate-400 border-slate-700/50 hover:bg-slate-800/50 hover:text-slate-300"
+                }`}
               >
                 1 Week
               </Button>
@@ -172,7 +180,11 @@ export default function PredictionForm({
                 size="sm"
                 onClick={() => setHorizon("14")}
                 disabled={loading}
-                className={horizon === "14" ? "bg-purple-100" : ""}
+                className={`text-xs ${
+                  horizon === "14"
+                    ? "bg-slate-700/50 text-slate-200 border-slate-600"
+                    : "bg-slate-900/30 text-slate-400 border-slate-700/50 hover:bg-slate-800/50 hover:text-slate-300"
+                }`}
               >
                 2 Weeks
               </Button>
@@ -182,7 +194,11 @@ export default function PredictionForm({
                 size="sm"
                 onClick={() => setHorizon("30")}
                 disabled={loading}
-                className={horizon === "30" ? "bg-purple-100" : ""}
+                className={`text-xs ${
+                  horizon === "30"
+                    ? "bg-slate-700/50 text-slate-200 border-slate-600"
+                    : "bg-slate-900/30 text-slate-400 border-slate-700/50 hover:bg-slate-800/50 hover:text-slate-300"
+                }`}
               >
                 1 Month
               </Button>
@@ -192,17 +208,17 @@ export default function PredictionForm({
 
         <Button
           type="submit"
-          className="w-full text-lg py-6 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+          className="w-full text-sm py-5 bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-lg transition-all"
           disabled={loading}
         >
           {loading ? (
             <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Analyzing cascade effects...
             </>
           ) : (
             <>
-              <Sparkles className="mr-2 h-5 w-5" />
+              <Sparkles className="mr-2 h-4 w-4" />
               Predict Cascade Effects
             </>
           )}
@@ -211,9 +227,9 @@ export default function PredictionForm({
 
       {/* Example Scenarios */}
       {!loading && (
-        <div className="mt-6 pt-6 border-t border-purple-200">
-          <p className="text-sm font-semibold text-gray-700 mb-3">
-            Try an example:
+        <div className="mt-6 pt-5 border-t border-slate-700/50">
+          <p className="text-xs font-medium text-slate-400 mb-2.5">
+            Quick start examples:
           </p>
           <div className="flex flex-wrap gap-2">
             {EXAMPLE_SCENARIOS.map((example, idx) => (
@@ -223,7 +239,7 @@ export default function PredictionForm({
                 variant="outline"
                 size="sm"
                 onClick={() => loadExample(example)}
-                className="text-xs hover:bg-purple-50 hover:border-purple-300"
+                className="text-xs bg-slate-900/30 text-slate-400 border-slate-700/50 hover:bg-slate-800/50 hover:border-slate-600 hover:text-slate-300 transition-all"
               >
                 {example.ticker} {example.surprise > 0 ? "+" : ""}
                 {example.surprise}%
