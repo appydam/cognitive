@@ -370,7 +370,7 @@ def _generate_explanation(effect: Effect, graph: CausalGraph) -> str:
         source_name = source_entity.name if source_entity else link.source
         target_name = target_entity.name if target_entity else link.target
 
-        relationship = link.relationship.value.replace("_", " ")
+        relationship = link.relationship_type.replace("_", " ")
         path_parts.append(f"{source_name} → {target_name} ({relationship})")
 
     if path_parts:
