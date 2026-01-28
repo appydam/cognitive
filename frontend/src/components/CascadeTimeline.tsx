@@ -259,9 +259,14 @@ function ExpandedEffectCard({
         </Badge>
       </div>
 
-      <p className="text-xs text-slate-400 mb-2 leading-relaxed">
-        {effect.explanation}
-      </p>
+      {/* Detailed Explanation - Split by pipe for better readability */}
+      <div className="mb-2 space-y-1">
+        {effect.explanation.split(' | ').map((part, idx) => (
+          <p key={idx} className="text-xs text-slate-400 leading-relaxed">
+            {part}
+          </p>
+        ))}
+      </div>
 
       <div className="grid grid-cols-3 gap-2 text-xs">
         <div className="bg-slate-800/30 border border-slate-700/50 rounded px-2 py-1.5">

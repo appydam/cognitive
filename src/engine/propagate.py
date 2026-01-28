@@ -335,43 +335,74 @@ def propagate_with_explanation(
 
 
 def _generate_explanation(effect: Effect, graph: CausalGraph) -> str:
-    """Generate a human-readable explanation for an effect."""
+    """
+    Generate a detailed, trust-building explanation showing the exact calculation.
+
+    This transparency is critical for financial products where users make real trading
+    decisions based on our predictions.
+    """
     if not effect.cause_chain:
         return ""
 
-    parts = []
+    # Extract the causal chain components
+    trigger = effect.cause_chain[0] if effect.cause_chain else None
+    links = [item for item in effect.cause_chain[1:] if isinstance(item, CausalLink)]
 
-    # Start with the trigger
-    trigger = effect.cause_chain[0]
-    if isinstance(trigger, Event):
-        sign = "beat" if trigger.magnitude > 0 else "miss"
-        parts.append(
-            f"{trigger.entity} earnings {sign} of {abs(trigger.magnitude)*100:.1f}%"
-        )
-
-    # Add each link in the chain
-    for item in effect.cause_chain[1:]:
-        if isinstance(item, CausalLink):
-            source_entity = graph.get_entity(item.source)
-            target_entity = graph.get_entity(item.target)
-
-            source_name = source_entity.name if source_entity else item.source
-            target_name = target_entity.name if target_entity else item.target
-
-            relationship = item.relationship_type.replace("_", " ")
-            parts.append(f"{source_name} → {target_name} ({relationship})")
-
-    if not parts:
+    if not trigger or not links:
         return ""
 
-    # Build the explanation
-    explanation = " → ".join(parts)
+    # Build explanation with calculation details
+    explanation_parts = []
 
-    # Add confidence note
+    # 1. Start with trigger information
+    trigger_sign = "beat" if trigger.magnitude > 0 else "miss"
+    trigger_pct = abs(trigger.magnitude) * 100
+    explanation_parts.append(
+        f"Triggered by {trigger.entity} earnings {trigger_sign} ({trigger_pct:+.1f}%)"
+    )
+
+    # 2. Show the causal path with relationship details
+    path_parts = []
+    for link in links:
+        source_entity = graph.get_entity(link.source)
+        target_entity = graph.get_entity(link.target)
+
+        source_name = source_entity.name if source_entity else link.source
+        target_name = target_entity.name if target_entity else link.target
+
+        relationship = link.relationship.value.replace("_", " ")
+        path_parts.append(f"{source_name} → {target_name} ({relationship})")
+
+    if path_parts:
+        explanation_parts.append("Path: " + " → ".join(path_parts))
+
+    # 3. Show the calculation breakdown
+    # Start with trigger magnitude
+    current_magnitude = abs(trigger.magnitude) * 100
+    calculation_steps = [f"{current_magnitude:.1f}%"]
+
+    # Apply each link's strength and direction
+    for i, link in enumerate(links, 1):
+        current_magnitude *= link.strength * link.direction
+        calculation_steps.append(f"× {link.strength:.2f}")
+
+    # Build calculation string
+    calculation = " ".join(calculation_steps) + f" = {effect.magnitude_percent:+.2f}%"
+    explanation_parts.append(f"Calculation: {calculation}")
+
+    # 4. Add timing information
+    total_delay = sum(link.delay_mean for link in links)
+    explanation_parts.append(f"Expected timing: Day {effect.day:.1f} (propagation delay: {total_delay:.1f} days)")
+
+    # 5. Add confidence breakdown
+    confidence_pct = effect.confidence * 100
     if effect.confidence < 0.5:
-        explanation += " [lower confidence due to indirect relationship]"
+        confidence_note = f"Confidence: {confidence_pct:.0f}% (lower due to {len(links)}-hop indirect relationship)"
+    else:
+        confidence_note = f"Confidence: {confidence_pct:.0f}% ({effect.order}-order effect)"
+    explanation_parts.append(confidence_note)
 
-    return explanation
+    return " | ".join(explanation_parts)
 
 
 def create_earnings_event(
