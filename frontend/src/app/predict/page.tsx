@@ -69,14 +69,14 @@ export default function PredictPage() {
                 <TabsList className="grid w-full grid-cols-2 bg-slate-900/50 border border-slate-700/50 p-1 rounded-lg">
                   <TabsTrigger
                     value="timeline"
-                    className="flex items-center gap-2 text-xs data-[state=active]:bg-slate-700/50 data-[state=active]:text-slate-200 data-[state=inactive]:text-slate-400 transition-all"
+                    className="flex items-center gap-2 text-sm data-[state=active]:bg-slate-700/70 data-[state=active]:text-white data-[state=inactive]:text-slate-300 transition-all"
                   >
                     <Clock className="h-4 w-4" />
                     Timeline View
                   </TabsTrigger>
                   <TabsTrigger
                     value="simulation"
-                    className="flex items-center gap-2 text-xs data-[state=active]:bg-slate-700/50 data-[state=active]:text-slate-200 data-[state=inactive]:text-slate-400 transition-all"
+                    className="flex items-center gap-2 text-sm data-[state=active]:bg-slate-700/70 data-[state=active]:text-white data-[state=inactive]:text-slate-300 transition-all"
                   >
                     <Network className="h-4 w-4" />
                     Graph View

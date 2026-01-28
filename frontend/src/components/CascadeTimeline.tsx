@@ -68,7 +68,10 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
             <span className="text-lg font-semibold text-slate-200">
               {cascade.trigger.entity}
             </span>
-            <Badge variant={cascade.trigger.magnitude_percent < 0 ? "destructive" : "default"} className="text-xs px-2 py-0.5">
+            <Badge
+              variant={cascade.trigger.magnitude_percent < 0 ? "destructive" : "default"}
+              className={`text-xs px-2 py-0.5 font-semibold ${cascade.trigger.magnitude_percent < 0 ? 'bg-red-600 text-white' : 'bg-emerald-600 text-white'}`}
+            >
               {cascade.trigger.magnitude_percent > 0 ? "+" : ""}
               {cascade.trigger.magnitude_percent.toFixed(1)}%
             </Badge>
@@ -191,7 +194,7 @@ function CompactEffectRow({ effect }: { effect: EffectResponse }) {
         </Badge>
         <Badge
           variant={isNegative ? "destructive" : "default"}
-          className="text-xs font-medium px-1.5 py-0 shrink-0"
+          className={`text-xs font-semibold px-1.5 py-0 shrink-0 ${isNegative ? 'bg-red-600 text-white' : 'bg-emerald-600 text-white'}`}
         >
           {isNegative ? (
             <TrendingDown className="h-3 w-3 mr-0.5" />
@@ -242,7 +245,7 @@ function ExpandedEffectCard({
         </Badge>
         <Badge
           variant={isNegative ? "destructive" : "default"}
-          className="text-xs font-medium px-2 py-0.5"
+          className={`text-xs font-semibold px-2 py-0.5 ${isNegative ? 'bg-red-600 text-white' : 'bg-emerald-600 text-white'}`}
         >
           <div className="flex items-center gap-1">
             {isNegative ? (
