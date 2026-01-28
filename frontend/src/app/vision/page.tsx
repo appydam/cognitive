@@ -52,25 +52,31 @@ function AnimatedCounter({ value, suffix = "", prefix = "" }: { value: number; s
 function ParticleBackground() {
   return (
     <div className="absolute inset-0 overflow-hidden opacity-20">
-      {[...Array(50)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-green-400 rounded-full"
-          initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
-          }}
-          transition={{
-            duration: Math.random() * 20 + 10,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      ))}
+      {[...Array(50)].map((_, i) => {
+        // Use safe defaults for SSR, will update on client
+        const width = typeof window !== 'undefined' ? window.innerWidth : 1920;
+        const height = typeof window !== 'undefined' ? window.innerHeight : 1080;
+
+        return (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-green-400 rounded-full"
+            initial={{
+              x: Math.random() * width,
+              y: Math.random() * height,
+            }}
+            animate={{
+              x: Math.random() * width,
+              y: Math.random() * height,
+            }}
+            transition={{
+              duration: Math.random() * 20 + 10,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        );
+      })}
     </div>
   );
 }
