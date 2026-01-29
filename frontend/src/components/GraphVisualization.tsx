@@ -12,7 +12,9 @@ import {
   Maximize2,
   AlertCircle,
   Info,
+  Download,
 } from "lucide-react";
+import { downloadGraphCanvasAsPNG } from "@/lib/download";
 import { ConsequenceAPI } from "@/lib/api";
 import CascadeEffectsPanel from "@/components/CascadeEffectsPanel";
 
@@ -54,6 +56,7 @@ export default function GraphVisualization() {
   const [showCascadePanel, setShowCascadePanel] = useState(false);
   const [cascadeHighlight, setCascadeHighlight] = useState<Set<string>>(new Set());
   const [cascadeOrderMap, setCascadeOrderMap] = useState<Map<string, number>>(new Map());
+  const [cascadeLinks, setCascadeLinks] = useState<Set<string>>(new Set());
   const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
@@ -186,6 +189,33 @@ export default function GraphVisualization() {
   const handleCascadeHighlight = (nodeIds: Set<string>, orderMap: Map<string, number>) => {
     setCascadeHighlight(nodeIds);
     setCascadeOrderMap(orderMap);
+
+    // Build the cascade links set from the order map
+    // Links connect consecutive entities in the causal chain
+    const linkIds = new Set<string>();
+    if (graphData) {
+      graphData.links.forEach((link) => {
+        const sourceId = typeof link.source === 'object' ? (link.source as any).id : link.source;
+        const targetId = typeof link.target === 'object' ? (link.target as any).id : link.target;
+
+        // Check if both nodes are in the cascade highlight
+        if (nodeIds.has(sourceId) && nodeIds.has(targetId)) {
+          // Check if they are consecutive in the causal chain (order differs by 1)
+          const sourceOrder = orderMap.get(sourceId);
+          const targetOrder = orderMap.get(targetId);
+
+          if (
+            sourceOrder !== undefined &&
+            targetOrder !== undefined &&
+            Math.abs(sourceOrder - targetOrder) === 1
+          ) {
+            linkIds.add(`${sourceId}-${targetId}`);
+          }
+        }
+      });
+    }
+
+    setCascadeLinks(linkIds);
   };
 
   const handleZoomIn = () => {
@@ -203,6 +233,21 @@ export default function GraphVisualization() {
   const handleFitView = () => {
     if (fgRef.current) {
       fgRef.current.zoomToFit(1000, 50);
+    }
+  };
+
+  const handleDownloadGraph = async () => {
+    if (!fgRef.current) return;
+
+    try {
+      // Get the canvas element from the ForceGraph2D ref
+      const canvas = fgRef.current.renderer().domElement;
+      if (canvas instanceof HTMLCanvasElement) {
+        const filename = `causal-graph-${new Date().toISOString().split('T')[0]}.png`;
+        await downloadGraphCanvasAsPNG(canvas, filename);
+      }
+    } catch (err) {
+      console.error('Failed to download graph:', err);
     }
   };
 
@@ -413,6 +458,18 @@ export default function GraphVisualization() {
                 const fontSize = 12 / globalScale;
                 ctx.font = `${fontSize}px Courier New, monospace`;
 
+                // Check highlighting states
+                const isSelected = selectedNode?.id === node.id;
+                const isHighlighted = highlightNodes.has(node.id);
+                const isInCascade = cascadeHighlight.has(node.id);
+                const shouldDim = (highlightNodes.size > 0 && !isHighlighted && !isSelected && cascadeHighlight.size === 0) ||
+                                  (cascadeHighlight.size > 0 && !isInCascade && !isSelected);
+
+                // Apply dimming for non-highlighted nodes
+                if (shouldDim) {
+                  ctx.globalAlpha = 0.3;
+                }
+
                 // Determine node color - cascade highlight takes precedence
                 let nodeColor = node.color;
                 if (cascadeHighlight.has(node.id)) {
@@ -492,6 +549,53 @@ export default function GraphVisualization() {
                 ctx.lineWidth = 3 / globalScale;
                 ctx.stroke();
 
+                // Add special highlighting for selected node (bright yellow pulsing border)
+                if (isSelected) {
+                  const selectionPulseScale = 1 + Math.sin(Date.now() / 200) * 0.1;
+                  ctx.beginPath();
+                  for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const x = node.x + Math.cos(angle) * node.val * 2 * selectionPulseScale;
+                    const y = node.y + Math.sin(angle) * node.val * 2 * selectionPulseScale;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                  }
+                  ctx.closePath();
+                  ctx.strokeStyle = "#fbbf24"; // Bright yellow/gold
+                  ctx.lineWidth = 4 / globalScale;
+                  ctx.stroke();
+
+                  // Add yellow glow
+                  ctx.shadowColor = "#fbbf24";
+                  ctx.shadowBlur = 20 / globalScale;
+                  ctx.stroke();
+                  ctx.shadowBlur = 0; // Reset shadow
+                }
+
+                // Add green glow for highlighted (connected) nodes
+                if (isHighlighted && !isSelected && cascadeHighlight.size === 0) {
+                  ctx.beginPath();
+                  for (let i = 0; i < 6; i++) {
+                    const angle = (Math.PI / 3) * i;
+                    const x = node.x + Math.cos(angle) * node.val * 1.8;
+                    const y = node.y + Math.sin(angle) * node.val * 1.8;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                  }
+                  ctx.closePath();
+                  ctx.shadowColor = "#10b981"; // Green
+                  ctx.shadowBlur = 15 / globalScale;
+                  ctx.strokeStyle = "#10b981";
+                  ctx.lineWidth = 2.5 / globalScale;
+                  ctx.stroke();
+                  ctx.shadowBlur = 0; // Reset shadow
+                }
+
+                // Reset global alpha
+                if (shouldDim) {
+                  ctx.globalAlpha = 1.0;
+                }
+
                 // Draw crosshair in center
                 ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
                 ctx.lineWidth = 1.5 / globalScale;
@@ -535,8 +639,51 @@ export default function GraphVisualization() {
               linkDirectionalArrowLength={6}
               linkDirectionalArrowRelPos={0.99}
               linkCurvature={0.15}
-              linkWidth={(link: any) => Math.max(link.width, 1.5)}
-              linkColor={(link: any) => link.color}
+              linkWidth={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // Make cascade links thicker
+                if (cascadeLinks.has(linkId)) {
+                  return Math.max(link.width * 2.5, 4);
+                }
+
+                // Dim non-cascade links when cascade is active
+                if (cascadeHighlight.size > 0 && !cascadeLinks.has(linkId)) {
+                  return Math.max(link.width * 0.5, 0.8);
+                }
+
+                return Math.max(link.width, 1.5);
+              }}
+              linkColor={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // Highlight cascade links with bright color
+                if (cascadeLinks.has(linkId)) {
+                  const sourceOrder = cascadeOrderMap.get(sourceId) || 0;
+                  const targetOrder = cascadeOrderMap.get(targetId) || 0;
+                  const order = Math.max(sourceOrder, targetOrder);
+
+                  // Color cascade links by order
+                  const cascadeColors = [
+                    "#fbbf24", // Yellow/gold for trigger links (order 0-1)
+                    "#10b981", // Bright green for 1st order links
+                    "#34d399", // Medium green for 2nd order links
+                    "#6ee7b7", // Pale green for 3rd+ order links
+                  ];
+                  return cascadeColors[Math.min(order, cascadeColors.length - 1)];
+                }
+
+                // Dim non-cascade links when cascade is active
+                if (cascadeHighlight.size > 0 && !cascadeLinks.has(linkId)) {
+                  return link.color + '30'; // Add transparency
+                }
+
+                return link.color;
+              }}
               linkLabel={(link: any) => `
                 <div style="background: rgba(0, 0, 0, 0.9); color: ${link.color}; padding: 8px 12px; border-radius: 6px; font-family: 'Courier New', monospace; font-size: 11px; border: 1px solid ${link.color}; min-width: 180px;">
                   <div style="font-weight: bold; font-size: 12px; margin-bottom: 6px; color: ${link.color};">
@@ -566,10 +713,54 @@ export default function GraphVisualization() {
               enablePanInteraction={true}
               enablePointerInteraction={true}
               backgroundColor="transparent"
-              linkDirectionalParticles={2}
-              linkDirectionalParticleSpeed={0.005}
-              linkDirectionalParticleWidth={2}
-              linkDirectionalParticleColor={(link: any) => link.color || 'rgba(126, 200, 227, 0.6)'}
+              linkDirectionalParticles={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // More particles for cascade links
+                if (cascadeLinks.has(linkId)) {
+                  return 4;
+                }
+
+                return cascadeHighlight.size > 0 ? 0 : 2;
+              }}
+              linkDirectionalParticleSpeed={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // Faster particles for cascade links
+                if (cascadeLinks.has(linkId)) {
+                  return 0.008;
+                }
+
+                return 0.005;
+              }}
+              linkDirectionalParticleWidth={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // Larger particles for cascade links
+                if (cascadeLinks.has(linkId)) {
+                  return 3;
+                }
+
+                return 2;
+              }}
+              linkDirectionalParticleColor={(link: any) => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                const linkId = `${sourceId}-${targetId}`;
+
+                // Bright particles for cascade links
+                if (cascadeLinks.has(linkId)) {
+                  return '#fbbf24'; // Gold
+                }
+
+                return link.color || 'rgba(126, 200, 227, 0.6)';
+              }}
               d3VelocityDecay={0.8}
               d3AlphaDecay={0.05}
               cooldownTicks={100}
@@ -617,6 +808,14 @@ export default function GraphVisualization() {
                 >
                   <Maximize2 className="h-3 w-3" />
                   <span>FIT VIEW</span>
+                </button>
+                <button
+                  onClick={handleDownloadGraph}
+                  className="tactical-button px-3 py-2 text-xs flex items-center gap-2 bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/20"
+                  title="Download Graph as PNG"
+                >
+                  <Download className="h-3 w-3" />
+                  <span>DOWNLOAD</span>
                 </button>
               </div>
             </div>

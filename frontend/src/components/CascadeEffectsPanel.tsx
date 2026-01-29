@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { ChevronDown, ChevronRight, X, TrendingDown, TrendingUp } from "lucide-react";
+import { ChevronDown, ChevronRight, X, TrendingDown, TrendingUp, Download, FileImage, FileText } from "lucide-react";
 import { ConsequenceAPI } from "@/lib/api";
 import { CascadeResponse, EffectResponse } from "@/types/api";
+import { downloadAsPNG, downloadAsPDF } from "@/lib/download";
 
 interface GraphNode {
   id: string;
@@ -33,6 +34,8 @@ export default function CascadeEffectsPanel({
   const [error, setError] = useState<string | null>(null);
   const [cascade, setCascade] = useState<CascadeResponse | null>(null);
   const [expandedOrder, setExpandedOrder] = useState<number | null>(1);
+  const [downloading, setDownloading] = useState(false);
+  const panelRef = useRef<HTMLDivElement>(null);
 
   const analyzeCascade = async () => {
     setLoading(true);
@@ -122,18 +125,66 @@ export default function CascadeEffectsPanel({
   // Check if entity type is company (case-insensitive check)
   const isCompany = entity.type?.toLowerCase() === "company";
 
+  const handleDownloadPNG = async () => {
+    if (!panelRef.current) return;
+    setDownloading(true);
+    try {
+      const filename = `cascade-${entity.id}-${magnitude.toFixed(1)}pct.png`;
+      await downloadAsPNG(panelRef.current, filename);
+    } catch (err) {
+      console.error('Failed to download PNG:', err);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    if (!panelRef.current) return;
+    setDownloading(true);
+    try {
+      const filename = `cascade-${entity.id}-${magnitude.toFixed(1)}pct.pdf`;
+      await downloadAsPDF(panelRef.current, filename, 'portrait');
+    } catch (err) {
+      console.error('Failed to download PDF:', err);
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   return (
-    <Card className="mt-4 p-4 hud-panel border-green-500/30 animate-fade-in">
+    <Card ref={panelRef} className="mt-4 p-4 hud-panel border-green-500/30 animate-fade-in">
       <div className="flex items-start justify-between mb-4">
         <div className="military-font text-green-400 text-sm">
           &gt; CASCADE ANALYSIS
         </div>
-        <button
-          onClick={onClose}
-          className="text-green-400/60 hover:text-green-400 transition"
-        >
-          <X className="h-4 w-4" />
-        </button>
+        <div className="flex items-center gap-2">
+          {cascade && (
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleDownloadPNG}
+                disabled={downloading}
+                className="text-cyan-400/60 hover:text-cyan-400 transition p-1 border border-cyan-400/30 rounded hover:bg-cyan-400/10 disabled:opacity-50"
+                title="Download as PNG"
+              >
+                <FileImage className="h-3.5 w-3.5" />
+              </button>
+              <button
+                onClick={handleDownloadPDF}
+                disabled={downloading}
+                className="text-blue-400/60 hover:text-blue-400 transition p-1 border border-blue-400/30 rounded hover:bg-blue-400/10 disabled:opacity-50"
+                title="Download as PDF"
+              >
+                <FileText className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          )}
+          <button
+            onClick={onClose}
+            className="text-green-400/60 hover:text-green-400 transition"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
       </div>
 
       {/* Entity Type Check */}
@@ -218,8 +269,16 @@ export default function CascadeEffectsPanel({
       {/* Cascade Results */}
       {cascade && (
         <div className="mt-4 space-y-2">
-          <div className="text-[10px] font-mono text-green-400/60 mb-3">
-            TOTAL EFFECTS: {cascade.total_effects} | HORIZON: {cascade.horizon_days} DAYS
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-[10px] font-mono text-green-400/60">
+              TOTAL EFFECTS: {cascade.total_effects} | HORIZON: {cascade.horizon_days} DAYS
+            </div>
+            <button
+              onClick={() => onHighlight(new Set(), new Map())}
+              className="text-[10px] font-mono text-yellow-400/70 hover:text-yellow-400 transition px-2 py-1 border border-yellow-400/30 rounded hover:bg-yellow-400/10"
+            >
+              CLEAR HIGHLIGHTS
+            </button>
           </div>
 
           {/* Helpful tip if no 2nd/3rd order effects */}
@@ -283,12 +342,31 @@ export default function CascadeEffectsPanel({
                       {effects.slice(0, 10).map((effect, idx) => (
                         <div
                           key={idx}
-                          className="p-2 bg-black/20 rounded hover:bg-black/40 transition"
+                          className="p-2 bg-black/20 rounded hover:bg-black/40 transition cursor-pointer group"
+                          onClick={() => {
+                            // Highlight the causal chain for this effect
+                            const chainNodeIds = new Set<string>([entity.id, ...effect.cause_path]);
+                            const chainOrderMap = new Map<string, number>();
+
+                            // Set order for trigger entity
+                            chainOrderMap.set(entity.id, 0);
+
+                            // Set order for entities in the causal path
+                            effect.cause_path.forEach((entityId, pathIdx) => {
+                              // The order increases as we go through the path
+                              chainOrderMap.set(entityId, pathIdx + 1);
+                            });
+
+                            onHighlight(chainNodeIds, chainOrderMap);
+                          }}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <div className="flex-1">
-                              <div className="text-xs font-bold text-green-400">
+                              <div className="text-xs font-bold text-green-400 group-hover:text-green-300 transition-colors flex items-center gap-2">
                                 {effect.entity}
+                                <span className="text-[9px] font-mono text-green-400/40 group-hover:text-green-400/60">
+                                  [CLICK TO HIGHLIGHT CHAIN]
+                                </span>
                               </div>
                               <div className="text-[10px] font-mono text-green-400/50">
                                 {effect.relationship_type.replace(/_/g, ' ')}
