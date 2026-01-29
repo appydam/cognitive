@@ -111,6 +111,17 @@ export default function CascadeEffectsPanel({
 
   const effectsByOrder = groupEffectsByOrder();
 
+  // Preset magnitude values
+  const PRESETS = [
+    { label: "Large Miss", value: -10, color: "text-red-400" },
+    { label: "Miss", value: -5, color: "text-orange-400" },
+    { label: "Beat", value: 5, color: "text-green-400" },
+    { label: "Large Beat", value: 10, color: "text-emerald-400" },
+  ];
+
+  // Check if entity type is company (case-insensitive check)
+  const isCompany = entity.type?.toLowerCase() === "company";
+
   return (
     <Card className="mt-4 p-4 hud-panel border-green-500/30 animate-fade-in">
       <div className="flex items-start justify-between mb-4">
@@ -125,32 +136,69 @@ export default function CascadeEffectsPanel({
         </button>
       </div>
 
+      {/* Entity Type Check */}
+      {!isCompany && (
+        <div className="mb-4 p-3 bg-yellow-500/10 border border-yellow-400/30 rounded">
+          <p className="text-xs font-mono text-yellow-400">
+            &gt; CASCADE ANALYSIS ONLY AVAILABLE FOR COMPANIES
+          </p>
+          <p className="text-[10px] font-mono text-yellow-400/60 mt-1">
+            ETFs and sectors represent aggregates, not individual earnings events.
+          </p>
+        </div>
+      )}
+
       {/* Magnitude Slider */}
-      <div className="mb-4">
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-mono text-green-400/70">EVENT MAGNITUDE</span>
-          <span className="text-sm font-bold military-font text-green-400">
-            {magnitude > 0 ? '+' : ''}{magnitude.toFixed(1)}%
-          </span>
-        </div>
-        <Slider
-          value={[magnitude]}
-          onValueChange={(value) => setMagnitude(value[0])}
-          min={-20}
-          max={20}
-          step={0.5}
-          className="w-full"
-          disabled={loading}
-        />
-        <div className="flex justify-between text-[10px] font-mono text-green-400/50 mt-1">
-          <span>-20%</span>
-          <span>0%</span>
-          <span>+20%</span>
-        </div>
-      </div>
+      {isCompany && (
+        <>
+          {/* Preset Buttons */}
+          <div className="mb-3">
+            <span className="text-[10px] font-mono text-green-400/50 mb-1 block">QUICK PRESETS</span>
+            <div className="grid grid-cols-4 gap-1.5">
+              {PRESETS.map((preset) => (
+                <Button
+                  key={preset.value}
+                  onClick={() => setMagnitude(preset.value)}
+                  variant="outline"
+                  size="sm"
+                  className={`text-[10px] px-2 py-1 h-auto font-mono border-green-500/30 hover:bg-green-500/10 ${
+                    magnitude === preset.value ? 'bg-green-500/20 border-green-400' : ''
+                  } ${preset.color}`}
+                  disabled={loading}
+                >
+                  {preset.value > 0 ? '+' : ''}{preset.value}%
+                </Button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs font-mono text-green-400/70">EVENT MAGNITUDE</span>
+              <span className="text-sm font-bold military-font text-green-400">
+                {magnitude > 0 ? '+' : ''}{magnitude.toFixed(1)}%
+              </span>
+            </div>
+            <Slider
+              value={[magnitude]}
+              onValueChange={(value) => setMagnitude(value[0])}
+              min={-20}
+              max={20}
+              step={0.5}
+              className="w-full"
+              disabled={loading}
+            />
+            <div className="flex justify-between text-[10px] font-mono text-green-400/50 mt-1">
+              <span>-20%</span>
+              <span>0%</span>
+              <span>+20%</span>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Analyze Button */}
-      {!cascade && (
+      {isCompany && !cascade && (
         <Button
           onClick={analyzeCascade}
           disabled={loading}
@@ -173,6 +221,27 @@ export default function CascadeEffectsPanel({
           <div className="text-[10px] font-mono text-green-400/60 mb-3">
             TOTAL EFFECTS: {cascade.total_effects} | HORIZON: {cascade.horizon_days} DAYS
           </div>
+
+          {/* Helpful tip if no 2nd/3rd order effects */}
+          {effectsByOrder.size === 1 && Math.abs(magnitude) < 8 && (
+            <div className="mb-3 p-2 bg-blue-500/10 border border-blue-400/30 rounded">
+              <p className="text-[10px] font-mono text-blue-400">
+                💡 TIP: Increase magnitude to ±8% or higher to see 2nd and 3rd order cascade effects
+              </p>
+            </div>
+          )}
+
+          {/* Show cascade depth summary */}
+          {effectsByOrder.size > 1 && (
+            <div className="mb-3 p-2 bg-green-500/10 border border-green-400/30 rounded flex items-center justify-between">
+              <p className="text-[10px] font-mono text-green-400">
+                📊 CASCADE DEPTH: {effectsByOrder.size} levels detected
+              </p>
+              <p className="text-[9px] font-mono text-green-400/60">
+                Click sections below to expand
+              </p>
+            </div>
+          )}
 
           {Array.from(effectsByOrder.entries())
             .sort(([a], [b]) => a - b)
@@ -214,34 +283,44 @@ export default function CascadeEffectsPanel({
                       {effects.slice(0, 10).map((effect, idx) => (
                         <div
                           key={idx}
-                          className="p-2 bg-black/20 rounded flex items-center justify-between hover:bg-black/40 transition"
+                          className="p-2 bg-black/20 rounded hover:bg-black/40 transition"
                         >
-                          <div className="flex-1">
-                            <div className="text-xs font-bold text-green-400">
-                              {effect.entity}
+                          <div className="flex items-center justify-between mb-1">
+                            <div className="flex-1">
+                              <div className="text-xs font-bold text-green-400">
+                                {effect.entity}
+                              </div>
+                              <div className="text-[10px] font-mono text-green-400/50">
+                                {effect.relationship_type.replace(/_/g, ' ')}
+                              </div>
                             </div>
-                            <div className="text-[10px] font-mono text-green-400/50">
-                              {effect.relationship_type.replace(/_/g, ' ')}
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3 text-xs">
-                            <div className="flex items-center gap-1">
-                              {effect.magnitude_percent < 0 ? (
-                                <TrendingDown className="h-3 w-3 text-red-400" />
-                              ) : (
-                                <TrendingUp className="h-3 w-3 text-green-400" />
-                              )}
-                              <span className={effect.magnitude_percent < 0 ? "text-red-400 font-bold" : "text-green-400 font-bold"}>
-                                {effect.magnitude_percent > 0 ? '+' : ''}{effect.magnitude_percent.toFixed(2)}%
+                            <div className="flex items-center gap-3 text-xs">
+                              <div className="flex items-center gap-1">
+                                {effect.magnitude_percent < 0 ? (
+                                  <TrendingDown className="h-3 w-3 text-red-400" />
+                                ) : (
+                                  <TrendingUp className="h-3 w-3 text-green-400" />
+                                )}
+                                <span className={effect.magnitude_percent < 0 ? "text-red-400 font-bold" : "text-green-400 font-bold"}>
+                                  {effect.magnitude_percent > 0 ? '+' : ''}{effect.magnitude_percent.toFixed(2)}%
+                                </span>
+                              </div>
+                              <span className="text-green-400/60 font-mono text-[10px]">
+                                {(effect.confidence * 100).toFixed(0)}%
+                              </span>
+                              <span className="text-green-400/50 font-mono text-[10px]">
+                                {effect.day.toFixed(0)}d
                               </span>
                             </div>
-                            <span className="text-green-400/60 font-mono text-[10px]">
-                              {(effect.confidence * 100).toFixed(0)}%
-                            </span>
-                            <span className="text-green-400/50 font-mono text-[10px]">
-                              {effect.day.toFixed(0)}d
-                            </span>
                           </div>
+                          {/* Explanation text */}
+                          {effect.explanation && (
+                            <div className="text-[9px] font-mono text-green-400/40 leading-relaxed border-t border-green-500/10 pt-1 mt-1">
+                              {effect.explanation.split(' | ').map((part, i) => (
+                                <div key={i}>{part}</div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ))}
                       {effects.length > 10 && (
