@@ -86,7 +86,7 @@ def trace_causal_chain(effect: Effect, graph: CausalGraph) -> list[CausalStep]:
             step = CausalStep(
                 from_entity=item.source,
                 to_entity=item.target,
-                relationship=item.relationship.value,
+                relationship=item.relationship_type,
                 strength=item.strength,
                 delay_days=item.delay_mean,
                 confidence=item.confidence,
@@ -100,7 +100,7 @@ def trace_causal_chain(effect: Effect, graph: CausalGraph) -> list[CausalStep]:
 
 def _step_explanation(link: CausalLink, source_name: str, target_name: str) -> str:
     """Generate explanation for a single causal step."""
-    relationship = link.relationship.value.replace("_", " ")
+    relationship = link.relationship_type.replace("_", " ")
 
     if "supplier" in relationship or "customer" in relationship:
         return (
