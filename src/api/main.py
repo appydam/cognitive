@@ -265,6 +265,24 @@ async def predict_earnings_cascade(request: EarningsEventRequest):
         horizon_days=request.horizon_days,
     )
 
+    # Helper to extract entity IDs from cause_chain
+    def extract_cause_path(cause_chain):
+        """Extract entity IDs from cause_chain [Event, Link, Link, ...]."""
+        if not cause_chain:
+            return []
+
+        path = []
+        # First item is always the Event (trigger)
+        if cause_chain and hasattr(cause_chain[0], 'entity'):
+            path.append(cause_chain[0].entity)
+
+        # Remaining items are CausalLinks - extract target from each
+        for item in cause_chain[1:]:
+            if hasattr(item, 'target'):
+                path.append(item.target)
+
+        return path
+
     # Convert to response format
     timeline_response = {}
     for period, effects in cascade.get_timeline().items():
@@ -278,7 +296,7 @@ async def predict_earnings_cascade(request: EarningsEventRequest):
                 order=e.order,
                 relationship_type=e.relationship_type,
                 explanation=e.explanation,
-                cause_path=[item for item in e.cause_chain if isinstance(item, str)],  # Extract entity IDs from cause chain
+                cause_path=extract_cause_path(e.cause_chain),
             )
             for e in effects
         ]
