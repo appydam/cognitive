@@ -327,7 +327,12 @@ async def explain_cascade_endpoint(request: EarningsEventRequest):
     if GRAPH is None:
         raise HTTPException(status_code=503, detail="Graph not loaded")
 
-    ticker = request.ticker.upper()
+    # Support both entity_id (new) and ticker (legacy)
+    ticker = (request.entity_id or request.ticker)
+    if not ticker:
+        raise HTTPException(status_code=400, detail="Either entity_id or ticker must be provided")
+
+    ticker = ticker.upper()
 
     if ticker not in GRAPH.entities:
         raise HTTPException(status_code=404, detail=f"Entity {ticker} not found")

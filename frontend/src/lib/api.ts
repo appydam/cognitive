@@ -5,6 +5,7 @@ import type {
   CascadeResponse,
   SearchResult,
   EarningsEventRequest,
+  ExplainCascadeResponse,
 } from "@/types/api";
 
 const API_BASE_URL =
@@ -71,7 +72,7 @@ export class ConsequenceAPI {
   // Get cascade explanation
   static async explainCascade(
     request: EarningsEventRequest
-  ): Promise<any> {
+  ): Promise<ExplainCascadeResponse> {
     const res = await fetch(`${API_BASE_URL}/explain/cascade`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },

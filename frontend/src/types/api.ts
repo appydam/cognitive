@@ -61,3 +61,48 @@ export interface EarningsEventRequest {
   description?: string;
   horizon_days?: number;
 }
+
+export interface CausalStep {
+  from: string;
+  to: string;
+  relationship: string;
+  strength: number;
+  delay_days: number;
+  confidence: number;
+  evidence: string[];
+  explanation: string;
+}
+
+export interface ExplainedEffect {
+  effect: EffectResponse;
+  trigger: {
+    entity: string;
+    magnitude_percent: number;
+    event_type: string;
+    description: string;
+  };
+  steps: CausalStep[];
+  narrative: string;
+  confidence_factors: {
+    base_confidence: number;
+    chain_length_penalty: number;
+    relationship_confidence: number;
+    final_confidence: number;
+  };
+}
+
+export interface ExplainCascadeResponse {
+  trigger: {
+    entity: string;
+    magnitude_percent: number;
+    event_type: string;
+    description: string;
+  };
+  summary: {
+    total_effects: number;
+    first_order: number;
+    second_order: number;
+    third_order: number;
+  };
+  top_effects: ExplainedEffect[];
+}

@@ -14,6 +14,7 @@ import {
   ChevronDown,
   ChevronUp,
 } from "lucide-react";
+import { CausalChainModal } from "./CausalChainModal";
 
 interface CascadeTimelineProps {
   cascade: CascadeResponse;
@@ -21,6 +22,7 @@ interface CascadeTimelineProps {
 
 export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
   const [expandedPeriods, setExpandedPeriods] = useState<Set<string>>(new Set());
+  const [selectedChainEffect, setSelectedChainEffect] = useState<EffectResponse | null>(null);
 
   // Sort periods by time (backend returns "Hour 0-4", "Day 1", "Day 2-3", etc.)
   const periods = Object.keys(cascade.timeline).sort((a, b) => {
@@ -143,7 +145,12 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
                 {isExpanded && (
                   <div className="px-4 pb-3 space-y-2">
                     {effects.map((effect, idx) => (
-                      <ExpandedEffectCard key={idx} effect={effect} colors={colors} />
+                      <ExpandedEffectCard
+                        key={idx}
+                        effect={effect}
+                        colors={colors}
+                        onViewChain={() => setSelectedChainEffect(effect)}
+                      />
                     ))}
                   </div>
                 )}
@@ -174,6 +181,19 @@ export default function CascadeTimeline({ cascade }: CascadeTimelineProps) {
           ))}
         </div>
       </Card>
+
+      {/* Causal Chain Modal */}
+      {selectedChainEffect && (
+        <CausalChainModal
+          effect={selectedChainEffect}
+          triggerParams={{
+            ticker: cascade.trigger.entity,
+            surprise_percent: cascade.trigger.magnitude_percent,
+            horizon_days: cascade.horizon_days,
+          }}
+          onClose={() => setSelectedChainEffect(null)}
+        />
+      )}
     </div>
   );
 }
@@ -220,10 +240,12 @@ function CompactEffectRow({ effect }: { effect: EffectResponse }) {
 // Expanded effect card with full details
 function ExpandedEffectCard({
   effect,
-  colors
+  colors,
+  onViewChain
 }: {
   effect: EffectResponse;
   colors: { bg: string; border: string; text: string };
+  onViewChain: () => void;
 }) {
   const isNegative = effect.magnitude_percent < 0;
   const confidencePercent = effect.confidence * 100;
@@ -288,6 +310,15 @@ function ExpandedEffectCard({
           </div>
         </div>
       </div>
+
+      {/* View Chain Button */}
+      <button
+        onClick={onViewChain}
+        className="mt-3 w-full px-4 py-2.5 bg-green-500/10 hover:bg-green-500/20 border border-green-400/30 rounded-lg text-sm font-medium text-green-400 transition-all hover:border-green-400/50 flex items-center justify-center gap-2"
+      >
+        <span>View Full Causal Chain</span>
+        <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+      </button>
     </div>
   );
 }
