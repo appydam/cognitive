@@ -107,15 +107,33 @@ export default function CascadeGraph({ cascade }: CascadeGraphProps) {
           val: 20 + Math.min(Math.abs(effect.magnitude_percent) * 2, 15),
         });
         nodeIds.add(entityId);
+      }
+    });
 
-        // Create link from trigger
-        links.push({
-          source: cascade.trigger.entity,
-          target: entityId,
-          strength: effect.confidence,
-          color: isNegative ? "rgba(255,100,100,0.6)" : "rgba(100,255,100,0.6)",
-          width: 1 + effect.confidence * 3,
-        });
+    // Build links from causal chains (not star topology)
+    const linkSet = new Set<string>(); // Deduplicate links
+
+    effectsByEntity.forEach((effect) => {
+      if (!effect.cause_path || effect.cause_path.length < 2) return;
+
+      const isNegative = effect.magnitude_percent < 0;
+
+      // Create links between consecutive entities in the chain
+      for (let i = 0; i < effect.cause_path.length - 1; i++) {
+        const source = effect.cause_path[i];
+        const target = effect.cause_path[i + 1];
+        const linkKey = `${source}->${target}`;
+
+        if (!linkSet.has(linkKey)) {
+          linkSet.add(linkKey);
+          links.push({
+            source,
+            target,
+            strength: effect.confidence,
+            color: isNegative ? "rgba(255,100,100,0.6)" : "rgba(100,255,100,0.6)",
+            width: 1 + effect.confidence * 3,
+          });
+        }
       }
     });
 

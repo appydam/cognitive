@@ -91,6 +91,7 @@ class EffectResponse(BaseModel):
     order: int
     relationship_type: str
     explanation: str
+    cause_path: list[str] = Field(default_factory=list, description="Entity IDs in causal chain from trigger to this effect")
 
 
 class CascadeResponse(BaseModel):
@@ -277,6 +278,7 @@ async def predict_earnings_cascade(request: EarningsEventRequest):
                 order=e.order,
                 relationship_type=e.relationship_type,
                 explanation=e.explanation,
+                cause_path=[item for item in e.cause_chain if isinstance(item, str)],  # Extract entity IDs from cause chain
             )
             for e in effects
         ]

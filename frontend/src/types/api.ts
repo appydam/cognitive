@@ -31,6 +31,7 @@ export interface EffectResponse {
   order: number;
   relationship_type: string;
   explanation: string;
+  cause_path: string[];  // Entity IDs in causal chain from trigger to this effect
 }
 
 export interface CascadeResponse {
