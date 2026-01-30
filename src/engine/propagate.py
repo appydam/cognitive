@@ -221,12 +221,24 @@ class Cascade:
         return "\n".join(lines)
 
 
+# Per-order magnitude thresholds: deeper cascade orders use lower thresholds
+# because multi-hop effects are inherently smaller but still meaningful.
+# A 0.3% effect on ASML from an Apple earnings miss through TSMC is a real
+# supply chain signal that traders care about.
+DEFAULT_MIN_MAGNITUDE_BY_ORDER: dict[int, float] = {
+    1: 0.005,   # 0.5% for 1st order (direct effects should be significant)
+    2: 0.002,   # 0.2% for 2nd order (supply chain ripples)
+    3: 0.001,   # 0.1% for 3rd order+ (deep cascade insights)
+}
+
+
 def propagate(
     event: Event,
     graph: CausalGraph,
     horizon_days: int = 14,
     min_confidence: float = 0.1,
-    min_magnitude: float = 0.005,  # 0.5% minimum effect
+    min_magnitude: float = 0.005,  # 0.5% minimum effect (fallback)
+    min_magnitude_by_order: dict[int, float] | None = None,
     max_order: int = 5,
 ) -> Cascade:
     """
@@ -240,12 +252,25 @@ def propagate(
         graph: The causal graph to propagate through
         horizon_days: Maximum days to project
         min_confidence: Stop propagating below this confidence
-        min_magnitude: Stop propagating below this magnitude
+        min_magnitude: Stop propagating below this magnitude (fallback)
+        min_magnitude_by_order: Per-order magnitude thresholds. If provided,
+            overrides min_magnitude with order-specific values. Defaults to
+            DEFAULT_MIN_MAGNITUDE_BY_ORDER which uses progressively lower
+            thresholds for deeper cascade orders.
         max_order: Maximum hops from trigger
 
     Returns:
         Cascade object with all predicted effects
     """
+    thresholds = min_magnitude_by_order or DEFAULT_MIN_MAGNITUDE_BY_ORDER
+
+    def _get_min_magnitude(order: int) -> float:
+        if order in thresholds:
+            return thresholds[order]
+        # For orders beyond what's defined, use the highest defined order's value
+        max_defined = max(thresholds.keys())
+        return thresholds[max_defined]
+
     effects = []
     visited = set()
 
@@ -279,7 +304,7 @@ def propagate(
             continue
         if confidence < min_confidence:
             continue
-        if abs(magnitude) < min_magnitude:
+        if abs(magnitude) < _get_min_magnitude(order):
             continue
         if day > horizon_days:
             continue
@@ -291,8 +316,8 @@ def propagate(
             new_confidence = link.propagate_confidence(confidence)
             new_day = day + link.sample_delay()
 
-            # Skip if below thresholds
-            if abs(new_magnitude) < min_magnitude:
+            # Skip if below thresholds (use next order's threshold)
+            if abs(new_magnitude) < _get_min_magnitude(order + 1):
                 continue
             if new_confidence < min_confidence:
                 continue
@@ -318,6 +343,7 @@ def propagate_with_explanation(
     event: Event,
     graph: CausalGraph,
     horizon_days: int = 14,
+    min_magnitude_by_order: dict[int, float] | None = None,
 ) -> Cascade:
     """
     Propagate with detailed explanations for each effect.
@@ -325,7 +351,8 @@ def propagate_with_explanation(
     Same as propagate() but adds human-readable explanations
     to each effect based on the causal chain.
     """
-    cascade = propagate(event, graph, horizon_days)
+    cascade = propagate(event, graph, horizon_days,
+                        min_magnitude_by_order=min_magnitude_by_order)
 
     # Add explanations to each effect
     for effect in cascade.effects:
