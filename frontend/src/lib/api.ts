@@ -82,6 +82,34 @@ export class ConsequenceAPI {
     return res.json();
   }
 
+  // Backtest operations
+  static async getBacktestRuns(): Promise<any[]> {
+    const res = await fetch(`${API_BASE_URL}/backtest/runs`);
+    if (!res.ok) throw new Error("Failed to fetch backtest runs");
+    return res.json();
+  }
+
+  static async getBacktestRun(runId: number): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/backtest/run/${runId}`);
+    if (!res.ok) throw new Error("Failed to fetch backtest run");
+    return res.json();
+  }
+
+  static async createBacktestRun(params: {
+    start_date: string;
+    end_date: string;
+    min_surprise: number;
+    max_events: number;
+  }): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/backtest/run`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    });
+    if (!res.ok) throw new Error("Failed to create backtest run");
+    return res.json();
+  }
+
   // Get full graph data (all entities and connections)
   static async getFullGraph(): Promise<{
     nodes: Array<{
@@ -152,5 +180,30 @@ export class ConsequenceAPI {
 
     console.log(`[API] Complete! Total: ${nodes.length} nodes, ${links.length} links`);
     return { nodes, links };
+  }
+
+  // Notification preferences
+  static async getNotificationPreferences(userId: string = "default"): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/notifications/preferences?user_id=${userId}`);
+    if (!res.ok) throw new Error("Failed to fetch notification preferences");
+    return res.json();
+  }
+
+  static async saveNotificationPreferences(preferences: any, userId: string = "default"): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/notifications/preferences?user_id=${userId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(preferences),
+    });
+    if (!res.ok) throw new Error("Failed to save notification preferences");
+    return res.json();
+  }
+
+  static async sendTestNotification(userId: string = "default"): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/notifications/test?user_id=${userId}`, {
+      method: "POST",
+    });
+    if (!res.ok) throw new Error("Failed to send test notification");
+    return res.json();
   }
 }

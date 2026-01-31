@@ -1,16 +1,21 @@
 """FastAPI application for Consequence AI."""
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, model_validator
 from typing import Any
 from datetime import datetime
+from sqlalchemy.orm import Session
 
 from ..graph.builders import build_initial_graph
 from ..graph.loaders import load_graph_from_database
 from ..engine import propagate_with_explanation
 from ..explain import explain_cascade
 from src.adapters.securities import create_earnings_event
+from src.api.websocket import manager
+from src.db.database import SessionLocal
+from src.db.models import BacktestRun, UserNotificationPreference
+from src.validation.batch_backtest import BatchBacktester
 
 # Initialize app
 app = FastAPI(
@@ -30,6 +35,15 @@ app.add_middleware(
 
 # Global graph (loaded once at startup)
 GRAPH = None
+
+
+def get_db():
+    """Database dependency."""
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @app.on_event("startup")
@@ -370,6 +384,291 @@ async def search_entities(q: str, limit: int = 10):
                 break
 
     return {"query": q, "results": matches}
+
+
+# WebSocket endpoint for real-time alerts
+@app.websocket("/ws/alerts")
+async def websocket_endpoint(websocket: WebSocket):
+    """WebSocket endpoint for real-time cascade alerts."""
+    await manager.connect(websocket)
+    try:
+        while True:
+            # Keep connection alive, waiting for messages from client
+            data = await websocket.receive_text()
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+
+
+# Backtest endpoints
+class BacktestRequest(BaseModel):
+    """Request to create a new backtest run."""
+    start_date: str = Field(..., description="Start date (YYYY-MM-DD)")
+    end_date: str = Field(..., description="End date (YYYY-MM-DD)")
+    min_surprise: float = Field(default=5.0, description="Minimum surprise percentage")
+    max_events: int = Field(default=500, description="Maximum events to process")
+
+
+@app.post("/backtest/run")
+async def create_backtest_run(request: BacktestRequest, db: Session = Depends(get_db)):
+    """Create a new backtest run."""
+    try:
+        # Parse dates
+        start_date = datetime.fromisoformat(request.start_date)
+        end_date = datetime.fromisoformat(request.end_date)
+
+        # Create backtester and run
+        backtester = BatchBacktester(db)
+        run = await backtester.run_batch(
+            start_date=start_date,
+            end_date=end_date,
+            min_surprise=request.min_surprise,
+            max_events=request.max_events
+        )
+
+        return {
+            "id": run.id,
+            "start_date": run.start_date.isoformat(),
+            "end_date": run.end_date.isoformat(),
+            "min_surprise": run.min_surprise,
+            "total_events": run.total_events,
+            "avg_accuracy": run.avg_accuracy,
+            "avg_mae": run.avg_mae,
+            "profitable_trades": run.profitable_trades,
+            "total_roi": run.total_roi,
+            "status": run.status,
+            "created_at": run.created_at.isoformat(),
+            "completed_at": run.completed_at.isoformat() if run.completed_at else None,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create backtest: {str(e)}")
+
+
+@app.get("/backtest/runs")
+async def list_backtest_runs(db: Session = Depends(get_db)):
+    """List all backtest runs."""
+    runs = db.query(BacktestRun).order_by(BacktestRun.created_at.desc()).limit(50).all()
+
+    return [
+        {
+            "id": run.id,
+            "start_date": run.start_date.isoformat(),
+            "end_date": run.end_date.isoformat(),
+            "min_surprise": run.min_surprise,
+            "total_events": run.total_events,
+            "avg_accuracy": run.avg_accuracy,
+            "avg_mae": run.avg_mae,
+            "profitable_trades": run.profitable_trades,
+            "total_roi": run.total_roi,
+            "status": run.status,
+            "created_at": run.created_at.isoformat(),
+            "completed_at": run.completed_at.isoformat() if run.completed_at else None,
+        }
+        for run in runs
+    ]
+
+
+@app.get("/backtest/run/{run_id}")
+async def get_backtest_run(run_id: int, db: Session = Depends(get_db)):
+    """Get details of a specific backtest run."""
+    run = db.query(BacktestRun).filter(BacktestRun.id == run_id).first()
+
+    if not run:
+        raise HTTPException(status_code=404, detail="Backtest run not found")
+
+    return {
+        "id": run.id,
+        "start_date": run.start_date.isoformat(),
+        "end_date": run.end_date.isoformat(),
+        "min_surprise": run.min_surprise,
+        "total_events": run.total_events,
+        "avg_accuracy": run.avg_accuracy,
+        "avg_mae": run.avg_mae,
+        "profitable_trades": run.profitable_trades,
+        "total_roi": run.total_roi,
+        "status": run.status,
+        "created_at": run.created_at.isoformat(),
+        "completed_at": run.completed_at.isoformat() if run.completed_at else None,
+    }
+
+
+# Notification Preferences endpoints
+class NotificationPreferencesRequest(BaseModel):
+    """Request to update notification preferences."""
+    min_surprise: float = Field(default=5.0, ge=0, le=100)
+    high_confidence_only: bool = Field(default=True)
+    pre_market_alerts: bool = Field(default=True)
+    after_hours_alerts: bool = Field(default=True)
+
+    email_enabled: bool = Field(default=False)
+    email_address: str | None = Field(default=None)
+
+    slack_enabled: bool = Field(default=False)
+    slack_webhook: str | None = Field(default=None)
+
+    whatsapp_enabled: bool = Field(default=False)
+    whatsapp_number: str | None = Field(default=None)
+
+    sms_enabled: bool = Field(default=False)
+    sms_number: str | None = Field(default=None)
+
+    watchlist: list[str] = Field(default_factory=list)
+
+
+@app.get("/notifications/preferences")
+async def get_notification_preferences(user_id: str = "default", db: Session = Depends(get_db)):
+    """Get user notification preferences."""
+    prefs = db.query(UserNotificationPreference).filter(
+        UserNotificationPreference.user_id == user_id
+    ).first()
+
+    if not prefs:
+        # Return defaults if no preferences exist
+        return {
+            "min_surprise": 5.0,
+            "high_confidence_only": True,
+            "pre_market_alerts": True,
+            "after_hours_alerts": True,
+            "email_enabled": False,
+            "email_address": None,
+            "slack_enabled": False,
+            "slack_webhook": None,
+            "whatsapp_enabled": False,
+            "whatsapp_number": None,
+            "sms_enabled": False,
+            "sms_number": None,
+            "watchlist": [],
+        }
+
+    return {
+        "min_surprise": prefs.min_surprise,
+        "high_confidence_only": prefs.high_confidence_only,
+        "pre_market_alerts": prefs.pre_market_alerts,
+        "after_hours_alerts": prefs.after_hours_alerts,
+        "email_enabled": prefs.email_enabled,
+        "email_address": prefs.email_address,
+        "slack_enabled": prefs.slack_enabled,
+        "slack_webhook": prefs.slack_webhook,
+        "whatsapp_enabled": prefs.whatsapp_enabled,
+        "whatsapp_number": prefs.whatsapp_number,
+        "sms_enabled": prefs.sms_enabled,
+        "sms_number": prefs.sms_number,
+        "watchlist": prefs.watchlist or [],
+    }
+
+
+@app.post("/notifications/preferences")
+async def save_notification_preferences(
+    request: NotificationPreferencesRequest,
+    user_id: str = "default",
+    db: Session = Depends(get_db)
+):
+    """Save user notification preferences."""
+    prefs = db.query(UserNotificationPreference).filter(
+        UserNotificationPreference.user_id == user_id
+    ).first()
+
+    if not prefs:
+        prefs = UserNotificationPreference(user_id=user_id)
+        db.add(prefs)
+
+    # Update all fields
+    prefs.min_surprise = request.min_surprise
+    prefs.high_confidence_only = request.high_confidence_only
+    prefs.pre_market_alerts = request.pre_market_alerts
+    prefs.after_hours_alerts = request.after_hours_alerts
+
+    prefs.email_enabled = request.email_enabled
+    prefs.email_address = request.email_address
+
+    prefs.slack_enabled = request.slack_enabled
+    prefs.slack_webhook = request.slack_webhook
+
+    prefs.whatsapp_enabled = request.whatsapp_enabled
+    prefs.whatsapp_number = request.whatsapp_number
+
+    prefs.sms_enabled = request.sms_enabled
+    prefs.sms_number = request.sms_number
+
+    prefs.watchlist = request.watchlist
+
+    db.commit()
+    db.refresh(prefs)
+
+    return {"status": "success", "message": "Notification preferences saved"}
+
+
+@app.post("/notifications/test")
+async def send_test_notification(user_id: str = "default", db: Session = Depends(get_db)):
+    """Send a test notification to all enabled channels."""
+    from src.notifications import notification_sender
+
+    prefs = db.query(UserNotificationPreference).filter(
+        UserNotificationPreference.user_id == user_id
+    ).first()
+
+    if not prefs:
+        raise HTTPException(status_code=404, detail="No notification preferences found")
+
+    # Create test alert data
+    test_alert = {
+        'event': {
+            'ticker': 'TEST',
+            'company': 'Test Company Inc.',
+            'surprise_percent': 8.5,
+            'report_time': datetime.utcnow().isoformat(),
+        },
+        'cascade': {
+            'total_effects': 23,
+            'horizon_days': 14,
+        }
+    }
+
+    results = []
+
+    # Actually send to enabled channels
+    if prefs.email_enabled and prefs.email_address:
+        success = await notification_sender.send_email(prefs.email_address, test_alert)
+        results.append({
+            "channel": "email",
+            "status": "sent" if success else "failed",
+            "target": prefs.email_address
+        })
+
+    if prefs.slack_enabled and prefs.slack_webhook:
+        success = await notification_sender.send_slack(prefs.slack_webhook, test_alert)
+        results.append({
+            "channel": "slack",
+            "status": "sent" if success else "failed",
+            "target": "webhook"
+        })
+
+    if prefs.whatsapp_enabled and prefs.whatsapp_number:
+        success = await notification_sender.send_whatsapp(prefs.whatsapp_number, test_alert)
+        results.append({
+            "channel": "whatsapp",
+            "status": "sent" if success else "failed",
+            "target": prefs.whatsapp_number
+        })
+
+    if prefs.sms_enabled and prefs.sms_number:
+        success = await notification_sender.send_sms(prefs.sms_number, test_alert)
+        results.append({
+            "channel": "sms",
+            "status": "sent" if success else "failed",
+            "target": prefs.sms_number
+        })
+
+    if not results:
+        return {"status": "error", "message": "No notification channels enabled"}
+
+    # Check if any succeeded
+    any_sent = any(r["status"] == "sent" for r in results)
+
+    return {
+        "status": "success" if any_sent else "partial_failure",
+        "message": f"Sent test notifications to {len([r for r in results if r['status'] == 'sent'])} channels",
+        "results": results
+    }
 
 
 # Run with: uvicorn src.api.main:app --reload

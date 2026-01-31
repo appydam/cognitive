@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Orbitron, Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { CascadeAlertProvider } from "@/components/CascadeAlertToast";
+import { Toaster } from "sonner";
 import { TrendingUp } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -29,6 +31,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} ${orbitron.variable} ${shareTechMono.variable} bg-black`} suppressHydrationWarning>
+        <CascadeAlertProvider />
+        <Toaster />
         <Navbar />
         <main className="min-h-screen bg-black">
           {children}

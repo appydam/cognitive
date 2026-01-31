@@ -217,3 +217,177 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_accuracy_stats_ticker ON accuracy_stats(ti
 """
 
 REFRESH_ACCURACY_STATS_SQL = "REFRESH MATERIALIZED VIEW CONCURRENTLY accuracy_stats;"
+
+
+class EarningsEvent(Base):
+    """Earnings event table - stores upcoming and completed earnings events."""
+
+    __tablename__ = 'earnings_events'
+
+    # Primary key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # Event details
+    ticker = Column(String(10), ForeignKey('entities.id'), nullable=False, index=True)
+    company_name = Column(Text, nullable=False)
+    report_date = Column(DateTime, nullable=False, index=True)
+    report_time = Column(String(10))  # "BMO" or "AMC"
+
+    # Estimates
+    estimate_eps = Column(Float)
+
+    # Actuals
+    actual_eps = Column(Float)
+    surprise_percent = Column(Float)
+
+    # Cascade prediction
+    cascade_id = Column(UUID(as_uuid=True), ForeignKey('predictions.id'))
+
+    # Status
+    status = Column(String(20), default='pending')  # pending, completed, skipped
+
+    # Metadata
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationships
+    entity = relationship('Entity')
+    cascade = relationship('Prediction')
+
+    # Indexes
+    __table_args__ = (
+        Index('idx_earnings_ticker', 'ticker'),
+        Index('idx_earnings_report_date', 'report_date'),
+        Index('idx_earnings_status', 'status'),
+    )
+
+    def __repr__(self):
+        return f"<EarningsEvent(ticker='{self.ticker}', date='{self.report_date}', surprise={self.surprise_percent})>"
+
+
+class BacktestRun(Base):
+    """Backtest run table - stores metadata about backtest runs."""
+
+    __tablename__ = 'backtest_runs'
+
+    # Primary key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # Run parameters
+    start_date = Column(DateTime, nullable=False)
+    end_date = Column(DateTime, nullable=False)
+    min_surprise = Column(Float, nullable=False)
+
+    # Results
+    total_events = Column(Integer, default=0)
+    avg_accuracy = Column(Float)
+    avg_mae = Column(Float)
+    profitable_trades = Column(Integer, default=0)
+    total_roi = Column(Float, default=0)
+
+    # Status
+    status = Column(String(20), default='pending')  # pending, running, completed, failed
+
+    # Metadata
+    created_at = Column(DateTime, default=datetime.utcnow)
+    completed_at = Column(DateTime)
+
+    # Relationships
+    results = relationship('BacktestResult', back_populates='run')
+
+    # Indexes
+    __table_args__ = (
+        Index('idx_backtest_status', 'status'),
+        Index('idx_backtest_created_at', 'created_at'),
+    )
+
+    def __repr__(self):
+        return f"<BacktestRun(id={self.id}, events={self.total_events}, status='{self.status}')>"
+
+
+class BacktestResult(Base):
+    """Backtest result table - stores individual event results within a backtest run."""
+
+    __tablename__ = 'backtest_results'
+
+    # Primary key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # Foreign key
+    run_id = Column(Integer, ForeignKey('backtest_runs.id'), nullable=False, index=True)
+
+    # Event details
+    ticker = Column(String(10), ForeignKey('entities.id'), nullable=False, index=True)
+    event_date = Column(DateTime, nullable=False)
+    surprise_percent = Column(Float, nullable=False)
+
+    # Metrics
+    num_predictions = Column(Integer, nullable=False)
+    accuracy = Column(Float, nullable=False)
+    mae = Column(Float, nullable=False)
+    roi = Column(Float, nullable=False)
+
+    # Full cascade data
+    cascade_json = Column('cascade', JSON, nullable=False)
+
+    # Metadata
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationships
+    run = relationship('BacktestRun', back_populates='results')
+    entity = relationship('Entity')
+
+    # Indexes
+    __table_args__ = (
+        Index('idx_backtest_result_run_id', 'run_id'),
+        Index('idx_backtest_result_ticker', 'ticker'),
+        Index('idx_backtest_result_event_date', 'event_date'),
+    )
+
+    def __repr__(self):
+        return f"<BacktestResult(ticker='{self.ticker}', accuracy={self.accuracy:.2f}, roi={self.roi:.2f})>"
+
+
+class UserNotificationPreference(Base):
+    """User notification preferences - stores alert delivery settings."""
+
+    __tablename__ = 'user_notification_preferences'
+
+    # Primary key
+    id = Column(Integer, primary_key=True, autoincrement=True)
+
+    # User identifier (for future multi-user support)
+    user_id = Column(String(255), default='default', index=True)
+
+    # Alert thresholds
+    min_surprise = Column(Float, default=5.0)
+    high_confidence_only = Column(Boolean, default=True)
+    pre_market_alerts = Column(Boolean, default=True)
+    after_hours_alerts = Column(Boolean, default=True)
+
+    # Notification channels
+    email_enabled = Column(Boolean, default=False)
+    email_address = Column(String(255))
+
+    slack_enabled = Column(Boolean, default=False)
+    slack_webhook = Column(Text)
+
+    whatsapp_enabled = Column(Boolean, default=False)
+    whatsapp_number = Column(String(50))
+
+    sms_enabled = Column(Boolean, default=False)
+    sms_number = Column(String(50))
+
+    # Watchlist
+    watchlist = Column(JSON, default=[])
+
+    # Metadata
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Indexes
+    __table_args__ = (
+        Index('idx_user_preferences_user_id', 'user_id'),
+    )
+
+    def __repr__(self):
+        return f"<UserNotificationPreference(user_id='{self.user_id}', email={self.email_enabled}, slack={self.slack_enabled})>"
