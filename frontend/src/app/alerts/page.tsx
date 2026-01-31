@@ -1,12 +1,30 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Bell, Radio, TrendingUp, CheckCircle, XCircle, TestTube, Mail, MessageSquare, Phone, Send } from 'lucide-react';
+import { Bell, Radio, TrendingUp, XCircle, TestTube, Mail, MessageSquare, Phone, Send } from 'lucide-react';
 import { alertClient } from '@/lib/websocket';
 import { toast } from 'sonner';
 import { ConsequenceAPI } from '@/lib/api';
+
+function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
+  return (
+    <button
+      type="button"
+      role="switch"
+      aria-checked={checked}
+      onClick={() => onChange(!checked)}
+      className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0A0A] ${
+        checked ? 'bg-indigo-500' : 'bg-[#333333]'
+      }`}
+    >
+      <span
+        className={`pointer-events-none inline-block h-4 w-4 transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out ${
+          checked ? 'translate-x-4' : 'translate-x-0'
+        }`}
+      />
+    </button>
+  );
+}
 
 export default function AlertsPage() {
   const [wsConnected, setWsConnected] = useState(false);
@@ -28,7 +46,6 @@ export default function AlertsPage() {
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved'>('idle');
 
   useEffect(() => {
-    // Load notification preferences from backend
     const loadPreferences = async () => {
       try {
         const prefs = await ConsequenceAPI.getNotificationPreferences();
@@ -46,26 +63,23 @@ export default function AlertsPage() {
         });
         setWatchlist(prefs.watchlist || ['AAPL', 'NVDA', 'MSFT']);
       } catch (err) {
-        // Silently handle - backend may not be available yet
         console.log('Failed to load preferences, using defaults');
       }
     };
 
     loadPreferences();
 
-    // Check WebSocket connection status
     const checkConnection = setInterval(() => {
       setWsConnected(true);
     }, 1000);
 
-    // Subscribe to alerts and add to history
     const unsubscribe = alertClient.subscribe((alert) => {
       setAlertHistory((prev) => [
         {
           ...alert,
           receivedAt: new Date().toISOString(),
         },
-        ...prev.slice(0, 49), // Keep last 50 alerts
+        ...prev.slice(0, 49),
       ]);
     });
 
@@ -77,10 +91,8 @@ export default function AlertsPage() {
 
   const sendTestAlert = async () => {
     try {
-      // Call backend to send actual notifications
       const result = await ConsequenceAPI.sendTestNotification();
 
-      // Simulate a test alert in the UI
       const testAlert = {
         event: {
           ticker: 'TEST',
@@ -95,26 +107,21 @@ export default function AlertsPage() {
         timestamp: new Date().toISOString(),
       };
 
-      // Show UI toast
       toast.custom((t) => (
-        <div className="bg-slate-900 border border-green-400/50 p-4 rounded-lg min-w-[400px]">
+        <div className="bg-[#1E1E1E] border border-white/10 p-4 rounded-xl shadow-2xl min-w-[360px]">
           <div className="flex items-start gap-3">
-            <div className="flex-shrink-0 mt-1">
-              <TrendingUp className="w-6 h-6 text-green-400" />
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10 shrink-0 mt-0.5">
+              <TrendingUp className="w-4 h-4 text-indigo-400" />
             </div>
             <div className="flex-1">
-              <div className="text-sm font-bold text-green-400 mb-1">
-                TEST EARNINGS ALERT
-              </div>
-              <div className="text-xs text-slate-300 mb-2">
-                Beat by <span className="text-green-400">8.5%</span>
-              </div>
-              <div className="text-xs text-slate-400 mb-3">
-                Cascade: 23 effects detected
-              </div>
+              <p className="text-sm font-medium text-white mb-0.5">Test Earnings Alert</p>
+              <p className="text-xs text-[#A0A0A0] mb-1">
+                Beat by <span className="text-emerald-400 font-medium">8.5%</span>
+              </p>
+              <p className="text-xs text-[#666666] mb-3">Cascade: 23 effects detected</p>
               <button
                 onClick={() => toast.dismiss(t)}
-                className="text-xs bg-green-500/20 hover:bg-green-500/30 border border-green-400/50 rounded px-3 py-1.5 text-green-400 font-medium transition-all"
+                className="text-xs px-3 py-1.5 rounded-md bg-[#262626] hover:bg-[#333333] text-[#A0A0A0] hover:text-white border border-white/[0.06] transition-all"
               >
                 Dismiss
               </button>
@@ -126,7 +133,6 @@ export default function AlertsPage() {
         position: 'top-right',
       });
 
-      // Show notification send status
       if (result.status === 'success') {
         toast.success('Test notifications sent!', {
           description: result.message || `Sent to ${result.results?.length || 0} channels`,
@@ -141,7 +147,6 @@ export default function AlertsPage() {
         });
       }
 
-      // Add to history
       setAlertHistory((prev) => [
         {
           ...testAlert,
@@ -211,107 +216,97 @@ export default function AlertsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black tactical-grid scanlines">
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <div className="inline-block bg-cyan-500/10 border border-cyan-500 text-cyan-400 px-4 py-1 military-font text-xs mb-4">
-            ⬢ ALERT SYSTEM ⬢
+    <div className="min-h-screen bg-[#0A0A0A]">
+      <div className="mx-auto max-w-5xl px-6 py-10">
+        {/* Header */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-1">
+            <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-indigo-500/10">
+              <Bell className="w-5 h-5 text-indigo-400" />
+            </div>
+            <h1 className="text-3xl font-semibold tracking-tight text-white">
+              Alerts
+            </h1>
           </div>
-          <h1 className="text-4xl font-bold mb-2 terminal-text military-font">
-            &gt; REAL-TIME CASCADE ALERTS
-          </h1>
-          <p className="text-sm text-green-400/70 font-mono">
-            CONFIGURE NOTIFICATIONS | MONITOR WEBSOCKET | MANAGE WATCHLIST
+          <p className="text-sm text-[#A0A0A0] mt-2 ml-[52px]">
+            Configure real-time notifications for cascade events and manage your watchlist.
           </p>
         </div>
 
-        {/* Connection Status */}
-        <Card className="p-6 hud-panel border-green-500/30 mb-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Radio className={`w-5 h-5 ${wsConnected ? 'text-green-400' : 'text-red-400'}`} />
-              <div>
-                <h2 className="text-lg font-bold text-green-400 military-font">
-                  WEBSOCKET STATUS
-                </h2>
-                <p className="text-xs text-green-400/60 font-mono mt-1">
-                  {wsConnected ? 'CONNECTED - RECEIVING LIVE ALERTS' : 'DISCONNECTED - RECONNECTING...'}
-                </p>
-              </div>
-            </div>
-            <div className={`px-4 py-2 rounded border ${
-              wsConnected
-                ? 'bg-green-500/20 border-green-400/50 text-green-400'
-                : 'bg-red-500/20 border-red-400/50 text-red-400'
-            } font-mono text-sm`}>
-              {wsConnected ? '● ONLINE' : '○ OFFLINE'}
-            </div>
-          </div>
-        </Card>
+        {/* Connection Status Bar */}
+        <div className="flex items-center gap-2.5 mb-8 px-4 py-3 rounded-xl bg-[#141414] border border-white/[0.06]">
+          <span className={`h-2 w-2 rounded-full shrink-0 ${wsConnected ? 'bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]' : 'bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.4)]'}`} />
+          <span className="text-sm text-[#A0A0A0]">
+            {wsConnected ? 'Connected — receiving live alerts' : 'Disconnected — reconnecting...'}
+          </span>
+          <span className={`ml-auto text-xs font-medium px-2.5 py-1 rounded-md ${
+            wsConnected
+              ? 'bg-emerald-500/10 text-emerald-400'
+              : 'bg-red-500/10 text-red-400'
+          }`}>
+            {wsConnected ? 'Online' : 'Offline'}
+          </span>
+        </div>
 
         {/* Notification Channels */}
-        <Card className="p-6 hud-panel border-purple-500/30 mb-6">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <Send className="w-5 h-5 text-purple-400" />
-              <h2 className="text-xl font-bold text-purple-400 military-font">
-                NOTIFICATION CHANNELS
-              </h2>
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <h2 className="text-lg font-semibold text-white">Notification Channels</h2>
+              <p className="text-sm text-[#666666] mt-0.5">Choose how you want to receive cascade alerts</p>
             </div>
-            <Button
+            <button
               onClick={saveNotificationSettings}
               disabled={saveStatus === 'saving'}
-              className={`military-font text-xs ${
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 ${
                 saveStatus === 'saved'
-                  ? 'bg-green-500/20 border-green-400/50 text-green-400'
-                  : 'bg-purple-500/20 border-purple-400/50 text-purple-400'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'bg-indigo-500 hover:bg-indigo-400 text-white'
               }`}
             >
-              {saveStatus === 'saving' ? 'SAVING...' : saveStatus === 'saved' ? '✓ SAVED' : 'SAVE SETTINGS'}
-            </Button>
+              {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? '✓ Saved' : 'Save Settings'}
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Email */}
-            <div className="p-4 bg-black/40 border border-purple-400/20 rounded">
-              <div className="flex items-center gap-3 mb-3">
-                <Mail className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-bold text-purple-400 military-font">EMAIL</span>
-                <label className="ml-auto flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={notificationChannels.email.enabled}
-                    onChange={(e) => updateChannel('email', 'enabled', e.target.checked)}
-                    className="w-4 h-4 bg-purple-500/20 border-purple-400/50 rounded"
-                  />
-                </label>
+            <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.1]">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10">
+                    <Mail className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <span className="text-sm font-medium text-white">Email</span>
+                </div>
+                <ToggleSwitch
+                  checked={notificationChannels.email.enabled}
+                  onChange={(v) => updateChannel('email', 'enabled', v)}
+                />
               </div>
               <input
                 type="email"
-                placeholder="your.email@example.com"
+                placeholder="you@company.com"
                 value={notificationChannels.email.value}
                 onChange={(e) => updateChannel('email', 'value', e.target.value)}
                 disabled={!notificationChannels.email.enabled}
-                className="w-full bg-black/60 border border-purple-400/30 rounded px-3 py-2 text-purple-400 font-mono text-xs focus:outline-none focus:border-purple-400 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-[#1E1E1E] border border-white/[0.06] px-3 py-2 text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               />
-              <p className="text-xs text-purple-400/40 font-mono mt-2">
-                Instant email notifications with cascade details
-              </p>
+              <p className="text-xs text-[#666666] mt-2">Instant notifications with cascade details</p>
             </div>
 
             {/* Slack */}
-            <div className="p-4 bg-black/40 border border-purple-400/20 rounded">
-              <div className="flex items-center gap-3 mb-3">
-                <MessageSquare className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-bold text-purple-400 military-font">SLACK</span>
-                <label className="ml-auto flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={notificationChannels.slack.enabled}
-                    onChange={(e) => updateChannel('slack', 'enabled', e.target.checked)}
-                    className="w-4 h-4 bg-purple-500/20 border-purple-400/50 rounded"
-                  />
-                </label>
+            <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.1]">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10">
+                    <MessageSquare className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <span className="text-sm font-medium text-white">Slack</span>
+                </div>
+                <ToggleSwitch
+                  checked={notificationChannels.slack.enabled}
+                  onChange={(v) => updateChannel('slack', 'enabled', v)}
+                />
               </div>
               <input
                 type="text"
@@ -319,26 +314,24 @@ export default function AlertsPage() {
                 value={notificationChannels.slack.value}
                 onChange={(e) => updateChannel('slack', 'value', e.target.value)}
                 disabled={!notificationChannels.slack.enabled}
-                className="w-full bg-black/60 border border-purple-400/30 rounded px-3 py-2 text-purple-400 font-mono text-xs focus:outline-none focus:border-purple-400 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-[#1E1E1E] border border-white/[0.06] px-3 py-2 text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               />
-              <p className="text-xs text-purple-400/40 font-mono mt-2">
-                Post alerts to Slack channel or DM
-              </p>
+              <p className="text-xs text-[#666666] mt-2">Post alerts to your Slack workspace</p>
             </div>
 
             {/* WhatsApp */}
-            <div className="p-4 bg-black/40 border border-purple-400/20 rounded">
-              <div className="flex items-center gap-3 mb-3">
-                <MessageSquare className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-bold text-purple-400 military-font">WHATSAPP</span>
-                <label className="ml-auto flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={notificationChannels.whatsapp.enabled}
-                    onChange={(e) => updateChannel('whatsapp', 'enabled', e.target.checked)}
-                    className="w-4 h-4 bg-purple-500/20 border-purple-400/50 rounded"
-                  />
-                </label>
+            <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.1]">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10">
+                    <MessageSquare className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <span className="text-sm font-medium text-white">WhatsApp</span>
+                </div>
+                <ToggleSwitch
+                  checked={notificationChannels.whatsapp.enabled}
+                  onChange={(v) => updateChannel('whatsapp', 'enabled', v)}
+                />
               </div>
               <input
                 type="tel"
@@ -346,26 +339,24 @@ export default function AlertsPage() {
                 value={notificationChannels.whatsapp.value}
                 onChange={(e) => updateChannel('whatsapp', 'value', e.target.value)}
                 disabled={!notificationChannels.whatsapp.enabled}
-                className="w-full bg-black/60 border border-purple-400/30 rounded px-3 py-2 text-purple-400 font-mono text-xs focus:outline-none focus:border-purple-400 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-[#1E1E1E] border border-white/[0.06] px-3 py-2 text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               />
-              <p className="text-xs text-purple-400/40 font-mono mt-2">
-                WhatsApp messages via Twilio API
-              </p>
+              <p className="text-xs text-[#666666] mt-2">WhatsApp messages via Twilio</p>
             </div>
 
             {/* SMS */}
-            <div className="p-4 bg-black/40 border border-purple-400/20 rounded">
-              <div className="flex items-center gap-3 mb-3">
-                <Phone className="w-4 h-4 text-purple-400" />
-                <span className="text-sm font-bold text-purple-400 military-font">SMS</span>
-                <label className="ml-auto flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={notificationChannels.sms.enabled}
-                    onChange={(e) => updateChannel('sms', 'enabled', e.target.checked)}
-                    className="w-4 h-4 bg-purple-500/20 border-purple-400/50 rounded"
-                  />
-                </label>
+            <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.1]">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/10">
+                    <Phone className="w-4 h-4 text-indigo-400" />
+                  </div>
+                  <span className="text-sm font-medium text-white">SMS</span>
+                </div>
+                <ToggleSwitch
+                  checked={notificationChannels.sms.enabled}
+                  onChange={(v) => updateChannel('sms', 'enabled', v)}
+                />
               </div>
               <input
                 type="tel"
@@ -373,145 +364,142 @@ export default function AlertsPage() {
                 value={notificationChannels.sms.value}
                 onChange={(e) => updateChannel('sms', 'value', e.target.value)}
                 disabled={!notificationChannels.sms.enabled}
-                className="w-full bg-black/60 border border-purple-400/30 rounded px-3 py-2 text-purple-400 font-mono text-xs focus:outline-none focus:border-purple-400 disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full rounded-lg bg-[#1E1E1E] border border-white/[0.06] px-3 py-2 text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
               />
-              <p className="text-xs text-purple-400/40 font-mono mt-2">
-                Text message alerts for critical events
-              </p>
+              <p className="text-xs text-[#666666] mt-2">Text alerts for critical events</p>
             </div>
           </div>
 
-          <div className="mt-4 p-4 bg-purple-500/10 border border-purple-400/30 rounded">
-            <p className="text-xs text-purple-400/70 font-mono leading-relaxed">
-              <strong className="text-purple-400">PRIVACY & SECURITY:</strong> Your contact information is encrypted at rest and only used for alert delivery. We never share your data with third parties. You can disable any channel at any time.
+          {/* Privacy note */}
+          <div className="mt-4 rounded-xl bg-[#141414] border border-white/[0.06] px-5 py-4">
+            <p className="text-xs text-[#666666] leading-relaxed">
+              <span className="text-[#A0A0A0] font-medium">Privacy & Security:</span> Your contact information is encrypted at rest and only used for alert delivery. We never share your data with third parties.
             </p>
           </div>
-        </Card>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {/* Two-column grid: Preferences + Watchlist */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Alert Preferences */}
-          <Card className="p-6 hud-panel border-cyan-500/30">
-            <div className="flex items-center gap-3 mb-6">
-              <Bell className="w-5 h-5 text-cyan-400" />
-              <h2 className="text-xl font-bold text-cyan-400 military-font">
-                ALERT PREFERENCES
-              </h2>
+          <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-6">
+            <div className="flex items-center gap-2.5 mb-6">
+              <Bell className="w-5 h-5 text-indigo-400" />
+              <h2 className="text-lg font-semibold text-white">Alert Preferences</h2>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
+              {/* Threshold Slider */}
               <div>
-                <label className="block text-sm font-mono text-green-400/80 mb-2">
-                  Minimum Surprise Threshold
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    min="1"
-                    max="20"
-                    step="0.5"
-                    value={preferences.minSurprise}
-                    onChange={(e) => setPreferences({ ...preferences, minSurprise: parseFloat(e.target.value) })}
-                    className="flex-1 h-2 bg-green-500/20 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span className="text-green-400 font-mono text-sm w-16 text-right">
+                <div className="flex items-center justify-between mb-2.5">
+                  <label className="text-sm text-[#A0A0A0]">Minimum surprise threshold</label>
+                  <span className="text-sm font-medium text-white tabular-nums bg-[#1E1E1E] px-2.5 py-0.5 rounded-md">
                     {preferences.minSurprise.toFixed(1)}%
                   </span>
                 </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  step="0.5"
+                  value={preferences.minSurprise}
+                  onChange={(e) => setPreferences({ ...preferences, minSurprise: parseFloat(e.target.value) })}
+                  className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-[#333333] accent-indigo-500"
+                />
+                <div className="flex justify-between mt-1">
+                  <span className="text-[10px] text-[#666666]">1%</span>
+                  <span className="text-[10px] text-[#666666]">20%</span>
+                </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
+              {/* Toggle Rows */}
+              <div className="space-y-3 pt-2">
+                <div className="flex items-center justify-between py-1">
+                  <span className="text-sm text-[#A0A0A0]">High confidence only (&gt;70%)</span>
+                  <ToggleSwitch
                     checked={preferences.highConfidenceOnly}
-                    onChange={(e) => setPreferences({ ...preferences, highConfidenceOnly: e.target.checked })}
-                    className="w-4 h-4 bg-green-500/20 border-green-400/50 rounded"
+                    onChange={(v) => setPreferences({ ...preferences, highConfidenceOnly: v })}
                   />
-                  <span className="text-sm font-mono text-green-400/80">
-                    High confidence cascades only (&gt;70%)
-                  </span>
-                </label>
-
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div>
+                    <span className="text-sm text-[#A0A0A0]">Pre-market alerts</span>
+                    <p className="text-xs text-[#666666] mt-0.5">Before 9:30 AM ET</p>
+                  </div>
+                  <ToggleSwitch
                     checked={preferences.preMarket}
-                    onChange={(e) => setPreferences({ ...preferences, preMarket: e.target.checked })}
-                    className="w-4 h-4 bg-green-500/20 border-green-400/50 rounded"
+                    onChange={(v) => setPreferences({ ...preferences, preMarket: v })}
                   />
-                  <span className="text-sm font-mono text-green-400/80">
-                    Pre-market alerts (Before 9:30 AM ET)
-                  </span>
-                </label>
-
-                <label className="flex items-center gap-3 cursor-pointer">
-                  <input
-                    type="checkbox"
+                </div>
+                <div className="flex items-center justify-between py-1">
+                  <div>
+                    <span className="text-sm text-[#A0A0A0]">After-hours alerts</span>
+                    <p className="text-xs text-[#666666] mt-0.5">After 4:00 PM ET</p>
+                  </div>
+                  <ToggleSwitch
                     checked={preferences.afterHours}
-                    onChange={(e) => setPreferences({ ...preferences, afterHours: e.target.checked })}
-                    className="w-4 h-4 bg-green-500/20 border-green-400/50 rounded"
+                    onChange={(v) => setPreferences({ ...preferences, afterHours: v })}
                   />
-                  <span className="text-sm font-mono text-green-400/80">
-                    After-hours alerts (After 4:00 PM ET)
-                  </span>
-                </label>
+                </div>
               </div>
 
-              <div className="pt-4 border-t border-green-500/20">
-                <Button
+              {/* Test Button */}
+              <div className="pt-4 border-t border-white/[0.06]">
+                <button
                   onClick={sendTestAlert}
-                  className="w-full tactical-button military-font text-xs flex items-center justify-center gap-2"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium border border-white/[0.1] bg-[#1E1E1E] text-white hover:bg-[#262626] transition-all duration-200"
                 >
-                  <TestTube className="w-4 h-4" />
-                  SEND TEST ALERT
-                </Button>
+                  <TestTube className="w-4 h-4 text-indigo-400" />
+                  Send Test Alert
+                </button>
               </div>
             </div>
-          </Card>
+          </div>
 
           {/* Watchlist */}
-          <Card className="p-6 hud-panel border-yellow-500/30">
-            <div className="flex items-center gap-3 mb-6">
-              <TrendingUp className="w-5 h-5 text-yellow-400" />
-              <h2 className="text-xl font-bold text-yellow-400 military-font">
-                TICKER WATCHLIST
-              </h2>
+          <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-6">
+            <div className="flex items-center gap-2.5 mb-6">
+              <TrendingUp className="w-5 h-5 text-indigo-400" />
+              <h2 className="text-lg font-semibold text-white">Watchlist</h2>
             </div>
 
-            <div className="mb-4">
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={newTicker}
-                  onChange={(e) => setNewTicker(e.target.value.toUpperCase())}
-                  onKeyPress={(e) => e.key === 'Enter' && addToWatchlist()}
-                  placeholder="Add ticker..."
-                  className="flex-1 bg-black/40 border border-yellow-400/30 rounded px-3 py-2 text-yellow-400 font-mono text-sm focus:outline-none focus:border-yellow-400"
-                />
-                <Button
-                  onClick={addToWatchlist}
-                  className="bg-yellow-500/20 hover:bg-yellow-500/30 border border-yellow-400/50 text-yellow-400 font-mono text-xs px-4"
-                >
-                  ADD
-                </Button>
-              </div>
+            {/* Add ticker */}
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={newTicker}
+                onChange={(e) => setNewTicker(e.target.value.toUpperCase())}
+                onKeyPress={(e) => e.key === 'Enter' && addToWatchlist()}
+                placeholder="Add ticker..."
+                className="flex-1 rounded-lg bg-[#1E1E1E] border border-white/[0.06] px-3 py-2 text-sm text-white placeholder-[#666666] focus:outline-none focus:ring-2 focus:ring-indigo-500/40 focus:border-indigo-500/40 transition-all"
+              />
+              <button
+                onClick={addToWatchlist}
+                className="px-4 py-2 rounded-lg text-sm font-medium bg-indigo-500 hover:bg-indigo-400 text-white transition-all duration-200"
+              >
+                Add
+              </button>
             </div>
 
-            <div className="space-y-2 max-h-[300px] overflow-y-auto">
+            {/* Ticker list */}
+            <div className="space-y-1.5 max-h-[300px] overflow-y-auto">
               {watchlist.length === 0 ? (
-                <p className="text-center text-yellow-400/40 font-mono text-xs py-8">
-                  No tickers in watchlist
-                </p>
+                <div className="text-center py-10">
+                  <TrendingUp className="w-8 h-8 text-[#333333] mx-auto mb-3" />
+                  <p className="text-sm text-[#666666]">No tickers in watchlist</p>
+                </div>
               ) : (
                 watchlist.map((ticker) => (
                   <div
                     key={ticker}
-                    className="flex items-center justify-between bg-black/40 border border-yellow-400/20 rounded px-4 py-2 hover:bg-yellow-500/5 transition"
+                    className="flex items-center justify-between rounded-lg bg-[#1E1E1E] px-4 py-2.5 group hover:bg-[#262626] transition-all duration-150"
                   >
-                    <span className="font-mono text-sm text-yellow-400">{ticker}</span>
+                    <div className="flex items-center gap-2.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-indigo-400 shrink-0" />
+                      <span className="text-sm font-medium text-white">{ticker}</span>
+                    </div>
                     <button
                       onClick={() => removeFromWatchlist(ticker)}
-                      className="text-yellow-400/60 hover:text-red-400 transition"
+                      className="text-[#666666] hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all duration-150"
                     >
                       <XCircle className="w-4 h-4" />
                     </button>
@@ -520,70 +508,66 @@ export default function AlertsPage() {
               )}
             </div>
 
-            <p className="text-xs text-yellow-400/40 font-mono mt-4">
-              Priority alerts for watchlist tickers will be highlighted
+            <p className="text-xs text-[#666666] mt-4">
+              Watchlist tickers receive priority alerts and highlighted notifications.
             </p>
-          </Card>
+          </div>
         </div>
 
         {/* Alert History */}
-        <Card className="p-6 hud-panel border-green-500/30">
+        <div className="rounded-xl bg-[#141414] border border-white/[0.06] p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-green-400 military-font">
-              ALERT HISTORY
-            </h2>
-            <span className="text-xs font-mono text-green-400/60">
-              LAST 50 ALERTS
-            </span>
+            <h2 className="text-lg font-semibold text-white">Alert History</h2>
+            <span className="text-xs text-[#666666]">Last 50 alerts</span>
           </div>
 
           {alertHistory.length === 0 ? (
-            <div className="text-center py-12">
-              <Bell className="w-12 h-12 text-green-400/20 mx-auto mb-4" />
-              <p className="text-sm text-green-400/60 font-mono mb-2">
-                NO ALERTS YET
-              </p>
-              <p className="text-xs text-green-400/40 font-mono">
-                Waiting for earnings events to trigger cascades...
+            <div className="text-center py-16">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#1E1E1E] mb-4">
+                <Bell className="w-6 h-6 text-[#666666]" />
+              </div>
+              <p className="text-sm text-[#A0A0A0] mb-1">No alerts yet</p>
+              <p className="text-xs text-[#666666]">
+                Alerts will appear here when earnings events trigger cascades
               </p>
             </div>
           ) : (
-            <div className="space-y-3 max-h-[500px] overflow-y-auto">
+            <div className="space-y-2 max-h-[500px] overflow-y-auto">
               {alertHistory.map((alert, idx) => (
                 <div
                   key={idx}
-                  className="p-4 bg-black/40 border border-green-500/20 rounded hover:bg-green-500/5 transition"
+                  className="flex items-center justify-between rounded-lg bg-[#1E1E1E] px-4 py-3 hover:bg-[#262626] transition-all duration-150"
                 >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full ${
-                        alert.event.surprise_percent > 0 ? 'bg-green-400' : 'bg-red-400'
-                      }`} />
-                      <span className="font-bold text-sm text-green-400">
-                        {alert.event.ticker}
-                      </span>
-                      <span className="text-xs text-green-400/60 font-mono">
-                        {alert.event.company}
-                      </span>
+                  <div className="flex items-center gap-3">
+                    <span className={`h-2 w-2 rounded-full shrink-0 ${
+                      alert.event.surprise_percent > 0 ? 'bg-emerald-500' : 'bg-red-500'
+                    }`} />
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-sm font-medium text-white">{alert.event.ticker}</span>
+                        <span className="text-xs text-[#666666]">{alert.event.company}</span>
+                      </div>
+                      <div className="flex items-center gap-3 mt-0.5">
+                        <span className={`text-xs font-medium ${
+                          alert.event.surprise_percent > 0 ? 'text-emerald-400' : 'text-red-400'
+                        }`}>
+                          {alert.event.surprise_percent > 0 ? 'Beat' : 'Missed'} by{' '}
+                          {Math.abs(alert.event.surprise_percent).toFixed(1)}%
+                        </span>
+                        <span className="text-xs text-[#666666]">
+                          {alert.cascade.total_effects} effects
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-xs text-green-400/40 font-mono">
-                      {new Date(alert.receivedAt).toLocaleTimeString()}
-                    </span>
                   </div>
-                  <div className="flex items-center gap-4 text-xs font-mono">
-                    <span className={alert.event.surprise_percent > 0 ? 'text-green-400' : 'text-red-400'}>
-                      {alert.event.surprise_percent > 0 ? 'Beat' : 'Missed'} by{' '}
-                      {Math.abs(alert.event.surprise_percent).toFixed(1)}%
-                    </span>
-                    <span className="text-green-400/60">
-                      {alert.cascade.total_effects} effects
-                    </span>
-                  </div>
+                  <span className="text-xs text-[#666666] tabular-nums shrink-0 ml-4">
+                    {new Date(alert.receivedAt).toLocaleTimeString()}
+                  </span>
                 </div>
               ))}
             </div>
           )}
-        </Card>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import ForceGraph2D from "react-force-graph-2d";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,6 +13,7 @@ import {
   AlertCircle,
   Info,
   Download,
+  RefreshCw,
 } from "lucide-react";
 import { downloadGraphCanvasAsPNG } from "@/lib/download";
 import { ConsequenceAPI } from "@/lib/api";
@@ -57,13 +58,27 @@ export default function GraphVisualization() {
   const [cascadeHighlight, setCascadeHighlight] = useState<Set<string>>(new Set());
   const [cascadeOrderMap, setCascadeOrderMap] = useState<Map<string, number>>(new Map());
   const [cascadeLinks, setCascadeLinks] = useState<Set<string>>(new Set());
+  const [cacheInfo, setCacheInfo] = useState<{ isCached: boolean; ageMinutes: number | null } | null>(null);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const fgRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 600 });
+  const layoutDoneRef = useRef(false);
 
   useEffect(() => {
     loadGraphData();
+    updateCacheInfo();
   }, []);
+
+  const updateCacheInfo = async () => {
+    try {
+      const { getCacheInfo } = await import('@/lib/graphCache');
+      const info = getCacheInfo();
+      setCacheInfo(info);
+    } catch (err) {
+      console.error('Failed to get cache info:', err);
+    }
+  };
 
   // Track container dimensions for ForceGraph2D
   // Depends on loading/graphData because the containerRef div only exists after loading completes
@@ -103,26 +118,62 @@ export default function GraphVisualization() {
   useEffect(() => {
     if (!fgRef.current || !graphData) return;
 
+    layoutDoneRef.current = false;
     const fg = fgRef.current;
 
-    // Configure forces for better spacing and stability
-    fg.d3Force('charge')?.strength(-800).distanceMax(600);
-    fg.d3Force('link')?.distance(120);
-    fg.d3Force('center')?.strength(0.2);
+    // Configure forces for MUCH better spacing and clarity
+    // Stronger repulsion to push nodes apart
+    fg.d3Force('charge')?.strength(-2000).distanceMax(1000);
 
-    // Add collision detection to prevent node overlap
+    // Longer links for more spread
+    fg.d3Force('link')?.distance(250).strength(0.5);
+
+    // Weaker center force so nodes can spread more
+    fg.d3Force('center')?.strength(0.05);
+
+    // Stronger collision detection to prevent overlap
     const d3 = require('d3-force');
-    fg.d3Force('collision', d3.forceCollide().radius(40));
+    fg.d3Force('collision', d3.forceCollide().radius(60));
+
+    // Add radial force to spread nodes outward from center
+    fg.d3Force('radial', d3.forceRadial(300, 0, 0).strength(0.3));
+
+    // After physics settles, freeze the graph completely
+    setTimeout(() => {
+      if (fgRef.current && graphData) {
+        // Zoom to fit first
+        fgRef.current.zoomToFit(1000, 100);
+
+        // Fix all node positions in place
+        graphData.nodes.forEach((node: any) => {
+          node.fx = node.x;
+          node.fy = node.y;
+        });
+
+        // Remove all forces so any reheat does nothing
+        fgRef.current.d3Force('charge', null);
+        fgRef.current.d3Force('link', null);
+        fgRef.current.d3Force('center', null);
+        fgRef.current.d3Force('collision', null);
+        fgRef.current.d3Force('radial', null);
+
+        // Set cooldownTime to 0 so any future simulation reheat stops immediately
+        fgRef.current.cooldownTime(0);
+
+        layoutDoneRef.current = true;
+        console.log('[GraphVisualization] Layout frozen - graph is now static');
+      }
+    }, 3000); // Wait 3 seconds for physics to fully settle
   }, [graphData]);
 
-  const loadGraphData = async () => {
+  const loadGraphData = async (forceRefresh = false) => {
     try {
       setLoading(true);
       setError(null);
       console.log("[GraphVisualization] Fetching graph data...");
 
-      // Fetch actual graph data from backend
-      const data = await ConsequenceAPI.getFullGraph();
+      // Fetch actual graph data from backend (with caching)
+      const data = await ConsequenceAPI.getFullGraph({ forceRefresh });
       console.log(`[GraphVisualization] Received ${data.nodes.length} nodes and ${data.links.length} links`);
 
       // Helper functions for colors - Pastel professional palette
@@ -144,15 +195,24 @@ export default function GraphVisualization() {
         return colors[relationship] || "#88d498";
       };
 
-      // Transform data for visualization
-      const nodes: GraphNode[] = data.nodes.map((node) => ({
-        id: node.id,
-        name: node.name,
-        type: node.type,
-        sector: node.sector || undefined,
-        val: 15 + Math.random() * 15, // Size variation
-        color: getColorForType(node.type),
-      }));
+      // Transform data for visualization with initial positioning
+      // Spread nodes in a circular pattern to start instead of all at center
+      const nodes: GraphNode[] = data.nodes.map((node, index) => {
+        const angle = (index / data.nodes.length) * Math.PI * 2;
+        const radius = 300 + Math.random() * 200; // Random radius between 300-500
+
+        return {
+          id: node.id,
+          name: node.name,
+          type: node.type,
+          sector: node.sector || undefined,
+          val: 15 + Math.random() * 15, // Size variation
+          color: getColorForType(node.type),
+          // Initial position in circular pattern
+          x: Math.cos(angle) * radius,
+          y: Math.sin(angle) * radius,
+        } as any;
+      });
 
       const links: GraphLink[] = data.links.map((link) => ({
         source: link.source,
@@ -168,10 +228,20 @@ export default function GraphVisualization() {
       setGraphData({ nodes, links });
       console.log("[GraphVisualization] Graph data loaded successfully");
       setLoading(false);
+      updateCacheInfo();
     } catch (err: any) {
       console.error("[GraphVisualization] Error loading graph:", err);
       setError(err.message || "Failed to load graph");
       setLoading(false);
+    }
+  };
+
+  const handleRefreshGraph = async () => {
+    setIsRefreshing(true);
+    try {
+      await loadGraphData(true); // Force refresh
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -180,10 +250,8 @@ export default function GraphVisualization() {
     setShowCascadePanel(false); // Reset cascade panel on new selection
     setCascadeHighlight(new Set()); // Clear cascade highlights
     setCascadeOrderMap(new Map());
-    // Center on node without aggressive zoom
-    if (fgRef.current) {
-      fgRef.current.centerAt(node.x, node.y, 800);
-    }
+    // Don't auto-center on click to prevent unwanted movement
+    // User can manually pan if needed
   };
 
   const handleCascadeHighlight = (nodeIds: Set<string>, orderMap: Map<string, number>) => {
@@ -286,16 +354,51 @@ export default function GraphVisualization() {
     window.location.href = `/predict?ticker=${selectedNode.id}`;
   };
 
+  // Filter and search functionality - memoized to prevent new object references on every render
+  // This is critical: without useMemo, every hover triggers a re-render which creates a new
+  // graphData object, causing react-force-graph-2d to reset the simulation
+  const filteredData = useMemo(() => {
+    if (!graphData) return null;
+    if (searchQuery === "" && filterType === "all") return null; // Use graphData directly
+    return {
+      nodes: graphData.nodes.filter((node) => {
+        const matchesSearch = searchQuery === "" ||
+          node.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          node.name.toLowerCase().includes(searchQuery.toLowerCase());
+        const matchesType = filterType === "all" || node.type === filterType;
+        return matchesSearch && matchesType;
+      }),
+      links: graphData.links.filter((link) => {
+        const sourceId = typeof link.source === 'string' ? link.source : (link.source as any).id;
+        const targetId = typeof link.target === 'string' ? link.target : (link.target as any).id;
+        const sourceNode = graphData.nodes.find((n) => n.id === sourceId);
+        const targetNode = graphData.nodes.find((n) => n.id === targetId);
+        const sourceMatches = searchQuery === "" ||
+          sourceId.toLowerCase().includes(searchQuery.toLowerCase());
+        const targetMatches = searchQuery === "" ||
+          targetId.toLowerCase().includes(searchQuery.toLowerCase());
+        const typeMatches = filterType === "all" ||
+          sourceNode?.type === filterType ||
+          targetNode?.type === filterType;
+        return (sourceMatches || targetMatches) && typeMatches;
+      }),
+    };
+  }, [graphData, searchQuery, filterType]);
+
   if (loading) {
     return (
       <Card className="p-6 hud-panel">
         <div className="space-y-4">
           <div className="text-center py-8">
             <div className="military-font text-green-400 text-lg mb-4">
-              &gt; LOADING GRAPH DATABASE_
+              &gt; {cacheInfo?.isCached ? 'LOADING FROM CACHE' : 'FETCHING GRAPH DATABASE'}_
             </div>
             <div className="text-xs text-green-400/60 font-mono mb-6">
-              FETCHING 105 ENTITIES | 160 CAUSAL LINKS | STANDBY...
+              {cacheInfo?.isCached ? (
+                <>⚡ INSTANT LOAD FROM CACHE | NO API CALLS NEEDED</>
+              ) : (
+                <>FETCHING 105 ENTITIES | 160 CAUSAL LINKS | STANDBY...</>
+              )}
             </div>
             <Skeleton className="h-[500px] w-full bg-green-500/10" />
           </div>
@@ -315,7 +418,7 @@ export default function GraphVisualization() {
             </p>
             <p className="text-sm text-red-400/70 mt-2 font-mono">{error}</p>
             <button
-              onClick={loadGraphData}
+              onClick={() => loadGraphData()}
               className="mt-4 tactical-button px-4 py-2 text-sm"
             >
               &gt; RETRY CONNECTION
@@ -327,33 +430,6 @@ export default function GraphVisualization() {
   }
 
   if (!graphData) return null;
-
-  // Filter and search functionality
-  const filteredData = graphData
-    ? {
-        nodes: graphData.nodes.filter((node) => {
-          const matchesSearch = searchQuery === "" ||
-            node.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            node.name.toLowerCase().includes(searchQuery.toLowerCase());
-          const matchesType = filterType === "all" || node.type === filterType;
-          return matchesSearch && matchesType;
-        }),
-        links: graphData.links.filter((link) => {
-          const sourceId = typeof link.source === 'string' ? link.source : (link.source as any).id;
-          const targetId = typeof link.target === 'string' ? link.target : (link.target as any).id;
-          const sourceNode = graphData.nodes.find((n) => n.id === sourceId);
-          const targetNode = graphData.nodes.find((n) => n.id === targetId);
-          const sourceMatches = searchQuery === "" ||
-            sourceId.toLowerCase().includes(searchQuery.toLowerCase());
-          const targetMatches = searchQuery === "" ||
-            targetId.toLowerCase().includes(searchQuery.toLowerCase());
-          const typeMatches = filterType === "all" ||
-            sourceNode?.type === filterType ||
-            targetNode?.type === filterType;
-          return (sourceMatches || targetMatches) && typeMatches;
-        }),
-      }
-    : null;
 
   return (
     <div className="space-y-4">
@@ -383,8 +459,8 @@ export default function GraphVisualization() {
               <option value="sector">SECTORS</option>
             </select>
           </div>
-          {(searchQuery || filterType !== "all") && (
-            <div className="flex items-end">
+          <div className="flex items-end gap-2">
+            {(searchQuery || filterType !== "all") && (
               <button
                 onClick={() => {
                   setSearchQuery("");
@@ -394,14 +470,33 @@ export default function GraphVisualization() {
               >
                 CLEAR FILTERS
               </button>
+            )}
+            <button
+              onClick={handleRefreshGraph}
+              disabled={isRefreshing}
+              className="tactical-button px-4 py-2 text-xs whitespace-nowrap flex items-center gap-2 bg-cyan-500/10 border-cyan-500/30 hover:bg-cyan-500/20 disabled:opacity-50"
+              title="Refresh graph data from server"
+            >
+              <RefreshCw className={`h-3 w-3 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <span>REFRESH</span>
+            </button>
+          </div>
+        </div>
+        <div className="mt-3 pt-3 border-t border-green-500/20 font-mono text-xs text-green-400/70 flex justify-between items-center">
+          <div>
+            {(searchQuery || filterType !== "all") && filteredData ? (
+              <>SHOWING {filteredData.nodes.length} / {graphData?.nodes.length || 0} ENTITIES</>
+            ) : (
+              <>TOTAL: {graphData?.nodes.length || 0} ENTITIES | {graphData?.links.length || 0} CONNECTIONS</>
+            )}
+          </div>
+          {cacheInfo?.isCached && cacheInfo.ageMinutes !== null && (
+            <div className="text-cyan-400/70 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+              CACHED DATA (AGE: {cacheInfo.ageMinutes}m)
             </div>
           )}
         </div>
-        {(searchQuery || filterType !== "all") && filteredData && (
-          <div className="mt-3 pt-3 border-t border-green-500/20 font-mono text-xs text-green-400/70">
-            SHOWING {filteredData.nodes.length} / {graphData?.nodes.length || 0} ENTITIES
-          </div>
-        )}
       </Card>
 
       {/* Interactive Instructions - Military Style */}
@@ -707,12 +802,15 @@ export default function GraphVisualization() {
               `}
               linkCanvasObjectMode={() => 'after'}
               onNodeClick={handleNodeClick}
-              onNodeHover={(node: any) => setHoveredNode(node)}
+              onNodeHover={() => {/* no-op: avoid setState to prevent re-render */}}
               enableNodeDrag={true}
               enableZoomInteraction={true}
               enablePanInteraction={true}
               enablePointerInteraction={true}
               backgroundColor="transparent"
+              autoPauseRedraw={false}
+              minZoom={0.1}
+              maxZoom={8}
               linkDirectionalParticles={(link: any) => {
                 const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
                 const targetId = typeof link.target === 'object' ? link.target.id : link.target;
@@ -761,16 +859,17 @@ export default function GraphVisualization() {
 
                 return link.color || 'rgba(126, 200, 227, 0.6)';
               }}
-              d3VelocityDecay={0.8}
-              d3AlphaDecay={0.05}
-              cooldownTicks={100}
+              d3VelocityDecay={0.3}
+              d3AlphaDecay={0.01}
+              cooldownTicks={200}
+              warmupTicks={100}
               onNodeDragEnd={(node: any) => {
                 // Fix node in place after dragging
                 node.fx = node.x;
                 node.fy = node.y;
               }}
               onEngineStop={() => {
-                // Don't auto-zoom on engine stop
+                // No-op: layout freezing is handled by the timeout in useEffect
               }}
             />
             ) : (

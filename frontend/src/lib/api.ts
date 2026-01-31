@@ -111,7 +111,8 @@ export class ConsequenceAPI {
   }
 
   // Get full graph data (all entities and connections)
-  static async getFullGraph(): Promise<{
+  // With intelligent caching to prevent redundant API calls
+  static async getFullGraph(options: { forceRefresh?: boolean } = {}): Promise<{
     nodes: Array<{
       id: string;
       name: string;
@@ -127,7 +128,20 @@ export class ConsequenceAPI {
       confidence: number;
     }>;
   }> {
-    console.log(`[API] Fetching all entities from ${API_BASE_URL}/entities/search`);
+    // Import cache utilities (dynamic import to avoid SSR issues)
+    const { getCachedGraphData, setCachedGraphData, getCacheInfo } = await import('./graphCache');
+
+    // Check cache first (unless force refresh requested)
+    if (!options.forceRefresh) {
+      const cached = getCachedGraphData();
+      if (cached) {
+        const info = getCacheInfo();
+        console.log(`[API] ⚡ Using cached graph data (age: ${info.ageMinutes}m, ${info.nodeCount} nodes, ${info.linkCount} links)`);
+        return cached;
+      }
+    }
+
+    console.log(`[API] 🔄 Fetching fresh graph data from ${API_BASE_URL}/entities/search`);
 
     // Get all entities
     const searchRes = await fetch(
@@ -179,7 +193,13 @@ export class ConsequenceAPI {
     }
 
     console.log(`[API] Complete! Total: ${nodes.length} nodes, ${links.length} links`);
-    return { nodes, links };
+
+    const graphData = { nodes, links };
+
+    // Cache the results
+    setCachedGraphData(graphData);
+
+    return graphData;
   }
 
   // Notification preferences
