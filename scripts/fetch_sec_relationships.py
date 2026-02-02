@@ -186,7 +186,7 @@ def main():
     relationships = fetch_all_relationships(
         SP100_TICKERS,
         use_cache=True,
-        max_companies=20  # Increase this for more data (will take longer)
+        max_companies=len(SP100_TICKERS)  # Fetch all SP100 companies
     )
 
     # Print summary

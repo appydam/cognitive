@@ -50,9 +50,26 @@ def get_db():
 async def startup_event():
     """Load the causal graph on startup."""
     global GRAPH
-    print("Loading causal graph from database...")
-    GRAPH = load_graph_from_database()
-    print(f"Graph loaded: {GRAPH.num_entities} entities, {GRAPH.num_links} links")
+
+    # Try loading from builders with macro domain first (for testing)
+    # Fall back to database if builders fail
+    try:
+        print("Loading causal graph from builders (securities + macro)...")
+        from src.graph.builders.registry import BuilderRegistry
+        from src.graph.builders.real_data import build_graph_from_real_data
+        from src.graph.builders import macro
+
+        # Register builders
+        BuilderRegistry.register('securities_real_data', build_graph_from_real_data)
+
+        # Build combined graph
+        GRAPH = BuilderRegistry.build(['securities_real_data', 'macro'])
+        print(f"Graph loaded from builders: {GRAPH.num_entities} entities, {GRAPH.num_links} links")
+    except Exception as e:
+        print(f"Failed to load from builders: {e}")
+        print("Falling back to database...")
+        GRAPH = load_graph_from_database()
+        print(f"Graph loaded from database: {GRAPH.num_entities} entities, {GRAPH.num_links} links")
 
 
 # Request/Response models
@@ -92,6 +109,40 @@ class EarningsEventRequest(BaseModel):
             return self.ticker.upper()
         else:
             raise ValueError("Either entity_id or ticker must be provided")
+
+
+class GenericEventRequest(BaseModel):
+    """Generic event request for any domain (macro, supply chain, etc.)."""
+
+    entity_id: str = Field(..., description="Entity ID where event occurs", example="FED_FUNDS_RATE")
+    magnitude: float = Field(
+        ...,
+        description="Event magnitude as decimal (-1.0 to 1.0)",
+        example=0.005,  # 0.5% = 50 basis points for rate hike
+        ge=-1.0,
+        le=1.0,
+    )
+    event_type: str = Field(
+        default="generic",
+        description="Type of event (e.g., 'rate_hike', 'port_disruption', 'commodity_surge')",
+        example="rate_hike",
+    )
+    domain: str = Field(
+        default="macro",
+        description="Domain of the event (e.g., 'macro', 'supply_chain', 'securities')",
+        example="macro",
+    )
+    description: str = Field(
+        default="",
+        description="Optional human-readable description",
+        example="Fed raises rates by 50 basis points",
+    )
+    horizon_days: int = Field(
+        default=30,
+        description="Number of days to project effects",
+        ge=1,
+        le=90,
+    )
 
 
 class EffectResponse(BaseModel):
@@ -243,6 +294,37 @@ async def get_entity_connections(ticker: str):
     }
 
 
+@app.get("/graph/full")
+async def get_full_graph():
+    """Get the complete graph data (all nodes and links) in a single request."""
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    nodes = [
+        {
+            "id": entity.id,
+            "name": entity.name,
+            "type": entity.entity_type,
+            "sector": entity.attributes.get("sector"),
+        }
+        for entity in GRAPH.entities.values()
+    ]
+
+    links = [
+        {
+            "source": link.source,
+            "target": link.target,
+            "relationship": link.relationship_type,
+            "strength": link.strength,
+            "delay_days": link.delay_mean,
+            "confidence": link.confidence,
+        }
+        for link in GRAPH.iter_links()
+    ]
+
+    return {"nodes": nodes, "links": links}
+
+
 @app.post("/predict/earnings", response_model=CascadeResponse)
 async def predict_earnings_cascade(request: EarningsEventRequest):
     """
@@ -273,6 +355,100 @@ async def predict_earnings_cascade(request: EarningsEventRequest):
         description=request.description,
     )
 
+    cascade = propagate_with_explanation(
+        event,
+        GRAPH,
+        horizon_days=request.horizon_days,
+    )
+
+    # Helper to extract entity IDs from cause_chain
+    def extract_cause_path(cause_chain):
+        """Extract entity IDs from cause_chain [Event, Link, Link, ...]."""
+        if not cause_chain:
+            return []
+
+        path = []
+        # First item is always the Event (trigger)
+        if cause_chain and hasattr(cause_chain[0], 'entity'):
+            path.append(cause_chain[0].entity)
+
+        # Remaining items are CausalLinks - extract target from each
+        for item in cause_chain[1:]:
+            if hasattr(item, 'target'):
+                path.append(item.target)
+
+        return path
+
+    # Convert to response format
+    timeline_response = {}
+    for period, effects in cascade.get_timeline().items():
+        timeline_response[period] = [
+            EffectResponse(
+                entity=e.entity,
+                magnitude_percent=round(e.magnitude * 100, 2),
+                magnitude_range=[round(e.magnitude_range[0], 2), round(e.magnitude_range[1], 2)],
+                day=round(e.day, 1),
+                confidence=round(e.confidence, 3),
+                order=e.order,
+                relationship_type=e.relationship_type,
+                explanation=e.explanation,
+                cause_path=extract_cause_path(e.cause_chain),
+            )
+            for e in effects
+        ]
+
+    return CascadeResponse(
+        trigger={
+            "entity": event.entity,
+            "magnitude_percent": round(event.magnitude * 100, 2),
+            "event_type": event.event_type,
+            "description": event.description,
+        },
+        horizon_days=cascade.horizon_days,
+        total_effects=len(cascade.effects),
+        effects_by_order={
+            f"order_{k}": len(v) for k, v in cascade._by_order.items()
+        },
+        timeline=timeline_response,
+    )
+
+
+@app.post("/predict/event", response_model=CascadeResponse)
+async def predict_generic_event(request: GenericEventRequest):
+    """
+    Predict cascade effects from a generic event (domain-agnostic).
+
+    This endpoint works for any domain: macro, supply chain, geopolitical, etc.
+    Examples:
+    - Macro: Fed rate hike, oil price surge, VIX spike
+    - Supply chain: Port disruption, factory closure
+    - Geopolitical: Trade sanctions, conflict escalation
+
+    The earnings endpoint remains for backward compatibility.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    entity_id = request.entity_id.upper()
+
+    # Verify entity exists
+    if entity_id not in GRAPH.entities:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Entity {entity_id} not found in graph. Check entity ID spelling.",
+        )
+
+    # Create generic event
+    from src.engine.propagate import Event
+
+    event = Event(
+        entity=entity_id,
+        magnitude=request.magnitude,
+        event_type=request.event_type,
+        description=request.description or f"{request.event_type} on {entity_id}",
+    )
+
+    # Propagate cascade (domain-agnostic engine)
     cascade = propagate_with_explanation(
         event,
         GRAPH,
@@ -669,6 +845,554 @@ async def send_test_notification(user_id: str = "default", db: Session = Depends
         "message": f"Sent test notifications to {len([r for r in results if r['status'] == 'sent'])} channels",
         "results": results
     }
+
+
+# ==================== Portfolio Endpoints ====================
+
+class PortfolioHoldingRequest(BaseModel):
+    """Single portfolio holding."""
+    entity_id: str
+    shares: float
+    cost_basis: float | None = None
+
+
+class PortfolioAnalyzeRequest(BaseModel):
+    """Request to analyze a portfolio."""
+    holdings: list[PortfolioHoldingRequest]
+
+
+@app.post("/portfolio/analyze")
+async def analyze_portfolio(request: PortfolioAnalyzeRequest):
+    """
+    Analyze a portfolio against the causal graph.
+
+    Returns exposure scores, concentration risk, and macro sensitivities
+    for each holding.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    if not request.holdings:
+        raise HTTPException(status_code=400, detail="No holdings provided")
+
+    holdings_analysis = []
+    valid_entity_ids = set()
+    sector_weights = {}
+    total_weight = 0.0
+
+    # Analyze each holding
+    for h in request.holdings:
+        eid = h.entity_id.upper()
+
+        # Check if entity exists in graph
+        if eid not in GRAPH.entities:
+            continue
+
+        entity = GRAPH.entities[eid]
+        valid_entity_ids.add(eid)
+
+        # Count incoming/outgoing links
+        incoming = len(GRAPH.get_incoming(eid))
+        outgoing = len(GRAPH.get_outgoing(eid))
+
+        # Get neighbors within 3 hops (cascade reach)
+        neighbors = GRAPH.get_neighbors(eid, depth=3)
+
+        # Cascade exposure score: 0-100 based on neighbor count
+        # Normalized against total graph size
+        exposure_score = min(100.0, (len(neighbors) / max(GRAPH.num_entities, 1)) * 1000)
+
+        # Equal weighting for now (without prices)
+        weight = 1.0 / len(request.holdings)
+        total_weight += weight
+
+        # Track sector weights
+        sector = entity.attributes.get("sector") if hasattr(entity, 'attributes') else None
+        if sector:
+            sector_weights[sector] = sector_weights.get(sector, 0) + weight
+
+        holdings_analysis.append({
+            "entity_id": eid,
+            "name": entity.name,
+            "entity_type": entity.entity_type,
+            "sector": sector,
+            "current_price": None,
+            "market_value": None,
+            "portfolio_weight": round(weight, 4),
+            "incoming_cascade_count": incoming,
+            "outgoing_cascade_count": outgoing,
+            "cascade_exposure_score": round(exposure_score, 1),
+        })
+
+    # Compute concentration metrics
+    weights = [h["portfolio_weight"] for h in holdings_analysis]
+    herfindahl = sum(w * w for w in weights) if weights else 0
+    top_weight = max(weights) if weights else 0
+
+    # Interconnection: measure density of links between holdings
+    links_between_holdings = 0
+    for h1 in valid_entity_ids:
+        for link in GRAPH.get_outgoing(h1):
+            if link.target in valid_entity_ids:
+                links_between_holdings += 1
+
+    max_possible_links = len(valid_entity_ids) * (len(valid_entity_ids) - 1)
+    interconnection = (links_between_holdings / max_possible_links * 100) if max_possible_links > 0 else 0
+
+    # Find macro indicators that affect holdings
+    macro_risks = []
+    for entity in GRAPH.entities.values():
+        if entity.entity_type == "indicator":
+            affected = []
+            for link in GRAPH.get_outgoing(entity.id):
+                if link.target in valid_entity_ids:
+                    affected.append(link.target)
+
+            if affected:
+                # Quick sensitivity estimate from link strengths
+                avg_sens = sum(
+                    GRAPH.get_outgoing(entity.id)[i].strength * GRAPH.get_outgoing(entity.id)[i].direction
+                    for i, _ in enumerate(affected)
+                    if i < len(GRAPH.get_outgoing(entity.id))
+                ) / len(affected) if affected else 0
+
+                macro_risks.append({
+                    "indicator_id": entity.id,
+                    "indicator_name": entity.name,
+                    "affected_holdings": affected,
+                    "avg_sensitivity": round(avg_sens, 3),
+                    "direction": "positive" if avg_sens > 0 else "negative",
+                })
+
+    # Overall portfolio cascade exposure (average of holdings)
+    avg_exposure = sum(h["cascade_exposure_score"] for h in holdings_analysis) / len(holdings_analysis) if holdings_analysis else 0
+
+    return {
+        "total_value": None,
+        "total_holdings": len(request.holdings),
+        "holdings": holdings_analysis,
+        "concentration_risk": {
+            "sector_breakdown": {k: round(v, 4) for k, v in sector_weights.items()},
+            "top_holding_weight": round(top_weight, 4),
+            "interconnection_score": round(interconnection, 1),
+            "herfindahl_index": round(herfindahl, 4),
+        },
+        "top_macro_risks": sorted(macro_risks, key=lambda x: abs(x["avg_sensitivity"]), reverse=True)[:5],
+        "cascade_exposure_score": round(avg_exposure, 1),
+    }
+
+
+class PortfolioCascadeRequest(BaseModel):
+    """Request to run a cascade filtered to portfolio holdings."""
+    holdings: list[PortfolioHoldingRequest]
+    entity_id: str = Field(..., description="Entity where event occurs")
+    surprise_percent: float
+    horizon_days: int = Field(default=14, ge=1, le=90)
+
+
+@app.post("/portfolio/cascade")
+async def portfolio_cascade(request: PortfolioCascadeRequest):
+    """
+    Predict cascade effects filtered to portfolio holdings.
+
+    Runs the standard cascade engine then filters results to show
+    only impacts on the user's holdings.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    entity_id = request.entity_id.upper()
+
+    # Verify trigger entity exists
+    if entity_id not in GRAPH.entities:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Entity {entity_id} not found in graph"
+        )
+
+    # Run standard cascade
+    event = create_earnings_event(
+        ticker=entity_id,
+        surprise_percent=request.surprise_percent,
+    )
+    cascade = propagate_with_explanation(
+        event,
+        GRAPH,
+        horizon_days=request.horizon_days,
+    )
+
+    # Build holding lookup
+    holding_ids = {h.entity_id.upper() for h in request.holdings}
+
+    # Filter effects to portfolio holdings
+    holding_effects = []
+    affected = set()
+
+    # cascade.effects is a list of Effect objects
+    for effect in cascade.effects:
+        if effect.entity in holding_ids:
+            affected.add(effect.entity)
+            entity_info = GRAPH.entities.get(effect.entity)
+
+            holding_effects.append({
+                "entity_id": effect.entity,
+                "name": entity_info.name if entity_info else effect.entity,
+                "portfolio_weight": 1.0 / len(holding_ids),  # Equal weight
+                "magnitude_percent": round(effect.magnitude * 100, 2),
+                "magnitude_range": [round(r * 100, 2) for r in effect.magnitude_range],
+                "day": round(effect.day, 1),
+                "confidence": round(effect.confidence, 3),
+                "order": effect.order,
+                "relationship_type": effect.relationship_type,
+                "cause_path": effect.cause_chain if hasattr(effect, 'cause_chain') else [],
+                "dollar_impact": None,
+            })
+
+    # Compute weighted portfolio impact (equal weight)
+    total_impact = sum(e["magnitude_percent"] * e["portfolio_weight"] for e in holding_effects)
+
+    return {
+        "trigger": {
+            "entity": entity_id,
+            "magnitude_percent": request.surprise_percent,
+            "event_type": "earnings" if request.surprise_percent else "generic",
+            "description": f"{entity_id} {'beats' if request.surprise_percent > 0 else 'misses'} by {abs(request.surprise_percent)}%",
+        },
+        "portfolio_impact": {
+            "total_impact_percent": round(total_impact, 2),
+            "total_impact_dollars": None,
+            "affected_holdings": len(affected),
+            "unaffected_holdings": len(holding_ids) - len(affected),
+        },
+        "holding_effects": sorted(holding_effects, key=lambda x: abs(x["magnitude_percent"]), reverse=True),
+        "unaffected_holdings": list(holding_ids - affected),
+    }
+
+
+class MacroSensitivityRequest(BaseModel):
+    """Request for macro sensitivity analysis."""
+    holdings: list[PortfolioHoldingRequest]
+
+
+@app.post("/portfolio/macro-sensitivity")
+async def portfolio_macro_sensitivity(request: MacroSensitivityRequest):
+    """
+    Compute how each macro indicator affects portfolio holdings.
+
+    Runs standard shocks for each macro indicator and measures
+    impact on holdings.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    # Standard shocks for each indicator type
+    INDICATOR_SHOCKS = {
+        "FED_FUNDS_RATE": 0.005,   # 50 bps
+        "VIX": 0.20,               # +20%
+        "OIL_WTI": 0.10,           # +10%
+        "USD_INDEX": 0.05,         # +5%
+        "CPI": 0.01,               # +1%
+        "10Y_TREASURY": 0.005,     # 50 bps
+        "GOLD": 0.05,              # +5%
+        "UNEMPLOYMENT": 0.01,      # +1%
+    }
+
+    holding_ids = {h.entity_id.upper() for h in request.holdings}
+    results = []
+
+    # Find all indicator entities in graph
+    for entity in GRAPH.entities.values():
+        if entity.entity_type != "indicator":
+            continue
+
+        # Get shock magnitude for this indicator
+        shock = INDICATOR_SHOCKS.get(entity.id, 0.05)  # default 5%
+
+        # Run propagation
+        from src.engine.propagate import Event
+        event = Event(entity=entity.id, magnitude=shock, event_type="macro_shock")
+
+        try:
+            cascade = propagate_with_explanation(event, GRAPH, horizon_days=30)
+
+            # Filter to holdings
+            effects_on_holdings = {}
+            for effect in cascade.effects:
+                if effect.entity in holding_ids:
+                    effects_on_holdings[effect.entity] = round(effect.magnitude * 100, 2)
+
+            if effects_on_holdings:
+                results.append({
+                    "indicator_id": entity.id,
+                    "indicator_name": entity.name,
+                    "shock_magnitude": shock,
+                    "effects_on_holdings": effects_on_holdings,
+                    "avg_impact": round(sum(effects_on_holdings.values()) / len(effects_on_holdings), 2),
+                })
+        except Exception as e:
+            print(f"[portfolio/macro-sensitivity] Failed to propagate {entity.id}: {e}")
+            continue
+
+    return {"sensitivities": sorted(results, key=lambda x: abs(x["avg_impact"]), reverse=True)}
+
+
+class SubgraphRequest(BaseModel):
+    """Request for portfolio subgraph."""
+    holdings: list[PortfolioHoldingRequest]
+    include_intermediaries: bool = Field(default=True, description="Include 1-hop intermediaries")
+
+
+@app.post("/portfolio/subgraph")
+async def portfolio_subgraph(request: SubgraphRequest):
+    """
+    Get the causal subgraph connecting portfolio holdings.
+
+    Returns nodes and links showing how holdings are connected.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    entity_ids = {h.entity_id.upper() for h in request.holdings}
+
+    # Filter to holdings that exist in the graph (skip unknown ones)
+    entity_ids = {eid for eid in entity_ids if eid in GRAPH.entities}
+
+    if not entity_ids:
+        return {"nodes": [], "links": []}
+
+    # Optionally include 1-hop intermediaries
+    if request.include_intermediaries:
+        expanded = set(entity_ids)
+        for eid in list(entity_ids):  # Iterate over copy
+            # Check outgoing links
+            for link in GRAPH.get_outgoing(eid):
+                # If target connects back to a holding, include it
+                target_links_to_holding = any(
+                    l.target in entity_ids
+                    for l in GRAPH.get_outgoing(link.target)
+                )
+                if link.target in entity_ids or target_links_to_holding:
+                    expanded.add(link.target)
+
+            # Check incoming links
+            for link in GRAPH.get_incoming(eid):
+                # If source connects to a holding, include it
+                source_links_to_holding = any(
+                    l.target in entity_ids
+                    for l in GRAPH.get_outgoing(link.source)
+                )
+                if link.source in entity_ids or source_links_to_holding:
+                    expanded.add(link.source)
+
+        entity_ids = expanded
+
+    # Extract subgraph
+    sub = GRAPH.subgraph(entity_ids)
+
+    # Format as graph/full response
+    nodes = []
+    for e in sub.entities.values():
+        is_holding = e.id in {h.entity_id.upper() for h in request.holdings}
+        nodes.append({
+            "id": e.id,
+            "name": e.name,
+            "type": e.entity_type,
+            "sector": e.attributes.get("sector") if hasattr(e, 'attributes') else None,
+            "is_holding": is_holding,
+        })
+
+    links = []
+    for link in sub.iter_links():
+        links.append({
+            "source": link.source,
+            "target": link.target,
+            "relationship": link.relationship_type,
+            "strength": round(link.strength, 3),
+            "delay_days": round(link.delay_mean, 2),
+            "confidence": round(link.confidence, 3),
+        })
+
+    return {"nodes": nodes, "links": links}
+
+
+# ============================================================
+# SIGNAL ENDPOINTS
+# ============================================================
+
+class SignalGenerateRequest(BaseModel):
+    """Request to generate signals from a cascade."""
+    trigger_entity: str
+    trigger_magnitude: float  # percent
+    trigger_description: str = ""
+    horizon_days: int = 14
+    min_confidence: float = 0.5
+    portfolio_value: float | None = None
+
+
+@app.post("/signals/generate")
+async def generate_signals(request: SignalGenerateRequest):
+    """
+    Generate trade signals from a cascade prediction.
+
+    Runs the cascade engine, then converts high-confidence effects
+    into actionable BUY/SELL signals with prices, stops, and conviction.
+    """
+    if GRAPH is None:
+        raise HTTPException(status_code=503, detail="Graph not loaded")
+
+    entity_id = request.trigger_entity.upper()
+    if entity_id not in GRAPH.entities:
+        raise HTTPException(status_code=404, detail=f"Entity {entity_id} not found in graph")
+
+    # Run cascade
+    event = create_earnings_event(
+        ticker=entity_id,
+        surprise_percent=request.trigger_magnitude,
+    )
+    cascade = propagate_with_explanation(
+        event, GRAPH, horizon_days=request.horizon_days,
+    )
+
+    # Flatten effects into list of dicts
+    effects = []
+    for effect in cascade.effects:
+        cause_path = []
+        if hasattr(effect, 'cause_chain') and effect.cause_chain:
+            for item in effect.cause_chain:
+                if hasattr(item, 'entity'):
+                    cause_path.append(item.entity)
+                elif hasattr(item, 'target'):
+                    cause_path.append(item.target)
+
+        effects.append({
+            "entity": effect.entity,
+            "magnitude_percent": round(effect.magnitude * 100, 2),
+            "day": round(effect.day, 1),
+            "confidence": round(effect.confidence, 3),
+            "order": effect.order,
+            "relationship_type": effect.relationship_type,
+            "cause_path": cause_path,
+        })
+
+    # Generate signals
+    from src.signals.signal_generator import generate_signals_from_cascade
+    signals = generate_signals_from_cascade(
+        cascade_effects=effects,
+        trigger_entity=entity_id,
+        trigger_magnitude=request.trigger_magnitude,
+        trigger_description=request.trigger_description,
+        min_confidence=request.min_confidence,
+        portfolio_value=request.portfolio_value,
+        graph_entities=GRAPH.entities,
+    )
+
+    # Save signals
+    from src.tracking.signal_tracker import save_signals_batch
+    signal_dicts = [s.to_dict() for s in signals]
+    saved = save_signals_batch(signal_dicts)
+
+    return {"signals": saved, "total": len(saved)}
+
+
+@app.get("/signals/active")
+async def get_active_signals_endpoint():
+    """Get all currently active trade signals."""
+    from src.tracking.signal_tracker import get_active_signals
+    signals = get_active_signals()
+    return {"signals": signals, "total": len(signals)}
+
+
+@app.get("/signals/history")
+async def get_signals_history(days: int = 30):
+    """Get signal history for the last N days."""
+    from src.tracking.signal_tracker import get_all_signals
+    signals = get_all_signals(days=days)
+    return {"signals": signals, "total": len(signals)}
+
+
+@app.get("/signals/performance")
+async def get_signals_performance():
+    """Get aggregate P&L performance across all signals."""
+    from src.tracking.signal_tracker import get_signal_performance
+    return get_signal_performance()
+
+
+@app.post("/signals/update-prices")
+async def update_signal_prices_endpoint():
+    """
+    Check active signals against current prices.
+    Updates status to target_hit, stopped, or expired.
+    """
+    from src.tracking.signal_tracker import update_signal_prices
+    result = update_signal_prices()
+    return result
+
+
+# ============================================================
+# CALENDAR ENDPOINTS
+# ============================================================
+
+@app.get("/calendar/upcoming")
+async def get_upcoming_earnings_endpoint(days: int = 7):
+    """
+    Get upcoming earnings for monitored companies.
+    Uses cached data if available (refreshed every 6 hours).
+    """
+    import asyncio
+    from src.poller.earnings_poller import get_cached_upcoming, fetch_upcoming_earnings
+
+    # Try cache first
+    cached = get_cached_upcoming()
+    if cached:
+        return {"earnings": cached, "source": "cache"}
+
+    # Fetch fresh data in a thread (yfinance is blocking I/O)
+    graph_entities = GRAPH.entities if GRAPH else None
+    loop = asyncio.get_event_loop()
+    earnings = await loop.run_in_executor(
+        None, lambda: fetch_upcoming_earnings(graph_entities=graph_entities, days=days)
+    )
+    return {"earnings": earnings, "source": "fresh"}
+
+
+@app.post("/calendar/refresh")
+async def refresh_earnings_calendar(days: int = 7):
+    """Force refresh the earnings calendar cache."""
+    import asyncio
+    from src.poller.earnings_poller import fetch_upcoming_earnings
+
+    graph_entities = GRAPH.entities if GRAPH else None
+    # Run in thread to avoid blocking the event loop
+    loop = asyncio.get_event_loop()
+    earnings = await loop.run_in_executor(
+        None, lambda: fetch_upcoming_earnings(graph_entities=graph_entities, days=days)
+    )
+    return {"earnings": earnings, "total": len(earnings)}
+
+
+@app.post("/calendar/check-surprises")
+async def check_earnings_surprises(min_surprise: float = 3.0):
+    """
+    Check for new earnings surprises.
+    Returns any new surprises above the threshold.
+    """
+    from src.poller.earnings_poller import check_for_surprises
+
+    graph_entities = GRAPH.entities if GRAPH else None
+    surprises = check_for_surprises(graph_entities=graph_entities, min_surprise=min_surprise)
+
+    results = []
+    for s in surprises:
+        results.append({
+            "ticker": s.ticker,
+            "company_name": s.company_name,
+            "report_date": s.report_date.isoformat(),
+            "eps_estimate": s.eps_estimate,
+            "eps_actual": s.eps_actual,
+            "surprise_percent": round(s.surprise_percent, 2) if s.surprise_percent else None,
+        })
+
+    return {"surprises": results, "total": len(results)}
 
 
 # Run with: uvicorn src.api.main:app --reload

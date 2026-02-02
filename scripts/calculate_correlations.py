@@ -247,15 +247,15 @@ def main():
     print("Calculating stock price correlations...")
     print("=" * 60)
 
-    # Use top 50 tickers for faster calculation
-    # Increase for more comprehensive analysis
-    tickers = TOP_100_TICKERS[:50]
+    # Use full TOP_100_TICKERS for comprehensive analysis
+    # Previously limited to [:50], now using all 100 for 4,950 pairs
+    tickers = TOP_100_TICKERS
 
     # Calculate correlations
     correlations = calculate_all_correlations(
         tickers,
         use_cache=True,
-        min_pairs=200,  # Calculate at least 200 pairs
+        min_pairs=2000,  # Calculate at least 2000 pairs (up from 200)
         period="2y"
     )
 

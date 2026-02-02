@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Bell, Radio, TrendingUp, XCircle, TestTube, Mail, MessageSquare, Phone, Send } from 'lucide-react';
+import { Bell, Radio, TrendingUp, XCircle, TestTube, Mail, MessageSquare, Phone, Send, Briefcase } from 'lucide-react';
 import { alertClient } from '@/lib/websocket';
 import { toast } from 'sonner';
 import { ConsequenceAPI } from '@/lib/api';
+import { getPortfolio, hasPortfolio } from '@/lib/portfolio';
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
   return (
@@ -170,6 +171,32 @@ export default function AlertsPage() {
 
   const removeFromWatchlist = (ticker: string) => {
     setWatchlist(watchlist.filter((t) => t !== ticker));
+  };
+
+  const importFromPortfolio = () => {
+    if (!hasPortfolio()) {
+      toast.error('No portfolio found', {
+        description: 'Add holdings to your portfolio first',
+      });
+      return;
+    }
+
+    const portfolio = getPortfolio();
+    const portfolioTickers = portfolio.holdings.map(h => h.entity_id);
+
+    // Merge with existing watchlist, avoiding duplicates
+    const mergedWatchlist = [...new Set([...watchlist, ...portfolioTickers])];
+    const addedCount = mergedWatchlist.length - watchlist.length;
+
+    setWatchlist(mergedWatchlist);
+
+    if (addedCount > 0) {
+      toast.success(`Added ${addedCount} holdings to watchlist`, {
+        description: `Now watching ${mergedWatchlist.length} tickers`,
+      });
+    } else {
+      toast.info('All portfolio holdings already in watchlist');
+    }
   };
 
   const saveNotificationSettings = async () => {
@@ -479,6 +506,19 @@ export default function AlertsPage() {
                 Add
               </button>
             </div>
+
+            {/* Import from Portfolio Button */}
+            {hasPortfolio() && (
+              <div className="mb-4">
+                <button
+                  onClick={importFromPortfolio}
+                  className="w-full px-4 py-2.5 rounded-lg text-sm font-medium bg-gradient-to-r from-yellow-500/10 to-yellow-600/10 hover:from-yellow-500/20 hover:to-yellow-600/20 text-yellow-400 border border-yellow-500/30 transition-all duration-200 flex items-center justify-center gap-2"
+                >
+                  <Briefcase className="w-4 h-4" />
+                  Import from Portfolio
+                </button>
+              </div>
+            )}
 
             {/* Ticker list */}
             <div className="space-y-1.5 max-h-[300px] overflow-y-auto">

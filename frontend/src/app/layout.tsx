@@ -76,10 +76,22 @@ export default function RootLayout({
                     TRACK_RECORD
                   </a>
                   <a
+                    href="/backtest"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
+                  >
+                    BACKTEST_ENGINE
+                  </a>
+                  <a
                     href="/data-sources"
                     className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
                   >
                     DATA_SOURCES
+                  </a>
+                  <a
+                    href="/architecture"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
+                  >
+                    SYSTEM_ARCHITECTURE
                   </a>
                 </div>
               </div>

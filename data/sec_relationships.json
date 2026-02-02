@@ -6,7 +6,7 @@
     "revenue_pct": 25.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267318"
+    "fetched_at": "2026-02-01T00:55:39.094510"
   },
   {
     "supplier": "QCOM",
@@ -15,7 +15,7 @@
     "revenue_pct": 15.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267333"
+    "fetched_at": "2026-02-01T00:55:39.094516"
   },
   {
     "supplier": "AVGO",
@@ -24,7 +24,7 @@
     "revenue_pct": 20.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267334"
+    "fetched_at": "2026-02-01T00:55:39.094517"
   },
   {
     "supplier": "TXN",
@@ -33,7 +33,7 @@
     "revenue_pct": 10.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267336"
+    "fetched_at": "2026-02-01T00:55:39.094518"
   },
   {
     "supplier": "ADI",
@@ -42,7 +42,7 @@
     "revenue_pct": 8.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267337"
+    "fetched_at": "2026-02-01T00:55:39.094519"
   },
   {
     "supplier": "TSM",
@@ -51,7 +51,7 @@
     "revenue_pct": 100.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267338"
+    "fetched_at": "2026-02-01T00:55:39.094520"
   },
   {
     "supplier": "PCRFY",
@@ -60,7 +60,7 @@
     "revenue_pct": 15.0,
     "year": 2024,
     "source": "Estimate",
-    "fetched_at": "2026-01-24T12:19:06.267338"
+    "fetched_at": "2026-02-01T00:55:39.094521"
   },
   {
     "supplier": "ORCL",
@@ -69,7 +69,7 @@
     "revenue_pct": 5.0,
     "year": 2024,
     "source": "Estimate",
-    "fetched_at": "2026-01-24T12:19:06.267339"
+    "fetched_at": "2026-02-01T00:55:39.094522"
   },
   {
     "supplier": "ASML",
@@ -78,7 +78,7 @@
     "revenue_pct": 30.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267340"
+    "fetched_at": "2026-02-01T00:55:39.094523"
   },
   {
     "supplier": "LRCX",
@@ -87,7 +87,7 @@
     "revenue_pct": 25.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267341"
+    "fetched_at": "2026-02-01T00:55:39.094524"
   },
   {
     "supplier": "AMAT",
@@ -96,7 +96,7 @@
     "revenue_pct": 20.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267342"
+    "fetched_at": "2026-02-01T00:55:39.094525"
   },
   {
     "supplier": "KLAC",
@@ -105,7 +105,7 @@
     "revenue_pct": 15.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267343"
+    "fetched_at": "2026-02-01T00:55:39.094525"
   },
   {
     "supplier": "PG",
@@ -114,7 +114,7 @@
     "revenue_pct": 15.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267344"
+    "fetched_at": "2026-02-01T00:55:39.094526"
   },
   {
     "supplier": "KO",
@@ -123,7 +123,7 @@
     "revenue_pct": 10.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267345"
+    "fetched_at": "2026-02-01T00:55:39.094527"
   },
   {
     "supplier": "PEP",
@@ -132,6 +132,6 @@
     "revenue_pct": 8.0,
     "year": 2024,
     "source": "10-K FY2024",
-    "fetched_at": "2026-01-24T12:19:06.267346"
+    "fetched_at": "2026-02-01T00:55:39.094528"
   }
 ]

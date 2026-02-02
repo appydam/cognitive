@@ -54,10 +54,33 @@ def load_correlations(file_path: str = "data/correlations.json") -> list[dict]:
         return json.load(f)
 
 
+def load_verified_relationships(file_path: str = "data/verified_relationships.json") -> list[dict]:
+    """
+    Load manually verified supplier relationships.
+
+    Args:
+        file_path: Path to verified relationships file
+
+    Returns:
+        List of relationship dicts
+    """
+    path = Path(file_path)
+    if not path.exists():
+        print(f"Warning: Verified relationships file not found: {file_path}")
+        return []
+
+    with open(path) as f:
+        data = json.load(f)
+
+    return data.get("relationships", [])
+
+
 def build_graph_from_real_data(
     include_sec: bool = True,
     include_correlations: bool = True,
     include_sectors: bool = True,
+    include_verified: bool = True,
+    include_sp500_entities: bool = True,
     min_correlation: float = 0.4,
     max_correlation_lag: int = 3,
 ) -> CausalGraph:
@@ -199,6 +222,95 @@ def build_graph_from_real_data(
                     pass
 
         print(f"  ✓ Added {sector_links_added} sector links")
+
+    # 4. Add verified relationships (highest confidence, manually verified)
+    if include_verified:
+        print("\nLoading verified relationships...")
+        verified_rels = load_verified_relationships()
+        print(f"  Found {len(verified_rels)} verified relationships")
+
+        verified_added = 0
+        for rel in verified_rels:
+            supplier = rel["supplier"]
+            customer = rel["customer"]
+            revenue_pct = rel.get("revenue_pct", 10.0)
+            confidence_level = rel.get("confidence", "medium")
+
+            # Skip zero-revenue relationships (e.g., Apple dropped Intel)
+            if revenue_pct <= 0:
+                continue
+
+            all_tickers.add(supplier)
+            all_tickers.add(customer)
+
+            # Add entities if not exists
+            if supplier not in graph.entities:
+                graph.add_entity(create_company(ticker=supplier, name=supplier))
+            if customer not in graph.entities:
+                graph.add_entity(create_company(ticker=customer, name=customer))
+
+            # Check if we already have this link
+            existing = graph.get_link(customer, supplier)
+            if existing:
+                # Update confidence if verified version is stronger
+                if confidence_level == "high" and existing.confidence < 0.85:
+                    existing.confidence = 0.85
+                continue
+
+            # Create supplier link with higher confidence for verified data
+            link = create_supplier_link(
+                supplier=supplier,
+                customer=customer,
+                revenue_percentage=revenue_pct,
+                evidence=[rel.get("source", "Verified relationship")],
+            )
+            # Boost confidence for verified relationships
+            if confidence_level == "high":
+                link.confidence = 0.85
+            else:
+                link.confidence = 0.75
+
+            try:
+                graph.add_link(link)
+                verified_added += 1
+            except ValueError as e:
+                print(f"  Warning: Could not add verified link {supplier}→{customer}: {e}")
+
+        print(f"  ✓ Added {verified_added} verified relationship links")
+
+    # 5. Load S&P 500 entities (entities only, no new links)
+    if include_sp500_entities:
+        sp500_file = Path("data/sp500_entities.json")
+        if sp500_file.exists():
+            print("\nLoading S&P 500 entities...")
+            with open(sp500_file) as f:
+                sp500_data = json.load(f)
+
+            entities_list = sp500_data.get("entities", sp500_data if isinstance(sp500_data, list) else [])
+            sp500_added = 0
+            for entity_data in entities_list:
+                ticker = entity_data["id"]
+                if ticker not in graph.entities:
+                    entity = create_company(
+                        ticker=ticker,
+                        name=entity_data.get("name", ticker),
+                    )
+                    # Add sector and other attributes
+                    if entity_data.get("sector"):
+                        entity.attributes["sector"] = entity_data["sector"]
+                    if entity_data.get("industry"):
+                        entity.attributes["industry"] = entity_data["industry"]
+                    if entity_data.get("market_cap"):
+                        entity.attributes["market_cap"] = entity_data["market_cap"]
+                    if entity_data.get("country"):
+                        entity.attributes["country"] = entity_data["country"]
+
+                    graph.add_entity(entity)
+                    sp500_added += 1
+
+            print(f"  ✓ Added {sp500_added} S&P 500 entities (total entities now: {graph.num_entities})")
+        else:
+            print("\n⚠️  S&P 500 entities file not found. Run: python scripts/ingest_sp500_entities.py")
 
     # Summary
     print("\n" + "=" * 60)

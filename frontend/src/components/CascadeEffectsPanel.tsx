@@ -114,16 +114,25 @@ export default function CascadeEffectsPanel({
 
   const effectsByOrder = groupEffectsByOrder();
 
-  // Preset magnitude values
-  const PRESETS = [
+  const entityType = entity.type?.toLowerCase() || "company";
+  const isIndicator = entityType === "indicator";
+  const isSector = entityType === "sector";
+
+  // Type-specific presets
+  const PRESETS = isIndicator ? [
+    { label: "Sharp Drop", value: -10, color: "text-red-400" },
+    { label: "Decline", value: -5, color: "text-orange-400" },
+    { label: "Rise", value: 5, color: "text-green-400" },
+    { label: "Surge", value: 10, color: "text-emerald-400" },
+  ] : [
     { label: "Large Miss", value: -10, color: "text-red-400" },
     { label: "Miss", value: -5, color: "text-orange-400" },
     { label: "Beat", value: 5, color: "text-green-400" },
     { label: "Large Beat", value: 10, color: "text-emerald-400" },
   ];
 
-  // Check if entity type is company (case-insensitive check)
-  const isCompany = entity.type?.toLowerCase() === "company";
+  // All entity types can run cascade analysis
+  const canAnalyze = true;
 
   const handleDownloadPNG = async () => {
     if (!panelRef.current) return;
@@ -187,20 +196,17 @@ export default function CascadeEffectsPanel({
         </div>
       </div>
 
-      {/* Entity Type Check */}
-      {!isCompany && (
-        <div className="mb-4 p-3 bg-yellow-500/10 border border-yellow-400/30 rounded">
-          <p className="text-xs font-mono text-yellow-400">
-            &gt; CASCADE ANALYSIS ONLY AVAILABLE FOR COMPANIES
-          </p>
-          <p className="text-[10px] font-mono text-yellow-400/60 mt-1">
-            ETFs and sectors represent aggregates, not individual earnings events.
+      {/* Context hint for indicator type */}
+      {isIndicator && (
+        <div className="mb-3 p-2 bg-amber-500/10 border border-amber-400/30 rounded">
+          <p className="text-[10px] font-mono text-amber-400">
+            MACRO INDICATOR &mdash; Simulate a change in {entity.id.replace(/_/g, ' ')} and see which stocks are affected
           </p>
         </div>
       )}
 
       {/* Magnitude Slider */}
-      {isCompany && (
+      {canAnalyze && (
         <>
           {/* Preset Buttons */}
           <div className="mb-3">
@@ -249,7 +255,7 @@ export default function CascadeEffectsPanel({
       )}
 
       {/* Analyze Button */}
-      {isCompany && !cascade && (
+      {canAnalyze && !cascade && (
         <Button
           onClick={analyzeCascade}
           disabled={loading}

@@ -41,6 +41,43 @@ class EarningsSurprise:
     detected_at: datetime
 
 
+def _extract_earnings_date(calendar) -> datetime | None:
+    """Safely extract the next earnings date from yfinance calendar data."""
+    if calendar is None:
+        return None
+
+    earnings_date = None
+
+    if isinstance(calendar, dict):
+        raw = calendar.get("Earnings Date")
+        if isinstance(raw, list) and len(raw) > 0:
+            earnings_date = raw[0]
+        elif isinstance(raw, datetime):
+            earnings_date = raw
+    elif hasattr(calendar, "iloc"):
+        try:
+            if len(calendar) > 0:
+                raw = calendar.iloc[0].get("Earnings Date") if hasattr(calendar.iloc[0], "get") else None
+                if isinstance(raw, list) and len(raw) > 0:
+                    earnings_date = raw[0]
+                elif isinstance(raw, datetime):
+                    earnings_date = raw
+        except Exception:
+            pass
+
+    # Handle pandas Timestamp
+    if earnings_date is not None and not isinstance(earnings_date, datetime):
+        try:
+            earnings_date = earnings_date.to_pydatetime()
+        except Exception:
+            try:
+                earnings_date = datetime.fromisoformat(str(earnings_date))
+            except Exception:
+                return None
+
+    return earnings_date
+
+
 def get_upcoming_earnings(
     tickers: list[str],
     days_ahead: int = 30
@@ -57,49 +94,47 @@ def get_upcoming_earnings(
     """
     upcoming = []
     cutoff_date = datetime.now() + timedelta(days=days_ahead)
+    now = datetime.now()
 
     for ticker in tickers:
         try:
             stock = yf.Ticker(ticker)
-            info = stock.info
 
-            company_name = info.get("longName", ticker)
+            # Get company name (fast_info is faster than .info)
+            try:
+                company_name = stock.info.get("longName", ticker) if hasattr(stock, "info") else ticker
+            except Exception:
+                company_name = ticker
 
             # Try to get earnings date from calendar
             calendar = stock.calendar
-            if calendar is not None:
-                earnings_date = None
+            earnings_date = _extract_earnings_date(calendar)
 
-                if isinstance(calendar, dict):
-                    earnings_date = calendar.get("Earnings Date")
-                elif hasattr(calendar, "iloc"):
-                    # DataFrame-like object
-                    if len(calendar) > 0:
-                        earnings_date = calendar.iloc[0].get("Earnings Date")
+            if earnings_date and earnings_date < cutoff_date and earnings_date >= now - timedelta(days=1):
+                # Try to get estimates
+                eps_estimate = None
+                try:
+                    earnings_dates_df = stock.earnings_dates
+                    if earnings_dates_df is not None and not earnings_dates_df.empty:
+                        if "EPS Estimate" in earnings_dates_df.columns:
+                            val = earnings_dates_df["EPS Estimate"].iloc[0]
+                            if val is not None and str(val) != "nan":
+                                eps_estimate = float(val)
+                except Exception:
+                    pass
 
-                if earnings_date and earnings_date < cutoff_date:
-                    # Try to get estimates
-                    earnings_estimate = stock.earnings_dates
-                    eps_estimate = None
-
-                    if earnings_estimate is not None and not earnings_estimate.empty:
-                        # Get most recent estimate
-                        if "EPS Estimate" in earnings_estimate.columns:
-                            eps_estimate = earnings_estimate["EPS Estimate"].iloc[0]
-
-                    upcoming.append(
-                        UpcomingEarnings(
-                            ticker=ticker,
-                            company_name=company_name,
-                            earnings_date=earnings_date,
-                            eps_estimate=eps_estimate,
-                            revenue_estimate=None,  # Not always available
-                            fetched_at=datetime.now()
-                        )
+                upcoming.append(
+                    UpcomingEarnings(
+                        ticker=ticker,
+                        company_name=company_name,
+                        earnings_date=earnings_date,
+                        eps_estimate=eps_estimate,
+                        revenue_estimate=None,
+                        fetched_at=datetime.now()
                     )
+                )
 
-        except Exception as e:
-            # Skip on error (ticker may not exist or API issue)
+        except Exception:
             continue
 
     # Sort by date

@@ -6,6 +6,14 @@ import type {
   SearchResult,
   EarningsEventRequest,
   ExplainCascadeResponse,
+  PortfolioHolding,
+  PortfolioAnalysis,
+  PortfolioCascadeResult,
+  MacroSensitivity,
+  PortfolioSubgraph,
+  TradeSignal,
+  SignalPerformance,
+  UpcomingEarning,
 } from "@/types/api";
 
 const API_BASE_URL =
@@ -141,60 +149,14 @@ export class ConsequenceAPI {
       }
     }
 
-    console.log(`[API] 🔄 Fetching fresh graph data from ${API_BASE_URL}/entities/search`);
+    console.log(`[API] 🔄 Fetching full graph data from ${API_BASE_URL}/graph/full`);
 
-    // Get all entities
-    const searchRes = await fetch(
-      `${API_BASE_URL}/entities/search?q=&limit=200`
-    );
-    if (!searchRes.ok) throw new Error("Failed to fetch entities");
-    const searchData = await searchRes.json();
-    const nodes = searchData.results;
-    console.log(`[API] Fetched ${nodes.length} entities`);
+    // Fetch entire graph in a single request
+    const res = await fetch(`${API_BASE_URL}/graph/full`);
+    if (!res.ok) throw new Error("Failed to fetch full graph");
+    const graphData = await res.json();
 
-    // Get connections for all entities
-    const links: any[] = [];
-    const seenLinks = new Set<string>();
-    let processedCount = 0;
-
-    console.log(`[API] Fetching connections for ${nodes.length} entities...`);
-
-    for (const node of nodes) {
-      try {
-        const connRes = await fetch(
-          `${API_BASE_URL}/graph/entity/${node.id}/connections`
-        );
-        if (connRes.ok) {
-          const connData = await connRes.json();
-
-          // Add outgoing connections
-          for (const conn of connData.outgoing || []) {
-            const linkId = `${node.id}-${conn.target}-${conn.relationship}`;
-            if (!seenLinks.has(linkId)) {
-              links.push({
-                source: node.id,
-                target: conn.target,
-                relationship: conn.relationship,
-                strength: conn.strength,
-                delay_days: conn.delay_days,
-                confidence: conn.confidence,
-              });
-              seenLinks.add(linkId);
-            }
-          }
-        }
-        processedCount++;
-        if (processedCount % 20 === 0) {
-          console.log(`[API] Processed ${processedCount}/${nodes.length} entities (${links.length} links so far)`);
-        }
-      } catch (err) {
-        console.warn(`[API] Failed to fetch connections for ${node.id}:`, err);
-      }
-    }
-
-    console.log(`[API] Complete! Total: ${nodes.length} nodes, ${links.length} links`);
-
-    const graphData = { nodes, links };
+    console.log(`[API] Complete! Total: ${graphData.nodes.length} nodes, ${graphData.links.length} links`);
 
     // Cache the results
     setCachedGraphData(graphData);
@@ -224,6 +186,117 @@ export class ConsequenceAPI {
       method: "POST",
     });
     if (!res.ok) throw new Error("Failed to send test notification");
+    return res.json();
+  }
+
+  // Portfolio endpoints
+  static async analyzePortfolio(holdings: PortfolioHolding[]): Promise<PortfolioAnalysis> {
+    const res = await fetch(`${API_BASE_URL}/portfolio/analyze`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ holdings }),
+    });
+    if (!res.ok) throw new Error("Failed to analyze portfolio");
+    return res.json();
+  }
+
+  static async portfolioCascade(
+    holdings: PortfolioHolding[],
+    entity_id: string,
+    surprise_percent: number,
+    horizon_days: number = 14
+  ): Promise<PortfolioCascadeResult> {
+    const res = await fetch(`${API_BASE_URL}/portfolio/cascade`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ holdings, entity_id, surprise_percent, horizon_days }),
+    });
+    if (!res.ok) throw new Error("Failed to run portfolio cascade");
+    return res.json();
+  }
+
+  static async portfolioMacroSensitivity(holdings: PortfolioHolding[]): Promise<{ sensitivities: MacroSensitivity[] }> {
+    const res = await fetch(`${API_BASE_URL}/portfolio/macro-sensitivity`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ holdings }),
+    });
+    if (!res.ok) throw new Error("Failed to get macro sensitivity");
+    return res.json();
+  }
+
+  static async portfolioSubgraph(
+    holdings: PortfolioHolding[],
+    include_intermediaries: boolean = true
+  ): Promise<PortfolioSubgraph> {
+    const res = await fetch(`${API_BASE_URL}/portfolio/subgraph`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ holdings, include_intermediaries }),
+    });
+    if (!res.ok) throw new Error("Failed to get portfolio subgraph");
+    return res.json();
+  }
+
+  // Signal endpoints
+  static async generateSignals(
+    triggerEntity: string,
+    triggerMagnitude: number,
+    triggerDescription?: string,
+    portfolioValue?: number,
+  ): Promise<{ signals: TradeSignal[]; total: number }> {
+    const res = await fetch(`${API_BASE_URL}/signals/generate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        trigger_entity: triggerEntity,
+        trigger_magnitude: triggerMagnitude,
+        trigger_description: triggerDescription || "",
+        portfolio_value: portfolioValue,
+      }),
+    });
+    if (!res.ok) throw new Error("Failed to generate signals");
+    return res.json();
+  }
+
+  static async getActiveSignals(): Promise<{ signals: TradeSignal[]; total: number }> {
+    const res = await fetch(`${API_BASE_URL}/signals/active`);
+    if (!res.ok) throw new Error("Failed to fetch active signals");
+    return res.json();
+  }
+
+  static async getSignalHistory(days: number = 30): Promise<{ signals: TradeSignal[]; total: number }> {
+    const res = await fetch(`${API_BASE_URL}/signals/history?days=${days}`);
+    if (!res.ok) throw new Error("Failed to fetch signal history");
+    return res.json();
+  }
+
+  static async getSignalPerformance(): Promise<SignalPerformance> {
+    const res = await fetch(`${API_BASE_URL}/signals/performance`);
+    if (!res.ok) throw new Error("Failed to fetch signal performance");
+    return res.json();
+  }
+
+  static async updateSignalPrices(): Promise<any> {
+    const res = await fetch(`${API_BASE_URL}/signals/update-prices`, {
+      method: "POST",
+    });
+    if (!res.ok) throw new Error("Failed to update signal prices");
+    return res.json();
+  }
+
+  // Calendar endpoints
+  static async getUpcomingEarnings(days: number = 7): Promise<{ earnings: UpcomingEarning[]; source: string }> {
+    const res = await fetch(`${API_BASE_URL}/calendar/upcoming?days=${days}`);
+    if (!res.ok) throw new Error("Failed to fetch upcoming earnings");
+    return res.json();
+  }
+
+  static async refreshEarningsCalendar(days: number = 7): Promise<{ earnings: UpcomingEarning[]; total: number }> {
+    const res = await fetch(`${API_BASE_URL}/calendar/refresh?days=${days}`, {
+      method: "POST",
+    });
+    if (!res.ok) throw new Error("Failed to refresh earnings calendar");
     return res.json();
   }
 }
