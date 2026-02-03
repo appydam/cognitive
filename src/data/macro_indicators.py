@@ -29,6 +29,41 @@ FRED_SERIES = {
         "name": "Unemployment Rate",
         "description": "Civilian unemployment rate (seasonally adjusted)",
     },
+    "GDP": {
+        "series_id": "GDP",
+        "name": "Gross Domestic Product",
+        "description": "US GDP in billions of dollars (quarterly)",
+    },
+    "HOUSING_STARTS": {
+        "series_id": "HOUST",
+        "name": "Housing Starts",
+        "description": "New privately-owned housing units started (thousands, SAAR)",
+    },
+    "RETAIL_SALES": {
+        "series_id": "RSXFS",
+        "name": "Retail Sales Ex Food Services",
+        "description": "Advance retail sales excluding food services",
+    },
+    "CONSUMER_SENTIMENT": {
+        "series_id": "UMCSENT",
+        "name": "Consumer Sentiment",
+        "description": "University of Michigan Consumer Sentiment Index",
+    },
+    "INITIAL_CLAIMS": {
+        "series_id": "ICSA",
+        "name": "Initial Jobless Claims",
+        "description": "Initial claims for unemployment insurance (weekly)",
+    },
+    "M2_MONEY_SUPPLY": {
+        "series_id": "M2SL",
+        "name": "M2 Money Supply",
+        "description": "M2 money stock (seasonally adjusted)",
+    },
+    "INDUSTRIAL_PRODUCTION": {
+        "series_id": "INDPRO",
+        "name": "Industrial Production Index",
+        "description": "Industrial production index (seasonally adjusted, 2017=100)",
+    },
 }
 
 # Yahoo Finance tickers for macro indicators
@@ -57,6 +92,21 @@ YAHOO_MACRO_TICKERS = {
         "ticker": "DX-Y.NYB",
         "name": "US Dollar Index",
         "description": "US Dollar Index (measure of dollar strength)",
+    },
+    "COPPER": {
+        "ticker": "HG=F",
+        "name": "Copper Futures",
+        "description": "Copper futures (bellwether for industrial activity and construction)",
+    },
+    "NATURAL_GAS": {
+        "ticker": "NG=F",
+        "name": "Natural Gas Futures",
+        "description": "Natural gas futures price (energy and utilities indicator)",
+    },
+    "2Y_TREASURY": {
+        "ticker": "2YY=F",
+        "name": "2-Year Treasury Yield",
+        "description": "2-year Treasury yield (rate sensitivity and yield curve indicator)",
     },
 }
 

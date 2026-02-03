@@ -107,6 +107,66 @@ def build_graph_from_real_data(
     # Track all tickers we encounter
     all_tickers = set()
 
+    # 0. Load S&P 500 entities FIRST (so sector/correlation links can connect to them)
+    if include_sp500_entities:
+        sp500_file = Path("data/sp500_entities.json")
+        if sp500_file.exists():
+            print("Loading S&P 500 entities (step 0 - before relationships)...")
+            with open(sp500_file) as f:
+                sp500_data = json.load(f)
+
+            entities_list = sp500_data.get("entities", sp500_data if isinstance(sp500_data, list) else [])
+            sp500_added = 0
+            for entity_data in entities_list:
+                ticker = entity_data["id"]
+                if ticker not in graph.entities:
+                    entity = create_company(
+                        ticker=ticker,
+                        name=entity_data.get("name", ticker),
+                    )
+                    if entity_data.get("sector"):
+                        entity.attributes["sector"] = entity_data["sector"]
+                    if entity_data.get("industry"):
+                        entity.attributes["industry"] = entity_data["industry"]
+                    if entity_data.get("market_cap"):
+                        entity.attributes["market_cap"] = entity_data["market_cap"]
+                    if entity_data.get("country"):
+                        entity.attributes["country"] = entity_data["country"]
+
+                    graph.add_entity(entity)
+                    sp500_added += 1
+
+            print(f"  ✓ Loaded {sp500_added} S&P 500 entities")
+
+            # Auto-link all S&P 500 entities to their sector ETFs
+            from src.adapters.securities import SECTOR_ETFS
+            print("  Auto-linking entities to sector ETFs...")
+
+            # Ensure all 11 GICS sector ETFs exist
+            for sector_name, etf_ticker in SECTOR_ETFS.items():
+                if etf_ticker not in graph.entities:
+                    graph.add_entity(create_etf(
+                        ticker=etf_ticker,
+                        name=f"{sector_name} Select Sector SPDR",
+                        sector=sector_name,
+                    ))
+
+            sector_links_auto = 0
+            for entity in list(graph.entities.values()):
+                sector = entity.attributes.get("sector")
+                if sector and sector in SECTOR_ETFS:
+                    etf_ticker = SECTOR_ETFS[sector]
+                    link = create_sector_link(entity.id, etf_ticker, weight=0.005)
+                    try:
+                        graph.add_link(link)
+                        sector_links_auto += 1
+                    except ValueError:
+                        pass
+
+            print(f"  ✓ Auto-linked {sector_links_auto} entities to sector ETFs")
+        else:
+            print("\n⚠️  S&P 500 entities file not found. Run: python scripts/ingest_sp500_entities.py")
+
     # 1. Add SEC relationships (highest confidence)
     if include_sec:
         print("Loading SEC 10-K relationships...")
@@ -277,40 +337,6 @@ def build_graph_from_real_data(
                 print(f"  Warning: Could not add verified link {supplier}→{customer}: {e}")
 
         print(f"  ✓ Added {verified_added} verified relationship links")
-
-    # 5. Load S&P 500 entities (entities only, no new links)
-    if include_sp500_entities:
-        sp500_file = Path("data/sp500_entities.json")
-        if sp500_file.exists():
-            print("\nLoading S&P 500 entities...")
-            with open(sp500_file) as f:
-                sp500_data = json.load(f)
-
-            entities_list = sp500_data.get("entities", sp500_data if isinstance(sp500_data, list) else [])
-            sp500_added = 0
-            for entity_data in entities_list:
-                ticker = entity_data["id"]
-                if ticker not in graph.entities:
-                    entity = create_company(
-                        ticker=ticker,
-                        name=entity_data.get("name", ticker),
-                    )
-                    # Add sector and other attributes
-                    if entity_data.get("sector"):
-                        entity.attributes["sector"] = entity_data["sector"]
-                    if entity_data.get("industry"):
-                        entity.attributes["industry"] = entity_data["industry"]
-                    if entity_data.get("market_cap"):
-                        entity.attributes["market_cap"] = entity_data["market_cap"]
-                    if entity_data.get("country"):
-                        entity.attributes["country"] = entity_data["country"]
-
-                    graph.add_entity(entity)
-                    sp500_added += 1
-
-            print(f"  ✓ Added {sp500_added} S&P 500 entities (total entities now: {graph.num_entities})")
-        else:
-            print("\n⚠️  S&P 500 entities file not found. Run: python scripts/ingest_sp500_entities.py")
 
     # Summary
     print("\n" + "=" * 60)

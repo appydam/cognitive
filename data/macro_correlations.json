@@ -1,0 +1,1220 @@
+[
+  {
+    "source": "VIX",
+    "target": "AAPL",
+    "correlation": -0.6631,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "MSFT",
+    "correlation": -0.4893,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "GOOGL",
+    "correlation": -0.5104,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "AMZN",
+    "correlation": -0.631,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "NVDA",
+    "correlation": -0.644,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "META",
+    "correlation": -0.5624,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "TSLA",
+    "correlation": -0.5919,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BRK-B",
+    "correlation": -0.4468,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "JPM",
+    "correlation": -0.6651,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "V",
+    "correlation": -0.5666,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "XOM",
+    "correlation": -0.3649,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "MA",
+    "correlation": -0.5801,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "HD",
+    "correlation": -0.4495,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CVX",
+    "correlation": -0.4317,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "MRK",
+    "correlation": -0.2246,
+    "p_value": 0.0015,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ABBV",
+    "correlation": -0.2847,
+    "p_value": 0.0002,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "LLY",
+    "correlation": -0.299,
+    "p_value": 0.0001,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "COST",
+    "correlation": -0.3762,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "AVGO",
+    "correlation": -0.5749,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "WMT",
+    "correlation": -0.3319,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "MCD",
+    "correlation": -0.1759,
+    "p_value": 0.0075,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CSCO",
+    "correlation": -0.603,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "TMO",
+    "correlation": -0.4778,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ACN",
+    "correlation": -0.5201,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ABT",
+    "correlation": -0.1827,
+    "p_value": 0.006,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "DHR",
+    "correlation": -0.4958,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "NEE",
+    "correlation": -0.2074,
+    "p_value": 0.0027,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "LIN",
+    "correlation": -0.5437,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ADBE",
+    "correlation": -0.4946,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "NKE",
+    "correlation": -0.4074,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "TXN",
+    "correlation": -0.5373,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CRM",
+    "correlation": -0.5472,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CMCSA",
+    "correlation": -0.3876,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ORCL",
+    "correlation": -0.3115,
+    "p_value": 0.0001,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "AMD",
+    "correlation": -0.5355,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "INTC",
+    "correlation": -0.3831,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "QCOM",
+    "correlation": -0.6548,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "UPS",
+    "correlation": -0.4413,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "RTX",
+    "correlation": -0.3587,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "HON",
+    "correlation": -0.5051,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "LOW",
+    "correlation": -0.4444,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "IBM",
+    "correlation": -0.4644,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CAT",
+    "correlation": -0.5934,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "GE",
+    "correlation": -0.5828,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BA",
+    "correlation": -0.5656,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SPGI",
+    "correlation": -0.543,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "INTU",
+    "correlation": -0.4702,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "AMAT",
+    "correlation": -0.5699,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "DE",
+    "correlation": -0.4225,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SBUX",
+    "correlation": -0.5136,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "AXP",
+    "correlation": -0.7326,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BKNG",
+    "correlation": -0.5921,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "GS",
+    "correlation": -0.728,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ISRG",
+    "correlation": -0.5422,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BLK",
+    "correlation": -0.7024,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "PLD",
+    "correlation": -0.5274,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "GILD",
+    "correlation": -0.2489,
+    "p_value": 0.0007,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ADI",
+    "correlation": -0.656,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SYK",
+    "correlation": -0.5391,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "MMC",
+    "correlation": -0.3063,
+    "p_value": 0.0001,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ADP",
+    "correlation": -0.467,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CVS",
+    "correlation": -0.1607,
+    "p_value": 0.0122,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "TJX",
+    "correlation": -0.3625,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "REGN",
+    "correlation": -0.2019,
+    "p_value": 0.0032,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "VRTX",
+    "correlation": -0.2312,
+    "p_value": 0.0012,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ZTS",
+    "correlation": -0.3571,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SCHW",
+    "correlation": -0.6206,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "LRCX",
+    "correlation": -0.6291,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BDX",
+    "correlation": -0.3515,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CB",
+    "correlation": -0.212,
+    "p_value": 0.0023,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "EOG",
+    "correlation": -0.4243,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "FISV",
+    "correlation": -0.2312,
+    "p_value": 0.0012,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "ITW",
+    "correlation": -0.5818,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "KLAC",
+    "correlation": -0.5941,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "PGR",
+    "correlation": -0.1961,
+    "p_value": 0.0039,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "HUM",
+    "correlation": -0.1585,
+    "p_value": 0.0131,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "WM",
+    "correlation": -0.194,
+    "p_value": 0.0041,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "BSX",
+    "correlation": -0.4405,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SNPS",
+    "correlation": -0.4171,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "CSX",
+    "correlation": -0.493,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "SLB",
+    "correlation": -0.514,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "APD",
+    "correlation": -0.5267,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "EMR",
+    "correlation": -0.6845,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "VIX",
+    "target": "FDX",
+    "correlation": -0.583,
+    "p_value": 0.0,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "GOLD",
+    "target": "VZ",
+    "correlation": -0.154,
+    "p_value": 0.0151,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "GOLD",
+    "target": "KLAC",
+    "correlation": 0.2061,
+    "p_value": 0.0028,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "GOLD",
+    "target": "NOC",
+    "correlation": 0.1626,
+    "p_value": 0.0115,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "AAPL",
+    "correlation": 0.2104,
+    "p_value": 0.0024,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "GOOGL",
+    "correlation": 0.1787,
+    "p_value": 0.0068,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "AMZN",
+    "correlation": 0.2307,
+    "p_value": 0.0012,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "NVDA",
+    "correlation": 0.1823,
+    "p_value": 0.0061,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "META",
+    "correlation": 0.1519,
+    "p_value": 0.0162,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "TSLA",
+    "correlation": 0.1731,
+    "p_value": 0.0082,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "JPM",
+    "correlation": 0.1789,
+    "p_value": 0.0068,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "XOM",
+    "correlation": 0.6707,
+    "p_value": 0.0,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "CVX",
+    "correlation": 0.5787,
+    "p_value": 0.0,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "AVGO",
+    "correlation": 0.1535,
+    "p_value": 0.0153,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "NEE",
+    "correlation": 0.1614,
+    "p_value": 0.0119,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "TXN",
+    "correlation": 0.176,
+    "p_value": 0.0074,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "ORCL",
+    "correlation": 0.2067,
+    "p_value": 0.0027,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "AMD",
+    "correlation": 0.1903,
+    "p_value": 0.0047,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "QCOM",
+    "correlation": 0.1874,
+    "p_value": 0.0051,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "RTX",
+    "correlation": 0.2631,
+    "p_value": 0.0004,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "HON",
+    "correlation": 0.1999,
+    "p_value": 0.0034,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "CAT",
+    "correlation": 0.1766,
+    "p_value": 0.0073,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "GE",
+    "correlation": 0.2086,
+    "p_value": 0.0026,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "BA",
+    "correlation": 0.193,
+    "p_value": 0.0043,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "DE",
+    "correlation": 0.1876,
+    "p_value": 0.0051,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "SBUX",
+    "correlation": 0.2301,
+    "p_value": 0.0013,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "AXP",
+    "correlation": 0.1659,
+    "p_value": 0.0103,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "GS",
+    "correlation": 0.157,
+    "p_value": 0.0137,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "BLK",
+    "correlation": 0.1613,
+    "p_value": 0.0119,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "PLD",
+    "correlation": 0.2233,
+    "p_value": 0.0016,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "ADI",
+    "correlation": 0.1913,
+    "p_value": 0.0045,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "SCHW",
+    "correlation": 0.224,
+    "p_value": 0.0016,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "EOG",
+    "correlation": 0.6736,
+    "p_value": 0.0,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "ITW",
+    "correlation": 0.1519,
+    "p_value": 0.0161,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "KLAC",
+    "correlation": 0.1673,
+    "p_value": 0.0098,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "BSX",
+    "correlation": 0.1535,
+    "p_value": 0.0154,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "SLB",
+    "correlation": 0.5083,
+    "p_value": 0.0,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "OIL_WTI",
+    "target": "EMR",
+    "correlation": 0.2626,
+    "p_value": 0.0004,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "AMZN",
+    "correlation": 0.264,
+    "p_value": 0.0004,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "NVDA",
+    "correlation": 0.1998,
+    "p_value": 0.0034,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "JNJ",
+    "correlation": -0.1679,
+    "p_value": 0.0097,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "JPM",
+    "correlation": 0.1915,
+    "p_value": 0.0045,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "KO",
+    "correlation": -0.1865,
+    "p_value": 0.0053,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "NKE",
+    "correlation": 0.1502,
+    "p_value": 0.017,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "TXN",
+    "correlation": 0.1698,
+    "p_value": 0.0091,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "AMD",
+    "correlation": 0.1587,
+    "p_value": 0.013,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "GE",
+    "correlation": 0.1852,
+    "p_value": 0.0055,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "AXP",
+    "correlation": 0.2202,
+    "p_value": 0.0018,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "GS",
+    "correlation": 0.2012,
+    "p_value": 0.0033,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "MDLZ",
+    "correlation": -0.1876,
+    "p_value": 0.0051,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "SCHW",
+    "correlation": 0.1761,
+    "p_value": 0.0074,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "SO",
+    "correlation": -0.1593,
+    "p_value": 0.0128,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "DUK",
+    "correlation": -0.2133,
+    "p_value": 0.0022,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "PGR",
+    "correlation": -0.1844,
+    "p_value": 0.0057,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "CL",
+    "correlation": -0.167,
+    "p_value": 0.0099,
+    "relationship_type": "inverse_correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "EMR",
+    "correlation": 0.2181,
+    "p_value": 0.0019,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "USD_INDEX",
+    "target": "FDX",
+    "correlation": 0.1572,
+    "p_value": 0.0136,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "JPM",
+    "correlation": 0.1895,
+    "p_value": 0.0048,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "V",
+    "correlation": 0.1661,
+    "p_value": 0.0102,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "XOM",
+    "correlation": 0.2051,
+    "p_value": 0.0029,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "CVX",
+    "correlation": 0.2534,
+    "p_value": 0.0006,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "AVGO",
+    "correlation": 0.1638,
+    "p_value": 0.011,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "TMO",
+    "correlation": 0.1569,
+    "p_value": 0.0138,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "ACN",
+    "correlation": 0.1588,
+    "p_value": 0.013,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "DHR",
+    "correlation": 0.1561,
+    "p_value": 0.0141,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "LIN",
+    "correlation": 0.1721,
+    "p_value": 0.0084,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "QCOM",
+    "correlation": 0.2964,
+    "p_value": 0.0001,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "HON",
+    "correlation": 0.1584,
+    "p_value": 0.0131,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "CAT",
+    "correlation": 0.174,
+    "p_value": 0.0079,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "GE",
+    "correlation": 0.1554,
+    "p_value": 0.0144,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "BA",
+    "correlation": 0.1877,
+    "p_value": 0.0051,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "INTU",
+    "correlation": 0.1531,
+    "p_value": 0.0155,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "AMAT",
+    "correlation": 0.2177,
+    "p_value": 0.0019,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "SBUX",
+    "correlation": 0.2699,
+    "p_value": 0.0003,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "GS",
+    "correlation": 0.1904,
+    "p_value": 0.0047,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "ISRG",
+    "correlation": 0.1731,
+    "p_value": 0.0082,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "BLK",
+    "correlation": 0.2009,
+    "p_value": 0.0033,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "PLD",
+    "correlation": 0.1586,
+    "p_value": 0.013,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "ADI",
+    "correlation": 0.163,
+    "p_value": 0.0113,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "CI",
+    "correlation": 0.2794,
+    "p_value": 0.0002,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "SCHW",
+    "correlation": 0.1661,
+    "p_value": 0.0102,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "LRCX",
+    "correlation": 0.222,
+    "p_value": 0.0017,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "EOG",
+    "correlation": 0.2229,
+    "p_value": 0.0016,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "KLAC",
+    "correlation": 0.2215,
+    "p_value": 0.0017,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "HUM",
+    "correlation": 0.1515,
+    "p_value": 0.0164,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "SLB",
+    "correlation": 0.2612,
+    "p_value": 0.0004,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "COPPER",
+    "target": "EMR",
+    "correlation": 0.1965,
+    "p_value": 0.0038,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "NATURAL_GAS",
+    "target": "MSFT",
+    "correlation": 0.2331,
+    "p_value": 0.0011,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "NATURAL_GAS",
+    "target": "NEE",
+    "correlation": 0.1538,
+    "p_value": 0.0152,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "NATURAL_GAS",
+    "target": "WM",
+    "correlation": 0.2162,
+    "p_value": 0.002,
+    "relationship_type": "correlated"
+  },
+  {
+    "source": "NATURAL_GAS",
+    "target": "BSX",
+    "correlation": 0.1648,
+    "p_value": 0.0107,
+    "relationship_type": "correlated"
+  }
+]

@@ -1,0 +1,218 @@
+[
+  {
+    "id": "FED_FUNDS_RATE",
+    "name": "Federal Funds Rate",
+    "type": "indicator",
+    "attributes": {
+      "description": "Target federal funds rate set by the Federal Reserve",
+      "source": "FRED",
+      "latest_value": 3.64,
+      "series_id": "FEDFUNDS",
+      "ticker": null
+    }
+  },
+  {
+    "id": "CPI",
+    "name": "Consumer Price Index",
+    "type": "indicator",
+    "attributes": {
+      "description": "CPI for all urban consumers (seasonally adjusted)",
+      "source": "FRED",
+      "latest_value": 326.03,
+      "series_id": "CPIAUCSL",
+      "ticker": null
+    }
+  },
+  {
+    "id": "UNEMPLOYMENT",
+    "name": "Unemployment Rate",
+    "type": "indicator",
+    "attributes": {
+      "description": "Civilian unemployment rate (seasonally adjusted)",
+      "source": "FRED",
+      "latest_value": 4.4,
+      "series_id": "UNRATE",
+      "ticker": null
+    }
+  },
+  {
+    "id": "GDP",
+    "name": "Gross Domestic Product",
+    "type": "indicator",
+    "attributes": {
+      "description": "US GDP in billions of dollars (quarterly)",
+      "source": "FRED",
+      "latest_value": 31098.027,
+      "series_id": "GDP",
+      "ticker": null
+    }
+  },
+  {
+    "id": "HOUSING_STARTS",
+    "name": "Housing Starts",
+    "type": "indicator",
+    "attributes": {
+      "description": "New privately-owned housing units started (thousands, SAAR)",
+      "source": "FRED",
+      "latest_value": 1246.0,
+      "series_id": "HOUST",
+      "ticker": null
+    }
+  },
+  {
+    "id": "RETAIL_SALES",
+    "name": "Retail Sales Ex Food Services",
+    "type": "indicator",
+    "attributes": {
+      "description": "Advance retail sales excluding food services",
+      "source": "FRED",
+      "latest_value": 635651.0,
+      "series_id": "RSXFS",
+      "ticker": null
+    }
+  },
+  {
+    "id": "CONSUMER_SENTIMENT",
+    "name": "Consumer Sentiment",
+    "type": "indicator",
+    "attributes": {
+      "description": "University of Michigan Consumer Sentiment Index",
+      "source": "FRED",
+      "latest_value": 52.9,
+      "series_id": "UMCSENT",
+      "ticker": null
+    }
+  },
+  {
+    "id": "INITIAL_CLAIMS",
+    "name": "Initial Jobless Claims",
+    "type": "indicator",
+    "attributes": {
+      "description": "Initial claims for unemployment insurance (weekly)",
+      "source": "FRED",
+      "latest_value": 209000.0,
+      "series_id": "ICSA",
+      "ticker": null
+    }
+  },
+  {
+    "id": "M2_MONEY_SUPPLY",
+    "name": "M2 Money Supply",
+    "type": "indicator",
+    "attributes": {
+      "description": "M2 money stock (seasonally adjusted)",
+      "source": "FRED",
+      "latest_value": 22411.0,
+      "series_id": "M2SL",
+      "ticker": null
+    }
+  },
+  {
+    "id": "INDUSTRIAL_PRODUCTION",
+    "name": "Industrial Production Index",
+    "type": "indicator",
+    "attributes": {
+      "description": "Industrial production index (seasonally adjusted, 2017=100)",
+      "source": "FRED",
+      "latest_value": 102.325,
+      "series_id": "INDPRO",
+      "ticker": null
+    }
+  },
+  {
+    "id": "10Y_TREASURY",
+    "name": "10-Year Treasury Yield",
+    "type": "indicator",
+    "attributes": {
+      "description": "10-year Treasury constant maturity rate",
+      "source": "YahooFinance",
+      "latest_value": 4.275000095367432,
+      "series_id": null,
+      "ticker": "^TNX"
+    }
+  },
+  {
+    "id": "VIX",
+    "name": "VIX Volatility Index",
+    "type": "indicator",
+    "attributes": {
+      "description": "CBOE Volatility Index (market fear gauge)",
+      "source": "YahooFinance",
+      "latest_value": 16.15999984741211,
+      "series_id": null,
+      "ticker": "^VIX"
+    }
+  },
+  {
+    "id": "GOLD",
+    "name": "Gold Futures",
+    "type": "indicator",
+    "attributes": {
+      "description": "Gold futures front month price",
+      "source": "YahooFinance",
+      "latest_value": 4943.0,
+      "series_id": null,
+      "ticker": "GC=F"
+    }
+  },
+  {
+    "id": "OIL_WTI",
+    "name": "Crude Oil WTI",
+    "type": "indicator",
+    "attributes": {
+      "description": "West Texas Intermediate crude oil futures",
+      "source": "YahooFinance",
+      "latest_value": 61.43000030517578,
+      "series_id": null,
+      "ticker": "CL=F"
+    }
+  },
+  {
+    "id": "USD_INDEX",
+    "name": "US Dollar Index",
+    "type": "indicator",
+    "attributes": {
+      "description": "US Dollar Index (measure of dollar strength)",
+      "source": "YahooFinance",
+      "latest_value": 97.47100067138672,
+      "series_id": null,
+      "ticker": "DX-Y.NYB"
+    }
+  },
+  {
+    "id": "COPPER",
+    "name": "Copper Futures",
+    "type": "indicator",
+    "attributes": {
+      "description": "Copper futures (bellwether for industrial activity and construction)",
+      "source": "YahooFinance",
+      "latest_value": 6.047999858856201,
+      "series_id": null,
+      "ticker": "HG=F"
+    }
+  },
+  {
+    "id": "NATURAL_GAS",
+    "name": "Natural Gas Futures",
+    "type": "indicator",
+    "attributes": {
+      "description": "Natural gas futures price (energy and utilities indicator)",
+      "source": "YahooFinance",
+      "latest_value": 3.26200008392334,
+      "series_id": null,
+      "ticker": "NG=F"
+    }
+  },
+  {
+    "id": "2Y_TREASURY",
+    "name": "2-Year Treasury Yield",
+    "type": "indicator",
+    "attributes": {
+      "description": "2-year Treasury yield (rate sensitivity and yield curve indicator)",
+      "source": "YahooFinance",
+      "latest_value": 3.447999954223633,
+      "series_id": null,
+      "ticker": "2YY=F"
+    }
+  }
+]
