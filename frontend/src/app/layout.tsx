@@ -39,7 +39,7 @@ export default function RootLayout({
         </main>
         <footer className="bg-black border-t-2 border-green-500/30 tactical-grid scanlines py-12 relative overflow-hidden">
           <div className="container mx-auto px-4 relative z-10">
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 gap-8">
               <div>
                 <div className="flex items-center gap-3 text-lg font-bold mb-4">
                   <div className="bg-green-500/20 border-2 border-green-500 p-2 target-reticle">
@@ -99,23 +99,6 @@ export default function RootLayout({
                   >
                     SYSTEM_ARCHITECTURE
                   </a>
-                </div>
-              </div>
-              <div>
-                <h4 className="military-font text-cyan-400 text-sm mb-3">&gt; TECH_STACK</h4>
-                <div className="space-y-2 text-xs font-mono">
-                  <p className="text-cyan-400/70 flex items-center gap-2">
-                    <span className="pulse-dot w-1.5 h-1.5 bg-green-500 rounded-full"></span>
-                    BACKEND: FastAPI + PostgreSQL
-                  </p>
-                  <p className="text-cyan-400/70 flex items-center gap-2">
-                    <span className="pulse-dot w-1.5 h-1.5 bg-cyan-500 rounded-full"></span>
-                    FRONTEND: Next.js 16 + React 19
-                  </p>
-                  <p className="text-cyan-400/70 flex items-center gap-2">
-                    <span className="pulse-dot w-1.5 h-1.5 bg-yellow-500 rounded-full"></span>
-                    AI_CORE: Bayesian Learning Engine
-                  </p>
                 </div>
               </div>
             </div>

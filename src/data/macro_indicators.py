@@ -104,9 +104,14 @@ YAHOO_MACRO_TICKERS = {
         "description": "Natural gas futures price (energy and utilities indicator)",
     },
     "2Y_TREASURY": {
-        "ticker": "2YY=F",
+        "ticker": "^IRX",
         "name": "2-Year Treasury Yield",
         "description": "2-year Treasury yield (rate sensitivity and yield curve indicator)",
+    },
+    "BITCOIN": {
+        "ticker": "BTC-USD",
+        "name": "Bitcoin",
+        "description": "Bitcoin price (cryptocurrency and risk appetite indicator)",
     },
 }
 

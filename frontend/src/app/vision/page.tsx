@@ -103,55 +103,6 @@ export default function VisionPage() {
 
   return (
     <div className="min-h-screen bg-black text-green-400">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-black via-purple-950 to-black">
-        <ParticleBackground />
-        <div className="tactical-grid absolute inset-0 opacity-10" />
-
-        <motion.div
-          className="relative z-10 max-w-7xl mx-auto px-4 text-center"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="classified-header mb-8">⬤ VISION STATEMENT ⬤</div>
-
-          <h1 className="text-6xl md:text-8xl font-bold military-font mb-6 terminal-text">
-            THE REASONING<br />INFRASTRUCTURE<br />FOR AI
-          </h1>
-
-          <p className="text-xl md:text-2xl text-green-400/80 font-mono max-w-4xl mx-auto mb-12">
-            A living, learning, reasoning engine that mirrors how humans think about cause and effect.
-            <span className="text-cyan-400"> The foundational layer for complex, interconnected domains.</span>
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/explore">
-              <button className="tactical-button px-8 py-4 bg-green-500/20 border-2 border-green-500 text-green-400 hover:bg-green-500/30 transition-all flex items-center gap-2 justify-center">
-                <Network className="w-5 h-5" />
-                EXPLORE LIVE DEMO
-                <ArrowRight className="w-5 h-5" />
-              </button>
-            </Link>
-            <Link href="/data-sources">
-              <button className="px-8 py-4 border-2 border-cyan-500/50 text-cyan-400 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all flex items-center gap-2 justify-center font-mono">
-                <Shield className="w-5 h-5" />
-                VIEW DATA SOURCES
-              </button>
-            </Link>
-          </div>
-
-          <motion.div
-            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <div className="text-green-400/50 text-sm font-mono">SCROLL TO EXPLORE</div>
-            <div className="w-px h-16 bg-gradient-to-b from-green-400/50 to-transparent mx-auto mt-2" />
-          </motion.div>
-        </motion.div>
-      </section>
-
       {/* Core Insight Section */}
       <section className="py-32 bg-black">
         <div className="max-w-7xl mx-auto px-4">

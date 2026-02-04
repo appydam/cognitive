@@ -75,6 +75,41 @@ def load_verified_relationships(file_path: str = "data/verified_relationships.js
     return data.get("relationships", [])
 
 
+def load_discovered_relationships(
+    file_path: str = "data/pending_relationships.json",
+    min_confidence: float = 0.7,
+) -> list[dict]:
+    """
+    Load auto-discovered relationships that passed confidence threshold.
+
+    Args:
+        file_path: Path to pending relationships file
+        min_confidence: Minimum confidence score to include (default: 0.7)
+
+    Returns:
+        List of relationship dicts with confidence >= min_confidence
+    """
+    path = Path(file_path)
+    if not path.exists():
+        print(f"Warning: Discovered relationships file not found: {file_path}")
+        return []
+
+    with open(path) as f:
+        data = json.load(f)
+
+    # Filter by confidence threshold
+    if isinstance(data, list):
+        filtered = [
+            rel for rel in data
+            if rel.get("confidence", 0.0) >= min_confidence
+            and rel.get("status") == "pending_review"
+        ]
+    else:
+        filtered = []
+
+    return filtered
+
+
 def build_graph_from_real_data(
     include_sec: bool = True,
     include_correlations: bool = True,
@@ -337,6 +372,100 @@ def build_graph_from_real_data(
                 print(f"  Warning: Could not add verified link {supplier}→{customer}: {e}")
 
         print(f"  ✓ Added {verified_added} verified relationship links")
+
+    # 5. Add discovered relationships (auto-discovered with high confidence)
+    print("\nLoading discovered relationships...")
+    discovered_rels = load_discovered_relationships(min_confidence=0.7)
+    print(f"  Found {len(discovered_rels)} high-confidence discovered relationships")
+
+    discovered_added = 0
+    for rel in discovered_rels:
+        source = rel["source"]
+        target = rel["target"]
+        rel_type = rel.get("type", "supplier")
+        confidence = rel.get("confidence", 0.0)
+        evidence = rel.get("evidence", [])
+
+        all_tickers.add(source)
+        all_tickers.add(target)
+
+        # Add entities if not exists
+        if source not in graph.entities:
+            graph.add_entity(create_company(ticker=source, name=source))
+        if target not in graph.entities:
+            graph.add_entity(create_company(ticker=target, name=target))
+
+        # Check if we already have this link
+        existing_forward = graph.get_link(source, target)
+        existing_reverse = graph.get_link(target, source)
+
+        if existing_forward or existing_reverse:
+            # Update confidence if discovered version has higher confidence
+            existing = existing_forward or existing_reverse
+            if confidence > existing.confidence:
+                existing.confidence = confidence
+                # Add discovered evidence
+                for e in evidence:
+                    evidence_str = f"Discovered: {e.get('source', 'Unknown')} ({e.get('date', 'No date')})"
+                    if evidence_str not in existing.evidence:
+                        existing.evidence.append(evidence_str)
+            continue
+
+        # Create appropriate link type based on relationship type
+        if rel_type in ["supplier", "customer"]:
+            # For supplier/customer, create supplier link
+            # Note: discovered relationships may not have revenue_pct
+            link = create_supplier_link(
+                supplier=source if rel_type == "supplier" else target,
+                customer=target if rel_type == "supplier" else source,
+                revenue_percentage=5.0,  # Default low weight for discovered
+                evidence=[f"Discovered ({len(evidence)} sources)"],
+            )
+        elif rel_type == "competitor":
+            # For competitors, create symmetric correlation link
+            link = create_correlation_link(
+                entity_a=source,
+                entity_b=target,
+                correlation=-0.3,  # Competitors often inversely correlated
+                lag_days=0,
+            )
+        elif rel_type == "partnership":
+            # For partnerships, create correlation link
+            link = create_correlation_link(
+                entity_a=source,
+                entity_b=target,
+                correlation=0.5,  # Partners often positively correlated
+                lag_days=0,
+            )
+        else:
+            # Default to correlation link
+            link = create_correlation_link(
+                entity_a=source,
+                entity_b=target,
+                correlation=0.3,
+                lag_days=0,
+            )
+
+        # Set confidence (slight discount vs manual verification)
+        link.confidence = confidence * 0.8
+
+        # Add evidence from discovery sources
+        for e in evidence:
+            evidence_str = f"Discovered: {e.get('source', 'Unknown')} - {e.get('article', e.get('text_snippet', '')[:50])}"
+            link.evidence.append(evidence_str)
+
+        # Mark as discovered
+        link.metadata = link.metadata or {}
+        link.metadata["discovered"] = True
+        link.metadata["discovery_confidence"] = confidence
+
+        try:
+            graph.add_link(link)
+            discovered_added += 1
+        except ValueError as e:
+            print(f"  Warning: Could not add discovered link {source}→{target}: {e}")
+
+    print(f"  ✓ Added {discovered_added} discovered relationship links")
 
     # Summary
     print("\n" + "=" * 60)
