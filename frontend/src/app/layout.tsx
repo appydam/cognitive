@@ -64,6 +64,12 @@ export default function RootLayout({
                     PREDICT_CASCADE
                   </a>
                   <a
+                    href="/signals"
+                    className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
+                  >
+                    TRADE_SIGNALS
+                  </a>
+                  <a
                     href="/explore"
                     className="block text-green-400/70 hover:text-green-400 transition-all status-indicator"
                   >
